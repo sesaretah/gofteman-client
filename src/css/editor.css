@@ -1,0 +1,24 @@
+.rdw-dropdown-carettoopen {
+  right: auto !important;
+  left: 10%;
+}
+
+.rdw-dropdown-carettoclose {
+  right: auto !important;
+  left: 10%;
+}
+
+.rdw-editor-toolbar {
+  margin-bottom: 0px;
+  border: none;
+}
+
+.rdw-editor-main {
+  background-color: #fff;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.rdw-editor-toolbar a {
+  color: #000;
+}
