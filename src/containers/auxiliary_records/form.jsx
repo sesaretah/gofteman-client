@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button} from 'framework7-react';
+import { List, ListItem, ListInput, Block, Row, Button, BlockTitle} from 'framework7-react';
 import { dict} from '../../Dict';
 import RecordOptions from "../auxiliary_records/options";
 import crypto from 'crypto-js';
@@ -17,7 +17,7 @@ const RecordForm = (props) => {
             label={data_format[i].field_name}
             type="text"
             placeholder="..."
-            onInput={(e) => props.onChangeValue(data_format[i].field_id, e.target.value)}
+            onInput={(e) => props.onChangeValue(data_format[i].field_id, e.target.value, props.auxiliaryTable)}
             />)
             break;
             case 'Text':
@@ -26,20 +26,20 @@ const RecordForm = (props) => {
                 label={data_format[i].field_name}
                 type="textarea"
                 placeholder="..."
-                onInput={(e) => props.onChangeValue(data_format[i].field_id, e.target.value)}
+                onInput={(e) => props.onChangeValue(data_format[i].field_id, e.target.value, props.auxiliaryTable)}
                 />
             )
             break;
             case 'Table':
-            console.log(data_format[i]);
             if (data_format[i].field_data && data_format[i].field_data[0]) {
             items.push(
               <ListItem
                 title={data_format[i].field_name}
                 smartSelect
+                smartSelectParams={{pageBackLinkText: dict.back}}
                 >
                 <select name="content"
-                  onChange={(e) => props.onChangeValue(data_format[i].field_id, e.target.value)}
+                  onChange={(e) => props.onChangeValue(data_format[i].field_id, e.target.value, props.auxiliaryTable)}
                   >
                   <RecordOptions content={data_format[i].field_data}/>
                 </select>
@@ -49,15 +49,18 @@ const RecordForm = (props) => {
           }
 
         }
+        var submit = null
+        if (props.submit) {
+          submit = <Block strong><Row tag="p"><Button className="col" fill onClick={props.submit}>{dict.submit}</Button></Row></Block>
+        }
         return(
+          <React.Fragment>
+          <BlockTitle>{props.auxiliaryTable.title}</BlockTitle>
           <List form>
             {items}
-            <Block strong>
-              <Row tag="p">
-                <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
-              </Row>
-            </Block>
+            {submit}
           </List>
+          </React.Fragment>
         )
       }
       else {

@@ -6,7 +6,7 @@ import { dict} from '../../Dict';
 const WorkflowIndex = (props) => {
   return(
     <Page>
-      <Fab href="/workflows/new" target="#main-view"  position="left-bottom" slot="fixed" color="orange">
+      <Fab href="/workflows/new" target="#main-view"  position="left-bottom" slot="fixed" color="deeporange">
         <Icon ios="f7:add" aurora="f7:add" md="material:add"></Icon>
         <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
       </Fab>

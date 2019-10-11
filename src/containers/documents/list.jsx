@@ -15,7 +15,7 @@ const DocumentList = (props) => {
             title={document.title}
             after=""
             subtitle=""
-            text="..."
+            text={document.abstract}
             ></ListItem>
         )}
       </List>

@@ -15,11 +15,17 @@ const RecordList = (props) => {
 
     var body = []
     var records = props.records
+
     for (let i = 0; i < records.length; i++) {
+
       if(records[i].data_record){
         var td = []
         for (let j = 0; j < data_format.length; j++) {
-          td.push(<td key={crypto.lib.WordArray.random(32)}>{records[i].data_record[data_format[j].field_id]}</td>)
+          if(records[i].data_record[j] && records[i].data_record[j].field_id === data_format[j].field_id) {
+            td.push(<td key={crypto.lib.WordArray.random(32)}>{records[i].data_record[j].value}</td>)
+          } else {
+            td.push(<td key={crypto.lib.WordArray.random(32)}></td>)
+          }
         }
         body.push(<tr key={crypto.lib.WordArray.random(32)}>
         <td className="checkbox-cell" key={crypto.lib.WordArray.random(32)}>
@@ -36,6 +42,9 @@ const RecordList = (props) => {
     <div className="data-table card">
       <table>
         <thead>
+          <tr>
+            <td><b>{props.auxiliaryTable.title}</b></td>
+          </tr>
           <tr>
             <td>{dict.actions}</td>
             {head}

@@ -9,7 +9,7 @@ const AuxiliaryTableIndex = (props) => {
       <Navbar title={dict.auxiliary_tables} backLink={dict.back} >
       </Navbar>
       <BlockTitle>{dict.list}</BlockTitle>
-      <Fab href="/auxiliary_tables/new" target="#main-view"  position="left-bottom" slot="fixed" color="orange">
+      <Fab href="/auxiliary_tables/new" target="#main-view"  position="left-bottom" slot="fixed" color="deeporange">
         <Icon ios="f7:add" aurora="f7:add" md="material:add"></Icon>
         <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
       </Fab>

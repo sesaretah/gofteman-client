@@ -30,7 +30,7 @@ export default class AuxiliaryRecord extends Component {
     this.removeRecord = this.removeRecord.bind(this)
     this.state = {
       auxiliary_table: null,
-      fields: {},
+      fields: [],
       records: [],
       id: null,
       page: 1
@@ -64,7 +64,6 @@ export default class AuxiliaryRecord extends Component {
         records: list,
       });
     }
-
   }
 
   deleteIntance(){
@@ -100,7 +99,6 @@ export default class AuxiliaryRecord extends Component {
         records: this.state.records.concat(instance)
       });
     }
-    console.log(this.state.records);
   }
 
   fab(){
@@ -123,10 +121,27 @@ export default class AuxiliaryRecord extends Component {
     }
   }
 
-  handleChangeValue(key,value) {
-    let newState = Object.assign({}, this.state);
-    newState.fields[key]= value
-    this.setState(newState);
+  // handleChangeValue(key,value, auxiliary_table) {
+  //   let newState = Object.assign({}, this.state);
+  //   newState.fields[key]= value
+  //   this.setState(newState);
+  // }
+
+  handleChangeValue(key, value, auxiliaryTable) {
+    var fields = this.state.fields
+    if (fields.length > 0) {
+      for (let i = 0; i < fields.length; i++) {
+        if (fields[i].field_id && fields[i].field_id === key){
+          let newState = Object.assign({}, this.state);
+          newState.fields[i]= {field_id: key, value: value}
+          this.setState(newState);
+        } else {
+          this.setState({fields: this.state.fields.concat({field_id: key, value: value})});
+        }
+      }
+    } else {
+      this.setState({fields: this.state.fields.concat({field_id: key, value: value})});
+    }
   }
 
   removeRecord(uuid){

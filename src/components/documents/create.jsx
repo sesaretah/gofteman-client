@@ -18,7 +18,7 @@ import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import DocumentForm from "../../containers/documents/form"
 import Framework7 from 'framework7/framework7.esm.bundle';
-import { EditorState } from 'draft-js';
+import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 
 export default class DocumentCreate extends Component {
@@ -29,6 +29,7 @@ export default class DocumentCreate extends Component {
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this)
     this.getList = this.getList.bind(this)
+    this.onChangeValue = this.onChangeValue.bind(this)
 
     this.state = {
       document: {},
@@ -37,7 +38,9 @@ export default class DocumentCreate extends Component {
       workflowTables: null,
       workflowId: null,
       auxiliaryTables: [],
+      fields: [],
       title: '',
+      abstract: '',
       page: 0
     }
   }
@@ -54,7 +57,7 @@ export default class DocumentCreate extends Component {
   }
 
   submit(){
-    var data = {title: this.state.title, graph: {nodes: window.nodes, edges: window.edges}}
+    var data = {title: this.state.title, abstract: this.state.abstract, draft: convertToRaw(this.state.editorState.getCurrentContent()), auxiliary_records: this.state.fields}
     MyActions.setInstance('documents', data);
   }
 
@@ -68,6 +71,7 @@ export default class DocumentCreate extends Component {
   handleChangeValue(obj) {
     this.setState(obj);
   }
+
 
   componentDidMount(){
     this.loadData();
@@ -109,7 +113,6 @@ export default class DocumentCreate extends Component {
         break;
       }
     }
-    console.log(this.state);
   }
 
   setInstance(){
@@ -117,14 +120,31 @@ export default class DocumentCreate extends Component {
     this.$f7router.navigate('/documents/');
   }
 
+  onChangeValue(key, value, auxiliaryTable) {
+    var fields = this.state.fields
+    if (fields.length > 0) {
+      for (let i = 0; i < fields.length; i++) {
+        if (fields[i].field_id && fields[i].field_id === key){
+          let newState = Object.assign({}, this.state);
+          newState.fields[i]= {field_id: key, value: value}
+          this.setState(newState);
+        } else {
+          this.setState({fields: this.state.fields.concat({field_id: key, value: value})});
+        }
+      }
+    } else {
+      this.setState({fields: this.state.fields.concat({field_id: key, value: value})});
+    }
+  }
+
 
   render() {
     const {title, document, editorState, workflows, auxiliaryTables} = this.state;
     return (
       <Page>
-        <Navbar title="Form" backLink={dict.back} />
+        <Navbar title={dict.document_form} backLink={dict.back} />
         <BlockTitle>{dict.document_form}</BlockTitle>
-        <DocumentForm title={title} document={document} auxiliaryTables={auxiliaryTables} workflows={workflows} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <DocumentForm title={title} document={document} auxiliaryTables={auxiliaryTables} workflows={workflows} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit} editing={true} handleChange={this.handleChangeValue} onChangeValue={this.onChangeValue}/>
       </Page>
     );
   }

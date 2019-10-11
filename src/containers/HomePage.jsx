@@ -40,38 +40,21 @@ export default () => (
       <Link>Right Link</Link>
     </Toolbar>
     <Block strong>
-      <p>Here is your blank Framework7 app. Lets see what we have here.</p>
+      <p></p>
     </Block>
-    <BlockTitle>Navigation</BlockTitle>
+    <BlockTitle></BlockTitle>
     <List>
-      <ListItem link="/about/" title="About"></ListItem>
-      <ListItem link="/form/" title="Form"></ListItem>
+
     </List>
-    <BlockTitle>Modals</BlockTitle>
+    <BlockTitle></BlockTitle>
     <Block strong>
-      <Row>
-        <Col width="50">
-          <Button fill  popupOpen="#popup">Popup</Button>
-        </Col>
-        <Col width="50">
-          <Button fill  loginScreenOpen="#login-screen">Login Screen</Button>
-        </Col>
-      </Row>
+
     </Block>
-    <BlockTitle>Panels</BlockTitle>
+    <BlockTitle></BlockTitle>
     <Block strong>
-      <Row>
-        <Col width="50">
-          <Button fill  panelOpen="left">Left Panel</Button>
-        </Col>
-        <Col width="50">
-          <Button fill raised panelOpen="right">Right Panel</Button>
-        </Col>
-      </Row>
+
     </Block>
     <List>
-      <ListItem link="/dynamic-route/blog/45/post/125/?foo=bar#about" title="Dynamic Route"></ListItem>
-      <ListItem link="/load-something-that-doesnt-exist/" title="Default Route (404)"></ListItem>
     </List>
     <Fab href="/document_form/" target="#main-view"  position="left-bottom" slot="fixed" color="orange">
       <Icon ios="f7:add" aurora="f7:add" md="material:add"></Icon>

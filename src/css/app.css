@@ -32,7 +32,8 @@
   --f7-theme-color-shade: #7395AE;
   --f7-theme-color-tint: #9c27b0;
 
-  --f7-navbar-height: 30px;
+  --f7-navbar-height: 40px;
+  --f7-list-item-min-height: 40px;
   /*
   --f7-page-bg-color: #9DC4B5;
   --f7-navbar-bg-color:  #9DC4B5;
@@ -101,4 +102,9 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
   background: rgba(0,0,0,0.1);
   content: '';
   z-index: 6000;
+}
+
+.aurora .subnavbar {
+    margin-top: -3px;
+    padding-top: 0px;
 }

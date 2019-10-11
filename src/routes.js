@@ -4,9 +4,14 @@ import FormPage from './containers/FormPage';
 
 import DocumentForm from './containers/DocumentForm';
 import DocumentList from './containers/DocumentList';
+import DocumentShow from './components/documents/show';
+import DocumentIndex from './components/documents/index';
+import DocumentCreate from './components/documents/create';
+import DocumentUpdate from './components/documents/update';
 
-import AuxiliaryTable from './components/AuxiliaryTable';
-import AuxiliaryForm from './containers/auxiliary_tables/form';
+
+import AuxiliaryTable from './components/auxiliary_tables/index';
+import AuxiliaryForm from './components/auxiliary_tables/create';
 import AuxiliaryRecord from './containers/auxiliary_tables/record';
 
 
@@ -15,10 +20,8 @@ import WorkflowCreate from './components/workflows/create';
 import WorkflowUpdate from './components/workflows/update';
 import WorkflowShow from './components/workflows/show';
 
-import DocumentIndex from './components/documents/index';
-import DocumentCreate from './components/documents/create';
-import DocumentUpdate from './components/documents/update';
-import DocumentShow from './components/documents/show';
+
+
 
 import WorkflowTableIndex from './components/workflow_tables/index';
 import WorkflowTableCreate from './components/workflow_tables/create';

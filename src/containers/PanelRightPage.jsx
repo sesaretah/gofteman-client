@@ -6,8 +6,7 @@ export default () => (
     <Navbar title={dict.Divan} />
     <BlockTitle>{dict.home}</BlockTitle>
     <List>
-      <ListItem link="/about/" title="About"></ListItem>
-      <ListItem link="/form/" title="Form"></ListItem>
+
     </List>
     <BlockTitle>{dict.settings}</BlockTitle>
     <List>
