@@ -24,7 +24,7 @@ const AuxiliaryTableItems = (props) => {
             <ListInput
               label={dict.type}
               type="select"
-              defaultValue={props.fields[i].type}
+              value={props.fields[i].type}
               placeholder="Please choose..."
               onChange={(e) => {
                 props.onChangeValue(i, 'type',  e.target.value)
@@ -36,7 +36,7 @@ const AuxiliaryTableItems = (props) => {
               <option value="Table">{dict.table}</option>
             </ListInput>
 
-            <AuxiliaryTableOptions i={i} fieldType={props.fields[i].type} auxiliaryTables={props.auxiliaryTables} onChangeValue={props.onChangeValue}/>
+            <AuxiliaryTableOptions i={i} content={props.fields[i].content} fieldType={props.fields[i].type} auxiliaryTables={props.auxiliaryTables} onChangeValue={props.onChangeValue}/>
 
           </List>
           <Block>

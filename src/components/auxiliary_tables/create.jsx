@@ -37,7 +37,7 @@ export default class AuxiliaryForm extends Component {
       title: '',
       table_type: 'Basic',
       auxiliaryTable: {},
-      auxiliaryTables: [],
+      auxiliaryTables: null,
       id: null,
       fields: [{field_name: dict.title, title: true,type: 'String', content: ''}]
     }
@@ -59,19 +59,10 @@ export default class AuxiliaryForm extends Component {
     var data = {id: this.state.id, table_type: this.state.table_type, title: this.state.title, data_format: this.state.fields}
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.submitting, closeTimeout: 2000, position: 'top'});
-    if (this.state.id){
-      MyActions.updateInstance('auxiliary_tables', data);
-    } else {
-      MyActions.setInstance('auxiliary_tables', data);
-    }
-
+    MyActions.setInstance('auxiliary_tables', data);
   }
 
   componentDidMount(){
-    if (this.$f7route.params['auxiliaryTableId']) {
-      this.setState({id:this.$f7route.params['auxiliaryTableId']});
-      MyActions.getInstance('auxiliary_tables', this.$f7route.params['auxiliaryTableId']);
-    }
     MyActions.getList('auxiliary_tables', this.state.page);
   }
 

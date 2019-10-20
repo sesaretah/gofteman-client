@@ -10,8 +10,16 @@ import DocumentCreate from './components/documents/create';
 import DocumentUpdate from './components/documents/update';
 
 
+
+import RoleShow from './components/roles/show';
+import RoleIndex from './components/roles/index';
+import RoleCreate from './components/roles/create';
+import RoleUpdate from './components/roles/update';
+
+
 import AuxiliaryTable from './components/auxiliary_tables/index';
 import AuxiliaryForm from './components/auxiliary_tables/create';
+import AuxiliaryUpdate from './components/auxiliary_tables/update';
 import AuxiliaryRecord from './containers/auxiliary_tables/record';
 
 
@@ -70,7 +78,7 @@ export default [
   },
   {
     path: '/auxiliary_tables/:auxiliaryTableId/edit',
-    component: AuxiliaryForm,
+    component: AuxiliaryUpdate,
   },
   {
     path: '/auxiliary_tables/record/:auxiliaryTableId',
@@ -111,6 +119,23 @@ export default [
   {
     path: '/documents/:documentId',
     component: DocumentShow,
+  },
+
+  {
+    path: '/roles/',
+    component: RoleIndex,
+  },
+  {
+    path: '/roles/:roleId/edit',
+    component: RoleUpdate,
+  },
+  {
+    path: '/roles/new',
+    component: RoleCreate,
+  },
+  {
+    path: '/roles/:roleId',
+    component: RoleShow,
   },
   {
     path: '/workflow_tables/',

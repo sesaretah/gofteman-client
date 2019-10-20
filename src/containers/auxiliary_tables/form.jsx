@@ -6,10 +6,10 @@ import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 
 import AuxiliaryTableItems from "../auxiliary_tables/items";
-
+import AuxiliaryTableType from "../auxiliary_tables/table_type";
 
 const AuxiliaryTableForm = (props) => {
-  if (props.auxiliaryTable ) {
+  if (props.auxiliaryTable) {
     return (
       <Page>
         <Navbar title="Form" backLink="Back" />
@@ -24,20 +24,7 @@ const AuxiliaryTableForm = (props) => {
               props.handleChange({ title: e.target.value})
             }}
             />
-          <List>
-            <ListItem radio value="Basic" defaultChecked name="table_type" title={dict.basic_table}
-              onChange={(e) => {
-                props.handleChange({ title: e.target.value})
-                props.addTitleField()
-              }}>
-            </ListItem>
-            <ListItem radio value="Relation" name="table_type" title={dict.relation_table}
-              onChange={(e) => {
-                props.handleChange({ table_type: e.target.value});
-                props.removeTitlefield()
-              }}>
-            </ListItem>
-          </List>
+          <AuxiliaryTableType tableType={props.auxiliaryTable.table_type} handleChange={props.handleChange} addTitleField={props.addTitleField} removeTitlefield={props.removeTitlefield}/>
         </List>
         <Block>
           <Row>

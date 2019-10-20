@@ -102,5 +102,5 @@ export const dict = {
   'auxiliary_table': 'جدول کمکی',
   'workflow':'گردش کار',
   'actions' : 'عملیات',
-
+  'roles': 'نقش ها'
 };
