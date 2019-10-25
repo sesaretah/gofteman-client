@@ -2,20 +2,20 @@ import React from "react";
 import { List, ListItem} from 'framework7-react';
 import crypto from 'crypto-js';
 
-const PostList = (props) => {
+const ProfileList = (props) => {
 
-  if (props.posts) {
+  if (props.profiles) {
     return (
       <List mediaList>
-        {props.posts.map((post) =>
+        {props.profiles.map((profile) =>
           <ListItem
             key={crypto.lib.WordArray.random(32)}
-            link={"/posts/" + post.id}
+            link={"/profiles/" + profile.id}
             ignoreCache={true}
-            title={post.title}
+            title={profile.fullname}
             after=""
             subtitle=""
-            text={post.abstract}
+            text=""
             ></ListItem>
         )}
       </List>
@@ -23,4 +23,4 @@ const PostList = (props) => {
       return (<ul></ul>)
     }
   }
-  export default PostList;
+  export default ProfileList;

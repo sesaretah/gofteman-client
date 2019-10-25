@@ -27,10 +27,10 @@
 }
 /* Custom color theme properties */
 :root {
-  --f7-theme-color: #673ab7;
-  --f7-theme-color-rgb: 103, 58, 183;
-  --f7-theme-color-shade: #7395AE;
-  --f7-theme-color-tint: #9c27b0;
+  --f7-theme-color: #009688;
+  --f7-theme-color-rgb:  0, 150, 136;
+  --f7-theme-color-shade: #006d63;
+  --f7-theme-color-tint: #00bfad;
 
   --f7-navbar-height: 40px;
   --f7-list-item-min-height: 40px;
@@ -107,4 +107,8 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
 .aurora .subnavbar {
     margin-top: -3px;
     padding-top: 0px;
+}
+
+.minus-z {
+  z-index: -1;
 }

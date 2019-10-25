@@ -8,8 +8,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import WorkflowOptions from "../workflows/options";
 import RecordForm from "../auxiliary_records/form";
 
-const DocumentForm = (props) => {
-  if (props.document && props.workflows ) {
+const PostForm = (props) => {
+  if (props.post && props.workflows ) {
     return (
       <React.Fragment>
         <List form>
@@ -30,7 +30,7 @@ const DocumentForm = (props) => {
             label={dict.title}
             type="text"
             placeholder='...'
-            value={props.document.title}
+            value={props.post.title}
             onInput={(e) => {
               props.handleChange({ title: e.target.value})
             }}
@@ -39,7 +39,7 @@ const DocumentForm = (props) => {
             label={dict.abstract}
             type="textarea"
             placeholder='...'
-            value={props.document.abstract}
+            value={props.post.abstract}
             resizable
             onInput={(e) => {
               props.handleChange({ abstract: e.target.value})
@@ -67,4 +67,4 @@ const DocumentForm = (props) => {
       return (null)
     }
   }
-  export default DocumentForm;
+  export default PostForm;

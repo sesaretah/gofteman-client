@@ -10,12 +10,22 @@ import DocumentCreate from './components/documents/create';
 import DocumentUpdate from './components/documents/update';
 
 
+import PostShow from './components/posts/show';
+import PostIndex from './components/posts/index';
+import PostCreate from './components/posts/create';
+import PostUpdate from './components/posts/update';
+
 
 import RoleShow from './components/roles/show';
 import RoleIndex from './components/roles/index';
 import RoleCreate from './components/roles/create';
 import RoleUpdate from './components/roles/update';
 
+
+import ProfileShow from './components/profiles/show';
+import ProfileIndex from './components/profiles/index';
+import ProfileCreate from './components/profiles/create';
+import ProfileUpdate from './components/profiles/update';
 
 import AuxiliaryTable from './components/auxiliary_tables/index';
 import AuxiliaryForm from './components/auxiliary_tables/create';
@@ -34,6 +44,9 @@ import WorkflowShow from './components/workflows/show';
 import WorkflowTableIndex from './components/workflow_tables/index';
 import WorkflowTableCreate from './components/workflow_tables/create';
 
+import Login from './components/users/Login';
+import SignUp from './components/users/SignUp';
+
 import DynamicRoutePage from './containers/DynamicRoutePage';
 import NotFoundPage from './containers/NotFoundPage';
 import PanelLeftPage from './containers/PanelLeftPage';
@@ -43,6 +56,14 @@ export default [
   {
     path: '/',
     component: HomePage,
+  },
+  {
+    path: '/login/',
+    component: Login,
+  },
+  {
+    path: '/sign_up/',
+    component: SignUp,
   },
   {
     path: '/panel-left/',
@@ -122,6 +143,23 @@ export default [
   },
 
   {
+    path: '/posts/',
+    component: PostIndex,
+  },
+  {
+    path: '/posts/:postId/edit',
+    component: PostUpdate,
+  },
+  {
+    path: '/posts/new',
+    component: PostCreate,
+  },
+  {
+    path: '/posts/:postId',
+    component: PostShow,
+  },
+
+  {
     path: '/roles/',
     component: RoleIndex,
   },
@@ -137,6 +175,24 @@ export default [
     path: '/roles/:roleId',
     component: RoleShow,
   },
+
+  {
+    path: '/profiles/',
+    component: ProfileIndex,
+  },
+  {
+    path: '/profiles/:profileId/edit',
+    component: ProfileUpdate,
+  },
+  {
+    path: '/profiles/new',
+    component: ProfileCreate,
+  },
+  {
+    path: '/profiles/:profileId',
+    component: ProfileShow,
+  },
+
   {
     path: '/workflow_tables/',
     component: WorkflowTableIndex,

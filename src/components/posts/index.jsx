@@ -1,7 +1,7 @@
 import React from "react"
 import { Page,Fab, Icon } from 'framework7-react';
 import ModelStore from "../../stores/ModelStore";
-import DocumentIndex from "../../containers/documents/index"
+import PostIndex from "../../containers/posts/index"
 import * as MyActions from "../../actions/MyActions";
 import { dict} from '../../Dict';
 import Framework7 from 'framework7/framework7.esm.bundle';
@@ -14,7 +14,7 @@ export default class Layout extends React.Component {
     this.getList = this.getList.bind(this);
     this.loggedIn = loggedIn.bind(this);
     this.state = {
-      documents: null,
+      posts: null,
     }
   }
   componentWillMount() {
@@ -33,21 +33,21 @@ export default class Layout extends React.Component {
   loadData(){
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
-    MyActions.getList('documents', this.state.page);
+    MyActions.getList('posts', this.state.page);
   }
 
   getList() {
-    var documents = ModelStore.getList()
-    if (documents){
+    var posts = ModelStore.getList()
+    if (posts){
       this.setState({
-        documents: documents,
+        posts: posts,
       });
     }
     console.log(this.state);
   }
 
   render() {
-    const {documents} = this.state;
-    return(<DocumentIndex documents={documents}/>)
+    const {posts} = this.state;
+    return(<PostIndex posts={posts}/>)
   }
 }

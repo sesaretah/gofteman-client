@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button} from 'framework7-react';
+import { List, ListItem, ListInput, Block, Row, Button, BlockTitle} from 'framework7-react';
 import { dict} from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -7,6 +7,7 @@ import crypto from 'crypto-js';
 const RoleForm = (props) => {
     return (
       <React.Fragment>
+        <BlockTitle>{dict.new_assignment}</BlockTitle>
         <List form>
           <ListInput
             label={dict.title}

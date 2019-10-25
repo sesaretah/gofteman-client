@@ -18,8 +18,8 @@ export function getList(model, page=1, params={}) {
   });
 }
 
-export function getInstance(model, id) {
-  axios.get(server + '/'+ model +'/'+id)
+export function getInstance(model, id, token) {
+  axios.get(server + '/'+ model +'/'+id, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })
   .then(function (response) {
     dispatcher.dispatch({
       type: "GET_INSTANCE_SUCCESS",
@@ -45,10 +45,9 @@ export function removeInstance(model, params={}) {
   });
 }
 
-export function setInstance(model, data) {
-  axios.post(server + '/'+ model +'/', data)
+export function setInstance(model, data, token) {
+  axios.post(server + '/'+ model +'/', data, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })
   .then(function (response) {
-    console.log(response);
     dispatcher.dispatch({
       type: "SET_INSTANCE_SUCCESS",
       instance: response.data,
@@ -59,10 +58,9 @@ export function setInstance(model, data) {
   });
 }
 
-export function updateInstance(model, data) {
-  axios.put(server + '/'+ model +'/'+data.id, data)
+export function updateInstance(model, data, token) {
+  axios.put(server + '/'+ model +'/'+data.id, data, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })
   .then(function (response) {
-    console.log(response);
     dispatcher.dispatch({
       type: "SET_INSTANCE_SUCCESS",
       instance: response.data,

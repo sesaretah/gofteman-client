@@ -2,7 +2,7 @@ export const dict = {
   'home' : 'خانه',
   'name' : 'نام و نام خانوادگی ',
   'login' : 'ورود',
-  'username' :  'شماره موبایل (مثلا ۰۹۱۲۳۴۵۶۷۸۹)',
+  'username' :  'نام کاربری ',
   'password' : 'رمز عبور ',
   'password_confirmation': 'تکرار رمز عبور',
   'mobile' : 'شماره موبایل ',
@@ -102,5 +102,17 @@ export const dict = {
   'auxiliary_table': 'جدول کمکی',
   'workflow':'گردش کار',
   'actions' : 'عملیات',
-  'roles': 'نقش ها'
+  'roles': 'نقش ها',
+  'divan': 'دیوان',
+  'enter_your_email': 'ایمیل خود را وارد کنید',
+  'enter_your_password': 'رمز عبور را وارد کنید ',
+  'enter_your_password_confirmation': 'رمز عبور را تکرار کنید ',
+  'profiles': 'افراد ',
+  'firstname': 'نام',
+  'if_registered': 'اگر قبلا ثبت نام کرده اید',
+  'you_can_login':'وارد شوید ',
+  'if_not_registered': 'اگر ثبت نام نکرده اید',
+  'you_can_sign_up':'ثبت نام کنید',
+  'new_assignment': 'اعطای نقش جدید',
+  'posts': 'پست ها'
 };
