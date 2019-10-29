@@ -15,6 +15,10 @@ import PostIndex from './components/posts/index';
 import PostCreate from './components/posts/create';
 import PostUpdate from './components/posts/update';
 
+import ChannelShow from './components/channels/show';
+import ChannelIndex from './components/channels/index';
+import ChannelCreate from './components/channels/create';
+import ChannelUpdate from './components/channels/update';
 
 import RoleShow from './components/roles/show';
 import RoleIndex from './components/roles/index';
@@ -27,10 +31,11 @@ import ProfileIndex from './components/profiles/index';
 import ProfileCreate from './components/profiles/create';
 import ProfileUpdate from './components/profiles/update';
 
-import AuxiliaryTable from './components/auxiliary_tables/index';
-import AuxiliaryForm from './components/auxiliary_tables/create';
-import AuxiliaryUpdate from './components/auxiliary_tables/update';
-import AuxiliaryRecord from './containers/auxiliary_tables/record';
+import AuxiliaryTable from './components/auxiliaryTables/index';
+import AuxiliaryForm from './components/auxiliaryTables/create';
+import AuxiliaryUpdate from './components/auxiliaryTables/update';
+import AuxiliaryTableShow from './components/auxiliaryTables/show';
+
 
 
 import WorkflowIndex from './components/workflows/index';
@@ -90,20 +95,20 @@ export default [
     component: DocumentForm,
   },
   {
-    path: '/auxiliary_tables/',
+    path: '/auxiliaryTables/',
     component: AuxiliaryTable,
   },
   {
-    path: '/auxiliary_tables/new',
+    path: '/auxiliaryTables/new',
     component: AuxiliaryForm,
   },
   {
-    path: '/auxiliary_tables/:auxiliaryTableId/edit',
+    path: '/auxiliaryTables/:auxiliaryTableId/edit',
     component: AuxiliaryUpdate,
   },
   {
-    path: '/auxiliary_tables/record/:auxiliaryTableId',
-    component: AuxiliaryRecord,
+    path: '/auxiliaryTables/:auxiliaryTableId',
+    component: AuxiliaryTableShow,
   },
   {
     path: '/workflows/',
@@ -157,6 +162,23 @@ export default [
   {
     path: '/posts/:postId',
     component: PostShow,
+  },
+
+  {
+    path: '/channels/',
+    component: ChannelIndex,
+  },
+  {
+    path: '/channels/:channelId/edit',
+    component: ChannelUpdate,
+  },
+  {
+    path: '/channels/new',
+    component: ChannelCreate,
+  },
+  {
+    path: '/channels/:channelId',
+    component: ChannelShow,
   },
 
   {

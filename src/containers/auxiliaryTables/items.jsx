@@ -2,7 +2,7 @@ import React from "react";
 import { List, ListItem, ListInput, Block, Row, Col, Icon, Button} from 'framework7-react';
 import { dict} from '../../Dict';
 import crypto from 'crypto-js';
-import AuxiliaryTableOptions from "../auxiliary_tables/options";
+import AuxiliaryTableOptions from "../auxiliaryTables/options";
 
 const AuxiliaryTableItems = (props) => {
 

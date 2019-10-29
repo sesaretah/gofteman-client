@@ -5,6 +5,7 @@ import crypto from 'crypto-js';
 const RecordOptions = (props) => {
   var options = [<option value=''></option>]
   if(props.content){
+    console.log(props.content);
     for (let i = 0; i < props.content.length; i++) {
       options.push(
         <option value={props.content[i].id}>

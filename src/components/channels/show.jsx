@@ -16,7 +16,7 @@ import {
 import { dict} from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import PostShow from "../../containers/posts/show"
+import ChannelShow from "../../containers/channels/show"
 
 export default class Layout extends Component {
   constructor() {
@@ -24,15 +24,10 @@ export default class Layout extends Component {
     this.getInstance = this.getInstance.bind(this);
     this.interaction = this.interaction.bind(this);
     this.setInstance = this.setInstance.bind(this);
-    this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.getList = this.getList.bind(this);
-    this.submit = this.submit.bind(this);
+
 
     this.state = {
-      post: null,
-      id: null,
-      channels: null,
-      channel_id: null,
+      channel: null,
       sheetOpened: false,
       token: window.localStorage.getItem('token'),
 
@@ -42,53 +37,42 @@ export default class Layout extends Component {
   componentWillMount() {
     ModelStore.on("got_instance", this.getInstance);
     ModelStore.on("set_instance", this.setInstance);
-    ModelStore.on("got_list", this.getList);
   }
 
   componentWillUnmount() {
     ModelStore.removeListener("got_instance", this.getInstance);
     ModelStore.removeListener("set_instance", this.setInstance);
-    ModelStore.removeListener("got_list", this.getList);
   }
 
   componentDidMount(){
-    MyActions.getInstance('posts', this.$f7route.params['postId'], this.state.token);
-    MyActions.getList('channels', this.state.page, {} ,this.state.token);
+    MyActions.getInstance('channels', this.$f7route.params['channelId'], this.state.token);
   }
 
   getInstance(){
-    var post = ModelStore.getIntance()
-    if (post){
+    var channel = ModelStore.getIntance()
+    if (channel){
       this.setState({
-        post: post,
-        id: post.id
+        channel: channel,
       });
     }
+    console.log(channel);
   }
-
-  getList() {
-    var channels = ModelStore.getList()
-    if (channels){
-      this.setState({
-        channels: channels,
-        channel_id: channels[0].id
-      });
-  }
-}
 
   setInstance(){
-    var post = ModelStore.getIntance()
-    if(post){
+    var channel = ModelStore.getIntance()
+    if(channel){
       this.setState({
-        post: post,
+        channel: channel,
       });
     }
+    console.log(channel);
   }
 
+
   fab(){
-    if (this.state.post){
+    if (this.state.channel){
       return(
-        <Fab href={"/posts/"+this.state.post.id+"/edit"} target="#main-view"  position="left-bottom" slot="fixed" color="lime">
+        <Fab href={"/channels/"+this.state.channel.id+"/edit"} target="#main-view"  position="left-bottom" slot="fixed" color="lime">
           <Icon ios="f7:edit" aurora="f7:edit" md="material:edit"></Icon>
           <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
         </Fab>
@@ -96,31 +80,19 @@ export default class Layout extends Component {
     }
   }
 
-  handleChangeValue(obj) {
-    this.setState(obj);
-  }
-
-
   interaction(interaction_type, interactionable_id, interactionable_type, source_type=null, source_id=null){
     var data = {interaction_type: interaction_type, interactionable_id: interactionable_id, interactionable_type: interactionable_type, source_type: source_type, source_id: source_id}
     MyActions.setInstance('interactions', data, this.state.token);
   }
 
-  submit(){
-    var data = {post_id: this.state.id, channel_id: this.state.channel_id}
-    MyActions.setInstance('shares', data, this.state.token);
-    const self = this;
-    self.$f7.sheet.close('.demo-sheet')
-  }
-
   render() {
-    const {post, sheetOpened, channels} = this.state;
+    const {channel, sheetOpened} = this.state;
     return (
       <Page>
-        <Navbar title={dict.posts} backLink={dict.back} />
+        <Navbar title={dict.channels} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <PostShow post={post} channels={channels} sheetOpened={sheetOpened} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue}/>
+        <ChannelShow channel={channel} sheetOpened={sheetOpened} interaction={this.interaction} />
       </Page>
     );
   }

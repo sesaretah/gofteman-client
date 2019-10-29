@@ -17,9 +17,9 @@ import { dict} from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import Framework7 from 'framework7/framework7.esm.bundle';
-import AuxiliaryTableForm from "../../containers/auxiliary_tables/form"
+import AuxiliaryTableForm from "../../containers/auxiliaryTables/form"
 
-export default class AuxiliaryForm extends Component {
+export default class AuxiliaryTableFormComponent extends Component {
   constructor() {
     super();
     this.submit = this.submit.bind(this);
@@ -32,6 +32,8 @@ export default class AuxiliaryForm extends Component {
     this.removeField = this.removeField.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onChangeValue = this.onChangeValue.bind(this);
+    this.loadData = this.loadData.bind(this);
+
 
     this.state = {
       title: '',
@@ -59,16 +61,29 @@ export default class AuxiliaryForm extends Component {
     var data = {id: this.state.id, table_type: this.state.table_type, title: this.state.title, data_format: this.state.fields}
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.submitting, closeTimeout: 2000, position: 'top'});
-    MyActions.setInstance('auxiliary_tables', data);
+    if (this.state.id){
+      MyActions.updateInstance('auxiliary_tables', data);
+    }
   }
 
   componentDidMount(){
-    MyActions.getList('auxiliary_tables', this.state.page);
+    console.log(this.state);
+      this.loadData();
+  }
+
+  loadData(){
+      if (!this.auxiliaryTable) {
+      //  console.log(this.auxiliaryTable.id, this.$f7route.params['auxiliaryTableId']);
+        this.setState({id: this.$f7route.params['auxiliaryTableId']});
+        MyActions.getInstance('auxiliary_tables', this.$f7route.params['auxiliaryTableId']);
+        MyActions.getList('auxiliary_tables', this.state.page);
+      }
+
   }
 
   getList(){
     var auxiliaryTables = ModelStore.getList()
-    if (auxiliaryTables.length > 0){
+    if (auxiliaryTables){
       this.setState({
         auxiliaryTables: auxiliaryTables,
       });
@@ -79,6 +94,7 @@ export default class AuxiliaryForm extends Component {
     var auxiliaryTable = ModelStore.getIntance()
     if (auxiliaryTable){
       this.setState({
+        auxiliaryTable: auxiliaryTable,
         fields: auxiliaryTable.data_format,
         title: auxiliaryTable.title,
         id: auxiliaryTable.id,
@@ -121,12 +137,13 @@ export default class AuxiliaryForm extends Component {
 
   onChangeValue(i, key, value) {
     let newState = Object.assign({}, this.state);
+    console.log(i, key, value);
     newState.fields[i][key] = value
     this.setState(newState);
   }
 
   render() {
-    const {title, auxiliaryTable, auxiliaryTables, fields} = this.state;
+    const {title, auxiliaryTable, auxiliaryTables, fields, id} = this.state;
     return (
       <AuxiliaryTableForm title={title} auxiliaryTables={auxiliaryTables} auxiliaryTable={auxiliaryTable} fields={fields} removeField={this.removeField} addTitleField={this.addTitleField} removeTitlefield={this.removeTitlefield} addField={this.addField} handleChange={this.handleChange} onChangeValue={this.onChangeValue} submit={this.submit}/>
     );

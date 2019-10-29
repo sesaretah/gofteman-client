@@ -1,14 +1,14 @@
 import React from "react"
 import { Page,Fab, Icon } from 'framework7-react';
 import ModelStore from "../../stores/ModelStore";
-import PostIndex from "../../containers/posts/index"
+import ChannelIndex from "../../containers/channels/index"
 import * as MyActions from "../../actions/MyActions";
 import { dict} from '../../Dict';
 import Framework7 from 'framework7/framework7.esm.bundle';
 import {loggedIn} from "../../components/users/loggedIn.js"
 
 
-export default class Post extends React.Component {
+export default class Channel extends React.Component {
   constructor() {
     super();
     this.getList = this.getList.bind(this);
@@ -18,7 +18,7 @@ export default class Post extends React.Component {
 
     this.state = {
       token: window.localStorage.getItem('token'),
-      posts: null,
+      channels: null,
     }
   }
   componentWillMount() {
@@ -38,23 +38,25 @@ export default class Post extends React.Component {
 
   loadData(){
     const f7: Framework7 = Framework7.instance;
-    f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
-    MyActions.getList('posts', this.state.page, {} ,this.state.token);
+    f7.toast.show({ text: dict.receiving, closeTimeout: 1000, position: 'top'});
+    MyActions.getList('channels', this.state.page, {} ,this.state.token);
   }
 
+
+
   setInstance(){
-    var post = ModelStore.getIntance()
-    if(post){
-      this.setState({posts: this.state.posts.map(el => (el.id === post.id ? Object.assign({}, el, post) : el))});
+    var channel = ModelStore.getIntance()
+    if(channel){
+      this.setState({channels: this.state.channels.map(el => (el.id === channel.id ? Object.assign({}, el, channel) : el))});
     }
   }
 
   getList() {
-    var posts = ModelStore.getList()
+    var channels = ModelStore.getList()
     var klass = ModelStore.getKlass()
-    if (posts && klass === 'Post'){
+    if (channels && klass === 'Channel'){
       this.setState({
-        posts: posts,
+        channels: channels,
       });
     }
   }
@@ -65,7 +67,7 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const {posts} = this.state;
-    return(<PostIndex interaction={this.interaction} posts={posts}/>)
+    const {channels} = this.state;
+    return(<ChannelIndex interaction={this.interaction} channels={channels}/>)
   }
 }

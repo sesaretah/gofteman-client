@@ -4,21 +4,20 @@ import crypto from 'crypto-js';
 import InteractionMenu from "../interactions/menu"
 
 
-const PostList = (props) => {
-
-  if (props.posts) {
+const ChannelList = (props) => {
+  if (props.channels && props.channels.length > 0) {
     return (
      <Row noGap>
-        {props.posts.map((post) =>
+        {props.channels.map((channel) =>
           <Col width="100" tabletWidth="50">
           <Card className="demo-facebook-card">
             <CardHeader className="no-border">
               <div className="demo-facebook-avatar"><img src="https://cdn.framework7.io/placeholder/people-68x68-1.jpg" width="34" height="34"/></div>
-              <div className="demo-facebook-name "><Link className="gray-color" href={'/posts/'+post.id}>{post.title.substring(0, 30)}</Link></div>
-              <div className="demo-facebook-date"><InteractionMenu model={post} klass='Post' interaction={props.interaction} sourceType={props.sourceType} sourceId={props.sourceId}/></div>
+              <div className="demo-facebook-name "><Link className="gray-color" href={'/channels/'+channel.id}>{channel.title.substring(0, 30)}</Link></div>
+              <div className="demo-facebook-date"><InteractionMenu model={channel} klass='Channel' interaction={props.interaction} sourceType='Channel' sourceId={channel.id}/></div>
             </CardHeader>
             <CardContent className='lightgray-color'>
-              {post.content.substring(0, 145) + '...'}
+              {channel.content.substring(0, 145) + '...'}
             </CardContent>
           </Card>
         </Col>
@@ -29,4 +28,4 @@ const PostList = (props) => {
       return (<ul></ul>)
     }
   }
-  export default PostList;
+  export default ChannelList;

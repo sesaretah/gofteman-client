@@ -16,13 +16,13 @@ import {
 import { dict} from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import PostForm from "../../containers/posts/form"
+import ChannelForm from "../../containers/channels/form"
 import Framework7 from 'framework7/framework7.esm.bundle';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import {uploadImageCallBack} from "./uploader.js"
 
-export default class PostCreate extends Component {
+export default class ChannelCreate extends Component {
   constructor() {
     super();
     this.submit = this.submit.bind(this);
@@ -34,10 +34,11 @@ export default class PostCreate extends Component {
 
 
     this.state = {
-      post: {},
+      channel: {},
       editorState: EditorState.createEmpty(),
       token: window.localStorage.getItem('token'),
       title: null,
+      content: null,
       interaction: null,
       page: 0
     }
@@ -57,10 +58,8 @@ export default class PostCreate extends Component {
 
 
   submit(){
-    const blocks = convertToRaw(this.state.editorState.getCurrentContent()).blocks;
-    const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
-    var data = {title: this.state.title, content: value, draft: convertToRaw(this.state.editorState.getCurrentContent())}
-    MyActions.setInstance('posts', data, this.state.token);
+    var data = {title: this.state.title, content: this.state.content}
+    MyActions.setInstance('channels', data, this.state.token);
   }
 
   onEditorStateChange(editorState){
@@ -90,7 +89,7 @@ export default class PostCreate extends Component {
 
   setInstance(){
     const self = this;
-    this.$f7router.navigate('/posts/');
+    this.$f7router.navigate('/channels/');
   }
 
 
@@ -98,12 +97,12 @@ export default class PostCreate extends Component {
 
 
   render() {
-    const {post, editorState} = this.state;
+    const {channel, editorState} = this.state;
     return (
       <Page>
-        <Navbar title={dict.post_form} backLink={dict.back} />
-        <BlockTitle>{dict.post_form}</BlockTitle>
-        <PostForm post={post}  editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit}  handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack}/>
+        <Navbar title={dict.channel_form} backLink={dict.back} />
+        <BlockTitle>{dict.channel_form}</BlockTitle>
+        <ChannelForm channel={channel}  editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit}  handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack}/>
       </Page>
     );
   }

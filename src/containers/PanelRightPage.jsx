@@ -16,12 +16,10 @@ export default () => (
     </List>
     <BlockTitle>{dict.settings}</BlockTitle>
     <List>
-      <ListItem link="/documents/" title={dict.documents} view="#main-view" panelClose></ListItem>
-      <ListItem link="/posts/" title={dict.posts} view="#main-view" panelClose></ListItem>
-      <ListItem link="/auxiliary_tables/" title={dict.auxiliary_tables} ignoreCache={true} view="#main-view" panelClose></ListItem>
-      <ListItem link="/workflows/" title={dict.workflows} ignoreCache={true} view="#main-view" panelClose></ListItem>
-      <ListItem link="/workflow_tables/" title={dict.workflow_tables} ignoreCache={true} view="#main-view" panelClose></ListItem>
-      <ListItem link="/roles/" title={dict.roles} ignoreCache={true} view="#main-view" panelClose></ListItem>
+      <ListItem link="/posts/" title={dict.posts}   view="#main-view" panelClose></ListItem>
+      <ListItem link="/channels/" title={dict.channels}  view="#main-view" panelClose></ListItem>
+      <ListItem link="/auxiliaryTables/" title={dict.auxiliary_tables} view="#main-view" panelClose></ListItem>
+      <ListItem link="/roles/" title={dict.roles}  ignoreCache={true} view="#main-view" panelClose></ListItem>
 
     </List>
   </Page>

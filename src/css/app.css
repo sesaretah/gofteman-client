@@ -42,6 +42,30 @@
   --f7-list-bg-color: #CFE8EF;
   --f7-block-strong-bg-color: #CFE8EF;
   */
+
+--f7-menu-text-color: #fff;
+--f7-menu-font-size: 13px;
+--f7-menu-font-weight: 500;
+--f7-menu-line-height: 1.2;
+--f7-menu-bg-color: rgba(0, 150, 136);
+--f7-menu-item-pressed-bg-color: rgba(20, 20, 20, 0.9);
+--f7-menu-item-padding-horizontal: 10px;
+--f7-menu-item-spacing: 6px;
+--f7-menu-item-height: 28px;
+--f7-menu-item-dropdown-icon-color: rgba(255, 255, 255, 0.4);
+--f7-menu-item-border-radius: 4px;
+/*
+--f7-menu-dropdown-pressed-bg-color: var(--f7-theme-color);
+*/
+--f7-menu-dropdown-item-height: 24px;
+--f7-menu-dropdown-divider-color: rgba(255, 255, 255, 0.2);
+--f7-menu-dropdown-padding-vertical: 6px;
+/*
+--f7-menu-dropdown-border-radius: var(--f7-menu-item-border-radius);
+*/
+--f7-card-header-padding-vertical: 5px;
+--f7-card-header-padding-horizontal: 5px;
+--f7-menu-item-spacing: 2px;
 }
 
 .theme-dark {
@@ -104,6 +128,11 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
   z-index: 6000;
 }
 
+.card-content {
+    position: relative;
+    min-height: 80px;
+}
+
 .aurora .subnavbar {
     margin-top: -3px;
     padding-top: 0px;
@@ -111,4 +140,36 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
 
 .minus-z {
   z-index: -1;
+}
+
+.card-content {
+    min-height: 80px;
+}
+
+.fs-5 {
+  font-size: 5px;
+}
+
+.menu-dropdown-item, .menu-dropdown-link {
+justify-content: flex-start;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.va {
+  vertical-align: -2px;
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.gray-color {
+  color: #5d5d5d !important;
+}
+
+.lightgray-color {
+  color: #767677 !important;
 }

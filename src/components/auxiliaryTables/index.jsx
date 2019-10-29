@@ -1,14 +1,14 @@
 import React from "react"
 import { Page,Fab, Icon } from 'framework7-react';
 import ModelStore from "../../stores/ModelStore";
-import PostIndex from "../../containers/posts/index"
+import AuxiliaryTableIndex from "../../containers/auxiliaryTables/index"
 import * as MyActions from "../../actions/MyActions";
 import { dict} from '../../Dict';
 import Framework7 from 'framework7/framework7.esm.bundle';
 import {loggedIn} from "../../components/users/loggedIn.js"
 
 
-export default class Post extends React.Component {
+export default class AuxiliaryTable extends React.Component {
   constructor() {
     super();
     this.getList = this.getList.bind(this);
@@ -18,7 +18,7 @@ export default class Post extends React.Component {
 
     this.state = {
       token: window.localStorage.getItem('token'),
-      posts: null,
+      auxiliaryTables: [],
     }
   }
   componentWillMount() {
@@ -36,25 +36,28 @@ export default class Post extends React.Component {
     this.loadData();
   }
 
+
+
+
   loadData(){
     const f7: Framework7 = Framework7.instance;
-    f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
-    MyActions.getList('posts', this.state.page, {} ,this.state.token);
+    f7.toast.show({ text: dict.receiving, closeTimeout: 1000, position: 'top'});
+    MyActions.getList('auxiliary_tables', this.state.page, {} ,this.state.token);
   }
 
   setInstance(){
-    var post = ModelStore.getIntance()
-    if(post){
-      this.setState({posts: this.state.posts.map(el => (el.id === post.id ? Object.assign({}, el, post) : el))});
+    var auxiliaryTable = ModelStore.getIntance()
+    if(auxiliaryTable){
+      this.setState({auxiliaryTables: this.state.auxiliaryTables.map(el => (el.id === auxiliaryTable.id ? Object.assign({}, el, auxiliaryTable) : el))});
     }
   }
 
   getList() {
-    var posts = ModelStore.getList()
+    var auxiliaryTables = ModelStore.getList()
     var klass = ModelStore.getKlass()
-    if (posts && klass === 'Post'){
+    if (auxiliaryTables && klass === 'AuxiliaryTable'){
       this.setState({
-        posts: posts,
+        auxiliaryTables: auxiliaryTables,
       });
     }
   }
@@ -65,7 +68,7 @@ export default class Post extends React.Component {
   }
 
   render() {
-    const {posts} = this.state;
-    return(<PostIndex interaction={this.interaction} posts={posts}/>)
+    const {auxiliaryTables} = this.state;
+    return(<AuxiliaryTableIndex interaction={this.interaction} auxiliaryTables={auxiliaryTables}/>)
   }
 }

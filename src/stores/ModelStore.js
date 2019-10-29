@@ -15,8 +15,11 @@ class ModelStore extends EventEmitter {
     this.klass = list.klass
     for (var i = 0, len = list.data.length; i < len; ++i) {
       this.list.push(list.data[i]);
+      if (i === len - 1 ) {
+        this.emit("got_list");
+      }
     }
-    this.emit("got_list");
+
   }
 
   showIntance(instance){

@@ -10,7 +10,7 @@ const AuxiliaryTableList = (props) => {
         {props.auxiliaryTables.map((auxiliaryTable) =>
           <ListItem
             key={crypto.lib.WordArray.random(32)}
-            link={"/auxiliary_tables/record/"+auxiliaryTable.id}
+            link={"/auxiliary_tables/"+auxiliaryTable.id}
             title={auxiliaryTable.title}
             after=""
             subtitle=""

@@ -4,6 +4,7 @@ import AuxiliaryTableList from "./list"
 import { dict} from '../../Dict';
 
 const AuxiliaryTableIndex = (props) => {
+  console.log(props);
   return(
     <Page>
       <Navbar title={dict.auxiliary_tables} backLink={dict.back} >

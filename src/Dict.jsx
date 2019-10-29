@@ -114,5 +114,15 @@ export const dict = {
   'if_not_registered': 'اگر ثبت نام نکرده اید',
   'you_can_sign_up':'ثبت نام کنید',
   'new_assignment': 'اعطای نقش جدید',
-  'posts': 'پست ها'
+  'posts': 'پست ها',
+  'bookmark': 'نشان',
+  'like':'علاقه',
+  'follow':'دنبال',
+  'share':'اشتراک',
+  'social_acts':'عملگرهای اجتماعی ',
+  'channels': 'کانال ها',
+  'close': 'بستن',
+  'channel':'کانال ',
+  'details': 'شرح',
+  'Shoa': 'شعاع '
 };

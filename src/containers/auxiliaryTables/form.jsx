@@ -5,8 +5,8 @@ import crypto from 'crypto-js';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 
-import AuxiliaryTableItems from "../auxiliary_tables/items";
-import AuxiliaryTableType from "../auxiliary_tables/table_type";
+import AuxiliaryTableItems from "../auxiliaryTables/items";
+import AuxiliaryTableType from "../auxiliaryTables/table_type";
 
 const AuxiliaryTableForm = (props) => {
   if (props.auxiliaryTable) {
@@ -24,7 +24,7 @@ const AuxiliaryTableForm = (props) => {
               props.handleChange({ title: e.target.value})
             }}
             />
-          <AuxiliaryTableType tableType={props.auxiliaryTable.table_type} handleChange={props.handleChange} addTitleField={props.addTitleField} removeTitlefield={props.removeTitlefield}/>
+          <AuxiliaryTableType tableType={props.auxiliaryTable.table_type} handleChange={props.handleChange} addTitleField={props.addTitleField} removeField={props.removeField} removeTitlefield={props.removeTitlefield}/>
         </List>
         <Block>
           <Row>
@@ -36,7 +36,7 @@ const AuxiliaryTableForm = (props) => {
             </Col>
           </Row>
         </Block>
-        <AuxiliaryTableItems fields={props.fields} auxiliaryTables={props.auxiliaryTables} onChangeValue={props.onChangeValue}/>
+        <AuxiliaryTableItems fields={props.fields} auxiliaryTables={props.auxiliaryTables}  removeField={props.removeField} onChangeValue={props.onChangeValue}/>
         <Block strong>
           <Row tag="p">
             <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>

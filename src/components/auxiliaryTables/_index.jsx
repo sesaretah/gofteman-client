@@ -1,21 +1,27 @@
 import React from "react"
 import { Page,Fab, Icon } from 'framework7-react';
 import ModelStore from "../../stores/ModelStore";
-import AuxiliaryTableIndex from "../../containers/auxiliary_tables/index"
+import AuxiliaryTableIndex from "../../containers/auxiliaryTables/index"
 import * as MyActions from "../../actions/MyActions";
 import { dict} from '../../Dict';
-import Framework7 from 'framework7/framework7.esm.bundle';
+import crypto from 'crypto-js';
 
-
-export default class Layout extends React.Component {
+//export default class AuxiliaryTableIndexComponent extends React.Component {
+export default class AuxiliaryTableIndexComponent extends React.Component {
   constructor() {
-    super();
-    this.getList = this.getList.bind(this);
-    this.state = {
-      auxiliaryTables: [],
+  super();
+this.state = {
+      auxiliaryTables: null,
+      token: window.localStorage.getItem('token'),
       page: 1,
     }
   }
+  constructor() {
+    super();
+    this.getList = this.getList.bind(this);
+
+  }
+
   componentWillMount() {
     ModelStore.on("got_list", this.getList);
   }
@@ -25,33 +31,19 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount(){
-    this.loadData();
-  }
-
-  componentWillReceiveProps(){
-    this.loadData();
-  }
-
-  loadData(){
-    const f7: Framework7 = Framework7.instance;
-    f7.toast.show({text: dict.receiving, closeTimeout: 2000, position: 'bottom'});
-    MyActions.getList('auxiliary_tables', this.state.page);
+    console.log('XXXXXXXXXXXXXXXXXX');
+    MyActions.getList('auxiliary_tables', this.state.page, {rand: crypto.lib.WordArray.random(12)},this.state.token);
   }
 
   getList(){
     var auxiliaryTables = ModelStore.getList()
-    const self = this;
-    self.$f7.preloader.hide();
-    if (auxiliaryTables.length > 0){
+    if (auxiliaryTables){
       this.setState({
         auxiliaryTables: auxiliaryTables,
       });
     }
   }
 
-  getInstance(){
-
-  }
 
   render() {
     const {auxiliaryTables} = this.state;
