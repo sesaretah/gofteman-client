@@ -3,7 +3,7 @@ import {Menu, MenuItem, MenuDropdown, MenuDropdownItem, Page, Navbar, Block, Blo
 import { dict} from '../Dict';
 export default () => (
   <Page>
-    <Navbar title={dict.Divan} />
+    <Navbar title={dict.Shoa} />
     <BlockTitle>{dict.home}</BlockTitle>
 
     <List>

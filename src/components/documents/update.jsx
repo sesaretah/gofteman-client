@@ -26,7 +26,7 @@ export default class DocumentUpdate extends Component {
     super();
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
-    this.getInstance = this.getInstance.bind(this);    
+    this.getInstance = this.getInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this)
     this.getList = this.getList.bind(this)
@@ -60,7 +60,7 @@ export default class DocumentUpdate extends Component {
 
   submit(){
     var data = {id: this.state.id, title: this.state.title, graph: {nodes: window.nodes, edges: window.edges}}
-      MyActions.updateInstance('documents', data);
+    MyActions.updateInstance('documents', data);
   }
 
   componentDidMount(){
@@ -107,7 +107,6 @@ export default class DocumentUpdate extends Component {
         workflowId: document.workflow_id
       });
     }
-    console.log('Hey', this.state);
   }
 
   handleChangeValue(obj) {
@@ -115,7 +114,7 @@ export default class DocumentUpdate extends Component {
   }
 
   onEditorStateChange(editorState){
-      this.setState({
+    this.setState({
       editorState,
     });
   };
@@ -136,7 +135,7 @@ export default class DocumentUpdate extends Component {
       this.setState({fields: this.state.fields.concat({field_id: key, value: value})});
     }
   }
-
+  
   setInstance(){
     const self = this;
     this.$f7router.navigate('/documents/');
@@ -144,12 +143,12 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-        const {workflowId, document, editorState, workflows, auxiliaryTables} = this.state;
+    const {workflowId, document, editorState, workflows, auxiliaryTables} = this.state;
     return (
       <Page>
-        <Navbar title="Form" backLink={dict.back} />
-        <BlockTitle>{dict.workflow_form}</BlockTitle>
-        <DocumentForm document={document} workflowId={workflowId} auxiliaryTables={auxiliaryTables} workflows={workflows} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit} editing={true} handleChange={this.handleChangeValue} onChangeValue={this.onChangeValue}/>
+      <Navbar title="Form" backLink={dict.back} />
+      <BlockTitle>{dict.workflow_form}</BlockTitle>
+      <DocumentForm document={document} workflowId={workflowId} auxiliaryTables={auxiliaryTables} workflows={workflows} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit} editing={true} handleChange={this.handleChangeValue} onChangeValue={this.onChangeValue}/>
       </Page>
     );
   }
