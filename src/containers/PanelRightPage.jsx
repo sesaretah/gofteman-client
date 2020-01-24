@@ -16,7 +16,7 @@ export default () => (
     </List>
     <BlockTitle>{dict.settings}</BlockTitle>
     <List>
-      <ListItem link="/posts/" title={dict.posts}   view="#main-view" panelClose></ListItem>
+      <ListItem link="/posts/" title={dict.posts}  view="#main-view" panelClose></ListItem>
       <ListItem link="/channels/" title={dict.channels}  view="#main-view" panelClose></ListItem>
       <ListItem link="/auxiliaryTables/" title={dict.auxiliary_tables} view="#main-view" panelClose></ListItem>
       <ListItem link="/roles/" title={dict.roles}  ignoreCache={true} view="#main-view" panelClose></ListItem>

@@ -9,7 +9,7 @@ import InteractionMenu from "../interactions/menu"
 import ShareMenu from "../shares/menu"
 
 const PostShow = (props) => {
-  if (props.post){
+  if (props.post && props.post.draft){
     const contentState = convertFromRaw(props.post.draft);
     const editorState = EditorState.createWithContent(contentState);
     return(

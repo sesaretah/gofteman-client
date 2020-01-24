@@ -32,15 +32,18 @@ export default class Post extends React.Component {
   }
 
   componentDidMount(){
+    console.log('componentDidMount');
     this.loggedIn();
     this.loadData();
   }
 
   loadData(){
-    const f7: Framework7 = Framework7.instance;
-    f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
+    //const f7: Framework7 = Framework7.instance;
+    //f7.toast.show({ text: dict.receiving, closeTimeout: 1000, position: 'top'});
     MyActions.getList('posts', this.state.page, {} ,this.state.token);
   }
+
+
 
   setInstance(){
     var post = ModelStore.getIntance()

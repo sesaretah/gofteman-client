@@ -5,13 +5,10 @@ const server='http://localhost:3001/v1';
 
 
 export function getList(model, page=1, params={}, token) {
-  console.log(model);
   var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
   axios.get(server + '/'+ model +'?page='+page+'&'+queryString, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })
   .then(function (response) {
-          console.log('response' , response);
     dispatcher.dispatch({
-
       type: "LIST_MODEL_SUCCESS",
       list: response.data,
     });

@@ -12,6 +12,7 @@ export default class Layout extends React.Component {
     super();
     this.getList = this.getList.bind(this);
     this.state = {
+      token: window.localStorage.getItem('token'),
       roles: null,
     }
   }
@@ -29,13 +30,15 @@ export default class Layout extends React.Component {
 
   loadData(){
     const f7: Framework7 = Framework7.instance;
+  console.log(this.state.token)
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
-    MyActions.getList('roles', this.state.page);
+    MyActions.getList('roles', this.state.page, {}, this.state.token);
   }
 
   getList() {
     var roles = ModelStore.getList()
-    if (roles){
+    var klass = ModelStore.getKlass()
+    if (roles && klass === 'Role'){
       this.setState({
         roles: roles,
       });

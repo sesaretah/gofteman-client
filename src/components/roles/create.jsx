@@ -27,6 +27,7 @@ export default class RoleCreate extends Component {
     this.handleChangeValue = this.handleChangeValue.bind(this);
 
     this.state = {
+      token: window.localStorage.getItem('token'),
       role: {},
     }
   }
@@ -42,7 +43,7 @@ export default class RoleCreate extends Component {
 
   submit(){
     var data = {title: this.state.title}
-    MyActions.setInstance('roles', data);
+    MyActions.setInstance('roles', data, this.state.token);
   }
 
 

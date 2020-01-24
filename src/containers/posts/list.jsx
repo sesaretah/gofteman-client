@@ -6,7 +6,7 @@ import InteractionMenu from "../interactions/menu"
 
 const PostList = (props) => {
 
-  if (props.posts) {
+  if (props.posts && props.posts.length > 0) {
     return (
      <Row noGap>
         {props.posts.map((post) =>

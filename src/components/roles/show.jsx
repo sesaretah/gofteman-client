@@ -26,6 +26,7 @@ export default class Layout extends Component {
     this.submit = this.submit.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.state = {
+      token: window.localStorage.getItem('token'),
       role: null,
       id: null,
       users: null,
@@ -44,8 +45,8 @@ export default class Layout extends Component {
   }
 
   componentDidMount(){
-      MyActions.getInstance('roles', this.$f7route.params['roleId']);
-      MyActions.getList('users', this.state.page);
+      MyActions.getInstance('roles', this.$f7route.params['roleId'], this.state.token);
+      MyActions.getList('users', this.state.page, {} ,this.state.token);
   }
 
   getInstance(){
@@ -56,12 +57,12 @@ export default class Layout extends Component {
         id: role.id
       });
     }
-    console.log(role);
     }
 
     getList() {
       var users = ModelStore.getList()
-      if (users){
+      var klass = ModelStore.getKlass()
+      if (users &&  klass === 'User'){
         this.setState({
           users: users,
         });

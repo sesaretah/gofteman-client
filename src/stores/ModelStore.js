@@ -19,6 +19,9 @@ class ModelStore extends EventEmitter {
         this.emit("got_list");
       }
     }
+    if(list.data.length == 0){
+      this.emit("got_list");
+    }
 
   }
 

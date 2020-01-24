@@ -8,7 +8,7 @@ const UserOptions = (props) => {
     for (let i = 0; i < props.users.length; i++) {
       options.push(
         <option value={props.users[i].id}>
-          {props.users[i].username}
+          {props.users[i].email}
         </option>
       )
     }

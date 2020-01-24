@@ -31,8 +31,8 @@ export default function (props) {
       rightBreakpoint: 960,
     },
     view: {
-      xhrCache: false,
-      componentCache: false
+      //ignoreCache: true,
+      //reloadCurrent: true
     },
     // App routes
     routes,
@@ -54,8 +54,7 @@ export default function (props) {
       </Panel>
 
       {/* Main View */}
-      <View id="main-view" url="/" pushState={true} pushStateAnimate={false} pushStateRoot={document.location.pathname}  main className="safe-areas"/>
-
+      <View id="main-view" url="/" pushState={true}  main className="safe-areas"/>
       {/* Popup */}
       <Popup id="popup">
         <View>

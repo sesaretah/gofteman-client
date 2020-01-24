@@ -35,9 +35,11 @@ export default class PostCreate extends Component {
 
     this.state = {
       post: {},
+      channels: null,
       editorState: EditorState.createEmpty(),
       token: window.localStorage.getItem('token'),
       title: null,
+      channelId: null,
       interaction: null,
       page: 0
     }
@@ -59,7 +61,7 @@ export default class PostCreate extends Component {
   submit(){
     const blocks = convertToRaw(this.state.editorState.getCurrentContent()).blocks;
     const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
-    var data = {title: this.state.title, content: value, draft: convertToRaw(this.state.editorState.getCurrentContent())}
+    var data = {title: this.state.title, content: value, channel_id: this.state.channelId, draft: convertToRaw(this.state.editorState.getCurrentContent())}
     MyActions.setInstance('posts', data, this.state.token);
   }
 
@@ -80,12 +82,22 @@ export default class PostCreate extends Component {
   }
 
   loadData(){
+    const f7: Framework7 = Framework7.instance;
+    f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
+    MyActions.getList('channels', this.state.page, {},this.state.token);
   }
 
   componentDidUpdate(prev, prevstate) {
   }
 
   getList() {
+    var channels = ModelStore.getList()
+    var klass = ModelStore.getKlass()
+    if (channels && klass === 'Channel'){
+      this.setState({
+        channels: channels,
+      });
+    }
   }
 
   setInstance(){
@@ -98,12 +110,12 @@ export default class PostCreate extends Component {
 
 
   render() {
-    const {post, editorState} = this.state;
+    const {post, editorState, channels} = this.state;
     return (
       <Page>
         <Navbar title={dict.post_form} backLink={dict.back} />
         <BlockTitle>{dict.post_form}</BlockTitle>
-        <PostForm post={post}  editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit}  handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack}/>
+        <PostForm post={post} channels={channels} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit}  handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack}/>
       </Page>
     );
   }

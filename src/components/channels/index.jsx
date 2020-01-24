@@ -32,14 +32,15 @@ export default class Channel extends React.Component {
   }
 
   componentDidMount(){
+    console.log('componentDidMount');
     this.loggedIn();
     this.loadData();
   }
 
   loadData(){
-    const f7: Framework7 = Framework7.instance;
-    f7.toast.show({ text: dict.receiving, closeTimeout: 1000, position: 'top'});
-    MyActions.getList('channels', this.state.page, {} ,this.state.token);
+    //const f7: Framework7 = Framework7.instance;
+    //f7.toast.show({ text: dict.receiving, closeTimeout: 1000, position: 'top'});
+    MyActions.getList('channels', this.state.page, {} , this.state.token);
   }
 
 

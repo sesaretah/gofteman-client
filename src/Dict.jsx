@@ -124,5 +124,6 @@ export const dict = {
   'close': 'بستن',
   'channel':'کانال ',
   'details': 'شرح',
-  'Shoa': 'شعاع '
+  'Shoa': 'شعاع ',
+  'role': 'نقش'
 };

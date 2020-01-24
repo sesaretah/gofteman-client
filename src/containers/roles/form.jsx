@@ -7,7 +7,7 @@ import crypto from 'crypto-js';
 const RoleForm = (props) => {
     return (
       <React.Fragment>
-        <BlockTitle>{dict.new_assignment}</BlockTitle>
+        <BlockTitle>{dict.role}</BlockTitle>
         <List form>
           <ListInput
             label={dict.title}
