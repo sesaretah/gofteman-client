@@ -29,6 +29,7 @@ export default class RoleCreate extends Component {
     this.state = {
       token: window.localStorage.getItem('token'),
       role: {},
+      default_role: true,
     }
   }
 
@@ -42,7 +43,7 @@ export default class RoleCreate extends Component {
   }
 
   submit(){
-    var data = {title: this.state.title}
+    var data = {title: this.state.title, default_role: this.state.defaultRole}
     MyActions.setInstance('roles', data, this.state.token);
   }
 

@@ -1,15 +1,15 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button} from 'framework7-react';
+import { List, ListItem, BlockTitle, Block, Row, Button} from 'framework7-react';
 import { dict} from '../../Dict';
-import crypto from 'crypto-js';
 import UserOptions from "../users/options";
 
 const AssignmentForm = (props) => {
     return (
       <React.Fragment>
-        <List form>
+        <BlockTitle>{dict.assignment_form}</BlockTitle>
+        <List form inset>
           <ListItem
-            title={dict.username}
+            title={dict.email}
             smartSelect
             >
             <select name="content"
@@ -18,7 +18,7 @@ const AssignmentForm = (props) => {
             </select>
           </ListItem>
         </List>
-      <Block strong>
+      <Block strong inset>
         <Row tag="p">
           <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
         </Row>

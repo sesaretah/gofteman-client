@@ -31,9 +31,9 @@ export function getInstance(model, id, token) {
   });
 }
 
-export function removeInstance(model, params={}) {
+export function removeInstance(model, params={}, token ) {
   var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
-  axios.get(server + '/'+ model +'/delete?'+queryString)
+  axios.get(server + '/'+ model +'/delete?'+queryString, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })
   .then(function (response) {
     dispatcher.dispatch({
       type: "DELETE_INSTANCE_SUCCESS",

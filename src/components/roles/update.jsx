@@ -30,7 +30,9 @@ export default class DocumentUpdate extends Component {
 
 
     this.state = {
+      token: window.localStorage.getItem('token'),
       role : {},
+      defaultRole: null,
     }
   }
 
@@ -47,8 +49,8 @@ export default class DocumentUpdate extends Component {
 
 
   submit(){
-    var data = {id:this.state.id, title: this.state.title}
-    MyActions.updateInstance('roles', data);
+    var data = {id:this.state.id, title: this.state.title, default_role: this.state.defaultRole}
+    MyActions.updateInstance('roles', data,  this.state.token);
   }
   componentDidMount(){
     this.loadData();
@@ -58,25 +60,27 @@ export default class DocumentUpdate extends Component {
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
     if (this.$f7route.params['roleId']) {
-      MyActions.getInstance('roles', this.$f7route.params['roleId']);
+      MyActions.getInstance('roles', this.$f7route.params['roleId'],  this.state.token);
     }
   }
 
 
   getInstance(){
     var role = ModelStore.getIntance()
-    console.log(role);
-    if (role){
+    var klass = ModelStore.getKlass()
+    if (role && klass === 'Role'){
       this.setState({
         title: role.title,
         id: role.id,
         role: role,
+        defaultRole: role.default_role
       });
     }
+    console.log(role)
   }
 
   handleChangeValue(obj) {
-    console.log(obj);
+console.log(obj)
     this.setState(obj);
   }
 
@@ -88,12 +92,12 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-        const {role} = this.state;
+        const {role, defaultRole} = this.state;
     return (
       <Page>
         <Navbar title={dict.role_form} backLink={dict.back} />
         <BlockTitle>{dict.role_form}</BlockTitle>
-        <RoleForm role={role} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <RoleForm role={role} defaultRole={defaultRole} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

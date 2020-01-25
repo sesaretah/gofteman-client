@@ -125,5 +125,13 @@ export const dict = {
   'channel':'کانال ',
   'details': 'شرح',
   'Shoa': 'شعاع ',
-  'role': 'نقش'
+  'role': 'نقش',
+  'Default': 'پیش فرض',
+  'NonDefault':'غیر پیش فرض ',
+  'value': ' مقدار',
+  'true': 'مثبت',
+  'false': 'منفی',
+  'access_control_list':'لیست کنترل دسترسی',
+  'access_control_form':'فرم کنترل دسترسی',
+  'assignment_form':'فرم اعطای نقش'
 };

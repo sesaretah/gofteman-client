@@ -30,7 +30,6 @@ export default class Layout extends React.Component {
 
   loadData(){
     const f7: Framework7 = Framework7.instance;
-  console.log(this.state.token)
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
     MyActions.getList('roles', this.state.page, {}, this.state.token);
   }
