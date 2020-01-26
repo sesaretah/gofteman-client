@@ -16,7 +16,9 @@ import {
 import { dict} from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import PostShow from "../../containers/posts/show"
+import PostShow from "../../containers/posts/show";
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 export default class Layout extends Component {
   constructor() {
@@ -27,6 +29,9 @@ export default class Layout extends Component {
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.getList = this.getList.bind(this);
     this.submit = this.submit.bind(this);
+    this.submitComment = this.submitComment.bind(this);
+
+    
 
     this.state = {
       post: null,
@@ -34,6 +39,8 @@ export default class Layout extends Component {
       channels: null,
       channel_id: null,
       sheetOpened: false,
+      commentContent: '',
+      comments: null,
       token: window.localStorage.getItem('token'),
 
     }
@@ -58,17 +65,20 @@ export default class Layout extends Component {
 
   getInstance(){
     var post = ModelStore.getIntance()
-    if (post){
+    var klass = ModelStore.getKlass()
+    if (post && klass === 'Post'){
       this.setState({
         post: post,
-        id: post.id
+        id: post.id,
+        comments: post.comments
       });
     }
   }
 
   getList() {
     var channels = ModelStore.getList()
-    if (channels){
+    var klass = ModelStore.getKlass()
+    if (channels&& klass === 'Channel'){
       this.setState({
         channels: channels,
         channel_id: channels[0].id
@@ -78,9 +88,11 @@ export default class Layout extends Component {
 
   setInstance(){
     var post = ModelStore.getIntance()
-    if(post){
+    var klass = ModelStore.getKlass()
+    if(post && klass === 'Post'){
       this.setState({
         post: post,
+        comments: post.comments
       });
     }
   }
@@ -113,14 +125,19 @@ export default class Layout extends Component {
     self.$f7.sheet.close('.demo-sheet')
   }
 
+  submitComment(){
+    var data = {post_id: this.state.id, content: this.state.commentContent}
+    MyActions.setInstance('comments', data, this.state.token);
+  }
+
   render() {
-    const {post, sheetOpened, channels} = this.state;
+    const {post, sheetOpened, channels, comments} = this.state;
     return (
       <Page>
         <Navbar title={dict.posts} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <PostShow post={post} channels={channels} sheetOpened={sheetOpened} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue}/>
+        <PostShow post={post} comments={comments} channels={channels} submitComment={this.submitComment} sheetOpened={sheetOpened} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

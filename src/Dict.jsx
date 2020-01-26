@@ -41,7 +41,7 @@ export const dict = {
   'city': 'شهر',
   'website': 'وبسایت',
   'call': 'تماس بگیرید',
-  'ago': 'قبل ',
+  'ago': ' قبل',
   'all_above': 'همه ی موارد فوق',
   'no_result': 'موردی یافت نشد ',
   'category': 'دسته بندی ',
@@ -133,5 +133,6 @@ export const dict = {
   'false': 'منفی',
   'access_control_list':'لیست کنترل دسترسی',
   'access_control_form':'فرم کنترل دسترسی',
-  'assignment_form':'فرم اعطای نقش'
+  'assignment_form':'فرم اعطای نقش',
+  'comment_form': 'نظر بدهید',
 };

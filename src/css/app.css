@@ -173,3 +173,7 @@ justify-content: flex-start;
 .lightgray-color {
   color: #767677 !important;
 }
+
+.list .item-subtitle {
+  white-space: normal;
+}
