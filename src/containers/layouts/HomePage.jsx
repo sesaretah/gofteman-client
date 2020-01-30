@@ -15,7 +15,7 @@ import {
   Col,
   Button, Icon, Fab, Searchbar, Subnavbar
 } from 'framework7-react';
-import { dict } from '../Dict';
+import { dict } from '../../Dict';
 
 export default () => (
   <Page>

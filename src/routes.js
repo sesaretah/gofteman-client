@@ -1,9 +1,8 @@
-import HomePage from './containers/HomePage.jsx';
-import AboutPage from './containers/AboutPage';
-import FormPage from './containers/FormPage';
+import HomePage from './containers/layouts/HomePage.jsx';
+import NotFoundPage from './containers/layouts/NotFoundPage';
+import PanelRightPage from './containers/layouts/PanelRightPage';
 
-import DocumentForm from './containers/DocumentForm';
-import DocumentList from './containers/DocumentList';
+
 import DocumentShow from './components/documents/show';
 import DocumentIndex from './components/documents/index';
 import DocumentCreate from './components/documents/create';
@@ -31,31 +30,11 @@ import ProfileIndex from './components/profiles/index';
 import ProfileCreate from './components/profiles/create';
 import ProfileUpdate from './components/profiles/update';
 
-import AuxiliaryTable from './components/auxiliaryTables/index';
-import AuxiliaryForm from './components/auxiliaryTables/create';
-import AuxiliaryUpdate from './components/auxiliaryTables/update';
-import AuxiliaryTableShow from './components/auxiliaryTables/show';
-
-
-
-import WorkflowIndex from './components/workflows/index';
-import WorkflowCreate from './components/workflows/create';
-import WorkflowUpdate from './components/workflows/update';
-import WorkflowShow from './components/workflows/show';
-
-
-
-
-import WorkflowTableIndex from './components/workflow_tables/index';
-import WorkflowTableCreate from './components/workflow_tables/create';
 
 import Login from './components/users/Login';
 import SignUp from './components/users/SignUp';
 
-import DynamicRoutePage from './containers/DynamicRoutePage';
-import NotFoundPage from './containers/NotFoundPage';
-import PanelLeftPage from './containers/PanelLeftPage';
-import PanelRightPage from './containers/PanelRightPage';
+
 
 export default [
   {
@@ -71,64 +50,8 @@ export default [
     component: SignUp,
   },
   {
-    path: '/panel-left/',
-    component: PanelLeftPage,
-  },
-  {
     path: '/panel-right/',
     component: PanelRightPage,
-  },
-  {
-    path: '/about/',
-    component: AboutPage,
-  },
-  {
-    path: '/form/',
-    component: FormPage,
-  },
-  {
-    path: '/document_list/',
-    component: DocumentList,
-  },
-  {
-    path: '/document_form/',
-    component: DocumentForm,
-  },
-  {
-    path: '/auxiliaryTables/',
-    component: AuxiliaryTable,
-  },
-  {
-    path: '/auxiliaryTables/new',
-    component: AuxiliaryForm,
-  },
-  {
-    path: '/auxiliaryTables/:auxiliaryTableId/edit',
-    component: AuxiliaryUpdate,
-  },
-  {
-    path: '/auxiliaryTables/:auxiliaryTableId',
-    component: AuxiliaryTableShow,
-  },
-  {
-    path: '/workflows/',
-    component: WorkflowIndex,
-  },
-  {
-    path: '/workflows/:workflowId/edit',
-    component: WorkflowUpdate,
-  },
-  {
-    path: '/workflows/new',
-    component: WorkflowCreate,
-  },
-  {
-    path: '/workflows/:workflowId',
-    component: WorkflowShow,
-  },
-  {
-    path: '/workflow_tables/',
-    component: WorkflowTableIndex,
   },
   {
     path: '/documents/',
@@ -213,19 +136,6 @@ export default [
   {
     path: '/profiles/:profileId',
     component: ProfileShow,
-  },
-
-  {
-    path: '/workflow_tables/',
-    component: WorkflowTableIndex,
-  },
-  {
-    path: '/workflow_tables/new',
-    component: WorkflowTableCreate,
-  },
-  {
-    path: '/dynamic-route/blog/:blogId/post/:postId/',
-    component: DynamicRoutePage,
   },
   {
     path: '(.*)',

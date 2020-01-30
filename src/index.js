@@ -17,7 +17,6 @@ import './css/icons.css';
 
 // Custom app styles
 import './css/app.css';
-import './css/graph.css';
 
 import * as serviceWorker from './serviceWorker';
 

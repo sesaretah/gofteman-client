@@ -135,4 +135,5 @@ export const dict = {
   'access_control_form':'فرم کنترل دسترسی',
   'assignment_form':'فرم اعطای نقش',
   'comment_form': 'نظر بدهید',
+  'post_form': 'فرم پست'
 };

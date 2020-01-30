@@ -113,8 +113,7 @@ export default class PostCreate extends Component {
     const {post, editorState, channels} = this.state;
     return (
       <Page>
-        <Navbar title={dict.post_form} backLink={dict.back} />
-        <BlockTitle>{dict.post_form}</BlockTitle>
+        <Navbar title={dict.post_form} />
         <PostForm post={post} channels={channels} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit}  handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack}/>
       </Page>
     );

@@ -1,12 +1,12 @@
 import React from "react";
-import { List, ListInput, BlockTitle, Block, Row, Button} from 'framework7-react';
+import { List, ListInput, BlockTitle, Block, Link, Button, Card, CardHeader, CardFooter} from 'framework7-react';
 import { dict} from '../../Dict';
 
 const CommentForm = (props) => {
     return (
-      <React.Fragment>
-        <BlockTitle>{dict.comment_form}</BlockTitle>
-        <List form inset>
+      <Card>
+        <CardHeader>{dict.comment_form}</CardHeader>
+        <List form>
         <ListInput
             label={dict.comment}
             type="textarea"
@@ -17,12 +17,11 @@ const CommentForm = (props) => {
             }}
             />
         </List>
-      <Block strong inset>
-        <Row tag="p">
+        <CardFooter>
+          <Link></Link>
           <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
-        </Row>
-      </Block>
-      </React.Fragment>
+        </CardFooter>
+      </Card>
     )
   }
   export default CommentForm;

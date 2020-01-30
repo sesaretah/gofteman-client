@@ -17,8 +17,7 @@ import { dict} from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import PostShow from "../../containers/posts/show";
-import Moment from 'react-moment';
-import 'moment-timezone';
+
 
 export default class Layout extends Component {
   constructor() {

@@ -2,7 +2,6 @@ import React from "react";
 import { List, ListItem, ListInput, Block, Row, Button} from 'framework7-react';
 import { dict} from '../../Dict';
 import crypto from 'crypto-js';
-import Graph from "../Graph"
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import WorkflowOptions from "../workflows/options";
