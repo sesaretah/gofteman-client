@@ -1,20 +1,18 @@
 import React from "react"
 import { Page,Fab, Icon } from 'framework7-react';
 import ModelStore from "../../stores/ModelStore";
-import DocumentIndex from "../../containers/documents/index"
+import MetaIndex from "../../containers/metas/index"
 import * as MyActions from "../../actions/MyActions";
 import { dict} from '../../Dict';
 import Framework7 from 'framework7/framework7.esm.bundle';
-import {loggedIn} from "../../components/users/loggedIn.js"
 
 
 export default class Layout extends React.Component {
   constructor() {
     super();
     this.getList = this.getList.bind(this);
-    this.loggedIn = loggedIn.bind(this);
     this.state = {
-      documents: null,
+      metas: null,
     }
   }
   componentWillMount() {
@@ -26,28 +24,27 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount(){
-    this.loggedIn();
     this.loadData();
   }
 
   loadData(){
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
-    MyActions.getList('documents', this.state.page);
+    MyActions.getList('metas', this.state.page);
   }
 
   getList() {
-    var documents = ModelStore.getList()
-    if (documents){
+    var metas = ModelStore.getList()
+    var klass = ModelStore.getKlass()
+    if (metas  && klass === 'Meta'){
       this.setState({
-        documents: documents,
+        metas: metas,
       });
     }
-    console.log(this.state);
   }
 
   render() {
-    const {documents} = this.state;
-    return(<DocumentIndex documents={documents}/>)
+    const {metas} = this.state;
+    return(<MetaIndex metas={metas}/>)
   }
 }

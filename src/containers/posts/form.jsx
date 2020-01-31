@@ -5,6 +5,8 @@ import crypto from 'crypto-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertFromRaw } from "draft-js";
 import ChannelOptions from "../channels/options";
+
+
 import fa from '../../js/fa.js';
 const PostForm = (props) => {
   if (props.post) {

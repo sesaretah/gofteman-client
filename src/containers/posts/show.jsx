@@ -4,7 +4,6 @@ import { stateToHTML } from "draft-js-export-html";
 import { EditorState, convertFromRaw } from "draft-js";
 import { Editor } from 'react-draft-wysiwyg';
 import { dict } from '../../Dict';
-import RecordList from "../auxiliary_records/list";
 import InteractionMenu from "../interactions/menu"
 import ShareMenu from "../shares/menu"
 import CommentForm from "../comments/form"

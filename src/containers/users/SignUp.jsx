@@ -1,12 +1,14 @@
 import React from "react";
-import { Link, List, ListItem, ListInput, Block, Row, Button, Page, LoginScreenTitle, ListButton, BlockFooter} from 'framework7-react';
+import { Link, List, ListItem, ListInput, Block, Row, Button, Page, LoginScreenTitle, ListButton, CardFooter, Card, CardHeader, CardContent} from 'framework7-react';
 import { dict} from '../../Dict';
 import crypto from 'crypto-js';
 
 const SignUpForm = (props) => {
     return (
-      <Page noToolbar noNavbar noSwipeback loginScreen>
-        <LoginScreenTitle>{dict.divan}</LoginScreenTitle>
+      <Page>
+      <Card>
+        <CardHeader>{dict.sign_up}</CardHeader>
+        <CardContent>
         <List form>
           <ListInput
             label={dict.email}
@@ -45,13 +47,13 @@ const SignUpForm = (props) => {
             }}
           />
         </List>
-        <List>
-          <ListButton onClick={props.submit}>{dict.sign_up}</ListButton>
-          <BlockFooter>{dict.if_registered}:
-            <Link href="/login/" animate={false} ignoreCache={true}> {dict.you_can_login} </Link>
-          </BlockFooter>
-        </List>
-      </Page>
+        </CardContent>
+        <CardFooter>
+         <Link href="/login/" animate={false} ignoreCache={true}>{dict.if_registered}{'\u00A0'}{dict.you_can_login} </Link>
+        <Button className="col" fill onClick={props.submit}>{dict.sign_up}</Button>
+        </CardFooter>
+        </Card>
+        </Page>
     )
   }
   export default SignUpForm;

@@ -20,7 +20,7 @@ export default () => (
       <ListItem link="/channels/" title={dict.channels}  view="#main-view" panelClose></ListItem>
       <ListItem link="/profiles/" title={dict.profiles} view="#main-view" panelClose></ListItem>
       <ListItem link="/roles/" title={dict.roles}  ignoreCache={true} view="#main-view" panelClose></ListItem>
-
+      <ListItem link="/metas/" title={dict.metas}  ignoreCache={true} view="#main-view" panelClose></ListItem>
     </List>
   </Page>
 );

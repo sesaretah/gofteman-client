@@ -25,19 +25,31 @@ export default class ProfileCreate extends Component {
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
+    this.getList = this.getList.bind(this);
 
     this.state = {
       profile: {},
+      metas: null,
     }
   }
 
 
   componentWillMount() {
     ModelStore.on("set_instance", this.setInstance);
+    ModelStore.on("got_list", this.getList);
   }
 
   componentWillUnmount() {
     ModelStore.removeListener("set_instance", this.setInstance);
+    ModelStore.removeListener("got_list", this.getList);
+  }
+
+  componentDidMount(){
+    this.loadData();
+  }
+
+  loadData(){
+    MyActions.getList('metas', this.state.page);
   }
 
   submit(){
@@ -55,15 +67,25 @@ export default class ProfileCreate extends Component {
     this.$f7router.navigate('/profiles/');
   }
 
+  getList() {
+    var metas = ModelStore.getList()
+    var klass = ModelStore.getKlass()
+    if (metas && klass === 'Meta'){
+      this.setState({
+        metas: metas,
+      });
+    }
+  }
+
 
 
   render() {
-    const {profile} = this.state;
+    const {profile, metas} = this.state;
     return (
       <Page>
         <Navbar title={dict.profile_form} backLink={dict.back} />
         <BlockTitle>{dict.profile_form}</BlockTitle>
-        <ProfileForm profile={profile} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <ProfileForm profile={profile} metas={metas} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

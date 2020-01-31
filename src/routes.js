@@ -3,10 +3,10 @@ import NotFoundPage from './containers/layouts/NotFoundPage';
 import PanelRightPage from './containers/layouts/PanelRightPage';
 
 
-import DocumentShow from './components/documents/show';
-import DocumentIndex from './components/documents/index';
-import DocumentCreate from './components/documents/create';
-import DocumentUpdate from './components/documents/update';
+import MetaShow from './components/metas/show';
+import MetaIndex from './components/metas/index';
+import MetaCreate from './components/metas/create';
+import MetaUpdate from './components/metas/update';
 
 
 import PostShow from './components/posts/show';
@@ -54,20 +54,20 @@ export default [
     component: PanelRightPage,
   },
   {
-    path: '/documents/',
-    component: DocumentIndex,
+    path: '/metas/',
+    component: MetaIndex,
   },
   {
-    path: '/documents/:documentId/edit',
-    component: DocumentUpdate,
+    path: '/metas/:metaId/edit',
+    component: MetaUpdate,
   },
   {
-    path: '/documents/new',
-    component: DocumentCreate,
+    path: '/metas/new',
+    component: MetaCreate,
   },
   {
-    path: '/documents/:documentId',
-    component: DocumentShow,
+    path: '/metas/:metaId',
+    component: MetaShow,
   },
 
   {

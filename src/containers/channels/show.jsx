@@ -1,7 +1,6 @@
 import React from "react";
 import { Page, Navbar, List, BlockTitle, ListItem, Fab, Icon,Preloader, Block, Row, Col, Button} from 'framework7-react';
 import { dict} from '../../Dict';
-import RecordList from "../auxiliary_records/list";
 import InteractionMenu from "../interactions/menu"
 import ShareMenu from "../shares/menu"
 import PostList from "../posts/list"

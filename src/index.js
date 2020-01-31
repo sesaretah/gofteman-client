@@ -17,6 +17,9 @@ import './css/icons.css';
 
 // Custom app styles
 import './css/app.css';
+import './css/editor.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 
 import * as serviceWorker from './serviceWorker';
 
