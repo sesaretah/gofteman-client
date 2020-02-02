@@ -75,7 +75,8 @@ export default class ChannelUpdate extends Component {
 
   getInstance(){
     var channel = ModelStore.getIntance()
-    if (channel){
+    var klass = ModelStore.getKlass()
+    if (channel && klass === 'Channel'){
       this.setState({
         channel: channel,
         title: channel.title,

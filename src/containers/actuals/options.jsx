@@ -5,8 +5,8 @@ const ActualOptions = (props) => {
   if(props.content){
     for (let i = 0; i < props.content.length; i++) {
       options.push(
-        <option value={props.content[i].id}>
-          {props.content[i].title}
+        <option value={props.content[i].content[0].fid}>
+          {props.content[i].content[0].value}
         </option>
       )
     }

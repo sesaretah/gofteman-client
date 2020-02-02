@@ -76,11 +76,9 @@ export default class DocumentUpdate extends Component {
         defaultRole: role.default_role
       });
     }
-    console.log(role)
   }
 
   handleChangeValue(obj) {
-console.log(obj)
     this.setState(obj);
   }
 

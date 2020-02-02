@@ -137,5 +137,6 @@ export const dict = {
   'comment_form': 'نظر بدهید',
   'post_form': 'فرم پست',
   'metas':'پیش جداول',
-  'shoa': 'شعاع'
+  'shoa': 'شعاع',
+  'form' : 'ورود اطلاعات'
 };

@@ -25,22 +25,32 @@ export default class ProfileCreate extends Component {
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
+    this.handleChangeValueFields = this.handleChangeValueFields.bind(this);
+    this.removeActual = this.removeActual.bind(this);
+    
+    
     this.getList = this.getList.bind(this);
 
     this.state = {
       profile: {},
       metas: null,
+      token: window.localStorage.getItem('token'),
+      fields: [],
     }
   }
 
 
   componentWillMount() {
-    ModelStore.on("set_instance", this.setInstance);
+    ModelStore.on("got_instance", this.getInstance);
+    ModelStore.on("set_instance", this.getInstance);
+    ModelStore.on("deleted_instance", this.getInstance);
     ModelStore.on("got_list", this.getList);
   }
 
   componentWillUnmount() {
-    ModelStore.removeListener("set_instance", this.setInstance);
+    ModelStore.removeListener("got_instance", this.getInstance);
+    ModelStore.removeListener("set_instance", this.getInstance);
+    ModelStore.removeListener("deleted_instance", this.getInstance);
     ModelStore.removeListener("got_list", this.getList);
   }
 
@@ -62,9 +72,43 @@ export default class ProfileCreate extends Component {
     this.setState(obj);
   }
 
+  handleChangeValueFields(key, value) {
+    var fields = this.state.fields
+    if (fields.length > 0) {
+      for (let i = 0; i < fields.length; i++) {
+        if (fields[i].fid && fields[i].fid === key) {
+          let newState = Object.assign({}, this.state);
+          newState.fields[i] = { fid: key, value: value }
+          this.setState(newState);
+        } else {
+          this.setState({ fields: this.state.fields.concat({ fid: key, value: value }) });
+        }
+      }
+    } else {
+      this.setState({ fields: this.state.fields.concat({ fid: key, value: value }) });
+    }
+  }
+
+
   setInstance(){
     const self = this;
     this.$f7router.navigate('/profiles/');
+  }
+
+  getInstance() {
+    var profile = ModelStore.getIntance()
+    var klass = ModelStore.getKlass()
+    if (profile && klass === 'Profile') {
+      this.setState({
+        metas: profile.metas,
+        profile: profile
+      });
+    }
+  }
+
+
+  removeActual(uuid){
+    MyActions.removeInstance('actuals', {uuid: uuid});
   }
 
   getList() {
@@ -85,7 +129,7 @@ export default class ProfileCreate extends Component {
       <Page>
         <Navbar title={dict.profile_form} backLink={dict.back} />
         <BlockTitle>{dict.profile_form}</BlockTitle>
-        <ProfileForm profile={profile} metas={metas} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <ProfileForm profile={profile} metas={metas} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

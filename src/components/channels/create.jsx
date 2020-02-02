@@ -81,8 +81,6 @@ export default class ChannelCreate extends Component {
   loadData(){
   }
 
-  componentDidUpdate(prev, prevstate) {
-  }
 
   getList() {
   }

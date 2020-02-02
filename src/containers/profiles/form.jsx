@@ -1,20 +1,22 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button } from 'framework7-react';
+import { List, ListItem, ListInput, CardFooter, Button, Card, Link } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 import ActualForm from "../actuals/form";
-
+import ActualList from "../actuals/list";
 
 const ProfileForm = (props) => {
-  if (props.metas) {
+  console.log(props)
+  if (props.name && props.metas ) {
     return (
       <React.Fragment>
+        <Card>
         <List form>
           <ListInput
             label={dict.firstname}
             type="text"
             placeholder='...'
-            defaultValue={props.profile.name}
+            defaultValue={props.name}
             onInput={(e) => {
               props.handleChange({ name: e.target.value })
             }}
@@ -24,19 +26,22 @@ const ProfileForm = (props) => {
             label={dict.surename}
             type="text"
             placeholder='...'
-            defaultValue={props.profile.surename}
+            defaultValue={props.surename}
             onInput={(e) => {
               props.handleChange({ surename: e.target.value })
             }}
           />
         </List>
-        <Block strong>
-          <Row tag="p">
+        <CardFooter>
+          <Link></Link>
             <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
-          </Row>
-        </Block>
-        {props.metas.map((meta) =>
-          <ActualForm meta={meta} submit={props.submit} onChangeValue={props.onChangeValue} />
+        </CardFooter>
+        </Card>
+        {props.metas.map((m) =>
+        <React.Fragment>
+          <ActualList meta={m.meta} editable={true} actuals={m.actuals} removeActual={props.removeActual} />
+          <ActualForm meta={m.meta} submit={props.submitFields} onChangeValue={props.handleChangeValueFields} />
+        </React.Fragment>
         )}
       </React.Fragment>
     )

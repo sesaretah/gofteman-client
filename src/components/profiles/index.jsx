@@ -35,7 +35,8 @@ export default class Layout extends React.Component {
 
   getList() {
     var profiles = ModelStore.getList()
-    if (profiles){
+    var klass = ModelStore.getKlass()
+    if (profiles && klass === 'Profile'){
       this.setState({
         profiles: profiles,
       });

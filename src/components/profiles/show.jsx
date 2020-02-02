@@ -24,6 +24,9 @@ export default class Layout extends Component {
     this.getInstance = this.getInstance.bind(this);
     this.state = {
       profile: null,
+      id: null,
+      actuals: null,
+      metas: null,
     }
   }
 
@@ -41,9 +44,13 @@ export default class Layout extends Component {
 
   getInstance(){
     var profile = ModelStore.getIntance()
-    if (profile){
+    var klass = ModelStore.getKlass()
+    if (profile && klass === 'Profile'){
       this.setState({
         profile: profile,
+        id: profile.id, 
+        actuals: profile.actuals,
+        metas: profile.metas,
       });
     }
     }
@@ -60,13 +67,13 @@ export default class Layout extends Component {
   }
 
   render() {
-    const {profile} = this.state;
+    const {profile, actuals, metas} = this.state;
     return (
       <Page>
         <Navbar title={dict.profiles} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <ProfileShow profile={profile}/>
+        <ProfileShow profile={profile} actuals={actuals} metas={metas}/>
       </Page>
     );
   }

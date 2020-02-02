@@ -60,7 +60,6 @@ export default class Layout extends Component {
         metaId: meta.id 
       });
     }
-    console.log(meta)
   }
 
   handleChangeValue(key, value) {

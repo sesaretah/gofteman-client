@@ -16,7 +16,7 @@ const ActualForm = (props) => {
                 label={meta_schema[i].label}
                 type="text"
                 placeholder="..."
-                onInput={(e) => props.onChangeValue(meta_schema[i].fid, e.target.value, props.meta)}
+                onInput={(e) => props.onChangeValue(meta_schema[i].fid, e.target.value, props.meta.id)}
                 />)
             break;
             case 'Text':
@@ -25,12 +25,12 @@ const ActualForm = (props) => {
                     label={meta_schema[i].name}
                     type="textarea"
                     placeholder="..."
-                    onInput={(e) => props.onChangeValue(meta_schema[i].fid, e.target.value, props.meta)}
+                    onInput={(e) => props.onChangeValue(meta_schema[i].fid, e.target.value, props.meta.id)}
                     />
                 )
             break;
             case 'Table':
-                if (meta_schema[i].content && meta_schema[i].content.title) {
+                if (meta_schema[i].content) {
                   items.push(
                     <ListItem
                       title={meta_schema[i].content.title}
@@ -38,9 +38,9 @@ const ActualForm = (props) => {
                       smartSelectParams={{pageBackLinkText: dict.back}}
                       >
                       <select name="content"
-                        onChange={(e) => props.onChangeValue(meta_schema[i].fid, e.target.value, props.meta)}
+                        onChange={(e) => props.onChangeValue(meta_schema[i].fid, e.target.value, props.meta.id)}
                         >
-                        <ActualOptions content={meta_schema[i].content.auxiliary_records}/>
+                        <ActualOptions content={meta_schema[i].content}/>
                       </select>
                     </ListItem>
                   )}
@@ -53,7 +53,7 @@ const ActualForm = (props) => {
               }
               return(
                 <Card>
-                  <CardHeader>{props.meta.title}</CardHeader>
+                  <CardHeader>{dict.form} {props.meta.title}</CardHeader>
                   <List form>
                     {items}
                     {submit}
