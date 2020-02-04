@@ -31,6 +31,7 @@ export default class MetaCreate extends Component {
       meta: {},
       metaSchema: null,
       title: null,
+      label: null,
     }
   }
 
@@ -44,7 +45,7 @@ export default class MetaCreate extends Component {
   }
 
   submit(){
-    var data = {title: this.state.title, meta_schema: this.state.metaSchema}
+    var data = {title: this.state.title, label: this.state.label,  meta_schema: this.state.metaSchema}
     MyActions.setInstance('metas', data, this.state.token);
   }
 

@@ -44,6 +44,13 @@ class ModelStore extends EventEmitter {
     this.emit("deleted_instance");
   }
 
+  postFile(instance){
+    console.log(instance)
+    this.klass = instance.klass
+    this.instance = instance.data
+    this.emit("file_posted");
+  }
+
   getIntance() {
     return this.instance
   }
@@ -78,6 +85,12 @@ class ModelStore extends EventEmitter {
         this.setIntance(action.instance);
         break;
       }
+      case "POST_FILE_SUCCESS": {
+        this.postFile(action.instance);
+        break;
+      }
+
+      
     }
   }
 }

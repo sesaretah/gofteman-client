@@ -13,7 +13,7 @@ const PostList = (props) => {
           <Col width="100" tabletWidth="50">
           <Card className="demo-facebook-card">
             <CardHeader className="no-border">
-              <div className="demo-facebook-avatar"><img src="https://cdn.framework7.io/placeholder/people-68x68-1.jpg" width="34" height="34"/></div>
+              <div className="demo-facebook-avatar"><img src={post.profile.avatar} height="34" /></div>
               <div className="demo-facebook-name "><Link className="gray-color" href={'/posts/'+post.id}>{post.title.substring(0, 30)}</Link></div>
               <div className="demo-facebook-date"><InteractionMenu model={post} klass='Post' interaction={props.interaction} sourceType={props.sourceType} sourceId={props.sourceId}/></div>
             </CardHeader>

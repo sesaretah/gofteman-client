@@ -53,7 +53,7 @@ const ActualForm = (props) => {
               }
               return(
                 <Card>
-                  <CardHeader>{dict.form} {props.meta.title}</CardHeader>
+                  <CardHeader>{dict.form} {props.meta.label}</CardHeader>
                   <List form>
                     {items}
                     {submit}

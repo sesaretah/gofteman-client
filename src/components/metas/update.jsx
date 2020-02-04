@@ -32,7 +32,9 @@ export default class DocumentUpdate extends Component {
     this.state = {
       meta : {},
       title: null,
+      metaSchema: null,
       id: null,
+      label: null,
     }
   }
 
@@ -49,7 +51,7 @@ export default class DocumentUpdate extends Component {
 
 
   submit(){
-    var data = {id:this.state.id, title: this.state.title}
+    var data = {id:this.state.id, title: this.state.title, label: this.state.label, meta_schema: this.state.metaSchema}
     MyActions.updateInstance('metas', data);
   }
   componentDidMount(){
@@ -74,6 +76,8 @@ export default class DocumentUpdate extends Component {
         title: meta.title,
         id: meta.id,
         meta: meta,
+        metaSchema: meta.metaSchema,
+        label: meta.label
       });
     }
   }

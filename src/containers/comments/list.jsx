@@ -8,16 +8,17 @@ import 'moment/locale/fa';
 const CommentList = (props) => {
     var items = []
     if (props.comments) {
-        
+        console.log(props.comments)
 
         for (let i = 0; i < props.comments.length; i++) {
+            console.log(props.comments[i].profile.avatar)
         var time  = <React.Fragment><Moment locale="fa" fromNow ago>{props.comments[i].created_at}</Moment>{dict.ago}</React.Fragment>
             items.push(
                 <ListItem
                 text={time}
                 subtitle={props.comments[i].content}
                 >
-                <img slot="media" src="https://cdn.framework7.io/placeholder/fashion-88x88-4.jpg" width="44" />
+                <img slot="media" src={props.comments[i].profile.avatar} width="44" />
               </ListItem>
 
             )

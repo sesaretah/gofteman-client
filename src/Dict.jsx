@@ -138,5 +138,7 @@ export const dict = {
   'post_form': 'فرم پست',
   'metas':'پیش جداول',
   'shoa': 'شعاع',
-  'form' : 'ورود اطلاعات'
+  'form' : 'ورود اطلاعات',
+  'choose_image': 'انتخاب عکس',
+  'logout': 'خروج'
 };

@@ -1,5 +1,5 @@
 import dispatcher from "../dispatcher";
-import axios from 'axios';
+import axios, {put} from 'axios';
 const server='http://localhost:3001/v1';
 //const server='http://95.156.255.115/api';
 
@@ -11,6 +11,28 @@ export function getList(model, page=1, params={}, token) {
     dispatcher.dispatch({
       type: "LIST_MODEL_SUCCESS",
       list: response.data,
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+export function fileUpload(model, id , file, token){
+  const url = server + '/'+ model +'/'+id;
+  const formData = new FormData();
+  formData.append('profile[avatar]',file)
+  formData.append('profile[id]',id)
+  const config = {
+      headers: {
+          'content-type': 'multipart/form-data',
+          'Authorization': "bearer " + token 
+      }
+  }
+  put(url, formData,config).then(function (response) {
+    dispatcher.dispatch({
+      type: "POST_FILE_SUCCESS",
+      instance: response.data,
     });
   })
   .catch(function (error) {

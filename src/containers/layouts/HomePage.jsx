@@ -18,7 +18,7 @@ import {
 import { dict } from '../../Dict';
 
 export default () => (
-  <Page>
+  <Page className="no-swipe-panel">
     <Navbar>
 
       <NavLeft>

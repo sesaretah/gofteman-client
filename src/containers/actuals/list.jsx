@@ -5,7 +5,7 @@ import crypto from 'crypto-js';
 const ActualList = (props) => {
   var meta_schema =props.meta.meta_schema
   if(props.meta && props.actuals){
-  var body = [<BlockTitle>{props.meta.title}</BlockTitle>]
+  var body = [<BlockTitle>{props.meta.label}</BlockTitle>]
     var td = []
     var actuals =  props.actuals
     for (let i = 0; i < actuals.length; i++) {

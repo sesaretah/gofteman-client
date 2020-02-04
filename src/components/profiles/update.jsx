@@ -30,7 +30,7 @@ export default class ProfileCreate extends Component {
     this.getInstance = this.getInstance.bind(this);
     this.submitFields = this.submitFields.bind(this);
     
-    
+    this.onDrop = this.onDrop.bind(this);
     
     
     this.getList = this.getList.bind(this);
@@ -44,6 +44,8 @@ export default class ProfileCreate extends Component {
       token: window.localStorage.getItem('token'),
       fields: [],
       id: null, 
+      pictures: [],
+      avatar: null,
     }
   }
 
@@ -52,12 +54,14 @@ export default class ProfileCreate extends Component {
     ModelStore.on("got_instance", this.getInstance);
     ModelStore.on("set_instance", this.getInstance);
     ModelStore.on("deleted_instance", this.getInstance);
+    ModelStore.on("file_posted", this.getInstance);    
   }
 
   componentWillUnmount() {
     ModelStore.removeListener("got_instance", this.getInstance);
     ModelStore.removeListener("set_instance", this.getInstance);
     ModelStore.removeListener("deleted_instance", this.getInstance);
+    ModelStore.removeListener("file_posted", this.getInstance);
   }
 
   componentDidMount(){
@@ -68,6 +72,11 @@ export default class ProfileCreate extends Component {
     if (this.$f7route.params['profileId']) {
       MyActions.getInstance('profiles', this.$f7route.params['profileId']);
     }
+  }
+
+  onDrop(picture) {
+    console.log(picture[0])
+    MyActions.fileUpload('profiles', this.state.id, picture[0], this.state.token);
   }
 
 
@@ -117,7 +126,8 @@ export default class ProfileCreate extends Component {
         id: profile.id, 
         metas: profile.metas,
         name: profile.name,
-        surename : profile.surename
+        surename : profile.surename,
+        avatar: profile.avatar
       });
     }
     console.log(profile)
@@ -141,12 +151,12 @@ export default class ProfileCreate extends Component {
 
 
   render() {
-    const {name, surename, metas, actuals} = this.state;
+    const {name, surename, avatar,metas, actuals} = this.state;
     return (
       <Page>
         <Navbar title={dict.profile_form} backLink={dict.back} />
         <BlockTitle>{dict.profile_form}</BlockTitle>
-        <ProfileForm name={name} surename={surename} metas={metas} removeActual={this.removeActual} submitFields={this.submitFields} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue}/>
+        <ProfileForm name={name} avatar={avatar} surename={surename} metas={metas} onDrop={this.onDrop} removeActual={this.removeActual} submitFields={this.submitFields} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

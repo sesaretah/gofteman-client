@@ -20,6 +20,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-draft-wysiwyg": "^1.13.2",
+    "react-images-upload": "^1.2.7",
     "react-json-pretty": "^2.2.0",
     "react-moment": "^0.9.7",
     "react-scripts": "3.1.1",

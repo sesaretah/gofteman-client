@@ -19,6 +19,15 @@ const MetaForm = (props) => {
           }}
         />
         <ListInput
+          label={dict.label}
+          type="text"
+          placeholder='...'
+          defaultValue={props.meta.label}
+          onInput={(e) => {
+            props.handleChange({ label: e.target.value })
+          }}
+        />
+        <ListInput
           label="Schema"
           type="text"
           inputStyle={{direction: 'ltr'}}

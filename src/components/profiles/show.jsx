@@ -5,15 +5,15 @@ import {
   List,
   ListItem,
   ListInput,
-  Toggle,
-  BlockTitle,
-  Row,
-  Button,
+  Link,
+  Tabs,
+  Toolbar,
+  Tab,
   Range,
   Block,
   Icon, Fab
 } from 'framework7-react';
-import { dict} from '../../Dict';
+import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import ProfileShow from "../../containers/profiles/show"
@@ -38,27 +38,27 @@ export default class Layout extends Component {
     ModelStore.removeListener("got_instance", this.getInstance);
   }
 
-  componentDidMount(){
-      MyActions.getInstance('profiles', this.$f7route.params['profileId']);
+  componentDidMount() {
+    MyActions.getInstance('profiles', this.$f7route.params['profileId']);
   }
 
-  getInstance(){
+  getInstance() {
     var profile = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
-    if (profile && klass === 'Profile'){
+    if (profile && klass === 'Profile') {
       this.setState({
         profile: profile,
-        id: profile.id, 
+        id: profile.id,
         actuals: profile.actuals,
         metas: profile.metas,
       });
     }
-    }
+  }
 
-  fab(){
-    if (this.state.profile){
-      return(
-        <Fab href={"/profiles/"+this.state.profile.id+"/edit"} target="#main-view"  position="left-bottom" slot="fixed" color="lime">
+  fab() {
+    if (this.state.profile) {
+      return (
+        <Fab href={"/profiles/" + this.state.profile.id + "/edit"} target="#main-view" position="left-bottom" slot="fixed" color="lime">
           <Icon ios="f7:edit" aurora="f7:edit" md="material:edit"></Icon>
           <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
         </Fab>
@@ -67,13 +67,24 @@ export default class Layout extends Component {
   }
 
   render() {
-    const {profile, actuals, metas} = this.state;
+    const { profile, actuals, metas } = this.state;
     return (
       <Page>
         <Navbar title={dict.profiles} backLink={dict.back} />
-        <BlockTitle></BlockTitle>
+        <Toolbar tabbar bottom>
+          <Link tabLink="#tab-1" tabLinkActive>Tab 1</Link>
+          <Link tabLink="#tab-2">Tab 2</Link>
+          <Link tabLink="#tab-3">Tab 3</Link>
+        </Toolbar>
         {this.fab()}
-        <ProfileShow profile={profile} actuals={actuals} metas={metas}/>
+        <Tabs>
+          <Tab id="tab-1" className="page-content" tabActive>
+             <ProfileShow profile={profile} actuals={actuals} metas={metas} />
+          </Tab>
+          <Tab id="tab-2" className="page-content">
+            eee
+          </Tab>
+          </Tabs>
       </Page>
     );
   }

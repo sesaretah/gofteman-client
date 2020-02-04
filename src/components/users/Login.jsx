@@ -54,6 +54,7 @@ export default class extends React.Component {
     }
     const self = this;
     this.$f7router.navigate('/');
+    window.location.reload()
   }
 
 
