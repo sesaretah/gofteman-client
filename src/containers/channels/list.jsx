@@ -9,7 +9,7 @@ const ChannelList = (props) => {
     return (
      <Row noGap>
         {props.channels.map((channel) =>
-          <Col width="100" tabletWidth="50">
+          <Col width="100" tabletWidth="33">
           <Card className="demo-facebook-card">
             <CardHeader className="no-border">
               <div className="demo-facebook-avatar"><img src={channel.profile.avatar} width="34" height="34"/></div>

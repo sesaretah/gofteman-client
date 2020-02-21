@@ -7,6 +7,7 @@ import PostList from "../posts/list"
 
 const ChannelShow = (props) => {
   if (props.channel){
+    console.log(props.channel.posts)
     return(
       <React.Fragment>
         <Block>

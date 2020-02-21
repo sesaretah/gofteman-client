@@ -34,6 +34,8 @@
 
   --f7-navbar-height: 40px;
   --f7-list-item-min-height: 40px;
+
+  --f7-button-min-width: 28px;
   /*
   --f7-page-bg-color: #9DC4B5;
   --f7-navbar-bg-color:  #9DC4B5;
@@ -176,4 +178,81 @@ justify-content: flex-start;
 
 .list .item-subtitle {
   white-space: normal;
+}
+
+.demo-facebook-card .card-header {
+  display: block;
+  padding: 5px;
+  white-space: nowrap;
+  min-height: 45px;
+}
+.demo-facebook-card .demo-facebook-avatar {
+  float: right;
+}
+
+.demo-facebook-card .demo-facebook-avatar img {
+  border-radius: 50%;
+} 
+.demo-facebook-card .demo-facebook-name {
+  margin-right: 5px;
+  padding-top: 8px;;
+  float: right;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.demo-facebook-card  .demo-facebook-sub {
+  margin-right: 5px;
+  padding-top: 15px;;
+  float: left;
+  font-size: 9px;
+  font-weight: 300;
+  color: grey;
+}
+.demo-facebook-card .demo-facebook-date {
+  float: left;
+  font-size: 13px;
+  color: #8e8e93;
+}
+.demo-facebook-card .card-footer {
+  background: #fafafa;
+}
+.demo-facebook-card .card-footer a {
+  color: #81848b;
+  font-weight: 500;
+}
+.demo-facebook-card .card-content img {
+  display: block;
+
+}
+.demo-facebook-card .card-content-padding {
+  padding: 15px 10px;
+}
+.demo-facebook-card .card-content-padding .likes {
+  color: #8e8e93;
+}
+
+.row {
+  justify-content: inherit;
+}
+
+.media-list .item-media img, li.media-item .item-media img {
+  border-radius: 50%;
+}
+
+.profile-footer {
+  justify-content: inherit;
+  box-sizing: initial !important;
+  padding: 5px;
+  height: 80px;
+  overflow: auto;
+  align-items: baseline;
+}
+
+.chip  { 
+  margin-right: 2px;
+}
+
+.gauge {
+  margin-right: 4px;
 }

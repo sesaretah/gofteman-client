@@ -10,15 +10,15 @@ const PostList = (props) => {
     return (
      <Row noGap>
         {props.posts.map((post) =>
-          <Col width="100" tabletWidth="50">
+          <Col width="100" tabletWidth="33">
           <Card className="demo-facebook-card">
             <CardHeader className="no-border">
               <div className="demo-facebook-avatar"><img src={post.profile.avatar} height="34" /></div>
-              <div className="demo-facebook-name "><Link className="gray-color" href={'/posts/'+post.id}>{post.title.substring(0, 30)}</Link></div>
+              <div className="demo-facebook-name "><Link className="gray-color" href={'/posts/'+post.id}>{post.title.substring(0, 15) + '..'}</Link></div>
               <div className="demo-facebook-date"><InteractionMenu model={post} klass='Post' interaction={props.interaction} sourceType={props.sourceType} sourceId={props.sourceId}/></div>
             </CardHeader>
             <CardContent className='lightgray-color'>
-              {post.content.substring(0, 145) + '...'}
+              {post.content.substring(0, 120) + '...'}
             </CardContent>
           </Card>
         </Col>

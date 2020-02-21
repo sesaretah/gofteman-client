@@ -18,11 +18,11 @@ const PostShow = (props) => {
       <React.Fragment>
         <Block>
           <Row noGap>
-            <Col width='60'></Col>
-            <Col width="20">
+            <Col width='80'></Col>
+            <Col width="10">
               <Button><ShareMenu model={props.post} submit={props.submit} channels={props.channels} klass='Post' sheetOpened={props.sheetOpened} handleChange={props.handleChange} klass='Channel' interaction={props.interaction} /></Button>
             </Col>
-            <Col width="20">
+            <Col width="10">
               <Button><InteractionMenu model={props.post} klass='Post' interaction={props.interaction} /></Button>
             </Col>
           </Row>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Navbar, NavRight, Link, BlockTitle, ListItem, Fab, Icon, Preloader, Block } from 'framework7-react';
+import { Page, Navbar, Subnavbar, Searchbar, BlockTitle, ListItem, Fab, Icon, Preloader, Block } from 'framework7-react';
 import PostList from "./list"
 import { dict } from '../../Dict';
 
@@ -7,11 +7,15 @@ const PostIndex = (props) => {
   return (
     <Page>
       <Navbar title={dict.posts} >
-        <NavRight>
-          <Link panelOpen="right">
-            <Icon f7="bars"></Icon>
-          </Link>
-        </NavRight>
+      <Subnavbar inner={false}>
+        <Searchbar
+          disableButtonText={dict.cancel}
+          placeholder={dict.search}
+          onChange={(e) => {
+            props.search({ query: e.target.value})
+          }}
+        ></Searchbar>
+      </Subnavbar>
       </Navbar>
       <BlockTitle></BlockTitle>
       <Fab href="/posts/new" target="#main-view" position="left-bottom" slot="fixed" color="deeporange">

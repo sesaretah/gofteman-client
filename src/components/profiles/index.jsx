@@ -11,8 +11,11 @@ export default class Layout extends React.Component {
   constructor() {
     super();
     this.getList = this.getList.bind(this);
+    this.search = this.search.bind(this);
+    
     this.state = {
       profiles: null,
+      query: null,
     }
   }
   componentWillMount() {
@@ -33,6 +36,12 @@ export default class Layout extends React.Component {
     MyActions.getList('profiles', this.state.page);
   }
 
+  search(obj){
+    this.setState(obj, () => {
+      MyActions.getList('profiles/search', this.state.page, {q: this.state.query});
+  });    
+  }
+
   getList() {
     var profiles = ModelStore.getList()
     var klass = ModelStore.getKlass()
@@ -45,6 +54,6 @@ export default class Layout extends React.Component {
 
   render() {
     const {profiles} = this.state;
-    return(<ProfileIndex profiles={profiles}/>)
+    return(<ProfileIndex profiles={profiles} search={this.search}/>)
   }
 }

@@ -56,7 +56,7 @@ export default class Layout extends Component {
         channel: channel,
       });
     }
-    console.log(channel);
+    console.log('channel', channel);
   }
 
   setInstance(){

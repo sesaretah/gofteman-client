@@ -1,26 +1,38 @@
 import React from "react";
-import { List, ListItem} from 'framework7-react';
+import { Row, CardHeader, Card, CardContent, Col, Link, CardFooter, Chip, Gauge } from 'framework7-react';
 import crypto from 'crypto-js';
+import { dict } from "../../Dict";
+import Moment from 'react-moment';
+import 'moment-timezone';
+import 'moment/locale/fa';
 
 const ProfileList = (props) => {
 
   if (props.profiles) {
+    console.log(props.profiles)
     return (
-      <List mediaList>
+      <Row noGap>
         {props.profiles.map((profile) =>
-          <ListItem
-            key={crypto.lib.WordArray.random(32)}
-            link={"/profiles/" + profile.id}
-            ignoreCache={true}
-            title={profile.fullname}
-            after=""
-            subtitle=""
-            text=""
-            ></ListItem>
+          <Col width="100" tabletWidth="33">
+            <Card className="demo-facebook-card">
+              <CardHeader className="no-border">
+                <div className="demo-facebook-avatar"><img src={profile.avatar} width="34" height="34" /></div>
+                <div className="demo-facebook-name "><Link className="gray-color" href={'/channels/' + profile.id}>{profile.fullname.substring(0, 30)}</Link></div>
+        <div className="demo-facebook-sub">
+          <Moment locale="fa" fromNow ago>{profile.last_login}</Moment> {dict.ago}
+          </div>
+              </CardHeader>
+              <CardFooter className='profile-footer'>
+                <Chip text="Example Chip" />
+                <Chip text="Another Chip" />
+              </CardFooter>
+            </Card>
+          </Col>
         )}
-      </List>
-    )} else {
-      return (<ul></ul>)
-    }
+      </Row>
+    )
+  } else {
+    return (<ul></ul>)
   }
-  export default ProfileList;
+}
+export default ProfileList;

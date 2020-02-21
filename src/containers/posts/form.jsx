@@ -37,6 +37,7 @@ const PostForm = (props) => {
               label={dict.title}
               type="text"
               placeholder='...'
+              maxlength='50'
               value={props.post.title}
               onInput={(e) => {
                 props.handleChange({ title: e.target.value })

@@ -15,10 +15,12 @@ export default class Channel extends React.Component {
     this.loggedIn = loggedIn.bind(this);
     this.interaction = this.interaction.bind(this);
     this.setInstance = this.setInstance.bind(this);
+    this.search = this.search.bind(this);
 
     this.state = {
       token: window.localStorage.getItem('token'),
       channels: null,
+      query: null,
     }
   }
   componentWillMount() {
@@ -52,6 +54,13 @@ export default class Channel extends React.Component {
     }
   }
 
+  search(obj) {
+    this.setState(obj, () => {
+      MyActions.getList('channels/search', this.state.page, { q: this.state.query });
+    });
+  }
+
+
   getList() {
     var channels = ModelStore.getList()
     var klass = ModelStore.getKlass()
@@ -69,6 +78,6 @@ export default class Channel extends React.Component {
 
   render() {
     const {channels} = this.state;
-    return(<ChannelIndex interaction={this.interaction} channels={channels}/>)
+    return(<ChannelIndex interaction={this.interaction} search={this.search} channels={channels}/>)
   }
 }

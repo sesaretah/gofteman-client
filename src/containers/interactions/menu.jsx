@@ -19,7 +19,8 @@ const InteractionMenu = (props) => {
           <ActionsButton color="red">{dict.cancel}</ActionsButton>
         </ActionsGroup>
       </Actions>
-      <Button className="col" fill href={false} actionsOpen={"#actions-two-groups-"+props.model.id}><i className="va fas fa-users"></i></Button>
+      
+      <Button className="col"  href={false} actionsOpen={"#actions-two-groups-"+props.model.id}><i className="va fas fa-users"></i></Button>
       </React.Fragment>
     )
   } else {
