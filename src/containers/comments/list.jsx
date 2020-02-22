@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, BlockTitle, Icon } from 'framework7-react';
+import { List, ListItem, BlockTitle, Icon, Link } from 'framework7-react';
 import { dict } from '../../Dict';
 import Moment from 'react-moment';
 import 'moment-timezone';
@@ -8,11 +8,9 @@ import 'moment/locale/fa';
 const CommentList = (props) => {
     var items = []
     if (props.comments) {
-        console.log(props.comments)
 
         for (let i = 0; i < props.comments.length; i++) {
-            console.log(props.comments[i].profile.avatar)
-        var time  = <React.Fragment><Moment locale="fa" fromNow ago>{props.comments[i].created_at}</Moment>{dict.ago}</React.Fragment>
+            var time  = <React.Fragment><Link><i className="va ml-5 fas fa-trash"></i></Link><Moment locale="fa" fromNow ago>{props.comments[i].created_at}</Moment>{dict.ago}</React.Fragment>
             items.push(
                 <ListItem
                 text={time}

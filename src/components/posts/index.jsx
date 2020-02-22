@@ -16,11 +16,14 @@ export default class Post extends React.Component {
     this.interaction = this.interaction.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.search = this.search.bind(this);
+    this.loadMore = this.loadMore.bind(this);
+
 
     this.state = {
       token: window.localStorage.getItem('token'),
-      posts: null,
+      posts: [],
       query: null,
+      page: 1
     }
   }
   componentWillMount() {
@@ -34,20 +37,25 @@ export default class Post extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.loggedIn();
     this.loadData();
   }
 
   loadData() {
-    //const f7: Framework7 = Framework7.instance;
-    //f7.toast.show({ text: dict.receiving, closeTimeout: 1000, position: 'top'});
     MyActions.getList('posts', this.state.page, {}, this.state.token);
   }
 
   search(obj) {
+    this.setState({ posts: [] });
     this.setState(obj, () => {
       MyActions.getList('posts/search', this.state.page, { q: this.state.query });
+    });
+
+  }
+
+  loadMore() {
+    this.setState({ page: this.state.page + 1 }, () => {
+      MyActions.getList('posts', this.state.page, {}, this.state.token);
     });
   }
 
@@ -63,9 +71,14 @@ export default class Post extends React.Component {
   getList() {
     var posts = ModelStore.getList()
     var klass = ModelStore.getKlass()
-    if (posts && klass === 'Post') {
+    if (posts.length > 0 && klass === 'Post') {
       this.setState({
-        posts: posts,
+        posts: this.state.posts.concat(posts),
+      });
+    }
+    if (posts.length == 0 && klass === 'Post') {
+      this.setState({
+        page: 1,
       });
     }
   }
@@ -77,6 +90,6 @@ export default class Post extends React.Component {
 
   render() {
     const { posts } = this.state;
-    return (<PostIndex interaction={this.interaction} posts={posts} search={this.search} />)
+    return (<PostIndex interaction={this.interaction} loadMore={this.loadMore} posts={posts} search={this.search} />)
   }
 }

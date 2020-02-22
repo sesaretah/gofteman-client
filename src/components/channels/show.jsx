@@ -2,15 +2,7 @@ import React, { Component } from 'react';
 import {
   Page,
   Navbar,
-  List,
-  ListItem,
-  ListInput,
-  Toggle,
-  BlockTitle,
-  Row,
-  Button,
-  Range,
-  Block,
+  Link,
   Icon, Fab
 } from 'framework7-react';
 import { dict} from '../../Dict';
@@ -90,8 +82,12 @@ export default class Layout extends Component {
     const {channel, sheetOpened} = this.state;
     return (
       <Page>
-        <Navbar title={dict.channels} backLink={dict.back} />
-        <BlockTitle></BlockTitle>
+        <Navbar title={dict.channels} backLink={dict.back} >
+        <Link panelOpen="right">
+          <Icon f7="bars"></Icon>
+        </Link>
+        </Navbar>
+
         {this.fab()}
         <ChannelShow channel={channel} sheetOpened={sheetOpened} interaction={this.interaction} />
       </Page>

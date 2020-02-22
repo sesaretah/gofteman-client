@@ -27,6 +27,10 @@ export default class ProfileCreate extends Component {
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.handleChangeValueFields = this.handleChangeValueFields.bind(this);
     this.removeActual = this.removeActual.bind(this);
+    this.getInstance = this.getInstance.bind(this);
+    this.submitFields = this.submitFields.bind(this);
+    this.onDrop = this.onDrop.bind(this);    
+    this.getList = this.getList.bind(this);
     
     
     this.getList = this.getList.bind(this);
@@ -36,6 +40,10 @@ export default class ProfileCreate extends Component {
       metas: null,
       token: window.localStorage.getItem('token'),
       fields: [],
+      name: 'dd',
+      surename: '',
+      pictures: [],
+      avatar: null,
     }
   }
 
@@ -62,9 +70,20 @@ export default class ProfileCreate extends Component {
     MyActions.getList('metas', this.state.page);
   }
 
+  onDrop(picture) {
+    console.log(picture[0])
+    MyActions.fileUpload('profiles', this.state.id, picture[0], this.state.token);
+  }
+
+
   submit(){
-    var data = {title: this.state.title}
-    MyActions.setInstance('profiles', data);
+    var data = {id: this.state.id, name: this.state.name, surename: this.state.surename}
+    MyActions.updateInstance('profiles', data, this.state.token);
+  }
+
+  submitFields(){
+    var data = {meta_id: this.state.metaId, content: this.state.fields}
+    MyActions.setInstance('actuals', data, this.state.token);
   }
 
 
@@ -72,23 +91,22 @@ export default class ProfileCreate extends Component {
     this.setState(obj);
   }
 
-  handleChangeValueFields(key, value) {
+  handleChangeValueFields(key, value, metaId) {
     var fields = this.state.fields
     if (fields.length > 0) {
       for (let i = 0; i < fields.length; i++) {
         if (fields[i].fid && fields[i].fid === key) {
           let newState = Object.assign({}, this.state);
-          newState.fields[i] = { fid: key, value: value }
+          newState.fields[i] = { fid: key, value: value, metaId: metaId }
           this.setState(newState);
         } else {
-          this.setState({ fields: this.state.fields.concat({ fid: key, value: value }) });
+          this.setState({ fields: this.state.fields.concat({ fid: key, value: value , metaId:metaId}) });
         }
       }
     } else {
-      this.setState({ fields: this.state.fields.concat({ fid: key, value: value }) });
+      this.setState({ fields: this.state.fields.concat({ fid: key, value: value, metaId:metaId }) });
     }
   }
-
 
   setInstance(){
     const self = this;
@@ -124,12 +142,12 @@ export default class ProfileCreate extends Component {
 
 
   render() {
-    const {profile, metas} = this.state;
+    const {profile, metas, name, avatar, surename} = this.state;
     return (
       <Page>
         <Navbar title={dict.profile_form} backLink={dict.back} />
         <BlockTitle>{dict.profile_form}</BlockTitle>
-        <ProfileForm profile={profile} metas={metas} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue}/>
+        <ProfileForm name={name} avatar={avatar} surename={surename} metas={metas} onDrop={this.onDrop} removeActual={this.removeActual} submitFields={this.submitFields} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

@@ -22,15 +22,38 @@ export default class PanelRightPage extends Component {
         <React.Fragment>
           <BlockTitle>{dict.user_settings}</BlockTitle>
           <List>
-            <ListItem title={dict.logout} view="#main-view" panelClose onClick={this.logout}></ListItem>
+            <ListItem view="#main-view" panelClose onClick={this.logout}>
+            <i className="va ml-5 fa fa-power-off"></i>
+              <span>{dict.logout}</span>
+            </ListItem>
           </List>
-          <BlockTitle>{dict.settings}</BlockTitle>
+          <BlockTitle> <i className="va ml-5 fa fa-users"></i>{dict.social}</BlockTitle>
           <List>
-            <ListItem link="/posts/" title={dict.posts} view="#main-view" panelClose></ListItem>
-            <ListItem link="/channels/" title={dict.channels} view="#main-view" panelClose></ListItem>
-            <ListItem link="/profiles/" title={dict.profiles} view="#main-view" panelClose></ListItem>
-            <ListItem link="/roles/" title={dict.roles} ignoreCache={true} view="#main-view" panelClose></ListItem>
-            <ListItem link="/metas/" title={dict.metas} ignoreCache={true} view="#main-view" panelClose></ListItem>
+            <ListItem link="/posts/" view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-pencil"></i>
+              <span>{dict.posts}</span>
+            </ListItem>
+            
+            <ListItem link="/channels/" view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-bullhorn"></i>
+              <span>{dict.channels}</span>
+            </ListItem>
+            
+            <ListItem link="/profiles/"  view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-user-circle-o"></i>
+              <span>{dict.profiles}</span>
+            </ListItem>
+            </List>
+            <BlockTitle> <i className="va ml-5 fa fa-cogs"></i>{dict.settings}</BlockTitle>
+            <List>
+            <ListItem link="/roles/" ignoreCache={true} view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-shield"></i>
+              <span>{dict.roles}</span>
+            </ListItem>
+            <ListItem link="/metas/" ignoreCache={true} view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-th"></i>
+              <span>{dict.metas}</span>
+            </ListItem>
           </List>
         </React.Fragment>
       )

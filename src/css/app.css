@@ -1,9 +1,9 @@
 @font-face {
-  font-family: 'iransans';
-  src:    url(../fonts/IRANSansWeb.eot);
-  src:  url(../fonts/IRANSansWeb.eot) format('embedded-opentype'),
-  url(../fonts/IRANSansWeb.woff) format('woff'),
-  url(../fonts/IRANSansWeb.ttf) format('truetype');
+  font-family: "iransans";
+  src: url(../fonts/IRANSansWeb.eot);
+  src: url(../fonts/IRANSansWeb.eot) format("embedded-opentype"),
+    url(../fonts/IRANSansWeb.woff) format("woff"),
+    url(../fonts/IRANSansWeb.ttf) format("truetype");
 }
 
 .aurora body {
@@ -18,7 +18,8 @@
   margin-top: -10px;
   padding-top: 0px;
 }
-.searchbar input[type=search], .searchbar input[type=text] {
+.searchbar input[type="search"],
+.searchbar input[type="text"] {
   border: 1px solid #d4c6c6;
 }
 
@@ -28,7 +29,7 @@
 /* Custom color theme properties */
 :root {
   --f7-theme-color: #009688;
-  --f7-theme-color-rgb:  0, 150, 136;
+  --f7-theme-color-rgb: 0, 150, 136;
   --f7-theme-color-shade: #006d63;
   --f7-theme-color-tint: #00bfad;
 
@@ -45,45 +46,43 @@
   --f7-block-strong-bg-color: #CFE8EF;
   */
 
---f7-menu-text-color: #fff;
---f7-menu-font-size: 13px;
---f7-menu-font-weight: 500;
---f7-menu-line-height: 1.2;
---f7-menu-bg-color: rgba(0, 150, 136);
---f7-menu-item-pressed-bg-color: rgba(20, 20, 20, 0.9);
---f7-menu-item-padding-horizontal: 10px;
---f7-menu-item-spacing: 6px;
---f7-menu-item-height: 28px;
---f7-menu-item-dropdown-icon-color: rgba(255, 255, 255, 0.4);
---f7-menu-item-border-radius: 4px;
-/*
+  --f7-menu-text-color: #fff;
+  --f7-menu-font-size: 13px;
+  --f7-menu-font-weight: 500;
+  --f7-menu-line-height: 1.2;
+  --f7-menu-bg-color: rgba(0, 150, 136);
+  --f7-menu-item-pressed-bg-color: rgba(20, 20, 20, 0.9);
+  --f7-menu-item-padding-horizontal: 10px;
+  --f7-menu-item-spacing: 6px;
+  --f7-menu-item-height: 28px;
+  --f7-menu-item-dropdown-icon-color: rgba(255, 255, 255, 0.4);
+  --f7-menu-item-border-radius: 4px;
+  /*
 --f7-menu-dropdown-pressed-bg-color: var(--f7-theme-color);
 */
---f7-menu-dropdown-item-height: 24px;
---f7-menu-dropdown-divider-color: rgba(255, 255, 255, 0.2);
---f7-menu-dropdown-padding-vertical: 6px;
-/*
+  --f7-menu-dropdown-item-height: 24px;
+  --f7-menu-dropdown-divider-color: rgba(255, 255, 255, 0.2);
+  --f7-menu-dropdown-padding-vertical: 6px;
+  /*
 --f7-menu-dropdown-border-radius: var(--f7-menu-item-border-radius);
 */
---f7-card-header-padding-vertical: 5px;
---f7-card-header-padding-horizontal: 5px;
---f7-menu-item-spacing: 2px;
+  --f7-card-header-padding-vertical: 5px;
+  --f7-card-header-padding-horizontal: 5px;
+  --f7-menu-item-spacing: 2px;
 }
 
 .theme-dark {
-
   --f7-page-bg-color: #767677;
   --f7-navbar-bg-color: #767677;
   --f7-navbar-border-color: #5d5c5c;
   --f7-navbar-text-color: #dcdada;
-
 }
 
 .theme-dark .list ul {
   --f7-list-bg-color: #5d5d5d;
   --f7-list-border-color: #484848;
   --f7-list-item-border-color: #484848;
-  color: #dcdada;
+  color: #f1f1f1;
 }
 
 .theme-dark .block-strong {
@@ -92,11 +91,9 @@
   --f7-block-strong-border-color: #5d5c5c;
 }
 
-
 .theme-dark .block-title {
-  --f7-block-title-text-color:  #dcdada;
+  --f7-block-title-text-color: #dcdada;
 }
-
 
 /* Left Panel right border when it is visible by breakpoint */
 .panel-right.panel-visible-by-breakpoint:before {
@@ -105,39 +102,46 @@
   top: 0;
   height: 100%;
   width: 1px;
-  background: rgba(0,0,0,0.1);
-  content: '';
+  background: rgba(0, 0, 0, 0.1);
+  content: "";
   z-index: 6000;
 }
 
 /* Hide navbar link which opens left panel when it is visible by breakpoint */
-.panel-right.panel-visible-by-breakpoint ~ .view .navbar .panel-open[data-panel="right"] {
+.panel-right.panel-visible-by-breakpoint
+  ~ .view
+  .navbar
+  .panel-open[data-panel="right"] {
   display: none;
 }
 
 /*
 Extra borders for main view and left panel for iOS theme when it behaves as panel (before breakpoint size)
 */
-.ios .panel-right:not(.panel-visible-by-breakpoint).panel-active ~ .view-main:before,
-.ios .panel-right:not(.panel-visible-by-breakpoint).panel-closing ~ .view-main:before {
+.ios
+  .panel-right:not(.panel-visible-by-breakpoint).panel-active
+  ~ .view-main:before,
+.ios
+  .panel-right:not(.panel-visible-by-breakpoint).panel-closing
+  ~ .view-main:before {
   position: absolute;
   right: 0;
   top: 0;
   height: 100%;
   width: 1px;
-  background: rgba(0,0,0,0.1);
-  content: '';
+  background: rgba(0, 0, 0, 0.1);
+  content: "";
   z-index: 6000;
 }
 
 .card-content {
-    position: relative;
-    min-height: 80px;
+  position: relative;
+  min-height: 80px;
 }
 
 .aurora .subnavbar {
-    margin-top: -3px;
-    padding-top: 0px;
+  margin-top: -3px;
+  padding-top: 0px;
 }
 
 .minus-z {
@@ -145,15 +149,16 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
 }
 
 .card-content {
-    min-height: 80px;
+  min-height: 80px;
 }
 
 .fs-5 {
   font-size: 5px;
 }
 
-.menu-dropdown-item, .menu-dropdown-link {
-justify-content: flex-start;
+.menu-dropdown-item,
+.menu-dropdown-link {
+  justify-content: flex-start;
 }
 
 .pr-5 {
@@ -192,18 +197,34 @@ justify-content: flex-start;
 
 .demo-facebook-card .demo-facebook-avatar img {
   border-radius: 50%;
-} 
+}
 .demo-facebook-card .demo-facebook-name {
   margin-right: 5px;
-  padding-top: 8px;;
+  padding-top: 0px;
   float: right;
   font-size: 12px;
   font-weight: 600;
 }
 
-.demo-facebook-card  .demo-facebook-sub {
+.demo-facebook-card .demo-facebook-title {
+  margin-right: 7px;
+  padding-top: 7px;
+  float: right;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.demo-facebook-card .demo-facebook-profile {
+  margin-right: 0px;
+  padding-top: 0px;
+  font-size: 10px;
+  font-weight: 400;
+  color: gray;
+}
+
+.demo-facebook-card .demo-facebook-sub {
   margin-right: 5px;
-  padding-top: 15px;;
+  padding-top: 15px;
   float: left;
   font-size: 9px;
   font-weight: 300;
@@ -214,6 +235,13 @@ justify-content: flex-start;
   font-size: 13px;
   color: #8e8e93;
 }
+.demo-facebook-card .demo-facebook-more {
+  font-size: 8pt;
+  color: grey;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
 .demo-facebook-card .card-footer {
   background: #fafafa;
 }
@@ -223,7 +251,6 @@ justify-content: flex-start;
 }
 .demo-facebook-card .card-content img {
   display: block;
-
 }
 .demo-facebook-card .card-content-padding {
   padding: 15px 10px;
@@ -236,7 +263,8 @@ justify-content: flex-start;
   justify-content: inherit;
 }
 
-.media-list .item-media img, li.media-item .item-media img {
+.media-list .item-media img,
+li.media-item .item-media img {
   border-radius: 50%;
 }
 
@@ -249,10 +277,55 @@ justify-content: flex-start;
   align-items: baseline;
 }
 
-.chip  { 
+.chip {
   margin-right: 2px;
 }
 
 .gauge {
   margin-right: 4px;
+}
+
+.mr-2 {
+  margin-right: 2px;
+}
+
+.ml-4 {
+  margin-left: 4px;
+}
+
+.center{
+  text-align: center;
+}
+
+.list .item-subtitle { 
+  overflow: visible;
+  white-space: normal;
+}
+
+.aurora .navbar .left {
+  margin-left: 100px;
+}
+
+.list .item-inner { 
+  justify-content: initial;
+}
+
+.font-size-20 {
+  font-size: 20px;
+}
+
+.card-header img {
+  border-radius: 50%;
+}
+ 
+.card-content  img {
+  border-radius: 50%;
+}
+
+.profile-card {
+  position: absolute;
+  top: 30px;
+  right: 110px;
+  font-weight: bold;
+  font-size: 13px;
 }

@@ -140,5 +140,7 @@ export const dict = {
   'shoa': 'شعاع',
   'form' : 'ورود اطلاعات',
   'choose_image': 'انتخاب عکس',
-  'logout': 'خروج'
+  'logout': 'خروج',
+  'more': 'بیشتر ...',
+  'social': 'اجتماعی'
 };

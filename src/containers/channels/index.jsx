@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Navbar,Searchbar, Subnavbar, List, BlockTitle, ListItem, Fab, Icon,Preloader, Block} from 'framework7-react';
+import { Page, Navbar,Searchbar, Subnavbar, Link, BlockTitle, Fab, Icon} from 'framework7-react';
 import ChannelList from "./list"
 import { dict} from '../../Dict';
 
@@ -7,6 +7,9 @@ const ChannelIndex = (props) => {
   return(
     <Page>
       <Navbar title={dict.channels} >
+      <Link panelOpen="right">
+          <Icon f7="bars"></Icon>
+        </Link>
       <Subnavbar inner={false}>
         <Searchbar
           disableButtonText={dict.cancel}

@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import {
   Page,
   Navbar,
-  List,
-  ListItem,
-  ListInput,
-  Toggle,
   BlockTitle,
-  Row,
-  Button,
-  Range,
-  Block,
-  Icon
 } from 'framework7-react';
 import { dict} from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
@@ -29,10 +20,7 @@ export default class ProfileCreate extends Component {
     this.removeActual = this.removeActual.bind(this);
     this.getInstance = this.getInstance.bind(this);
     this.submitFields = this.submitFields.bind(this);
-    
-    this.onDrop = this.onDrop.bind(this);
-    
-    
+    this.onDrop = this.onDrop.bind(this);    
     this.getList = this.getList.bind(this);
 
     this.state = {
