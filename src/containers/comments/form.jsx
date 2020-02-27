@@ -11,6 +11,7 @@ const CommentForm = (props) => {
             label={dict.comment}
             type="textarea"
             placeholder='...'
+            maxlength='300'
             resizable
             onInput={(e) => {
               props.handleChange({ commentContent: e.target.value})

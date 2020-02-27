@@ -322,6 +322,10 @@ li.media-item .item-media img {
   border-radius: 50%;
 }
 
+.mb-20 {
+  margin-bottom: 20px;
+}
+
 .profile-card {
   position: absolute;
   top: 30px;
@@ -329,3 +333,25 @@ li.media-item .item-media img {
   font-weight: bold;
   font-size: 13px;
 }
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: right;
+  padding: 2px 4px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

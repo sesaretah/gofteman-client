@@ -30,7 +30,7 @@ const PostList = (props) => {
                   <div className="demo-facebook-more">
                     <Link className="gray-color" href={'/posts/' + post.id}>
                       {dict.view}
-                      <i className="va fas fa-arrow-left mr-2"></i>
+                      <i className="va fa fa-arrow-left mr-2"></i>
                     </Link>
                   </div>
                 </CardContent>
@@ -40,7 +40,7 @@ const PostList = (props) => {
         </Row>
         <Row noGap>
           <Col></Col>
-          <Col className='center'>
+          <Col className='center mb-20'>
           <a className="gray-color" onClick={() => props.loadMore()}>
             {dict.more}
           </a>

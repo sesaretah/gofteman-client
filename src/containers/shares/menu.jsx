@@ -49,7 +49,7 @@ const ShareMenu = (props) => {
           </PageContent>
         </Sheet>
 
-        <Button className="col"  href={false} sheetOpen=".demo-sheet"><i class="va fas fa-retweet"></i></Button>
+        <Button className="col"  href={false} sheetOpen=".demo-sheet"><i class="va fa fa-retweet"></i></Button>
       </React.Fragment>
     )
   } else {
