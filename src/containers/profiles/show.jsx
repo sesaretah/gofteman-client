@@ -1,8 +1,7 @@
 import React from "react";
 import { Card, Chip, CardContent, CardHeader, Col, Row } from 'framework7-react';
 import { dict } from '../../Dict';
-import ActualForm from "../actuals/form";
-import ActualList from "../actuals/list";
+
 import { Chart } from 'react-charts'
 import { color } from "d3";
 
@@ -62,14 +61,6 @@ const ProfileShow = (props) => {
             </Card>
           </Col>
         </Row>
-
-
-
-        {props.metas.map((m) =>
-          <React.Fragment>
-            <ActualList meta={m.meta} editable={false} actuals={m.actuals} removeActual={props.removeActual} />
-          </React.Fragment>
-        )}
 
       </React.Fragment>
     )

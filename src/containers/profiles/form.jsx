@@ -2,8 +2,7 @@ import React from "react";
 import { List, ListItem, ListInput, CardFooter, Button, Card, Link, CardHeader } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
-import ActualForm from "../actuals/form";
-import ActualList from "../actuals/list";
+
 import ImageUploader from 'react-images-upload';
 const ProfileForm = (props) => {
   console.log(props)
@@ -51,12 +50,6 @@ const ProfileForm = (props) => {
               maxFileSize={5242880}
             />
             </Card>
-        {props.metas.map((m) =>
-          <React.Fragment>
-            <ActualList meta={m.meta} editable={true} actuals={m.actuals} removeActual={props.removeActual} />
-            <ActualForm meta={m.meta} submit={props.submitFields} onChangeValue={props.handleChangeValueFields} />
-          </React.Fragment>
-        )}
       </React.Fragment>
     )
   } else {

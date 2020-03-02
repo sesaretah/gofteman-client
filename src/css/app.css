@@ -28,9 +28,9 @@
 }
 /* Custom color theme properties */
 :root {
-  --f7-theme-color: #009688;
-  --f7-theme-color-rgb: 0, 150, 136;
-  --f7-theme-color-shade: #006d63;
+  --f7-theme-color: #6272a4;
+  --f7-theme-color-rgb: 90, 200, 250;
+  --f7-theme-color-shade: #44475a;
   --f7-theme-color-tint: #00bfad;
 
   --f7-navbar-height: 40px;
@@ -69,30 +69,31 @@
   --f7-card-header-padding-vertical: 5px;
   --f7-card-header-padding-horizontal: 5px;
   --f7-menu-item-spacing: 2px;
+  
 }
 
 .theme-dark {
-  --f7-page-bg-color: #767677;
-  --f7-navbar-bg-color: #767677;
+  --f7-page-bg-color: #44475a;
+  --f7-navbar-bg-color: #44475a;
   --f7-navbar-border-color: #5d5c5c;
-  --f7-navbar-text-color: #dcdada;
+  --f7-navbar-text-color: #8be9fd;
 }
 
 .theme-dark .list ul {
-  --f7-list-bg-color: #5d5d5d;
+  --f7-list-bg-color: #282a36;
   --f7-list-border-color: #484848;
   --f7-list-item-border-color: #484848;
   color: #f1f1f1;
 }
 
 .theme-dark .block-strong {
-  --f7-block-strong-text-color: #dcdada;
-  --f7-block-strong-bg-color: #767677;
+  --f7-block-strong-text-color: #8be9fd;
+  --f7-block-strong-bg-color: #44475a;
   --f7-block-strong-border-color: #5d5c5c;
 }
 
 .theme-dark .block-title {
-  --f7-block-title-text-color: #dcdada;
+  --f7-block-title-text-color: #8be9fd;
 }
 
 /* Left Panel right border when it is visible by breakpoint */
@@ -174,11 +175,11 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
 }
 
 .gray-color {
-  color: #5d5d5d !important;
+  color: #282a36 !important;
 }
 
 .lightgray-color {
-  color: #767677 !important;
+  color: #44475a !important;
 }
 
 .list .item-subtitle {
@@ -259,6 +260,13 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
   color: #8e8e93;
 }
 
+.demo-card-header-pic .card-header {
+  height: 12vw;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
 .row {
   justify-content: inherit;
 }
@@ -334,24 +342,6 @@ li.media-item .item-media img {
   font-size: 13px;
 }
 
-.pagination {
-  display: inline-block;
+.fs-10 {
+  font-size: 10px !important;
 }
-
-.pagination a {
-  color: black;
-  float: right;
-  padding: 2px 4px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}

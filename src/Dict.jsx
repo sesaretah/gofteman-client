@@ -142,5 +142,13 @@ export const dict = {
   'choose_image': 'انتخاب عکس',
   'logout': 'خروج',
   'more': 'بیشتر ...',
-  'social': 'اجتماعی'
+  'social': 'اجتماعی',
+  'courses':'دروس',
+  'discussions':'گفتگو ها',
+  'exams':'آزمون ها ',
+  'public':'عمومی',
+  'private':'خصوصی ',
+  'course_type':'نوع درس',
+  'select_appropriate_title': 'عنوانی مناسب انتخاب کنید',
+  'write_appropriate_description':'شرحی از اهداف و روش ها بنویسید'
 };

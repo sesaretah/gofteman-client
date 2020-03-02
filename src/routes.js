@@ -3,26 +3,16 @@ import NotFoundPage from './containers/layouts/NotFoundPage';
 import PanelRightPage from './containers/layouts/PanelRightPage';
 
 
-import MetaShow from './components/metas/show';
-import MetaIndex from './components/metas/index';
-import MetaCreate from './components/metas/create';
-import MetaUpdate from './components/metas/update';
-
-
-import PostShow from './components/posts/show';
-import PostIndex from './components/posts/index';
-import PostCreate from './components/posts/create';
-import PostUpdate from './components/posts/update';
-
-import ChannelShow from './components/channels/show';
-import ChannelIndex from './components/channels/index';
-import ChannelCreate from './components/channels/create';
-import ChannelUpdate from './components/channels/update';
 
 import RoleShow from './components/roles/show';
 import RoleIndex from './components/roles/index';
 import RoleCreate from './components/roles/create';
 import RoleUpdate from './components/roles/update';
+
+import CourseShow from './components/courses/show';
+import CourseIndex from './components/courses/index';
+import CourseCreate from './components/courses/create';
+import CourseUpdate from './components/courses/update';
 
 
 import ProfileShow from './components/profiles/show';
@@ -53,56 +43,7 @@ export default [
     path: '/panel-right/',
     component: PanelRightPage,
   },
-  {
-    path: '/metas/',
-    component: MetaIndex,
-  },
-  {
-    path: '/metas/:metaId/edit',
-    component: MetaUpdate,
-  },
-  {
-    path: '/metas/new',
-    component: MetaCreate,
-  },
-  {
-    path: '/metas/:metaId',
-    component: MetaShow,
-  },
 
-  {
-    path: '/posts/',
-    component: PostIndex,
-  },
-  {
-    path: '/posts/:postId/edit',
-    component: PostUpdate,
-  },
-  {
-    path: '/posts/new',
-    component: PostCreate,
-  },
-  {
-    path: '/posts/:postId',
-    component: PostShow,
-  },
-
-  {
-    path: '/channels/',
-    component: ChannelIndex,
-  },
-  {
-    path: '/channels/:channelId/edit',
-    component: ChannelUpdate,
-  },
-  {
-    path: '/channels/new',
-    component: ChannelCreate,
-  },
-  {
-    path: '/channels/:channelId',
-    component: ChannelShow,
-  },
 
   {
     path: '/roles/',
@@ -119,6 +60,23 @@ export default [
   {
     path: '/roles/:roleId',
     component: RoleShow,
+  },
+
+  {
+    path: '/courses/',
+    component: CourseIndex,
+  },
+  {
+    path: '/courses/:courseId/edit',
+    component: CourseUpdate,
+  },
+  {
+    path: '/courses/new',
+    component: CourseCreate,
+  },
+  {
+    path: '/courses/:courseId',
+    component: CourseShow,
   },
 
   {

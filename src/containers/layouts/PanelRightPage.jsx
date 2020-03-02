@@ -29,14 +29,19 @@ export default class PanelRightPage extends Component {
           </List>
           <BlockTitle> <i className="va ml-5 fa fa-users"></i>{dict.social}</BlockTitle>
           <List>
-            <ListItem link="/posts/" view="#main-view" panelClose>
-              <i className="va ml-5 fa fa-pencil"></i>
-              <span>{dict.posts}</span>
+            <ListItem link="/courses/" view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-graduation-cap"></i>
+              <span>{dict.courses}</span>
             </ListItem>
             
-            <ListItem link="/channels/" view="#main-view" panelClose>
-            <i className="va ml-5 fa fa-bullhorn"></i>
-              <span>{dict.channels}</span>
+            <ListItem link="/discussions/" view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-comments-o"></i>
+              <span>{dict.discussions}</span>
+            </ListItem>
+
+            <ListItem link="/exams/" view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-pencil-square-o"></i>
+              <span>{dict.exams}</span>
             </ListItem>
             
             <ListItem link="/profiles/"  view="#main-view" panelClose>
