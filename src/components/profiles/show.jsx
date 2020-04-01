@@ -22,11 +22,14 @@ export default class Layout extends Component {
   constructor() {
     super();
     this.getInstance = this.getInstance.bind(this);
+    this.addTag = this.addTag.bind(this);
+    
     this.state = {
       profile: null,
       id: null,
       actuals: null,
       metas: null,
+      channels: null,
     }
   }
 
@@ -51,6 +54,7 @@ export default class Layout extends Component {
         id: profile.id,
         actuals: profile.actuals,
         metas: profile.metas,
+        channels: profile.channels,
       });
     }
   }
@@ -66,25 +70,23 @@ export default class Layout extends Component {
     }
   }
 
+  addTag(){
+    console.log('hey');
+  }
+
   render() {
-    const { profile, actuals, metas } = this.state;
+    const { profile, actuals, metas, channels } = this.state;
     return (
       <Page>
         <Navbar title={dict.profiles} backLink={dict.back} />
         <Toolbar tabbar bottom>
-          <Link tabLink="#tab-1" tabLinkActive>Tab 1</Link>
-          <Link tabLink="#tab-2">Tab 2</Link>
-          <Link tabLink="#tab-3">Tab 3</Link>
+          <Link tabLink="#tab-1" tabLinkActive><i className="va ml-5 fa fa-user-circle"></i></Link>
+          <Link tabLink="#tab-2"><i className="va ml-5 fa fa-bar-chart"></i></Link>
+          <Link tabLink="#tab-3"><i className="va ml-5 fa fa-list"></i></Link>
         </Toolbar>
         {this.fab()}
-        <Tabs>
-          <Tab id="tab-1" className="page-content" tabActive>
-             <ProfileShow profile={profile} actuals={actuals} metas={metas} />
-          </Tab>
-          <Tab id="tab-2" className="page-content">
-            eee
-          </Tab>
-          </Tabs>
+        <ProfileShow profile={profile} actuals={actuals} channels={channels} metas={metas} addTag={this.addTag}/>
+
       </Page>
     );
   }

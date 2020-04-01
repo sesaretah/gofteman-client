@@ -28,10 +28,11 @@
 }
 /* Custom color theme properties */
 :root {
-  --f7-theme-color: #6272a4;
+  --f7-theme-color: #211429;
   --f7-theme-color-rgb: 90, 200, 250;
-  --f7-theme-color-shade: #44475a;
-  --f7-theme-color-tint: #00bfad;
+  --f7-theme-color-shade: #211429;
+  --f7-theme-color-tint: #211429;
+  --f7-card-header-font-size: 12px;
 
   --f7-navbar-height: 40px;
   --f7-list-item-min-height: 40px;
@@ -73,27 +74,27 @@
 }
 
 .theme-dark {
-  --f7-page-bg-color: #44475a;
-  --f7-navbar-bg-color: #44475a;
-  --f7-navbar-border-color: #5d5c5c;
-  --f7-navbar-text-color: #8be9fd;
+  --f7-page-bg-color: #211429;
+  --f7-navbar-bg-color: #211429;
+  --f7-navbar-border-color: #635a64;
+  --f7-navbar-text-color: #e9cfec;
 }
 
 .theme-dark .list ul {
-  --f7-list-bg-color: #282a36;
-  --f7-list-border-color: #484848;
-  --f7-list-item-border-color: #484848;
+  --f7-list-bg-color: #443852;
+  --f7-list-border-color: #635a64;
+  --f7-list-item-border-color: #635a64;
   color: #f1f1f1;
 }
 
 .theme-dark .block-strong {
-  --f7-block-strong-text-color: #8be9fd;
-  --f7-block-strong-bg-color: #44475a;
-  --f7-block-strong-border-color: #5d5c5c;
+  --f7-block-strong-text-color: #e9cfec;
+  --f7-block-strong-bg-color: #211429;
+  --f7-block-strong-border-color: #5d5c5d;
 }
 
 .theme-dark .block-title {
-  --f7-block-title-text-color: #8be9fd;
+  --f7-block-title-text-color: #eccfe0;
 }
 
 /* Left Panel right border when it is visible by breakpoint */
@@ -265,6 +266,7 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
   background-size: cover;
   background-position: center;
   color: #fff;
+  text-shadow: 1px 1px 5px black;
 }
 
 .row {
@@ -344,4 +346,22 @@ li.media-item .item-media img {
 
 .fs-10 {
   font-size: 10px !important;
+}
+
+.h-40 {
+  height: 40px !important;
+  min-height: 40px !important;
+  overflow: hidden;
+}
+
+.item-media img {
+  border-radius: 50%;
+}
+
+.item-title  time{
+color:#777777;
+font-size: 10px;
+}
+.w-100 {
+  width: 100%;
 }

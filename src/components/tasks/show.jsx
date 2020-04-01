@@ -16,7 +16,7 @@ import {
 import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import CourseShow from "../../containers/courses/show"
+import TaskShow from "../../containers/tasks/show"
 
 export default class Layout extends Component {
   constructor() {
@@ -25,7 +25,7 @@ export default class Layout extends Component {
     this.getList = this.getList.bind(this);
     this.submit = this.submit.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.removeCourse = this.removeCourse.bind(this);
+    this.removeTask = this.removeTask.bind(this);
     this.addAbility = this.addAbility.bind(this);
     this.removeAbility = this.removeAbility.bind(this);
 
@@ -33,7 +33,7 @@ export default class Layout extends Component {
 
     this.state = {
       token: window.localStorage.getItem('token'),
-      course: null,
+      task: null,
       id: null,
       users: null,
       assignedUsers: null,
@@ -59,19 +59,19 @@ export default class Layout extends Component {
   }
 
   componentDidMount() {
-    MyActions.getInstance('courses', this.$f7route.params['courseId'], this.state.token);
+    MyActions.getInstance('tasks', this.$f7route.params['taskId'], this.state.token);
     MyActions.getList('users', this.state.page, {}, this.state.token);
   }
 
   getInstance() {
-    var course = ModelStore.getIntance()
+    var task = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
-    if (course && klass === 'Course') {
+    if (task && klass === 'Task') {
       this.setState({
-        course: course,
-        id: course.id,
-        assignedUsers: course.users,
-        ability: course.ability
+        task: task,
+        id: task.id,
+        assignedUsers: task.users,
+        ability: task.ability
       });
     }
   }
@@ -87,13 +87,13 @@ export default class Layout extends Component {
   }
 
   submit() {
-    var data = { course_id: this.state.id, user_id: this.state.user_id }
+    var data = { task_id: this.state.id, user_id: this.state.user_id }
     MyActions.setInstance('users/assignments', data, this.state.token);
   }
 
   addAbility() {
     var data = { id: this.state.id, ability_title: this.state.abilityTitle, ability_value: this.state.abilityValue}
-    MyActions.setInstance('courses/abilities', data, this.state.token);
+    MyActions.setInstance('tasks/abilities', data, this.state.token);
   }
 
   handleChangeValue(obj) {
@@ -101,9 +101,9 @@ export default class Layout extends Component {
   }
 
   fab() {
-    if (this.state.course) {
+    if (this.state.task) {
       return (
-        <Fab href={"/courses/" + this.state.course.id + "/edit"} target="#main-view" position="left-bottom" slot="fixed" color="lime">
+        <Fab href={"/tasks/" + this.state.task.id + "/edit"} target="#main-view" position="left-bottom" slot="fixed" color="lime">
           <Icon ios="f7:edit" aurora="f7:edit" md="material:edit"></Icon>
           <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
         </Fab>
@@ -111,22 +111,22 @@ export default class Layout extends Component {
     }
   }
 
-  removeCourse(user_id) {
-    MyActions.removeInstance('users/assignments', { user_id: user_id, course_id: this.state.id }, this.state.token);
+  removeTask(user_id) {
+    MyActions.removeInstance('users/assignments', { user_id: user_id, task_id: this.state.id }, this.state.token);
   }
 
   removeAbility(title){
-    MyActions.removeInstance('courses/abilities', { id: this.state.id, title: title }, this.state.token);
+    MyActions.removeInstance('tasks/abilities', { id: this.state.id, title: title }, this.state.token);
   }
 
   render() {
-    const { course, users, assignedUsers, ability } = this.state;
+    const { task, users, assignedUsers, ability } = this.state;
     return (
       <Page>
-        <Navbar title={dict.courses} backLink={dict.back} />
+        <Navbar title={dict.tasks} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <CourseShow course={course} users={users} ability={ability} removeAbility={this.removeAbility} assignedUsers={assignedUsers} addAbility={this.addAbility} removeCourse={this.removeCourse} submit={this.submit} handleChange={this.handleChangeValue} />
+        <TaskShow task={task} users={users} ability={ability} removeAbility={this.removeAbility} assignedUsers={assignedUsers} addAbility={this.addAbility} removeTask={this.removeTask} submit={this.submit} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

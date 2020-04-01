@@ -150,5 +150,19 @@ export const dict = {
   'private':'خصوصی ',
   'course_type':'نوع درس',
   'select_appropriate_title': 'عنوانی مناسب انتخاب کنید',
-  'write_appropriate_description':'شرحی از اهداف و روش ها بنویسید'
+  'write_appropriate_description':'شرحی از اهداف و روش ها بنویسید',
+  'description':'شرح ',
+  'drag_or_browse': 'فایل مورد نظر را اینجا بیاندازید یا کلیک کنید',
+  'attachment' : 'فایل های پیوست',
+  'tasks': 'وظایف',
+  'start_date': 'تاریخ شروع',
+  'deadline' : 'مهلت نهایی',
+  'select_a_date' : 'یک تاریخ انتخاب کنید',
+  'incomplete_data': 'همه ی موارد را تکمیل کنید',
+  'alert': 'هشدار',
+  'deadline_time': 'ساعت',
+  'start_time':'ساعت',
+  'select_a_time':'انتخاب ساعت',
+  'coworkers': 'همکاران',
+  'works': 'کارها '
 };

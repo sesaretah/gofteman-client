@@ -9,6 +9,11 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <script src="%PUBLIC_URL%/jdate.min.js"></script>
+    <script>
+      window.ODate = Date;
+      window.Date = JDate;
+    </script>
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a

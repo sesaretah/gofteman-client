@@ -9,10 +9,10 @@ import RoleIndex from './components/roles/index';
 import RoleCreate from './components/roles/create';
 import RoleUpdate from './components/roles/update';
 
-import CourseShow from './components/courses/show';
-import CourseIndex from './components/courses/index';
-import CourseCreate from './components/courses/create';
-import CourseUpdate from './components/courses/update';
+import TaskShow from './components/tasks/show';
+import TaskIndex from './components/tasks/index';
+import TaskCreate from './components/tasks/create';
+import TaskUpdate from './components/tasks/update';
 
 
 import ProfileShow from './components/profiles/show';
@@ -62,21 +62,23 @@ export default [
     component: RoleShow,
   },
 
+
+
   {
-    path: '/courses/',
-    component: CourseIndex,
+    path: '/tasks/',
+    component: TaskIndex,
   },
   {
-    path: '/courses/:courseId/edit',
-    component: CourseUpdate,
+    path: '/tasks/:taskId/edit',
+    component: TaskUpdate,
   },
   {
-    path: '/courses/new',
-    component: CourseCreate,
+    path: '/tasks/new',
+    component: TaskCreate,
   },
   {
-    path: '/courses/:courseId',
-    component: CourseShow,
+    path: '/tasks/:taskId',
+    component: TaskShow,
   },
 
   {

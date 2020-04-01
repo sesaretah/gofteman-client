@@ -5,7 +5,6 @@ import { dict } from "../../Dict";
 import Moment from 'react-moment';
 import 'moment-timezone';
 import 'moment/locale/fa';
-import ExpertiesList from "./experties";
 
 const ProfileList = (props) => {
 
@@ -24,7 +23,8 @@ const ProfileList = (props) => {
           </div>
               </CardHeader>
               <CardFooter className='profile-footer'>
-              <ExpertiesList experties={profile.experties} />
+                <Chip text="Example Chip" />
+                <Chip text="Another Chip" />
               </CardFooter>
             </Card>
           </Col>

@@ -22,6 +22,11 @@ export default class ProfileCreate extends Component {
     this.submitFields = this.submitFields.bind(this);
     this.onDrop = this.onDrop.bind(this);    
     this.getList = this.getList.bind(this);
+    this.submitExperties = this.submitExperties.bind(this);
+    this.removeExperties = this.removeExperties.bind(this);
+    
+
+    
 
     this.state = {
       name: null,
@@ -29,6 +34,8 @@ export default class ProfileCreate extends Component {
       metas: null,
       metaId: null,
       actuals: null,
+      experties: null,
+      expert: null,
       token: window.localStorage.getItem('token'),
       fields: [],
       id: null, 
@@ -78,6 +85,16 @@ export default class ProfileCreate extends Component {
     MyActions.setInstance('actuals', data, this.state.token);
   }
 
+  submitExperties(){
+    var data = {id: this.state.id, experties: this.state.expert}
+    MyActions.setInstance('profiles/add_experties/'+this.$f7route.params['profileId'], data, this.state.token);
+  }
+
+  removeExperties(experties){
+    var data = {id: this.state.id, experties: experties}
+    MyActions.setInstance('profiles/remove_experties/'+this.$f7route.params['profileId'], data, this.state.token);
+  }
+
 
   handleChangeValue(obj) {
     this.setState(obj);
@@ -115,10 +132,10 @@ export default class ProfileCreate extends Component {
         metas: profile.metas,
         name: profile.name,
         surename : profile.surename,
-        avatar: profile.avatar
+        avatar: profile.avatar,
+        experties: profile.experties
       });
     }
-    console.log(profile)
   }
 
 
@@ -139,12 +156,12 @@ export default class ProfileCreate extends Component {
 
 
   render() {
-    const {name, surename, avatar,metas, actuals} = this.state;
+    const {name, surename, avatar,metas, actuals, experties} = this.state;
     return (
       <Page>
         <Navbar title={dict.profile_form} backLink={dict.back} />
         <BlockTitle>{dict.profile_form}</BlockTitle>
-        <ProfileForm name={name} avatar={avatar} surename={surename} metas={metas} onDrop={this.onDrop} removeActual={this.removeActual} submitFields={this.submitFields} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue}/>
+        <ProfileForm name={name} avatar={avatar} surename={surename} metas={metas} experties={experties} onDrop={this.onDrop} removeActual={this.removeActual} submitFields={this.submitFields} submit={this.submit} editing={true} handleChangeValueFields={this.handleChangeValueFields} handleChange={this.handleChangeValue} submitExperties={this.submitExperties} removeExperties={this.removeExperties}/>
       </Page>
     );
   }
