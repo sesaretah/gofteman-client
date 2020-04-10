@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
-
+import SimpleList from "../profiles/simpleList";
 
 const Partcipants = (props) => {
     if (props.task) {
@@ -18,9 +18,7 @@ const Partcipants = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List>
-                        {props.task.coworkers.map((worker) =>
-                            <ListItem title={worker.fullname}></ListItem>
-                        )}
+                        <SimpleList profiles={props.task.participants} removeProfile={props.removeProfile} />
                     </List>
                 </CardContent>
                 <CardFooter>
@@ -35,9 +33,12 @@ const Partcipants = (props) => {
                                         type="text"
                                         placeholder=""
                                         clearButton
+                                        onInput={(e) => {
+                                            props.searchProfile({ query: e.target.value })
+                                          }}
                                     />
                                 </List>
-
+                                <SimpleList profiles={props.profiles} addProfile={props.addProfile}/>
                             </AccordionContent>
                         </ListItem>
                     </List>

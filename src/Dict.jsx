@@ -164,5 +164,8 @@ export const dict = {
   'start_time':'ساعت',
   'select_a_time':'انتخاب ساعت',
   'coworkers': 'همکاران',
-  'works': 'کارها '
+  'works': 'کارها ',
+  'dashboard':'میزکار',
+  'tavan':'توان',
+  'statuses': 'وضعیت ها'
 };

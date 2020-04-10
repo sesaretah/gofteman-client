@@ -9,6 +9,11 @@ import RoleIndex from './components/roles/index';
 import RoleCreate from './components/roles/create';
 import RoleUpdate from './components/roles/update';
 
+import StatusShow from './components/statuses/show';
+import StatusIndex from './components/statuses/index';
+import StatusCreate from './components/statuses/create';
+import StatusUpdate from './components/statuses/update';
+
 import TaskShow from './components/tasks/show';
 import TaskIndex from './components/tasks/index';
 import TaskCreate from './components/tasks/create';
@@ -62,6 +67,22 @@ export default [
     component: RoleShow,
   },
 
+  {
+    path: '/statuses/',
+    component: StatusIndex,
+  },
+  {
+    path: '/statuses/:statusId/edit',
+    component: StatusUpdate,
+  },
+  {
+    path: '/statuses/new',
+    component: StatusCreate,
+  },
+  {
+    path: '/statuses/:statusId',
+    component: StatusShow,
+  },
 
 
   {

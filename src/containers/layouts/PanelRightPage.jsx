@@ -27,7 +27,7 @@ export default class PanelRightPage extends Component {
               <span>{dict.logout}</span>
             </ListItem>
           </List>
-          <BlockTitle> <i className="va ml-5 fa fa-users"></i>{dict.social}</BlockTitle>
+          <BlockTitle> <i className="va ml-5 fa fa-tachometer"></i>{dict.dashboard}</BlockTitle>
           <List>
             <ListItem link="/tasks/" view="#main-view" panelClose>
               <i className="va ml-5 fa fa-tasks"></i>
@@ -49,6 +49,10 @@ export default class PanelRightPage extends Component {
             <i className="va ml-5 fa fa-th"></i>
               <span>{dict.metas}</span>
             </ListItem>
+            <ListItem link="/statuses/" ignoreCache={true} view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-circle-o"></i>
+              <span>{dict.statuses}</span>
+            </ListItem>
           </List>
         </React.Fragment>
       )
@@ -68,7 +72,7 @@ export default class PanelRightPage extends Component {
     const { token } = this.state;
     return (
       <Page >
-        <Navbar title={dict.Shoa} />
+        <Navbar title={dict.tavan} />
         {this.logged_in(token)}
       </Page>
     );

@@ -33,7 +33,7 @@ const TaskShow = (props) => {
           </Col>
 
           <Col width='100' tabletWidth='50'>
-          <Participants task={props.task}></Participants>
+          <Participants task={props.task} searchProfile={props.searchProfile} removeProfile={props.removeProfile} addProfile={props.addProfile} profiles={props.profiles}></Participants>
           </Col>
         </Row>
        
