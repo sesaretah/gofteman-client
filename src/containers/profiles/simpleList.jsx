@@ -24,7 +24,7 @@ const SimpleList = (props) => {
           title={profile.fullname}
           subtitle="..."
           after={addLink(profile)}>
-          <img slot="media" src={profile.avatar} width="25" />
+          <img slot="media" src={profile.avatar} width="27" height="27"/>
           </ListItem>
         )}
       </List>

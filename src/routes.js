@@ -19,6 +19,10 @@ import TaskIndex from './components/tasks/index';
 import TaskCreate from './components/tasks/create';
 import TaskUpdate from './components/tasks/update';
 
+import WorkShow from './components/works/show';
+import WorkIndex from './components/works/index';
+import WorkCreate from './components/works/create';
+import WorkUpdate from './components/works/update';
 
 import ProfileShow from './components/profiles/show';
 import ProfileIndex from './components/profiles/index';
@@ -100,6 +104,24 @@ export default [
   {
     path: '/tasks/:taskId',
     component: TaskShow,
+  },
+
+
+  {
+    path: '/works/',
+    component: WorkIndex,
+  },
+  {
+    path: '/works/:workId/edit',
+    component: WorkUpdate,
+  },
+  {
+    path: '/works/new/:taskId',
+    component: WorkCreate,
+  },
+  {
+    path: '/works/:workId',
+    component: WorkShow,
   },
 
   {

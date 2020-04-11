@@ -9,7 +9,7 @@ import 'moment/locale/fa';
 import SimpleList from "../profiles/simpleList";
 
 const Partcipants = (props) => {
-    if (props.task) {
+    if (props.work) {
 
         return (
             <Card>
@@ -19,7 +19,7 @@ const Partcipants = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List>
-                        <SimpleList profiles={props.task.participants} removeProfile={props.removeProfile} />
+                        <SimpleList profiles={props.work.participants} removeProfile={props.removeProfile} />
                     </List>
                 </CardContent>
                 <CardFooter>

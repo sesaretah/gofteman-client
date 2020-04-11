@@ -34,7 +34,8 @@ export default class DocumentUpdate extends Component {
     this.state = {
       token: window.localStorage.getItem('token'),
       status : {},
-      title: '',
+      title: null,
+      id: '',
       color: '#fff',
     }
   }
@@ -102,10 +103,11 @@ export default class DocumentUpdate extends Component {
       this.setState({
         title: status.title,
         id: status.id,
-        color: status.color,
+        color: status.the_color,
         status: status,
       }, () => this.loadPalette());
     } 
+    console.log(status)
   }
 
   handleChangeValue(obj) {
@@ -120,12 +122,12 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-        const {status, defaultStatus} = this.state;
+        const {status, title, color} = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.status_form} backLink={dict.back} />
         <BlockTitle>{dict.status_form}</BlockTitle>
-        <StatusForm status={status} defaultStatus={defaultStatus} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <StatusForm status={status} title={title} color={color} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

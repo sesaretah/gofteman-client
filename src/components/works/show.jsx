@@ -16,7 +16,7 @@ import {
 import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import TaskShow from "../../containers/tasks/show"
+import WorkShow from "../../containers/works/show"
 
 export default class Layout extends Component {
   constructor() {
@@ -25,7 +25,7 @@ export default class Layout extends Component {
     this.getList = this.getList.bind(this);
     this.submit = this.submit.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.removeTask = this.removeTask.bind(this);
+    this.removeWork = this.removeWork.bind(this);
     this.addAbility = this.addAbility.bind(this);
     this.removeAbility = this.removeAbility.bind(this);
     this.searchProfile = this.searchProfile.bind(this);
@@ -37,7 +37,7 @@ export default class Layout extends Component {
     
     this.state = {
       token: window.localStorage.getItem('token'),
-      task: null,
+      work: null,
       id: null,
       users: null,
       assignedUsers: null,
@@ -45,7 +45,6 @@ export default class Layout extends Component {
       abilityTitle: '',
       abilityValue: true,
       ability: null,
-      works: null,
       query: null,
       profiles: [],
       statuses: []
@@ -67,22 +66,21 @@ export default class Layout extends Component {
   }
 
   componentDidMount() {
-    MyActions.getInstance('tasks', this.$f7route.params['taskId'], this.state.token);
+    MyActions.getInstance('works', this.$f7route.params['workId'], this.state.token);
     MyActions.getList('users', this.state.page, {}, this.state.token);
   }
 
   getInstance() {
-    var task = ModelStore.getIntance()
+    var work = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
-    if (task && klass === 'Task') {
+    if (work && klass === 'Work') {
       this.setState({
-        task: task,
-        id: task.id,
-        assignedUsers: task.users,
-        works: task.works
+        work: work,
+        id: work.id,
+        assignedUsers: work.users,
+        ability: work.ability
       });
     }
-    console.log(task)
   }
 
   getList() {
@@ -107,7 +105,7 @@ export default class Layout extends Component {
   }
 
   submit() {
-    var data = { task_id: this.state.id, user_id: this.state.user_id }
+    var data = { work_id: this.state.id, user_id: this.state.user_id }
     MyActions.setInstance('users/assignments', data, this.state.token);
   }
 
@@ -127,22 +125,22 @@ export default class Layout extends Component {
 
   addProfile(profileId){
     var data = { id: this.state.id, profile_id: profileId}
-    MyActions.setInstance('tasks/participants', data, this.state.token);
+    MyActions.setInstance('works/participants', data, this.state.token);
   }
 
   addStatus(statusId){
     var data = { id: this.state.id, status_id: statusId}
-    MyActions.setInstance('tasks/status', data, this.state.token);
+    MyActions.setInstance('works/status', data, this.state.token);
   }
 
   removeProfile(profileId) {
     var data = { id: this.state.id, profile_id: profileId}
-    MyActions.removeInstance('tasks/participants', data, this.state.token);
+    MyActions.removeInstance('works/participants', data, this.state.token);
   }
 
   addAbility() {
     var data = { id: this.state.id, ability_title: this.state.abilityTitle, ability_value: this.state.abilityValue}
-    MyActions.setInstance('tasks/abilities', data, this.state.token);
+    MyActions.setInstance('works/abilities', data, this.state.token);
   }
 
   handleChangeValue(obj) {
@@ -150,9 +148,9 @@ export default class Layout extends Component {
   }
 
   fab() {
-    if (this.state.task) {
+    if (this.state.work) {
       return (
-        <Fab href={"/tasks/" + this.state.task.id + "/edit"} target="#main-view" position="left-bottom" slot="fixed" color="lime">
+        <Fab href={"/works/" + this.state.work.id + "/edit"} target="#main-view" position="left-bottom" slot="fixed" color="lime">
           <Icon ios="f7:edit" aurora="f7:edit" md="material:edit"></Icon>
           <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
         </Fab>
@@ -160,28 +158,28 @@ export default class Layout extends Component {
     }
   }
 
-  removeTask(user_id) {
-    MyActions.removeInstance('users/assignments', { user_id: user_id, task_id: this.state.id }, this.state.token);
+  removeWork(user_id) {
+    MyActions.removeInstance('users/assignments', { user_id: user_id, work_id: this.state.id }, this.state.token);
   }
 
   removeAbility(title){
-    MyActions.removeInstance('tasks/abilities', { id: this.state.id, title: title }, this.state.token);
+    MyActions.removeInstance('works/abilities', { id: this.state.id, title: title }, this.state.token);
   }
 
   render() {
-    const { task, users, assignedUsers, ability, profiles, statuses, works } = this.state;
+    const { work, users, assignedUsers, ability, profiles, statuses } = this.state;
     return (
       <Page>
-        <Navbar title={dict.tasks} backLink={dict.back} />
+        <Navbar title={dict.works} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <TaskShow 
-          task={task} users={users} ability={ability} profiles={profiles} statuses={statuses}
+        <WorkShow 
+          work={work} users={users} ability={ability} profiles={profiles} statuses={statuses}
           removeProfile={this.removeProfile} addProfile={this.addProfile}
           searchProfile={this.searchProfile} removeAbility={this.removeAbility}
           assignedUsers={assignedUsers} addAbility={this.addAbility} 
-          removeTask={this.removeTask} submit={this.submit} handleChange={this.handleChangeValue}
-          searchStatus={this.searchStatus} addStatus={this.addStatus} works={works}
+          removeWork={this.removeWork} submit={this.submit} handleChange={this.handleChangeValue}
+          searchStatus={this.searchStatus} addStatus={this.addStatus}
           />
       </Page>
     );

@@ -17,7 +17,7 @@ const StatusShow = (props) => {
         </List>
 
         <List simple-list>
-          <ListItem style={{backgroundColor: props.status.color}}>{props.status.color}</ListItem>
+          <ListItem style={{backgroundColor: props.status.the_color}}>{props.status.the_color}</ListItem>
         </List>
 
         

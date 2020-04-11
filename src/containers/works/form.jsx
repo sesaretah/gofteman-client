@@ -4,21 +4,21 @@ import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
 
-const TaskForm = (props) => {
-  if (props.privateTask) {
-    var isPrivateTask = true;
+const WorkForm = (props) => {
+  if (props.privateWork) {
+    var isPrivateWork = true;
   } else {
-    var isPrivateTask = false
+    var isPrivateWork = false
   }
   return (
     <Card>
-      <BlockTitle>{dict.task}</BlockTitle>
+      <BlockTitle>{dict.work}</BlockTitle>
       <List form>
         <ListInput
           label={dict.title}
           type="text"
           placeholder={dict.select_appropriate_title}
-          defaultValue={props.task.title}
+          defaultValue={props.work.title}
           required={true}
           onInput={(e) => {
             props.handleChange({ title: e.target.value })
@@ -94,4 +94,4 @@ const TaskForm = (props) => {
 
   )
 }
-export default TaskForm;
+export default WorkForm;

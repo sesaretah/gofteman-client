@@ -16,7 +16,7 @@ import {
 import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import TaskForm from "../../containers/tasks/form"
+import WorkForm from "../../containers/works/form"
 import Framework7 from 'framework7/framework7.esm.bundle';
 
 export default class DocumentUpdate extends Component {
@@ -33,7 +33,7 @@ export default class DocumentUpdate extends Component {
 
     this.state = {
       token: window.localStorage.getItem('token'),
-      task: {},
+      work: {},
       id: null,
       title: null,
       details: null,
@@ -41,7 +41,7 @@ export default class DocumentUpdate extends Component {
       start: new Date(),
       startTime: '0 00',
       deadlineTime: '0 00',
-      privateTask: true,
+      privateWork: true,
     }
   }
 
@@ -148,7 +148,7 @@ export default class DocumentUpdate extends Component {
   submit() {
     var data = { id: this.state.id, title: this.state.title, details: this.state.details, start: this.state.start, start_time: this.state.startTime, deadline: this.state.deadline, deadline_time: this.state.deadlineTime }// start: new Date(this.state.start.setHours(startTime[0], startTime[1], 0, 0)).toISOString(), deadline:  new Date(this.state.deadline.setHours(deadlineTime[0], deadlineTime[1], 0, 0)).toISOString() }
     if (this.state.title && this.state.title.length > 0) {
-      MyActions.updateInstance('tasks', data, this.state.token);
+      MyActions.updateInstance('works', data, this.state.token);
     } else {
       const self = this;
       self.$f7.dialog.alert(dict.incomplete_data, dict.alert);
@@ -163,26 +163,26 @@ export default class DocumentUpdate extends Component {
   loadData() {
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top' });
-    if (this.$f7route.params['taskId']) {
-      MyActions.getInstance('tasks', this.$f7route.params['taskId'], this.state.token);
+    if (this.$f7route.params['workId']) {
+      MyActions.getInstance('works', this.$f7route.params['workId'], this.state.token);
     }
   }
 
 
   getInstance() {
-    var task = ModelStore.getIntance()
+    var work = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
-    if (task && klass === 'Task') {
+    if (work && klass === 'Work') {
       this.setState({
-        title: task.title,
-        content: task.details,
-        id: task.id,
-        task: task,
-        start: new window.ODate(task.start_date),
-        deadline: new window.ODate(task.deadline_date),
-        startTime: task.start_time,
-        deadlineTime: task.deadline_time,
-        defaultTask: task.default_task,
+        title: work.title,
+        content: work.details,
+        id: work.id,
+        work: work,
+        start: new window.ODate(work.start_date),
+        deadline: new window.ODate(work.deadline_date),
+        startTime: work.start_time,
+        deadlineTime: work.deadline_time,
+        defaultWork: work.default_work,
       }, () => this.loadCalender());
     }
   }
@@ -194,17 +194,17 @@ export default class DocumentUpdate extends Component {
 
   setInstance() {
     const self = this;
-    this.$f7router.navigate('/tasks/');
+    this.$f7router.navigate('/works/');
   }
 
 
   render() {
-    const { task, defaultTask, title, content, startTime, deadlineTime } = this.state;
+    const { work, defaultWork, title, content, startTime, deadlineTime } = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
-        <Navbar title={dict.task_form} backLink={dict.back} />
-        <BlockTitle>{dict.task_form}</BlockTitle>
-        <TaskForm task={task} title={title} startTime={startTime} deadlineTime={deadlineTime} content={content} defaultTask={defaultTask} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <Navbar title={dict.work_form} backLink={dict.back} />
+        <BlockTitle>{dict.work_form}</BlockTitle>
+        <WorkForm work={work} title={title} startTime={startTime} deadlineTime={deadlineTime} content={content} defaultWork={defaultWork} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

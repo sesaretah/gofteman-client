@@ -167,5 +167,9 @@ export const dict = {
   'works': 'کارها ',
   'dashboard':'میزکار',
   'tavan':'توان',
-  'statuses': 'وضعیت ها'
+  'statuses': 'وضعیت ها',
+  'status' : 'وضعیت',
+  'add_stauts': 'تغییر وضعیت',
+  'select' : 'انتخاب',
+  'new': 'جدید'
 };

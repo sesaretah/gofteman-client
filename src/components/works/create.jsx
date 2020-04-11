@@ -7,9 +7,9 @@ import {
 import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import TaskForm from "../../containers/tasks/form"
+import WorkForm from "../../containers/works/form"
 
-export default class TaskCreate extends Component {
+export default class WorkCreate extends Component {
   constructor() {
     super();
     this.submit = this.submit.bind(this);
@@ -20,14 +20,14 @@ export default class TaskCreate extends Component {
     
     this.state = {
       token: window.localStorage.getItem('token'),
-      task: {},
+      work: {},
       title: null,
       details: null,
       deadline: new Date(),
       start: new Date(),
       startTime:  '0:00',
       deadlineTime: '0:00',
-      privateTask: true,
+      privateWork: true,
     }
   }
 
@@ -132,9 +132,14 @@ export default class TaskCreate extends Component {
   }
 
   submit() {
-    var data = { title: this.state.title, details: this.state.details, start: this.state.start, start_time: this.state.startTime, deadline: this.state.deadline, deadline_time: this.state.deadlineTime}// start: new Date(this.state.start.setHours(startTime[0], startTime[1], 0, 0)).toISOString(), deadline:  new Date(this.state.deadline.setHours(deadlineTime[0], deadlineTime[1], 0, 0)).toISOString() }
+    var data = { 
+      title: this.state.title, details: this.state.details, 
+      start: this.state.start, start_time: this.state.startTime, 
+      deadline: this.state.deadline, deadline_time: this.state.deadlineTime,
+      task_id: this.$f7route.params['taskId']
+    }
     if (this.state.title && this.state.title.length > 0) {
-      MyActions.setInstance('tasks', data, this.state.token);
+      MyActions.setInstance('works', data, this.state.token);
     } else {
       const self = this;
       self.$f7.dialog.alert(dict.incomplete_data, dict.alert);
@@ -149,18 +154,18 @@ export default class TaskCreate extends Component {
 
   setInstance() {
     const self = this;
-    this.$f7router.navigate('/tasks/');
+    this.$f7router.navigate('/works/');
   }
 
 
 
   render() {
-    const { task } = this.state;
+    const { work } = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
-        <Navbar title={dict.task_form} backLink={dict.back} />
-        <BlockTitle>{dict.task_form}</BlockTitle>
-        <TaskForm task={task} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <Navbar title={dict.work_form} backLink={dict.back} />
+        <BlockTitle>{dict.work_form}</BlockTitle>
+        <WorkForm work={work} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
       </Page>
     );
   }
