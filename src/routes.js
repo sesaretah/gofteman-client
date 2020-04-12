@@ -9,6 +9,12 @@ import RoleIndex from './components/roles/index';
 import RoleCreate from './components/roles/create';
 import RoleUpdate from './components/roles/update';
 
+
+import TagShow from './components/tags/show';
+import TagIndex from './components/tags/index';
+import TagCreate from './components/tags/create';
+import TagUpdate from './components/tags/update';
+
 import StatusShow from './components/statuses/show';
 import StatusIndex from './components/statuses/index';
 import StatusCreate from './components/statuses/create';
@@ -28,6 +34,11 @@ import ProfileShow from './components/profiles/show';
 import ProfileIndex from './components/profiles/index';
 import ProfileCreate from './components/profiles/create';
 import ProfileUpdate from './components/profiles/update';
+
+import ReportShow from './components/reports/show';
+import ReportIndex from './components/reports/index';
+import ReportCreate from './components/reports/create';
+import ReportUpdate from './components/reports/update';
 
 
 import Login from './components/users/Login';
@@ -106,6 +117,42 @@ export default [
     component: TaskShow,
   },
 
+
+  {
+    path: '/tags/',
+    component: TagIndex,
+  },
+  {
+    path: '/tags/:tagId/edit',
+    component: TagUpdate,
+  },
+  {
+    path: '/tags/new',
+    component: TagCreate,
+  },
+  {
+    path: '/tags/:tagId',
+    component: TagShow,
+  },
+
+
+
+  {
+    path: '/reports/',
+    component: ReportIndex,
+  },
+  {
+    path: '/reports/:reportId/edit',
+    component: ReportUpdate,
+  },
+  {
+    path: '/reports/new/:callerType/:callerId',
+    component: ReportCreate,
+  },
+  {
+    path: '/reports/:reportId',
+    component: ReportShow,
+  },
 
   {
     path: '/works/',

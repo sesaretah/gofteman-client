@@ -171,5 +171,9 @@ export const dict = {
   'status' : 'وضعیت',
   'add_stauts': 'تغییر وضعیت',
   'select' : 'انتخاب',
-  'new': 'جدید'
+  'new': 'جدید',
+  'task' : 'وظیفه',
+  'attachments': 'پیوست ها',
+  'reports': 'اسناد و گزارشات',
+  'tags':'برچسب ها'
 };

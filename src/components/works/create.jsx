@@ -153,8 +153,14 @@ export default class WorkCreate extends Component {
   }
 
   setInstance() {
-    const self = this;
-    this.$f7router.navigate('/works/');
+    var work = ModelStore.getIntance()
+    var klass = ModelStore.getKlass()
+    if (work && klass === 'Work') {
+      this.$f7router.navigate('/works/'+work.id);
+    } else {
+      this.$f7router.navigate('/tasks/');
+    }
+    
   }
 
 

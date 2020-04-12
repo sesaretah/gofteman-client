@@ -26,6 +26,8 @@ export default class DocumentUpdate extends Component {
     this.setInstance = this.setInstance.bind(this);
     this.getInstance = this.getInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
+    this.loadTime = this.loadTime.bind(this);
+    this.loadCalender = this.loadCalender.bind(this);
     this.pageAfterIn = this.pageAfterIn.bind(this);
 
 
@@ -35,6 +37,10 @@ export default class DocumentUpdate extends Component {
       id: null,
       title: null,
       details: null,
+      deadline: new Date(),
+      start: new Date(),
+      startTime: '0 00',
+      deadlineTime: '0 00',
       privateTask: true,
       tags: null,
     }
@@ -52,6 +58,8 @@ export default class DocumentUpdate extends Component {
   }
 
   pageAfterIn() {
+    this.loadCalender()
+    this.loadTime();
     this.loadTags();
   }
 
@@ -78,7 +86,7 @@ export default class DocumentUpdate extends Component {
       textProperty: 'title', //object's "text" property name
       limit: 50,
       searchbarPlaceholder: dict.search,
-      preloader: true, //enable preloader
+      preloader: false, //enable preloader
       source: function (query, render) {
         var autocomplete = this;
         var results = [];
@@ -127,11 +135,93 @@ export default class DocumentUpdate extends Component {
     });
   }
 
+  loadTime() {
+    var today = new Date();
+    const self = this;
+    const app = self.$f7;
+
+    app.picker.create({
+      inputEl: '#start-time-picker',
+      rotateEffect: true,
+      on: {
+        closed: function (picker) {
+          self.setState({ startTime: picker.value[1] + ':' + picker.value[0] });
+        }
+      },
+      cols: [
+        {
+          values: ('00 15 30 45').split(' ')
+        },
+        {
+          textAlign: 'left',
+          values: ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23').split(' ')
+        },
+
+      ]
+    });
+    app.picker.create({
+      inputEl: '#deadline-time-picker',
+      rotateEffect: true, on: {
+        closed: function (picker) {
+          self.setState({ deadlineTime: picker.value[1] + ':' + picker.value[0] });
+        }
+      },
+      cols: [
+        {
+          values: ('00 15 30 45').split(' ')
+        },
+        {
+          textAlign: 'left',
+          values: ('0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23').split(' ')
+        },
+
+      ]
+    });
+  }
+
+  loadCalender() {
+    const self = this;
+    const app = self.$f7;
+
+    app.calendar.create({
+      inputEl: '#start-calendar',
+      value: [this.state.start],
+      closeOnSelect: true,
+      firstDay: 6,
+      weekendDays: [4, 5],
+      monthNames: ['فروردين', 'ارديبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+      dayNames: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'],
+      dayNamesShort: ['یک', 'دو', 'سه ', 'چهار', 'پنج‌', 'جمعه', 'شنبه'],
+      on: {
+        closed: function (c) {
+          self.setState({ start: c.value[0].a });
+        }
+      }
+    });
+
+    app.calendar.create({
+      inputEl: '#deadline-calendar',
+      closeOnSelect: true,
+      value: [this.state.deadline],
+      firstDay: 6,
+      weekendDays: [4, 5],
+      monthNames: ['فروردين', 'ارديبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+      dayNames: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'],
+      dayNamesShort: ['یک', 'دو', 'سه ', 'چهار', 'پنج‌', 'جمعه', 'شنبه'],
+      on: {
+        closed: function (c) {
+          //console.log(c.value[0].a)
+          self.setState({ deadline: c.value[0].a });
+        }
+      }
+
+    });
+  }
+
 
 
   submit() {
-    var data = { id: this.state.id, title: this.state.title, 
-      details: this.state.details, tags: this.state.tags }
+    var data = { id: this.state.id, title: this.state.title, details: this.state.details, start: this.state.start, start_time: this.state.startTime, deadline: this.state.deadline, deadline_time: this.state.deadlineTime }// start: new Date(this.state.start.setHours(startTime[0], startTime[1], 0, 0)).toISOString(), deadline:  new Date(this.state.deadline.setHours(deadlineTime[0], deadlineTime[1], 0, 0)).toISOString() }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.updateInstance('tasks', data, this.state.token);
     } else {
@@ -163,9 +253,13 @@ export default class DocumentUpdate extends Component {
         content: task.details,
         id: task.id,
         task: task,
+        start: new window.ODate(task.start_date),
+        deadline: new window.ODate(task.deadline_date),
+        startTime: task.start_time,
+        deadlineTime: task.deadline_time,
         defaultTask: task.default_task,
         tags: task.the_tags
-      }, () => this.loadTags());
+      }, () => this.pageAfterIn());
     }
   }
 

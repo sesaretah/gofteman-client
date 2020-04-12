@@ -38,6 +38,11 @@ export default class PanelRightPage extends Component {
               <i className="va ml-5 fa fa-user-circle-o"></i>
               <span>{dict.profiles}</span>
             </ListItem>
+
+            <ListItem link="/reports/"  view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-user-circle-o"></i>
+              <span>{dict.profiles}</span>
+            </ListItem>
             </List>
             <BlockTitle> <i className="va ml-5 fa fa-cogs"></i>{dict.settings}</BlockTitle>
             <List>
@@ -52,6 +57,10 @@ export default class PanelRightPage extends Component {
             <ListItem link="/statuses/" ignoreCache={true} view="#main-view" panelClose>
             <i className="va ml-5 fa fa-circle-o"></i>
               <span>{dict.statuses}</span>
+            </ListItem>
+            <ListItem link="/tags/" ignoreCache={true} view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-tags"></i>
+              <span>{dict.tags}</span>
             </ListItem>
           </List>
         </React.Fragment>

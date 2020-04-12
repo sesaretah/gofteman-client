@@ -9,7 +9,6 @@ import 'moment/locale/fa';
 import SimpleList from "../statuses/simpleList";
 
 const Statuses = (props) => {
-    console.log(props.work)
     function chip(status){
         if(status) {
             return(

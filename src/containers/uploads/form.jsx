@@ -8,7 +8,7 @@ const server='http://localhost:3001/v1'
 
 const UploadForm = (props) => {
   // specify upload params and url for your files
-  const getUploadParams = ({ meta }) => { return { fields:{'upload[title]':props.title, 'upload[uploadable_type]': props.uploadableType, 'upload[uploadable_id]': props.uploadableId}, url: server+'/uploads' } }
+  const getUploadParams = ({ meta }) => { return { fields:{'upload[title]':props.title, 'upload[uuid]': props.uuid}, url: server+'/uploads' } }
   
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file }, status) => { console.log(status, meta, file) }

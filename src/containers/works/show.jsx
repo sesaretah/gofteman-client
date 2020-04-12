@@ -7,6 +7,8 @@ import Moment from 'react-moment';
 import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
+import CommentForm from "../comments/form"
+import CommentList from "../comments/list"
 
 const WorkShow = (props) => {
   if (props.work) {
@@ -18,15 +20,17 @@ const WorkShow = (props) => {
               <CardHeader>
                 {props.work.title}
                 <Link><i className="ml-5 fa fa-cog"></i></Link>
-                </CardHeader>
+              </CardHeader>
               <CardContent>
                 <List simple-list>
+                 <ListItem className='fs-11' title={dict.task + ': ' + props.work.task.title } href={'/tasks/'+props.work.task.id}></ListItem>
                   <ListItem className='fs-11' title={dict.start_date + ': ' + props.work.start_date_j}></ListItem>
-                  <ListItem className='fs-11' title={dict.deadline + ': ' +props.work.deadline_date_j}></ListItem>
+                  <ListItem className='fs-11' title={dict.deadline + ': ' + props.work.deadline_date_j}></ListItem>
+                  
                   <ListItem className='fs-11' title=''></ListItem>
                 </List>
                 <span className='fs-11'>{props.work.details}</span>
-                
+
               </CardContent>
               <CardFooter>
                 <Statuses work={props.work} searchStatus={props.searchStatus} statuses={props.statuses} addStatus={props.addStatus}></Statuses>
@@ -40,35 +44,8 @@ const WorkShow = (props) => {
           </Col>
         </Row>
 
-
-        <Row>
-          <Col width='100' tabletWidth='100'>
-            <Card>
-              <CardHeader>
-                {dict.works}
-              </CardHeader>
-              <CardContent>
-                <List>
-                  {props.work.works.map((work) =>
-                    <ListItem title={work.title}></ListItem>
-                  )}
-                </List>
-              </CardContent>
-              <CardFooter>
-                +
-              </CardFooter>
-            </Card>
-          </Col>
-        </Row>
-        <BlockTitle>{dict.discussions}</BlockTitle>
-        <Block>
-          <List>
-            {props.work.discussions.map((discussion) =>
-              <ListItem title={discussion.content}></ListItem>
-            )}
-          </List>
-        </Block>
-
+        <CommentForm model={props.work} submit={props.submitComment} handleChange={props.handleChange} />
+        <CommentList comments={props.comments} removeComment={props.removeComment} loadMore={props.loadMore}/>
 
       </React.Fragment>
     )

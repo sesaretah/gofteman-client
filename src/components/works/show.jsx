@@ -33,7 +33,9 @@ export default class Layout extends Component {
     this.removeProfile = this.removeProfile.bind(this);
     this.searchStatus = this.searchStatus.bind(this);
     this.addStatus = this.addStatus.bind(this);
-    
+    this.removeComment = this.removeComment.bind(this);
+    this.submitComment = this.submitComment.bind(this);
+    this.loadMore = this.loadMore.bind(this);
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -47,7 +49,9 @@ export default class Layout extends Component {
       ability: null,
       query: null,
       profiles: [],
-      statuses: []
+      statuses: [],
+      commentContent: '',
+      comments: null,
     }
   }
 
@@ -78,9 +82,11 @@ export default class Layout extends Component {
         work: work,
         id: work.id,
         assignedUsers: work.users,
-        ability: work.ability
+        ability: work.ability,
+        comments: work.the_comments
       });
     }
+    //this.$$('#cm-form').clear()
   }
 
   getList() {
@@ -143,6 +149,24 @@ export default class Layout extends Component {
     MyActions.setInstance('works/abilities', data, this.state.token);
   }
 
+
+  loadMore() {
+    this.setState({ page: this.state.page + 1 }, () => {
+      MyActions.getInstance('works', this.$f7route.params['workId'], this.state.token, this.state.page);
+    });
+  }
+
+
+  submitComment() {
+    var data = { commentable_type: 'Work' ,commentable_id: this.state.id, content: this.state.commentContent }
+    MyActions.setInstance('comments', data, this.state.token);
+  }
+
+  removeComment(id) {
+    var data = { id: id }
+    MyActions.removeInstance('comments', data, this.state.token, this.state.page);
+  }
+
   handleChangeValue(obj) {
     this.setState(obj);
   }
@@ -167,7 +191,7 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { work, users, assignedUsers, ability, profiles, statuses } = this.state;
+    const { work, users, assignedUsers, ability, profiles, statuses, comments, commentContent } = this.state;
     return (
       <Page>
         <Navbar title={dict.works} backLink={dict.back} />
@@ -180,6 +204,8 @@ export default class Layout extends Component {
           assignedUsers={assignedUsers} addAbility={this.addAbility} 
           removeWork={this.removeWork} submit={this.submit} handleChange={this.handleChangeValue}
           searchStatus={this.searchStatus} addStatus={this.addStatus}
+          submitComment={this.submitComment} removeComment={this.removeComment}
+          commentContent={commentContent} comments={comments} loadMore={this.loadMore}
           />
       </Page>
     );
