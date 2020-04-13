@@ -11,6 +11,8 @@ export default class Layout extends React.Component {
   constructor() {
     super();
     this.getList = this.getList.bind(this);
+    this.sortChange = this.sortChange.bind(this);
+    
     this.state = {
       token: window.localStorage.getItem('token'),
       tasks: null,
@@ -28,6 +30,10 @@ export default class Layout extends React.Component {
     this.loadData();
   }
 
+  sortChange(i){
+    console.log(i);
+  }
+
   loadData(){
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
@@ -42,10 +48,11 @@ export default class Layout extends React.Component {
         tasks: tasks,
       });
     }
+    console.log(tasks)
   }
 
   render() {
     const {tasks} = this.state;
-    return(<TaskIndex tasks={tasks}/>)
+    return(<TaskIndex tasks={tasks} sortChange={this.sortChange}/>)
   }
 }

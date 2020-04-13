@@ -15,8 +15,9 @@ export default class TaskCreate extends Component {
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.loadTags = this.pageAfterIn.bind(this);
+    this.loadTags = this.loadTags.bind(this);
     this.pageAfterIn = this.pageAfterIn.bind(this);
+    this.removeTag = this.removeTag.bind(this);
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -28,7 +29,8 @@ export default class TaskCreate extends Component {
       startTime:  '0:00',
       deadlineTime: '0:00',
       privateTask: true,
-      tags: null,
+      tags: [],
+      isPublic: false,
     }
   }
 
@@ -44,8 +46,9 @@ export default class TaskCreate extends Component {
   loadTags() {
     const self = this;
     const app = self.$f7;
+
     app.autocomplete.create({
-      openIn: 'page', //open in page
+      openIn: 'popup', //open in page
       openerEl: '#autocomplete-standalone-ajax', //link that opens autocomplete
       multiple: true, //allow multiple values
       valueProperty: 'id', //object's "value" property name
@@ -86,16 +89,18 @@ export default class TaskCreate extends Component {
       on: {
         change: function (value) {
           var itemText = [],
-              inputValue = [];
-          for (var i = 0; i < value.length; i++) {
-            itemText.push(value[i].title);
-            inputValue.push(value[i].id);
-          }
-          self.setState({tags: inputValue.join(', ')})
+            inputValue = [];
+          // for (var i = 0; i < value.length; i++) {
+          //itemText.push(value[i].title);
+          //inputValue.push(value[i].id);
+          console.log(value)
+          self.setState({ tags: self.state.tags.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id }) })
+          // }
+
           // Add item text value to item-after
-          self.$$('#autocomplete-standalone-ajax').find('.item-after').text(itemText.join(', '));
+          //self.$$('#autocomplete-standalone-ajax').find('.item-after').text(itemText.join(', '));
           // Add item value to input value
-          self.$$('#autocomplete-standalone-ajax').find('input').val(inputValue.join(', '));
+          //self.$$('#autocomplete-standalone-ajax').find('input').val(inputValue.join(', '));
         },
       },
     });
@@ -107,9 +112,9 @@ export default class TaskCreate extends Component {
 
   submit() {
     var data = { 
-       title: this.state.title, details: this.state.details,
-       tags: this.state.tags
-      }
+       title: this.state.title, public: this.state.isPublic,
+       details: this.state.details, tags: this.state.tags
+     }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.setInstance('tasks', data, this.state.token);
     } else {
@@ -117,6 +122,14 @@ export default class TaskCreate extends Component {
       self.$f7.dialog.alert(dict.incomplete_data, dict.alert);
     }
 
+  }
+
+  removeTag(id) {
+    this.setState({
+      tags: this.state.tags.filter(function (tag) {
+        return tag.id !== id
+      })
+    });
   }
 
 
@@ -132,12 +145,14 @@ export default class TaskCreate extends Component {
 
 
   render() {
-    const { task } = this.state;
+    const { task , tags, isPublic} = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.task_form} backLink={dict.back} />
         <BlockTitle>{dict.task_form}</BlockTitle>
-        <TaskForm task={task} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <TaskForm 
+         task={task} removeTag={this.removeTag} tags={tags} isPublic={isPublic}
+         submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

@@ -21,6 +21,15 @@ const TaskShow = (props) => {
       )
       return(arr)
     }
+    function isPublic(){
+      if (props.task.is_public){
+        return(dict.public)
+      } else {
+        return(dict.private)
+      }
+    }
+
+
     return (
       <React.Fragment>
         <Row>
@@ -35,8 +44,9 @@ const TaskShow = (props) => {
                   {/*<ListItem className='fs-11' title={dict.start_date + ': ' + props.task.start_date_j}></ListItem>
                   <ListItem className='fs-11' title={dict.deadline + ': ' + props.task.deadline_date_j}></ListItem>*/}
                   <ListItem className='fs-11' title=''>{tags()}</ListItem>
+                  <ListItem className='fs-11' title=''>{isPublic()}</ListItem>
+                  <ListItem className='fs-11' title=''>{props.task.details}</ListItem>
                 </List>
-                <span className='fs-11'>{props.task.details}</span>
 
               </CardContent>
               <CardFooter>

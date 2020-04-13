@@ -175,5 +175,14 @@ export const dict = {
   'task' : 'وظیفه',
   'attachments': 'پیوست ها',
   'reports': 'اسناد و گزارشات',
-  'tags':'برچسب ها'
+  'tags':'برچسب ها',
+  'new_tag': 'برچسب جدید ',
+  'recent_tasks': 'وظایف اخیر',
+  'public_tasks': 'وظایف عمومی',
+  'sort_by' : 'مرتب سازی',
+  'by_title':'عنوان',
+  'by_events':'رخداد',
+  'deadline_near': 'مهلت نهایی نزدیک',
+  'new_report': 'گزارش جدید',
+  'new_comments': 'گفتگوی جدید'
 };

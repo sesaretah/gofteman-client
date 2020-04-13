@@ -3,6 +3,7 @@ import { Block, AccordionContent, Card, Row, Col, CardHeader, CardContent, List,
 import { dict } from '../../Dict';
 import Participants from './participants';
 import Statuses from "./status";
+import Reports from "./reports";
 import Moment from 'react-moment';
 import JDate from 'jalali-date';
 import 'moment-timezone';
@@ -41,6 +42,12 @@ const WorkShow = (props) => {
 
           <Col width='100' tabletWidth='50'>
             <Participants work={props.work} searchProfile={props.searchProfile} removeProfile={props.removeProfile} addProfile={props.addProfile} profiles={props.profiles}></Participants>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col width='100' tabletWidth='100'>
+            <Reports work={props.work} ></Reports>
           </Col>
         </Row>
 

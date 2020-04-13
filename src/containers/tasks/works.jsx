@@ -8,23 +8,49 @@ import 'moment-timezone';
 import 'moment/locale/fa';
 
 const Works = (props) => {
-    function chip(status) {
-        if (status) {
-            return (
-                <div>
-                    <div className="chip" >
-                        <div className="chip-media" style={{ backgroundColor: status.color }} >
-                            <i className="icon f7-icons if-not-md">plus_circle</i>
-                            <i className="icon material-icons md-only"></i>
-                        </div>
-                        <div className="chip-label">{status.title}</div>
+
+    function chip(work) {
+        var result = []
+        if (work.deadline_alert) {
+            result.push(
+                <span className='color-red ml-5'>
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                </span>
+            )
+        }
+
+        if (work.comment_alert) {
+            result.push(
+                <span className='color-green ml-5'>
+                    <i class="fa fa-comments-o " aria-hidden="true"></i>
+                </span>
+            )
+        }
+        if (work.report_alert) {
+            result.push(
+                <span className='color-blue ml-5'>
+                    <i class="fa fa-file-text-o " aria-hidden="true"></i>
+                </span>
+            )
+        }
+        if (work.status) {
+            result.push(
+
+                <div className="chip" >
+                    <div className="chip-media" style={{ backgroundColor: work.status.color }} >
+                        <i className="icon f7-icons if-not-md">plus_circle</i>
+                        <i className="icon material-icons md-only"></i>
                     </div>
+                    <div className="chip-label">{work.status.title}</div>
                 </div>
             )
+
         } else {
-            return (<div>{dict.add_stauts}</div>)
+            result.push(dict.add_stauts)
         }
+        return (result)
     }
+
     if (props.task) {
         return (
             <Card>
@@ -39,7 +65,7 @@ const Works = (props) => {
                                 className='work-media'
                                 link={"/works/" + work.id}
                                 title={work.title}
-                                after={chip(work.status)}
+                                after={chip(work)}
                                 text={work.details}
                             >
                             </ListItem>

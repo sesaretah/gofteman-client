@@ -1,14 +1,23 @@
 import React from "react";
-import { List, ListItem, ListInput, Block, Row, Button, BlockTitle, Card } from 'framework7-react';
+import { List, Chip, ListInput, Block, Row, Button, BlockTitle, Card, ListItem } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
 
 const TaskForm = (props) => {
-  if (props.privateTask) {
-    var isPrivateTask = true;
+  if (props.isPublic) {
+    var isPublicTask = true;
   } else {
-    var isPrivateTask = false
+    var isPublicTask = false;
+  }
+  function tags() {
+    if (props.tags) {
+      var chips = [<span className='fs-11'>{dict.tags}: </span>]
+      props.tags.map((tag) =>
+        chips.push(<Chip text={tag.title} deleteable onClick={() => props.removeTag(tag.id)} />)
+      )
+      return chips
+    }
   }
   return (
     <Card>
@@ -29,18 +38,32 @@ const TaskForm = (props) => {
           label={dict.details}
           type="textarea"
           placeholder={dict.write_appropriate_description}
-          value={props.content}
+          value={props.details}
           onInput={(e) => {
             props.handleChange({ details: e.target.value })
           }}
         />
 
+        <ListItem radio value={false} checked={!isPublicTask} name="selectedMode" title={dict.private}
+          onChange={(e) => {
+            console.log(e)
+            props.handleChange({ isPublic: JSON.parse(e.target.value) });
+          }}>
+        </ListItem>
+        <ListItem radio value={true} checked={isPublicTask} name="selectedMode" title={dict.public}
+          onChange={(e) => {
+            console.log(e)
+            props.handleChange({ isPublic: JSON.parse(e.target.value) })
+          }}>
+        </ListItem>
 
+
+        <ListItem title={tags()}></ListItem>
         <li>
           <a className="item-link item-content" href="#" id="autocomplete-standalone-ajax">
 
             <div className="item-inner">
-              <div className="item-title">{dict.tags}</div>
+              <div className="item-title fs-11">{dict.new_tag}</div>
               <input className="hidden" />
               <div className="item-after"></div>
             </div>

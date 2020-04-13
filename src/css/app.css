@@ -473,3 +473,15 @@ color: var(--f7-navbar-bg-color)
 .hidden {
   visibility: hidden;
 }
+
+.color-red {
+  color: rgb(238, 81, 81) !important;
+}
+
+.color-blue {
+  color: rgb(78, 105, 228) !important;
+}
+
+.color-green {
+  color: rgb(61, 150, 58) !important;
+}

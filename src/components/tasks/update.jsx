@@ -27,7 +27,8 @@ export default class DocumentUpdate extends Component {
     this.getInstance = this.getInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.pageAfterIn = this.pageAfterIn.bind(this);
-
+    this.loadTags = this.loadTags.bind(this);
+    this.removeTag = this.removeTag.bind(this);
 
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -36,7 +37,10 @@ export default class DocumentUpdate extends Component {
       title: null,
       details: null,
       privateTask: true,
-      tags: null,
+      details: null,
+      tags: [],
+      isPublic: false,
+      selectedMode: false,
     }
   }
 
@@ -58,20 +62,9 @@ export default class DocumentUpdate extends Component {
   loadTags() {
     const self = this;
     const app = self.$f7;
-    if (self.state.tags) {
-      var itemText = [],
-        inputValue = [];
-      for (var i = 0; i < self.state.tags.length; i++) {
-        itemText.push(self.state.tags[i].title);
-        inputValue.push(self.state.tags[i].id);
-      }
-      console.log(itemText)
-      self.$$('#autocomplete-standalone-ajax').find('.item-after').text(itemText.join(', '));
-      self.$$('#autocomplete-standalone-ajax').find('input').val(inputValue.join(', '));
 
-    }
     app.autocomplete.create({
-      openIn: 'page', //open in page
+      openIn: 'popup', //open in page
       openerEl: '#autocomplete-standalone-ajax', //link that opens autocomplete
       multiple: true, //allow multiple values
       valueProperty: 'id', //object's "value" property name
@@ -113,15 +106,16 @@ export default class DocumentUpdate extends Component {
         change: function (value) {
           var itemText = [],
             inputValue = [];
-          for (var i = 0; i < value.length; i++) {
-            itemText.push(value[i].title);
-            inputValue.push(value[i].id);
-          }
-          self.setState({ tags: inputValue.join(', ') })
+          // for (var i = 0; i < value.length; i++) {
+          //itemText.push(value[i].title);
+          //inputValue.push(value[i].id);
+          self.setState({ tags: self.state.tags.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id }) })
+          // }
+
           // Add item text value to item-after
-          self.$$('#autocomplete-standalone-ajax').find('.item-after').text(itemText.join(', '));
+          //self.$$('#autocomplete-standalone-ajax').find('.item-after').text(itemText.join(', '));
           // Add item value to input value
-          self.$$('#autocomplete-standalone-ajax').find('input').val(inputValue.join(', '));
+          //self.$$('#autocomplete-standalone-ajax').find('input').val(inputValue.join(', '));
         },
       },
     });
@@ -130,8 +124,10 @@ export default class DocumentUpdate extends Component {
 
 
   submit() {
-    var data = { id: this.state.id, title: this.state.title, 
-      details: this.state.details, tags: this.state.tags }
+    var data = {
+      id: this.state.id, title: this.state.title, public: this.state.isPublic,
+      details: this.state.details, tags: this.state.tags
+    }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.updateInstance('tasks', data, this.state.token);
     } else {
@@ -160,13 +156,23 @@ export default class DocumentUpdate extends Component {
     if (task && klass === 'Task') {
       this.setState({
         title: task.title,
-        content: task.details,
+        details: task.details,
         id: task.id,
         task: task,
         defaultTask: task.default_task,
-        tags: task.the_tags
+        tags: task.the_tags,
+        isPublic: task.is_public,
       }, () => this.loadTags());
     }
+
+  }
+
+  removeTag(id) {
+    this.setState({
+      tags: this.state.tags.filter(function (tag) {
+        return tag.id !== id
+      })
+    });
   }
 
   handleChangeValue(obj) {
@@ -175,18 +181,25 @@ export default class DocumentUpdate extends Component {
 
 
   setInstance() {
-    const self = this;
-    this.$f7router.navigate('/tasks/');
+    var task = ModelStore.getIntance()
+    var klass = ModelStore.getKlass()
+    if (task && klass === 'Task') {
+      this.$f7router.navigate('/tasks/' + task.id);
+    }
   }
 
 
   render() {
-    const { task, defaultTask, title, content, startTime, deadlineTime } = this.state;
+    const { task, defaultTask, title, details, isPublic, tags, selectedMode } = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.task_form} backLink={dict.back} />
         <BlockTitle>{dict.task_form}</BlockTitle>
-        <TaskForm task={task} title={title} startTime={startTime} deadlineTime={deadlineTime} content={content} defaultTask={defaultTask} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <TaskForm
+          task={task} title={title} isPublic={isPublic}
+          tags={tags} removeTag={this.removeTag} selectedMode={selectedMode}
+          details={details} defaultTask={defaultTask} submit={this.submit}
+          editing={true} handleChange={this.handleChangeValue} />
       </Page>
     );
   }
