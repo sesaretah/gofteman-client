@@ -31,8 +31,6 @@ export default class Layout extends React.Component {
   }
 
   loadData(){
-    const f7: Framework7 = Framework7.instance;
-    f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
     MyActions.getList('profiles', this.state.page);
   }
 

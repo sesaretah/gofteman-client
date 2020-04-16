@@ -36,6 +36,8 @@ export default class Layout extends Component {
     this.removeComment = this.removeComment.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.loadMore = this.loadMore.bind(this);
+    this.changeRole = this.changeRole.bind(this);
+    
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -51,6 +53,7 @@ export default class Layout extends Component {
       profiles: [],
       statuses: [],
       commentContent: '',
+      access: null,
       comments: null,
     }
   }
@@ -83,9 +86,11 @@ export default class Layout extends Component {
         id: work.id,
         assignedUsers: work.users,
         ability: work.ability,
-        comments: work.the_comments
+        comments: work.the_comments,
+        access: work.user_access
       });
     }
+    console.log(work)
     //this.$$('#cm-form').clear()
   }
 
@@ -107,7 +112,6 @@ export default class Layout extends Component {
         statuses: list,
       });
     }
-    console.log(list)
   }
 
   submit() {
@@ -147,6 +151,11 @@ export default class Layout extends Component {
   addAbility() {
     var data = { id: this.state.id, ability_title: this.state.abilityTitle, ability_value: this.state.abilityValue}
     MyActions.setInstance('works/abilities', data, this.state.token);
+  }
+
+  changeRole(profile_id, role) {
+    var data = { id: this.state.id, profile_id: profile_id, role: role}
+    MyActions.setInstance('works/change_role', data, this.state.token);
   }
 
 
@@ -191,10 +200,10 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { work, users, assignedUsers, ability, profiles, statuses, comments, commentContent } = this.state;
+    const { work, users, assignedUsers, ability, profiles, statuses, comments, commentContent, access } = this.state;
     return (
       <Page>
-        <Navbar title={dict.works} backLink={dict.back} />
+        <Navbar title={dict.works} backLinkForce={true} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
         <WorkShow 
@@ -206,6 +215,7 @@ export default class Layout extends Component {
           searchStatus={this.searchStatus} addStatus={this.addStatus}
           submitComment={this.submitComment} removeComment={this.removeComment}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
+          changeRole={this.changeRole} access={access}
           />
       </Page>
     );

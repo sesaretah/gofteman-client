@@ -31,7 +31,7 @@ export default class Layout extends React.Component {
   }
 
   sortChange(i){
-    console.log(i);
+    MyActions.getList('tasks', this.state.page, {order: i.title}, this.state.token);
   }
 
   loadData(){

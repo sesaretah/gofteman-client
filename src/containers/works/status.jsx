@@ -9,48 +9,52 @@ import 'moment/locale/fa';
 import SimpleList from "../statuses/simpleList";
 
 const Statuses = (props) => {
-    function chip(status){
-        if(status) {
-            return(
+    function chip(status) {
+        if (status) {
+            return (
                 <div>
-                <div className="chip" >
-                    <div className="chip-media" style={{ backgroundColor: status.color }} >
-                        <i className="icon f7-icons if-not-md">plus_circle</i>
-                        <i className="icon material-icons md-only"></i>
+                    <div className="chip" >
+                        <div className="chip-media" style={{ backgroundColor: status.color }} >
+                            <i className="icon f7-icons if-not-md">plus_circle</i>
+                            <i className="icon material-icons md-only"></i>
+                        </div>
+                        <div className="chip-label">{status.title}</div>
                     </div>
-                    <div className="chip-label">{status.title}</div>
                 </div>
-            </div>
             )
         } else {
-        return(<div>{dict.add_stauts}</div>)
+            return (<div>{dict.add_stauts}</div>)
+        }
+    }
+    function editable() {
+        if (props.editable) {
+            return (
+                <AccordionContent>
+                    <List >
+                        <ListInput
+                            outline
+                            label={dict.search}
+                            floatingLabel
+                            type="text"
+                            placeholder=""
+                            clearButton
+                            onInput={(e) => {
+                                props.searchStatus({ query: e.target.value })
+                            }}
+                        />
+                    </List>
+                    <SimpleList statuses={props.statuses} addStatus={props.addStatus} />
+                </AccordionContent>)
         }
     }
     if (props.work) {
-        
+
         return (
             <List accordionList className='w-100'>
                 <ListItem accordionItem className='fs-10'
                     title={chip(props.work.status)}
                 >
-
-
-                    <AccordionContent>
-                        <List >
-                            <ListInput
-                                outline
-                                label={dict.search}
-                                floatingLabel
-                                type="text"
-                                placeholder=""
-                                clearButton
-                                onInput={(e) => {
-                                    props.searchStatus({ query: e.target.value })
-                                }}
-                            />
-                        </List>
-                        <SimpleList statuses={props.statuses} addStatus={props.addStatus} />
-                    </AccordionContent>
+                    {editable()}
                 </ListItem>
             </List>
         )

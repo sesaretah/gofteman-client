@@ -35,6 +35,7 @@ export default class Layout extends Component {
     this.removeComment = this.removeComment.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.loadMore = this.loadMore.bind(this);
+    this.changeRole = this.changeRole.bind(this);
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -51,6 +52,7 @@ export default class Layout extends Component {
       query: null,
       profiles: [],
       statuses: [],
+      access: [],
       commentContent: '',
     }
   }
@@ -83,10 +85,10 @@ export default class Layout extends Component {
         id: task.id,
         assignedUsers: task.users,
         works: task.works,
-        comments: task.the_comments
+        comments: task.the_comments,
+        access: task.user_access
       });
     }
-    console.log(task)
   }
 
 
@@ -114,7 +116,6 @@ export default class Layout extends Component {
         statuses: list,
       });
     }
-    console.log(list)
   }
 
   submit() {
@@ -151,6 +152,11 @@ export default class Layout extends Component {
     MyActions.removeInstance('tasks/participants', data, this.state.token);
   }
 
+  changeRole(profile_id, role) {
+    var data = { id: this.state.id, profile_id: profile_id, role: role}
+    MyActions.setInstance('tasks/change_role', data, this.state.token);
+  }
+
   submitComment() {
     var data = { commentable_type: 'Task' ,commentable_id: this.state.id, content: this.state.commentContent }
     MyActions.setInstance('comments', data, this.state.token);
@@ -185,10 +191,10 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { task, users, assignedUsers, ability, profiles, statuses, works, commentContent, comments } = this.state;
+    const { task, users, assignedUsers, ability, profiles, statuses, works, commentContent, comments, access } = this.state;
     return (
       <Page>
-        <Navbar title={dict.tasks} backLink={dict.back} />
+        <Navbar title={dict.tasks} backLink={dict.back} backLinkForce={true}/>
         <BlockTitle></BlockTitle>
         {this.fab()}
         <TaskShow 
@@ -200,6 +206,7 @@ export default class Layout extends Component {
           searchStatus={this.searchStatus} addStatus={this.addStatus} works={works}
           submitComment={this.submitComment} removeComment={this.removeComment}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
+          changeRole={this.changeRole} access={access}
           />
       </Page>
     );

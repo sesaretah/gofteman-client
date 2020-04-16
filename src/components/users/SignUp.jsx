@@ -13,9 +13,9 @@ import {
   ListItem,
   Row,
   Col,
-  Button, Icon, Fab,Searchbar, Subnavbar, LoginScreenTitle, ListInput, ListButton, BlockFooter
+  Button, Icon, Fab, Searchbar, Subnavbar, LoginScreenTitle, ListInput, ListButton, BlockFooter
 } from 'framework7-react';
-import { dict} from '../../Dict';
+import { dict } from '../../Dict';
 import SignUpForm from "../../containers/users/SignUp"
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
@@ -30,8 +30,10 @@ export default class extends React.Component {
 
     this.state = {
       email: '',
+      name: '',
+      surename: '',
+      faculty: '',
       password: '',
-
       password_confirmation: ''
     };
   }
@@ -44,18 +46,28 @@ export default class extends React.Component {
     ModelStore.removeListener("set_instance", this.setInstance);
   }
 
-  submit(){
-    var data = {email: this.state.email, password: this.state.password, password_confirmation: this.state.password_confirmation}
-    MyActions.setInstance('users/sign_up', data);
+  submit() {
+
+    var data = { email: this.state.email, password: this.state.password, password_confirmation: this.state.password_confirmation, name: this.state.name, surename: this.state.surename , faculty: this.state.faculty}
+    if (
+      (this.state.email && this.state.email.length > 0) &&
+      (this.state.name && this.state.name.length > 0) &&
+      (this.state.surename && this.state.surename.length > 0) 
+      ) {
+      MyActions.setInstance('users/sign_up', data);
+    } else {
+      const self = this;
+      self.$f7.dialog.alert(dict.incomplete_data, dict.alert);
+    }
   }
 
-  setInstance(){
+  setInstance() {
     var user = ModelStore.getIntance();
-    if (user){
-      window.localStorage.setItem('token', user.token);
+    if (user) {
+      //window.localStorage.setItem('token', user.token);
     }
     const self = this;
-    this.$f7router.navigate('/');
+    this.$f7router.navigate('/verification/');
     window.location.reload()
   }
 
@@ -65,9 +77,9 @@ export default class extends React.Component {
   }
 
   render() {
-    const {username, password} = this.state;
+    const { username, password } = this.state;
     return (
-      <SignUpForm submit={this.submit} handleChange={this.handleChangeValue}/>
+      <SignUpForm submit={this.submit} handleChange={this.handleChangeValue} />
     )
   }
 

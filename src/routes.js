@@ -43,7 +43,7 @@ import ReportUpdate from './components/reports/update';
 
 import Login from './components/users/Login';
 import SignUp from './components/users/SignUp';
-
+import Verification from './components/users/Verification';
 
 
 export default [
@@ -58,6 +58,10 @@ export default [
   {
     path: '/sign_up/',
     component: SignUp,
+  },
+  {
+    path: '/verification/:email',
+    component: Verification,
   },
   {
     path: '/panel-right/',

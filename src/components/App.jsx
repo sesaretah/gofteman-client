@@ -54,7 +54,7 @@ export default function (props) {
       </Panel>
 
       {/* Main View */}
-      <View id="main-view" url="/" pushState={true}  main className="safe-areas"/>
+      <View id="main-view" url="/app" pushState={true}  main className="safe-areas"/>
 
     </App>
   );

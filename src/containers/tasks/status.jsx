@@ -26,6 +26,27 @@ const Statuses = (props) => {
         return(<div>{dict.add_stauts}</div>)
         }
     }
+    function editable() {
+        if (props.editable) {
+            return (
+                <AccordionContent>
+                <List >
+                    <ListInput
+                        outline
+                        label={dict.search}
+                        floatingLabel
+                        type="text"
+                        placeholder=""
+                        clearButton
+                        onInput={(e) => {
+                            props.searchStatus({ query: e.target.value })
+                        }}
+                    />
+                </List>
+                <SimpleList statuses={props.statuses} addStatus={props.addStatus} />
+            </AccordionContent>)
+        }
+    }
     if (props.task) {
         
         return (
@@ -33,24 +54,7 @@ const Statuses = (props) => {
                 <ListItem accordionItem className='fs-10'
                     title={chip(props.task.status)}
                 >
-
-
-                    <AccordionContent>
-                        <List >
-                            <ListInput
-                                outline
-                                label={dict.search}
-                                floatingLabel
-                                type="text"
-                                placeholder=""
-                                clearButton
-                                onInput={(e) => {
-                                    props.searchStatus({ query: e.target.value })
-                                }}
-                            />
-                        </List>
-                        <SimpleList statuses={props.statuses} addStatus={props.addStatus} />
-                    </AccordionContent>
+                {editable()}
                 </ListItem>
             </List>
         )

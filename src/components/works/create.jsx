@@ -108,6 +108,7 @@ export default class WorkCreate extends Component {
       dayNamesShort: ['یک', 'دو', 'سه ', 'چهار', 'پنج‌', 'جمعه', 'شنبه'],
       on: {
         closed: function (c) {
+          console.log(c.value[0].a)
           self.setState({ start: c.value[0].a });
         }
       }

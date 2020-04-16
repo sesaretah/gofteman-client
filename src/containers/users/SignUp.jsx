@@ -10,30 +10,56 @@ const SignUpForm = (props) => {
         <Link panelOpen="right">
           <Icon f7="bars"></Icon>
         </Link>
-      </Navbar>Ï
+      </Navbar>
       <Card>
         <CardHeader>{dict.sign_up}</CardHeader>
         <CardContent>
           <List form>
             <ListInput
-              label={dict.email}
+              label={dict.firstname + ' *'}
+              placeholder={dict.enter_your_name}
               type="text"
+              name={crypto.lib.WordArray.random(32)}
+              onInput={(e) => {
+                props.handleChange({ name: e.target.value })
+              }}
+            />
+
+            <ListInput
+              label={dict.surename + ' *'}
+              placeholder={dict.enter_your_surename}
+              type="text"
+              name={crypto.lib.WordArray.random(32)}
+              onInput={(e) => {
+                props.handleChange({ surename: e.target.value })
+              }}
+            />
+
+
+            <ListInput
+              label={dict.faculty}
+              placeholder={dict.enter_your_faculty}
+              type="text"
+              name={crypto.lib.WordArray.random(32)}
+              onInput={(e) => {
+                props.handleChange({ faculty: e.target.value })
+              }}
+            />
+
+            <ListInput
+              label={' * ' + dict.email}
+              type="email"
+              validate
               placeholder={dict.enter_your_email}
+              className='ltr'
               value={props.email}
               onInput={(e) => {
                 props.handleChange({ email: e.target.value })
               }}
             />
+          {/*
             <ListInput
-              label={dict.username}
-              type="text"
-              name={crypto.lib.WordArray.random(32)}
-              onInput={(e) => {
-                props.handleChange({ username: e.target.value })
-              }}
-            />
-            <ListInput
-              label={dict.password}
+              label={dict.password + ' *'}
               type="password"
               placeholder={dict.enter_your_password}
               autocomplete='new-password'
@@ -44,7 +70,7 @@ const SignUpForm = (props) => {
               }}
             />
             <ListInput
-              label={dict.password_confirmation}
+              label={dict.password_confirmation + ' *'}
               type="password"
               autocomplete='off'
               placeholder={dict.enter_your_password_confirmation}
@@ -52,7 +78,7 @@ const SignUpForm = (props) => {
               onInput={(e) => {
                 props.handleChange({ password_confirmation: e.target.value })
               }}
-            />
+            />*/}
           </List>
         </CardContent>
         <CardFooter>

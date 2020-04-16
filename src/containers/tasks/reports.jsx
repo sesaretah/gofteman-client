@@ -1,5 +1,5 @@
 import React from "react";
-import { Block, Card, CardHeader, Link, CardContent, List, ListItem, CardFooter, ListInput, Col } from 'framework7-react';
+import { Searchbar, Card, CardHeader, Link, CardContent, List, ListItem, CardFooter, ListInput, Col } from 'framework7-react';
 import crypto from 'crypto-js';
 import { dict } from "../../Dict";
 import Moment from 'react-moment';
@@ -11,13 +11,18 @@ const Reports = (props) => {
     if (props.task) {
         function creation(t) {
             var date = new Date(new window.ODate(t))
-            return(<Moment date={date} fromNow></Moment>)
-          }
+            return (<Moment date={date} fromNow></Moment>)
+        }
+        function editable() {
+            if (props.editable) {
+                return (<Link href={'/reports/new/tasks/' + props.task.id}><i className="ml-5 fa fa-plus"></i> {dict.new}</Link>)
+            }
+        }
         return (
             <Card>
                 <CardHeader>
                     {dict.reports}
-                    <Link href={'/reports/new/tasks/' + props.task.id}><i className="ml-5 fa fa-plus"></i> {dict.new}</Link>
+                    {editable()}
                 </CardHeader>
                 <CardContent>
                     <List mediaList >
@@ -34,8 +39,13 @@ const Reports = (props) => {
                     </List>
                 </CardContent>
                 <CardFooter>
-                    +
-              </CardFooter>
+                    <Searchbar
+                        className='p-static fs-10'
+                        disableButtonText={dict.cancel}
+                        placeholder={dict.search}
+                        inline={true}
+                    ></Searchbar>
+                </CardFooter>
             </Card>
         )
     } else {

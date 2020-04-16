@@ -192,7 +192,7 @@ export default class DocumentUpdate extends Component {
   render() {
     const { task, defaultTask, title, details, isPublic, tags, selectedMode } = this.state;
     return (
-      <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
+      <Page onPageAfterIn={this.pageAfterIn.bind(this)} backLink={dict.back} backLinkForce={true}>
         <Navbar title={dict.task_form} backLink={dict.back} />
         <BlockTitle>{dict.task_form}</BlockTitle>
         <TaskForm

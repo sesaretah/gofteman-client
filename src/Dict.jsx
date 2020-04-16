@@ -26,7 +26,7 @@ export const dict = {
   'email': 'ایمیل ',
   'contact_information':'اطلاعات تماس ',
   'search': 'جستجو ',
-  'cancel' : 'بیخیال',
+  'cancel' : 'انصراف',
   'view': 'نمایش',
   'edit': 'ویرایش',
   'delete': 'حذف',
@@ -184,5 +184,11 @@ export const dict = {
   'by_events':'رخداد',
   'deadline_near': 'مهلت نهایی نزدیک',
   'new_report': 'گزارش جدید',
-  'new_comments': 'گفتگوی جدید'
+  'new_comments': 'گفتگوی جدید',
+  'Admin':'مدیر',
+  'Colleague':'همکار',
+  'Observer':'ناظر',
+  'Creator':'سازنده',
+  'verification_code':'کد احراز',
+  'enter_verification_code':  'کد احراز را وارد کنید',
 };

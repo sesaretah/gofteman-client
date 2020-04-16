@@ -13,11 +13,16 @@ const Reports = (props) => {
             var date = new Date(new window.ODate(t))
             return(<Moment date={date} fromNow></Moment>)
           }
+          function editable() {
+            if (props.editable) {
+                return ( <Link href={'/reports/new/works/' + props.work.id}><i className="ml-5 fa fa-plus"></i> {dict.new}</Link>)
+            }
+        }
         return (
             <Card>
                 <CardHeader>
                     {dict.reports}
-                    <Link href={'/reports/new/works/' + props.work.id}><i className="ml-5 fa fa-plus"></i> {dict.new}</Link>
+                    {editable()}
                 </CardHeader>
                 <CardContent>
                     <List mediaList >

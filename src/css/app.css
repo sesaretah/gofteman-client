@@ -28,7 +28,8 @@
 }
 /* Custom color theme properties */
 :root {
-  --f7-theme-color: #211429;
+
+  --f7-theme-color: #4f2d65;
   --f7-theme-color-rgb: 90, 200, 250;
   --f7-theme-color-shade: #211429;
   --f7-theme-color-tint: #211429;
@@ -484,4 +485,29 @@ color: var(--f7-navbar-bg-color)
 
 .color-green {
   color: rgb(61, 150, 58) !important;
+}
+
+
+.p-static {
+  position: static !important;
+}
+
+.inline {
+  display: inline-flex !important;
+}
+
+.bg-w-after:after {
+  background-color: white !important;
+}
+
+.mt-4 {
+  margin-top: 4px !important;
+}
+
+.mt-2 {
+  margin-top: 2px !important;
+}
+
+.mh-auto {
+  min-height: auto !important;
 }

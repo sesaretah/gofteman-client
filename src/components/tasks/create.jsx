@@ -147,7 +147,7 @@ export default class TaskCreate extends Component {
   render() {
     const { task , tags, isPublic} = this.state;
     return (
-      <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
+      <Page onPageAfterIn={this.pageAfterIn.bind(this)} backLink={dict.back} backLinkForce={true}>
         <Navbar title={dict.task_form} backLink={dict.back} />
         <BlockTitle>{dict.task_form}</BlockTitle>
         <TaskForm 
