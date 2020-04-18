@@ -7,30 +7,23 @@ import {
 import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
-import TaskForm from "../../containers/tasks/form"
+import TodoForm from "../../containers/todos/form"
 
-export default class TaskCreate extends Component {
+export default class TodoCreate extends Component {
   constructor() {
     super();
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.loadTags = this.loadTags.bind(this);
     this.pageAfterIn = this.pageAfterIn.bind(this);
-    this.removeTag = this.removeTag.bind(this);
+    this.removeParticipant = this.removeParticipant.bind(this);
 
+    
     this.state = {
       token: window.localStorage.getItem('token'),
-      task: {},
+      todo: {},
       title: null,
-      details: null,
-      deadline: new Date(),
-      start: new Date(),
-      startTime: '0:00',
-      deadlineTime: '0:00',
-      privateTask: true,
-      tags: [],
-      isPublic: false,
+      participants: [],
     }
   }
 
@@ -43,16 +36,20 @@ export default class TaskCreate extends Component {
     ModelStore.removeListener("set_instance", this.setInstance);
   }
 
+  componentDidMount() {
+
+  }
+
   loadTags() {
     const self = this;
     const app = self.$f7;
 
     app.autocomplete.create({
       openIn: 'popup', //open in page
-      openerEl: '#autocomplete-standalone-ajax', //link that opens autocomplete
+      openerEl: '#autocomplete-todos-participants', //link that opens autocomplete
       multiple: true, //allow multiple values
       valueProperty: 'id', //object's "value" property name
-      textProperty: 'title', //object's "text" property name
+      textProperty: 'fullname', //object's "text" property name
       limit: 50,
       searchbarPlaceholder: dict.search,
       preloader: true, //enable preloader
@@ -67,7 +64,7 @@ export default class TaskCreate extends Component {
         autocomplete.preloaderShow();
         // Do Ajax request to Autocomplete data
         app.request({
-          url: '/v1/tags/search',
+          url: 'http://localhost:3001/v1/profiles/search',
           method: 'GET',
           dataType: 'json',
           //send "query" to server. Useful in case you generate response dynamically
@@ -77,7 +74,7 @@ export default class TaskCreate extends Component {
           success: function (item) {
             // Find matched items
             for (var i = 0; i < item.data.length; i++) {
-              if (item.data[i].title.indexOf(query) >= 0) results.push(item.data[i]);
+              if (item.data[i].fullname.indexOf(query) >= 0) results.push(item.data[i]);
             }
             // Hide Preoloader
             autocomplete.preloaderHide();
@@ -88,8 +85,8 @@ export default class TaskCreate extends Component {
       },
       on: {
         change: function (value) {
-          if (value && value[value.length - 1]) {
-            self.setState({ tags: self.state.tags.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id }) })
+          if(value && value[value.length - 1]){
+            self.setState({ participants: self.state.participants.concat({ fullname: value[value.length - 1].fullname, id: value[value.length - 1].id }) })
           }
         },
       },
@@ -100,13 +97,13 @@ export default class TaskCreate extends Component {
     this.loadTags();
   }
 
+
   submit() {
-    var data = {
-      title: this.state.title, public: this.state.isPublic,
-      details: this.state.details, tags: this.state.tags
+    var data = { 
+      title: this.state.title, work_id: this.$f7route.params['workId']
     }
     if (this.state.title && this.state.title.length > 0) {
-      MyActions.setInstance('tasks', data, this.state.token);
+      MyActions.setInstance('todos', data, this.state.token);
     } else {
       const self = this;
       self.$f7.dialog.alert(dict.incomplete_data, dict.alert);
@@ -114,13 +111,14 @@ export default class TaskCreate extends Component {
 
   }
 
-  removeTag(id) {
+  removeParticipant(id) {
     this.setState({
-      tags: this.state.tags.filter(function (tag) {
-        return tag.id !== id
+      participants: this.state.participants.filter(function (participant) {
+        return participant.id !== id
       })
     });
   }
+
 
 
   handleChangeValue(obj) {
@@ -128,21 +126,22 @@ export default class TaskCreate extends Component {
   }
 
   setInstance() {
-    const self = this;
-    this.$f7router.navigate('/tasks/');
+    var todo = ModelStore.getIntance()
+    var klass = ModelStore.getKlass()
+    if (todo && klass === 'Todo') {
+      this.$f7router.navigate('/works/'+todo.work_id);
+    } 
   }
 
 
 
   render() {
-    const { task, tags, isPublic } = this.state;
+    const { todo, participants } = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)} backLink={dict.back} backLinkForce={true}>
-        <Navbar title={dict.task_form} backLink={dict.back} />
-        <BlockTitle>{dict.task_form}</BlockTitle>
-        <TaskForm
-          task={task} removeTag={this.removeTag} tags={tags} isPublic={isPublic}
-          submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <Navbar title={dict.work_form} backLink={dict.back} />
+        <BlockTitle>{dict.work_form}</BlockTitle>
+        <TodoForm todo={todo} participants={participants} removeParticipant={this.removeParticipant} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

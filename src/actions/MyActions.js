@@ -1,6 +1,7 @@
 import dispatcher from "../dispatcher";
 import axios, {put} from 'axios';
 const server='http://localhost:3001/v1';
+//const server='/v1';
 //const server='http://95.156.255.115/api';
 
 

@@ -13,7 +13,7 @@ export default class PanelRightPage extends Component {
   logout(){
     this.setState({token: null});
     window.localStorage.removeItem('token');
-    window.location.reload()
+    window.location.replace('/')
   }
 
   logged_in(token) {

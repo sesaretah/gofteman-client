@@ -16,6 +16,7 @@ export default class Layout extends React.Component {
     this.state = {
       token: window.localStorage.getItem('token'),
       tasks: null,
+      works: null,
     }
   }
   componentWillMount() {
@@ -38,21 +39,26 @@ export default class Layout extends React.Component {
     const f7: Framework7 = Framework7.instance;
     f7.toast.show({ text: dict.receiving, closeTimeout: 2000, position: 'top'});
     MyActions.getList('tasks', this.state.page, {}, this.state.token);
+    MyActions.getList('works', this.state.page, {}, this.state.token);
   }
 
   getList() {
-    var tasks = ModelStore.getList()
+    var list = ModelStore.getList()
     var klass = ModelStore.getKlass()
-    if (tasks && klass === 'Task'){
+    if (list && klass === 'Task'){
       this.setState({
-        tasks: tasks,
+        tasks: list,
       });
     }
-    console.log(tasks)
+    if (list && klass === 'Work'){
+      this.setState({
+        works: list,
+      });
+    }
   }
 
   render() {
-    const {tasks} = this.state;
-    return(<TaskIndex tasks={tasks} sortChange={this.sortChange}/>)
+    const {tasks, works} = this.state;
+    return(<TaskIndex tasks={tasks} works={works} sortChange={this.sortChange}/>)
   }
 }

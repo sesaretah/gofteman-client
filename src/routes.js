@@ -30,6 +30,10 @@ import WorkIndex from './components/works/index';
 import WorkCreate from './components/works/create';
 import WorkUpdate from './components/works/update';
 
+import TodoCreate from './components/todos/create';
+import TodoUpdate from './components/todos/update';
+
+
 import ProfileShow from './components/profiles/show';
 import ProfileIndex from './components/profiles/index';
 import ProfileCreate from './components/profiles/create';
@@ -173,6 +177,15 @@ export default [
   {
     path: '/works/:workId',
     component: WorkShow,
+  },
+
+  {
+    path: '/todos/:todoId/edit',
+    component: TodoUpdate,
+  },
+  {
+    path: '/todos/new/:workId',
+    component: TodoCreate,
   },
 
   {

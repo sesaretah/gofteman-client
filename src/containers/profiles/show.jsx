@@ -38,7 +38,7 @@ const ProfileShow = (props) => {
 
               <Card>
                 <CardHeader>
-                  <img src={props.profile.avatar} width="80"></img>
+                  <img src={props.profile.avatar} width="80" height="80"></img>
                   <div className='profile-card'>{props.profile.fullname}</div>
                 </CardHeader>
                 <CardContent>
@@ -59,19 +59,7 @@ const ProfileShow = (props) => {
               <Card>
                 <CardHeader>Chart</CardHeader>
                 <CardContent className='ta-center'>
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      borderRadius: '5px',
-                      padding: '10px',
-                      marginRight: '10px',
-                      backgroundColor: 'white',
-                      width: '250px',
-                      height: '200px'
-                    }}
-                  >
-                    <Chart data={data} axes={axes} />
-                  </div>
+
                 </CardContent>
               </Card>
             </Col>

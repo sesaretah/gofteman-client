@@ -10,6 +10,7 @@ import 'moment-timezone';
 import 'moment/locale/fa';
 import CommentForm from "../comments/form"
 import CommentList from "../comments/list"
+import TodoList from "../todos/list"
 
 const WorkShow = (props) => {
   function access(segment) {
@@ -33,6 +34,20 @@ const WorkShow = (props) => {
       }
       return (
         <Participants
+          work={props.work} searchProfile={props.searchProfile}
+          removeProfile={props.removeProfile} addProfile={props.addProfile}
+          profiles={props.profiles} changeRole={props.changeRole}
+          editable={editable} />
+      )
+    }
+
+    if (segment === 'todos') {
+      var editable = false
+      if (props.access.includes('todos')) {
+        editable = true
+      }
+      return (
+        <TodoList
           work={props.work} searchProfile={props.searchProfile}
           removeProfile={props.removeProfile} addProfile={props.addProfile}
           profiles={props.profiles} changeRole={props.changeRole}
@@ -66,45 +81,51 @@ const WorkShow = (props) => {
       if (props.access.includes('view')) {
         return (
           <React.Fragment>
-          <Row>
-            <Col width='100' tabletWidth='50'>
-              <Card>
-                <CardHeader>
-                  {props.work.title}
-                  {access('edit')}
-                </CardHeader>
-                <CardContent>
-                  <List simple-list>
-                    <ListItem className='fs-11' title={dict.task + ': ' + props.work.task.title} href={'/tasks/' + props.work.task.id}></ListItem>
-                    <ListItem className='fs-11' title={dict.start_date + ': ' + props.work.start_date_j}></ListItem>
-                    <ListItem className='fs-11' title={dict.deadline + ': ' + props.work.deadline_date_j}></ListItem>
-  
-                    <ListItem className='fs-11' title=''></ListItem>
-                  </List>
-                  <span className='fs-11'>{props.work.details}</span>
-  
-                </CardContent>
-                <CardFooter>
-                  {access('statuses')}
-                </CardFooter>
-              </Card>
-            </Col>
-  
-            <Col width='100' tabletWidth='50'>
-              {access('participants')}
-            </Col>
-          </Row>
-  
-          <Row>
-            <Col width='100' tabletWidth='100'>
-              {access('reports')}
-            </Col>
-          </Row>
-          {access('comments')}
-          
-          <CommentList comments={props.comments} removeComment={props.removeComment} loadMore={props.loadMore} />
-  
-        </React.Fragment>
+            <Row>
+              <Col width='100' tabletWidth='50'>
+                <Card>
+                  <CardHeader>
+                    {props.work.title}
+                    {access('edit')}
+                  </CardHeader>
+                  <CardContent>
+                    <List simple-list>
+                      <ListItem className='fs-11' title={dict.task + ': ' + props.work.task.title} href={'/tasks/' + props.work.task.id}></ListItem>
+                      <ListItem className='fs-11' title={dict.start_date + ': ' + props.work.start_date_j}></ListItem>
+                      <ListItem className='fs-11' title={dict.deadline + ': ' + props.work.deadline_date_j}></ListItem>
+
+                      <ListItem className='fs-11' title=''></ListItem>
+                    </List>
+                    <span className='fs-11'>{props.work.details}</span>
+
+                  </CardContent>
+                  <CardFooter>
+                    {access('statuses')}
+                  </CardFooter>
+                </Card>
+              </Col>
+
+              <Col width='100' tabletWidth='50'>
+                {access('participants')}
+              </Col>
+            </Row>
+
+            <Row>
+              <Col width='100' tabletWidth='100'>
+                {access('todos')}
+              </Col>
+            </Row>
+
+            <Row>
+              <Col width='100' tabletWidth='100'>
+                {access('reports')}
+              </Col>
+            </Row>
+            {access('comments')}
+
+            <CommentList comments={props.comments} removeComment={props.removeComment} loadMore={props.loadMore} />
+
+          </React.Fragment>
         )
       }
     }

@@ -191,4 +191,9 @@ export const dict = {
   'Creator':'سازنده',
   'verification_code':'کد احراز',
   'enter_verification_code':  'کد احراز را وارد کنید',
+  'your_tasks':'وظایف مرتبط با شما',
+  'your_newest_works':'جدیدترین کارهای مرتبط با شما',
+  'todo_list': 'تقسیم بندی کار',
+  'todo_participants': 'افراد',
+  'new_todo_participants': 'افراد جدید'
 };

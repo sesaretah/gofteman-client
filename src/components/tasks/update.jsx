@@ -47,11 +47,13 @@ export default class DocumentUpdate extends Component {
   componentWillMount() {
     ModelStore.on("got_instance", this.getInstance);
     ModelStore.on("set_instance", this.setInstance);
+    ModelStore.on("deleted_instance", this.deleteInstance);
   }
 
   componentWillUnmount() {
     ModelStore.removeListener("got_instance", this.getInstance);
     ModelStore.removeListener("set_instance", this.setInstance);
+    ModelStore.removeListener("deleted_instance", this.deleteInstance);
 
   }
 
@@ -83,7 +85,7 @@ export default class DocumentUpdate extends Component {
         autocomplete.preloaderShow();
         // Do Ajax request to Autocomplete data
         app.request({
-          url: 'http://localhost:3001/v1/tags/search',
+          url: '/v1/tags/search',
           method: 'GET',
           dataType: 'json',
           //send "query" to server. Useful in case you generate response dynamically
@@ -104,18 +106,9 @@ export default class DocumentUpdate extends Component {
       },
       on: {
         change: function (value) {
-          var itemText = [],
-            inputValue = [];
-          // for (var i = 0; i < value.length; i++) {
-          //itemText.push(value[i].title);
-          //inputValue.push(value[i].id);
-          self.setState({ tags: self.state.tags.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id }) })
-          // }
-
-          // Add item text value to item-after
-          //self.$$('#autocomplete-standalone-ajax').find('.item-after').text(itemText.join(', '));
-          // Add item value to input value
-          //self.$$('#autocomplete-standalone-ajax').find('input').val(inputValue.join(', '));
+          if (value && value[value.length - 1]) {
+            self.setState({ tags: self.state.tags.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id }) })
+          }
         },
       },
     });
@@ -177,6 +170,15 @@ export default class DocumentUpdate extends Component {
 
   handleChangeValue(obj) {
     this.setState(obj);
+  }
+
+  deleteTask(id) {
+    var data = { id: id }
+    MyActions.removeInstance('tasks', data, this.state.token, this.state.page);
+  }
+
+  deleteInstance() {
+
   }
 
 

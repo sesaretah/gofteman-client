@@ -511,3 +511,7 @@ color: var(--f7-navbar-bg-color)
 .mh-auto {
   min-height: auto !important;
 }
+
+.checkbox i:after, .icon-checkbox:after {
+  right: calc(0px - var(--f7-checkbox-border-width));
+}

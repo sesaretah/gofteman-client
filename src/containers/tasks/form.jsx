@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Chip, ListInput, Block, Row, Button, BlockTitle, Card, ListItem } from 'framework7-react';
+import { List, Chip, ListInput, Block, Row, Button, BlockTitle, Card, ListItem , Col} from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -17,6 +17,16 @@ const TaskForm = (props) => {
         chips.push(<Chip text={tag.title} deleteable onClick={() => props.removeTag(tag.id)} />)
       )
       return chips
+    }
+  }
+
+  function deleteButton() {
+    if (props.editing){
+      return(
+        <Col>
+          <Button className="col ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteTask(props.task.id)}>{dict.delete}</Button>
+        </Col>
+      )
     }
   }
   return (
@@ -75,7 +85,10 @@ const TaskForm = (props) => {
 
       <Block strong>
         <Row tag="p">
+          {deleteButton()}
+          <Col>
           <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
+          </Col>
         </Row>
       </Block>
     </Card >

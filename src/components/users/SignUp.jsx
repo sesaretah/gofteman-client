@@ -32,9 +32,6 @@ export default class extends React.Component {
       email: '',
       name: '',
       surename: '',
-      faculty: '',
-      password: '',
-      password_confirmation: ''
     };
   }
 
@@ -48,7 +45,10 @@ export default class extends React.Component {
 
   submit() {
 
-    var data = { email: this.state.email, password: this.state.password, password_confirmation: this.state.password_confirmation, name: this.state.name, surename: this.state.surename , faculty: this.state.faculty}
+    var data = { 
+      email: this.state.email,
+       name: this.state.name, 
+       surename: this.state.surename }
     if (
       (this.state.email && this.state.email.length > 0) &&
       (this.state.name && this.state.name.length > 0) &&
@@ -62,18 +62,16 @@ export default class extends React.Component {
   }
 
   setInstance() {
-    var user = ModelStore.getIntance();
-    if (user) {
-      //window.localStorage.setItem('token', user.token);
+    var klass = ModelStore.getKlass()
+    if (klass === 'SignUp') {
+      this.$f7router.navigate('/verification/'+this.state.email);
     }
-    const self = this;
-    this.$f7router.navigate('/verification/');
-    window.location.reload()
   }
 
 
   handleChangeValue(obj) {
     this.setState(obj);
+    console.log(obj)
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Page, Navbar, Row, BlockTitle, Col, Fab, Icon, Card, Block } from 'framework7-react';
 import TaskList from "./list"
+import WorkList from "./workList"
 import { dict } from '../../Dict';
 
 const TaskIndex = (props) => {
@@ -16,12 +17,12 @@ const TaskIndex = (props) => {
       <Row>
         <Col width='100' tabletWidth='50'>
           <Card>
-            <TaskList tasks={props.tasks} header={dict.recent_tasks} sortChange={props.sortChange} />
+            <TaskList tasks={props.tasks} header={dict.your_tasks} sortChange={props.sortChange} />
           </Card>
         </Col>
         <Col width='100' tabletWidth='50'>
           <Card>
-            <TaskList tasks={props.tasks} header={dict.public_tasks} sortChange={props.sortChange} />
+            <WorkList works={props.works} header={dict.your_newest_works} sortChange={props.sortChange} />
           </Card>
         </Col>
 

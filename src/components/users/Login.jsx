@@ -52,14 +52,10 @@ export default class extends React.Component {
   }
 
   setInstance(){
-    var user = ModelStore.getIntance();
-    if (user){
-     // window.localStorage.setItem('token', user.token);
+    var klass = ModelStore.getKlass()
+    if (klass === 'Login') {
+      this.$f7router.navigate('/verification/'+this.state.email);
     }
-    const self = this;
-    console.log(this.state.email)
-    this.$f7router.navigate('/verification/'+this.state.email);
-    //window.location.reload()
   }
 
 
