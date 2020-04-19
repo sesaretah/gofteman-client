@@ -50,7 +50,7 @@ const Partcipants = (props) => {
                     </List>
                 </CardContent>
                 <CardFooter>
-                    
+                    {editable()}
                 </CardFooter>
             </Card>
         )

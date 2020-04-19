@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
-import ParticipantList from "../works/participantList";
+import TodosParticipantsList from "./todosParticipantsList";
 import  SimpleList from "../profiles/simpleList";
 import  TodoForm from "./form";
 
@@ -18,16 +18,14 @@ const TodoList = (props) => {
             }
         }
         return (
-            <Card>
+            <Card className='bg-gray'>
                 <CardHeader>
                     {dict.todo_list}
                     {editable()}
                 </CardHeader>
                 <CardContent>
                     <List>
-                        <ParticipantList 
-                            participants={props.work.participants} removeProfile={props.removeProfile} 
-                            changeRole={props.changeRole} editable={props.editable} />
+                        <TodosParticipantsList todos={props.todos} todoChecked={props.todoChecked} />
                     </List>
                 </CardContent>
                 <CardFooter>

@@ -21,7 +21,7 @@ const TodoForm = (props) => {
             label={dict.title}
             type="text"
             placeholder={dict.select_appropriate_title}
-            defaultValue=''
+            defaultValue={props.title}
             required={true}
             onInput={(e) => {
               props.handleChange({ title: e.target.value })
@@ -39,6 +39,18 @@ const TodoForm = (props) => {
               </div>
             </a>
           </li>
+          <List className='fs-11 ' >
+          {props.workParticipants.map((workParticipant) =>
+          <ListItem
+          checkbox
+          checked={workParticipant.check}
+          onChange={(e) => props.participantCheck(workParticipant.profile.id,e)}
+          title={workParticipant.profile.fullname}
+          after=''>
+          </ListItem>
+          
+          )}
+          </List>
   
   
   

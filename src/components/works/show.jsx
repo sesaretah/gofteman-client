@@ -37,6 +37,8 @@ export default class Layout extends Component {
     this.submitComment = this.submitComment.bind(this);
     this.loadMore = this.loadMore.bind(this);
     this.changeRole = this.changeRole.bind(this);
+    this.todoChecked = this.todoChecked.bind(this);
+    
     
     
     this.state = {
@@ -55,6 +57,7 @@ export default class Layout extends Component {
       commentContent: '',
       access: null,
       comments: null,
+      todos: [],
     }
   }
 
@@ -87,7 +90,8 @@ export default class Layout extends Component {
         assignedUsers: work.users,
         ability: work.ability,
         comments: work.the_comments,
-        access: work.user_access
+        access: work.user_access,
+        todos: work.the_todos,
       });
     }
     console.log(work)
@@ -180,6 +184,11 @@ export default class Layout extends Component {
     this.setState(obj);
   }
 
+  todoChecked(id, e){
+    var data={id: id, is_done: e.target.checked}
+    MyActions.setInstance('todos/check_todo', data, this.state.token);
+  }
+
   fab() {
     if (this.state.work) {
       return (
@@ -200,7 +209,7 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { work, users, assignedUsers, ability, profiles, statuses, comments, commentContent, access } = this.state;
+    const { work, users, assignedUsers, ability, profiles, statuses, comments, commentContent, access, todos } = this.state;
     return (
       <Page>
         <Navbar title={dict.works} backLinkForce={true} backLink={dict.back} />
@@ -215,7 +224,7 @@ export default class Layout extends Component {
           searchStatus={this.searchStatus} addStatus={this.addStatus}
           submitComment={this.submitComment} removeComment={this.removeComment}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
-          changeRole={this.changeRole} access={access}
+          changeRole={this.changeRole} access={access} todos={todos} todoChecked={this.todoChecked}
           />
       </Page>
     );

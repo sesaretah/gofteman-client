@@ -13,6 +13,7 @@ import CommentList from "../comments/list"
 import TodoList from "../todos/list"
 
 const WorkShow = (props) => {
+  console.log(props)
   function access(segment) {
     if (segment === 'statuses') {
       var editable = false
@@ -47,11 +48,7 @@ const WorkShow = (props) => {
         editable = true
       }
       return (
-        <TodoList
-          work={props.work} searchProfile={props.searchProfile}
-          removeProfile={props.removeProfile} addProfile={props.addProfile}
-          profiles={props.profiles} changeRole={props.changeRole}
-          editable={editable} />
+        <TodoList work={props.work} todos={props.todos} editable={editable} todoChecked={props.todoChecked}  />
       )
     }
 

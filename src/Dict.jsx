@@ -195,5 +195,6 @@ export const dict = {
   'your_newest_works':'جدیدترین کارهای مرتبط با شما',
   'todo_list': 'تقسیم بندی کار',
   'todo_participants': 'افراد',
-  'new_todo_participants': 'افراد جدید'
+  'new_todo_participants': 'افراد جدید',
+  'not_found': 'چیزی یافت نشد'
 };

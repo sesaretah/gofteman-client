@@ -53,6 +53,9 @@ export default class TaskCreate extends Component {
       multiple: true, //allow multiple values
       valueProperty: 'id', //object's "value" property name
       textProperty: 'title', //object's "text" property name
+      searchbarDisableText: dict.cancel,
+      popupCloseLinkText: dict.close,
+      notFoundText: dict.not_found,
       limit: 50,
       searchbarPlaceholder: dict.search,
       preloader: true, //enable preloader

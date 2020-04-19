@@ -73,6 +73,9 @@ export default class DocumentUpdate extends Component {
       textProperty: 'title', //object's "text" property name
       limit: 50,
       searchbarPlaceholder: dict.search,
+      searchbarDisableText: dict.cancel,
+      popupCloseLinkText: dict.close,
+      notFoundText: dict.not_found,
       preloader: true, //enable preloader
       source: function (query, render) {
         var autocomplete = this;

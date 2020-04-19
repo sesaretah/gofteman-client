@@ -515,3 +515,35 @@ color: var(--f7-navbar-bg-color)
 .checkbox i:after, .icon-checkbox:after {
   right: calc(0px - var(--f7-checkbox-border-width));
 }
+
+.line-through .item-title {
+  text-decoration: line-through   !important;
+  text-decoration-color: gray !important;
+}
+
+.bg-gray {
+  background: #d0ced1 !important;
+}
+
+.bg-gray .card-header:after  {
+  background-color: #838283 !important;
+}
+.bg-gray .card-footer:before  {
+  background-color: #838283 !important;
+}
+
+.of-scroll {
+  overflow: scroll !important;
+}
+
+.of-visible {
+  overflow: visible !important;
+}
+
+.mw-auto{
+  min-width: auto !important;
+}
+
+
+
+
