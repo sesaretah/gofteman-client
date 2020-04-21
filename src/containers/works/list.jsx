@@ -18,7 +18,7 @@ const WorkList = (props) => {
     return (
       <List>
         {props.works.map((work) =>
-        <ListItem header={work.title} title={title(work.deadline_date)} link={'/works/'+work.id}></ListItem>
+        <ListItem key={'worklist' + work.id} header={work.title} title={title(work.deadline_date)} link={'/works/'+work.id}></ListItem>
         )}
       </List>
     )

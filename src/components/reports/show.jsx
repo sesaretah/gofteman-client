@@ -2,15 +2,8 @@ import React, { Component } from 'react';
 import {
   Page,
   Navbar,
-  List,
-  ListItem,
-  ListInput,
-  Toggle,
+  Link,
   BlockTitle,
-  Row,
-  Button,
-  Range,
-  Block,
   Icon, Fab
 } from 'framework7-react';
 import { dict } from '../../Dict';
@@ -147,7 +140,11 @@ export default class Layout extends Component {
     const { report, sheetOpened, channels, comments } = this.state;
     return (
       <Page>
-        <Navbar title={dict.reports} />
+        <Navbar title={dict.reports} >
+        <Link panelOpen="right">
+          <Icon f7="bars"></Icon>
+        </Link>
+      </Navbar>
         <BlockTitle></BlockTitle>
         {this.fab()}
         <ReportShow report={report} comments={comments} channels={channels} submitComment={this.submitComment} removeComment={this.removeComment} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue} loadMore={this.loadMore} />

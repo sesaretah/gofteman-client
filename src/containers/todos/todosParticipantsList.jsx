@@ -12,9 +12,10 @@ const TodosParticipantsList = (props) => {
   function addParticipants(todo) {
     var chips = []
     todo.participants.map((participant) =>
-      chips.push(<Chip className="ml-5" text={participant.profile.fullname} />)
+      chips.push(<Chip key={'chip' +'-'+todo.id +'-'+ participant.profile.id} className="ml-5" text={participant.profile.fullname} />)
     )
-    chips.push(<Link href={'/todos/' + todo.id + '/edit'}><i className="mr-5 fa fa-edit"></i></Link>)
+    chips.push(<Link key={'todoEdit'+ todo.id} href={'/todos/' + todo.id + '/edit'}><i className="ml-5 fa fa-edit"></i></Link>)
+    chips.push(<Link key={'todoDelete'+ todo.id} onClick={() => props.deleteTodoConfirm(todo.id)}><i className="ml-5 fa fa-trash"></i></Link>)
     return (chips)
 
   }
@@ -30,7 +31,7 @@ const TodosParticipantsList = (props) => {
       <List className='fs-11 ' >
         {props.todos.map((todo) =>
 
-          <li className="">
+          <li className={lt(todo)} key={'todo' + todo.id}>
             <label className="item-content item-checkbox">
               <input type="checkbox" value="" checked={todo.check} onChange={(e) => props.todoChecked(todo.id,e)}></input>
               <i className="icon icon-checkbox"></i>

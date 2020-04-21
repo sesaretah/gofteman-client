@@ -52,6 +52,7 @@ const Statuses = (props) => {
         return (
             <List accordionList className='w-100'>
                 <ListItem accordionItem className='fs-10'
+                    key={'status' + props.work.id}
                     title={chip(props.work.status)}
                 >
                     {editable()}

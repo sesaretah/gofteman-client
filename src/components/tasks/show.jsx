@@ -2,15 +2,7 @@ import React, { Component } from 'react';
 import {
   Page,
   Navbar,
-  List,
-  ListItem,
-  ListInput,
-  Toggle,
-  BlockTitle,
-  Row,
-  Button,
-  Range,
-  Block,
+  Link,
   Icon, Fab
 } from 'framework7-react';
 import { dict } from '../../Dict';
@@ -32,10 +24,12 @@ export default class Layout extends Component {
     this.removeProfile = this.removeProfile.bind(this);
     this.searchStatus = this.searchStatus.bind(this);
     this.addStatus = this.addStatus.bind(this);
-    this.removeComment = this.removeComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.loadMore = this.loadMore.bind(this);
     this.changeRole = this.changeRole.bind(this);
+    this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
+    
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -162,10 +156,18 @@ export default class Layout extends Component {
     MyActions.setInstance('comments', data, this.state.token);
   }
 
-  removeComment(id) {
+
+  deleteCommentConfirm(id){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, () => self.deleteComment(id))
+  }
+
+  deleteComment(id) {
     var data = { id: id }
     MyActions.removeInstance('comments', data, this.state.token, this.state.page);
   }
+
 
   handleChangeValue(obj) {
     this.setState(obj);
@@ -194,9 +196,11 @@ export default class Layout extends Component {
     const { task, users, assignedUsers, ability, profiles, statuses, works, commentContent, comments, access } = this.state;
     return (
       <Page>
-        <Navbar title={dict.tasks} backLink={dict.back} backLinkForce={true}/>
-        <BlockTitle></BlockTitle>
-        {this.fab()}
+        <Navbar title={dict.tasks} backLink={dict.back} backLinkForce={true}>
+        <Link panelOpen="right">
+          <Icon f7="bars"></Icon>
+        </Link>
+        </Navbar>
         <TaskShow 
           task={task} users={users} ability={ability} profiles={profiles} statuses={statuses}
           removeProfile={this.removeProfile} addProfile={this.addProfile}
@@ -204,9 +208,9 @@ export default class Layout extends Component {
           assignedUsers={assignedUsers} addAbility={this.addAbility} 
           removeTask={this.removeTask} submit={this.submit} handleChange={this.handleChangeValue}
           searchStatus={this.searchStatus} addStatus={this.addStatus} works={works}
-          submitComment={this.submitComment} removeComment={this.removeComment}
+          submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
-          changeRole={this.changeRole} access={access}
+          changeRole={this.changeRole} access={access} 
           />
       </Page>
     );

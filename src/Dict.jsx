@@ -196,5 +196,6 @@ export const dict = {
   'todo_list': 'تقسیم بندی کار',
   'todo_participants': 'افراد',
   'new_todo_participants': 'افراد جدید',
-  'not_found': 'چیزی یافت نشد'
+  'not_found': 'چیزی یافت نشد',
+  'are_you_sure': 'مطمئن هستید؟'
 };

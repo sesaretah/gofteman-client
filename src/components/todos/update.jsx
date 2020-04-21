@@ -16,10 +16,11 @@ export default class TodoCreate extends Component {
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.pageAfterIn = this.pageAfterIn.bind(this);
     this.removeParticipant = this.removeParticipant.bind(this);
     this.getInstance = this.getInstance.bind(this);
     this.participantCheck = this.participantCheck.bind(this);
+    this.setParticipants = this.setParticipants.bind(this);
+    
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -41,68 +42,6 @@ export default class TodoCreate extends Component {
     ModelStore.removeListener("got_instance", this.getInstance);
     ModelStore.removeListener("set_instance", this.setInstance);
   }
-
-
-  loadTags() {
-    const self = this;
-    const app = self.$f7;
-
-    app.autocomplete.create({
-      openIn: 'popup', //open in page
-      openerEl: '#autocomplete-todos-participants', //link that opens autocomplete
-      multiple: true, //allow multiple values
-      valueProperty: 'id', //object's "value" property name
-      textProperty: 'fullname', //object's "text" property name
-      searchbarDisableText: dict.cancel,
-      popupCloseLinkText: dict.close,
-      notFoundText: dict.not_found,
-      limit: 50,
-      searchbarPlaceholder: dict.search,
-      preloader: true, //enable preloader
-      source: function (query, render) {
-        var autocomplete = this;
-        var results = [];
-        if (query.length === 0) {
-          render(results);
-          return;
-        }
-        // Show Preloader
-        autocomplete.preloaderShow();
-        // Do Ajax request to Autocomplete data
-        app.request({
-          url: 'http://localhost:3001/v1/profiles/search',
-          method: 'GET',
-          dataType: 'json',
-          //send "query" to server. Useful in case you generate response dynamically
-          data: {
-            q: query
-          },
-          success: function (item) {
-            // Find matched items
-            for (var i = 0; i < item.data.length; i++) {
-              if (item.data[i].fullname.indexOf(query) >= 0) results.push(item.data[i]);
-            }
-            // Hide Preoloader
-            autocomplete.preloaderHide();
-            // Render items by passing array with result items
-            render(results);
-          }
-        });
-      },
-      on: {
-        change: function (value) {
-          if(value && value[value.length - 1]){
-            self.setState({ participants: self.state.participants.concat({ fullname: value[value.length - 1].fullname, id: value[value.length - 1].id }) })
-          }
-        },
-      },
-    });
-  }
-
-  pageAfterIn() {
-    this.loadTags();
-  }
-
 
   componentDidMount() {
     this.loadData();
@@ -149,8 +88,19 @@ export default class TodoCreate extends Component {
         id: todo.id,
         //participants: todo.participant_tags,
         workParticipants: todo.work_participants
-      });
+      }, () =>  this.setParticipants());
     }
+  }
+
+  setParticipants(){
+    this.setState({ participants: [] });
+    var arr = []
+    this.state.workParticipants.map((workParticipant) => {
+      if(workParticipant.check){
+        arr.push({ id: workParticipant.profile.id })
+      }
+    })
+    this.setState({ participants: arr})
   }
 
 
@@ -164,7 +114,6 @@ export default class TodoCreate extends Component {
         })
       });
     }
-    console.log(this.state)
   }
 
 
@@ -186,7 +135,7 @@ export default class TodoCreate extends Component {
   render() {
     const { todo, participants, title , workParticipants} = this.state;
     return (
-      <Page onPageAfterIn={this.pageAfterIn.bind(this)} backLink={dict.back} backLinkForce={true}>
+      <Page  backLink={dict.back} backLinkForce={true}>
         <Navbar title={dict.work_form} backLink={dict.back} />
         <BlockTitle>{dict.work_form}</BlockTitle>
         <TodoForm 

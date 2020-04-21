@@ -29,7 +29,11 @@ export default class DocumentUpdate extends Component {
     this.loadTime = this.loadTime.bind(this);
     this.loadCalender = this.loadCalender.bind(this);
     this.pageAfterIn = this.pageAfterIn.bind(this);
+    this.deleteWorkConfirm = this.deleteWorkConfirm.bind(this);
+    this.deleteWork = this.deleteWork.bind(this);
+    this.deleteInstance = this.deleteInstance.bind(this);
 
+    
 
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -48,11 +52,13 @@ export default class DocumentUpdate extends Component {
   componentWillMount() {
     ModelStore.on("got_instance", this.getInstance);
     ModelStore.on("set_instance", this.setInstance);
+    ModelStore.on("deleted_instance", this.deleteInstance);
   }
 
   componentWillUnmount() {
     ModelStore.removeListener("got_instance", this.getInstance);
     ModelStore.removeListener("set_instance", this.setInstance);
+    ModelStore.removeListener("deleted_instance", this.deleteInstance);
 
   }
 
@@ -187,6 +193,22 @@ export default class DocumentUpdate extends Component {
     }
   }
 
+  deleteWorkConfirm(){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, self.deleteWork)
+  }
+
+  deleteWork(){
+    var data = { id: this.state.id}
+    MyActions.removeInstance('works', data, this.state.token);
+  }
+
+  deleteInstance() {
+    this.$f7router.navigate('/tasks/');
+  }
+
+
   handleChangeValue(obj) {
     this.setState(obj);
   }
@@ -194,7 +216,7 @@ export default class DocumentUpdate extends Component {
 
   setInstance() {
     const self = this;
-    this.$f7router.navigate('/works/');
+    this.$f7router.navigate('/works/'+this.state.id);
   }
 
 
@@ -204,7 +226,13 @@ export default class DocumentUpdate extends Component {
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.work_form} backLink={dict.back} />
         <BlockTitle>{dict.work_form}</BlockTitle>
-        <WorkForm work={work} title={title} startTime={startTime} deadlineTime={deadlineTime} content={content} defaultWork={defaultWork} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        <WorkForm 
+        work={work} title={title} startTime={startTime} 
+        deadlineTime={deadlineTime} content={content} 
+        defaultWork={defaultWork} submit={this.submit} 
+        editing={true} handleChange={this.handleChangeValue} 
+        deleteWorkConfirm={this.deleteWorkConfirm}
+        />
       </Page>
     );
   }

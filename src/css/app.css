@@ -522,7 +522,7 @@ color: var(--f7-navbar-bg-color)
 }
 
 .bg-gray {
-  background: #d0ced1 !important;
+  background: #d7d6db !important;
 }
 
 .bg-gray .card-header:after  {
@@ -545,5 +545,12 @@ color: var(--f7-navbar-bg-color)
 }
 
 
+.card-footer .searchbar input[type=search], .card-footer .searchbar input[type=text] {
+  font-size: 10px;
+}
+
+.card-footer .searchbar-enabled .searchbar-disable-button {
+  font-size: 10px;
+}
 
 

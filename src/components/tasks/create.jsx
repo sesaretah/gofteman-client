@@ -145,7 +145,7 @@ export default class TaskCreate extends Component {
         <BlockTitle>{dict.task_form}</BlockTitle>
         <TaskForm
           task={task} removeTag={this.removeTag} tags={tags} isPublic={isPublic}
-          submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+          submit={this.submit} editing={false} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

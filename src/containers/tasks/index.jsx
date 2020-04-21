@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Navbar, Row, BlockTitle, Col, Fab, Icon, Card, Block } from 'framework7-react';
+import { Page, Navbar, Row, BlockTitle, Col, Fab, Icon, Card, Link } from 'framework7-react';
 import TaskList from "./list"
 import WorkList from "./workList"
 import { dict } from '../../Dict';
@@ -7,7 +7,10 @@ import { dict } from '../../Dict';
 const TaskIndex = (props) => {
   return (
     <Page>
-      <Navbar title={dict.tasks} backLink={dict.back} >
+      <Navbar title={dict.tasks} >
+        <Link panelOpen="right">
+          <Icon f7="bars"></Icon>
+        </Link>
       </Navbar>
       <BlockTitle>{dict.list}</BlockTitle>
       <Fab href="/tasks/new" target="#main-view" position="left-bottom" slot="fixed" color="deeporange">

@@ -28,7 +28,8 @@ const Reports = (props) => {
                     <List mediaList >
                         {props.task.reports.map((report) =>
                             <ListItem
-                                className='work-media'
+                                key={'report' + report.id}
+                                className='fs-11 work-media'
                                 link={"/reports/" + report.id}
                                 title={report.title}
                                 after={creation(report.creation_date)}

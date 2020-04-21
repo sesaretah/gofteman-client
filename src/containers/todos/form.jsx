@@ -6,65 +6,57 @@ import crypto from 'crypto-js';
 
 const TodoForm = (props) => {
   if (true) {
-    function participants() {
-        if (props.participants) {
-          var chips = [<span className='fs-11'>{dict.todo_participants}: </span>]
-          props.participants.map((participant) =>
-            chips.push(<Chip text={participant.fullname} deleteable onClick={() => props.removeParticipant(participant.id)} />)
-          )
-          return chips
+    function participantChecked(workParticipant) {
+      var flag = false
+      props.participants.map((participant) => {
+        if (participant.id === workParticipant.profile.id) {
+          flag = true
         }
       }
+      )
+      return flag
+    }
     return (
-        <List form>
-          <ListInput
-            label={dict.title}
-            type="text"
-            placeholder={dict.select_appropriate_title}
-            defaultValue={props.title}
-            required={true}
-            onInput={(e) => {
-              props.handleChange({ title: e.target.value })
-            }}
-          />
-  
-          <ListItem title={participants()}></ListItem>
-          <li>
-            <a className="item-link item-content" href="#" id="autocomplete-todos-participants">
-  
-              <div className="item-inner">
-                <div className="item-title fs-11">{dict.new_todo_participants}</div>
-                <input className="hidden" />
-                <div className="item-after"></div>
-              </div>
-            </a>
-          </li>
-          <List className='fs-11 ' >
+      <List form>
+        <ListInput
+          key='todos-form-title'
+          label={dict.title}
+          type="text"
+          placeholder={dict.select_appropriate_title}
+          defaultValue={props.title}
+          required={true}
+          onInput={(e) => {
+            props.handleChange({ title: e.target.value })
+          }}
+        />
+
+        <List className='fs-11 ' >
           {props.workParticipants.map((workParticipant) =>
-          <ListItem
-          checkbox
-          checked={workParticipant.check}
-          onChange={(e) => props.participantCheck(workParticipant.profile.id,e)}
-          title={workParticipant.profile.fullname}
-          after=''>
-          </ListItem>
-          
+            <ListItem
+              key={workParticipant.id}
+              checkbox
+              checked={participantChecked(workParticipant)}
+              onChange={(e) => props.participantCheck(workParticipant.profile.id, e)}
+              title={workParticipant.profile.fullname}
+              after=''>
+            </ListItem>
+
           )}
-          </List>
-  
-  
-  
+        </List>
+
+
+
         <Block strong>
           <Row tag="p">
             <Col>
-            <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
+              <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
             </Col>
           </Row>
         </Block>
-        </List>
+      </List>
     )
   } else {
-    return(null)
+    return (null)
   }
 
 }

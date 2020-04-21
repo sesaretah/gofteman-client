@@ -29,7 +29,11 @@ export default class DocumentUpdate extends Component {
     this.pageAfterIn = this.pageAfterIn.bind(this);
     this.loadTags = this.loadTags.bind(this);
     this.removeTag = this.removeTag.bind(this);
+    this.deleteTaskConfirm = this.deleteTaskConfirm.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
+    this.deleteInstance = this.deleteInstance.bind(this);
 
+     
     this.state = {
       token: window.localStorage.getItem('token'),
       task: {},
@@ -175,13 +179,20 @@ export default class DocumentUpdate extends Component {
     this.setState(obj);
   }
 
-  deleteTask(id) {
-    var data = { id: id }
-    MyActions.removeInstance('tasks', data, this.state.token, this.state.page);
+  deleteTaskConfirm(){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, self.deleteTask)
   }
 
-  deleteInstance() {
+  deleteTask(){
+    var data = { id: this.state.id}
+    MyActions.removeInstance('tasks', data, this.state.token);
+  }
 
+
+  deleteInstance() {
+    this.$f7router.navigate('/tasks/');
   }
 
 
@@ -204,7 +215,9 @@ export default class DocumentUpdate extends Component {
           task={task} title={title} isPublic={isPublic}
           tags={tags} removeTag={this.removeTag} selectedMode={selectedMode}
           details={details} defaultTask={defaultTask} submit={this.submit}
-          editing={true} handleChange={this.handleChangeValue} />
+          editing={true} handleChange={this.handleChangeValue}
+          deleteTaskConfirm={this.deleteTaskConfirm}
+          />
       </Page>
     );
   }

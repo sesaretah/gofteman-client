@@ -25,7 +25,10 @@ const TodoList = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List>
-                        <TodosParticipantsList todos={props.todos} todoChecked={props.todoChecked} />
+                        <TodosParticipantsList 
+                        todos={props.todos} todoChecked={props.todoChecked} 
+                        deleteTodoConfirm={props.deleteTodoConfirm}
+                        />
                     </List>
                 </CardContent>
                 <CardFooter>

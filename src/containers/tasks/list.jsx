@@ -59,7 +59,7 @@ const TaskList = (props) => {
         <CardContent>
           <List mediaList className='fs-11'>
             {props.tasks.map((task) =>
-              <ListItem title={task.title} text={task.details} after={alerts(task)} link={'/tasks/' + task.id}></ListItem>
+              <ListItem key={'task'+task.id} title={task.title} text={task.details} after={alerts(task)} link={'/tasks/' + task.id}></ListItem>
             )}
           </List>
         </CardContent>

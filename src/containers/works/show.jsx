@@ -13,7 +13,6 @@ import CommentList from "../comments/list"
 import TodoList from "../todos/list"
 
 const WorkShow = (props) => {
-  console.log(props)
   function access(segment) {
     if (segment === 'statuses') {
       var editable = false
@@ -48,7 +47,11 @@ const WorkShow = (props) => {
         editable = true
       }
       return (
-        <TodoList work={props.work} todos={props.todos} editable={editable} todoChecked={props.todoChecked}  />
+        <TodoList 
+        work={props.work} todos={props.todos} 
+        editable={editable} todoChecked={props.todoChecked}
+        deleteTodoConfirm={props.deleteTodoConfirm}
+        />
       )
     }
 
@@ -120,7 +123,7 @@ const WorkShow = (props) => {
             </Row>
             {access('comments')}
 
-            <CommentList comments={props.comments} removeComment={props.removeComment} loadMore={props.loadMore} />
+            <CommentList comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}  />
 
           </React.Fragment>
         )

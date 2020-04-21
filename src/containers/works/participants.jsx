@@ -45,7 +45,7 @@ const Partcipants = (props) => {
                 <CardContent>
                     <List>
                         <ParticipantList 
-                            participants={props.work.participants} removeProfile={props.removeProfile} 
+                            participants={props.work.the_participants} removeProfile={props.removeProfile} 
                             changeRole={props.changeRole} editable={props.editable} />
                     </List>
                 </CardContent>

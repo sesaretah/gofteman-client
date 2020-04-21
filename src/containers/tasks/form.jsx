@@ -24,7 +24,7 @@ const TaskForm = (props) => {
     if (props.editing){
       return(
         <Col>
-          <Button className="col ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteTask(props.task.id)}>{dict.delete}</Button>
+          <Button className="col ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteTaskConfirm()}>{dict.delete}</Button>
         </Col>
       )
     }
@@ -87,7 +87,7 @@ const TaskForm = (props) => {
         <Row tag="p">
           {deleteButton()}
           <Col>
-          <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
+          <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
           </Col>
         </Row>
       </Block>

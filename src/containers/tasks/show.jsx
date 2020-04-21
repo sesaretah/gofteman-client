@@ -7,8 +7,6 @@ import Works from "./works";
 import Reports from "./reports";
 import CommentForm from "../comments/form"
 import CommentList from "../comments/list"
-import Moment from 'react-moment';
-import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
 
@@ -17,7 +15,7 @@ const TaskShow = (props) => {
     function tags() {
       var arr = []
       props.task.the_tags.map((tag) =>
-        arr.push(<Chip text={tag.title} />)
+        arr.push(<Chip key={'task-tag' + tag.id} text={tag.title} />)
       )
       return (arr)
     }
@@ -76,7 +74,12 @@ const TaskShow = (props) => {
 
       if (segment === 'comments') {
         if (props.access.includes('comments')) {
-          return (<CommentForm model={props.task} submit={props.submitComment} handleChange={props.handleChange} />)
+          return (
+            <CommentForm
+              model={props.task} submit={props.submitComment}
+              handleChange={props.handleChange} 
+            />
+          )
         }
       }
 
@@ -90,51 +93,53 @@ const TaskShow = (props) => {
         if (props.access.includes('view')) {
           return (
             <React.Fragment>
-            <Row>
-              <Col width='100' tabletWidth='50'>
-                <Card>
-                  <CardHeader>
-                    {props.task.title}
-                    {access('edit')}
-                  </CardHeader>
-                  <CardContent>
-                    <List simple-list>
-                      <ListItem className='fs-11' title=''>{tags()}</ListItem>
-                      <ListItem className='fs-11' title=''>{isPublic()}</ListItem>
-                      <ListItem className='fs-11' title=''>{props.task.details}</ListItem>
-                    </List>
-    
-                  </CardContent>
-                  <CardFooter>
-                    {access('statuses')}
-                  </CardFooter>
-                </Card>
-              </Col>
-    
-              <Col width='100' tabletWidth='50'>
-                {access('participants')}
-              </Col>
-            </Row>
-    
-    
-            <Row>
-              <Col width='100' tabletWidth='100'>
-                {access('works')}
-              </Col>
-            </Row>
-    
-            <Row>
-              <Col width='100' tabletWidth='100'>
-                {access('reports')}
-              </Col>
-            </Row>
-    
-    
-            <BlockTitle>{dict.discussions}</BlockTitle>
-    
-            {access('comments')}
-            <CommentList comments={props.comments} removeComment={props.removeComment} loadMore={props.loadMore} />
-          </React.Fragment>
+              <Row>
+                <Col width='100' tabletWidth='50'>
+                  <Card>
+                    <CardHeader>
+                      {props.task.title}
+                      {access('edit')}
+                    </CardHeader>
+                    <CardContent>
+                      <List simple-list>
+                        <ListItem className='fs-11' title=''>{tags()}</ListItem>
+                        <ListItem className='fs-11' title=''>{isPublic()}</ListItem>
+                        <ListItem className='fs-11' title=''>{props.task.details}</ListItem>
+                      </List>
+
+                    </CardContent>
+                    <CardFooter>
+                      {access('statuses')}
+                    </CardFooter>
+                  </Card>
+                </Col>
+
+                <Col width='100' tabletWidth='50'>
+                  {access('participants')}
+                </Col>
+              </Row>
+
+
+              <Row>
+                <Col width='100' tabletWidth='100'>
+                  {access('works')}
+                </Col>
+              </Row>
+
+              <Row>
+                <Col width='100' tabletWidth='100'>
+                  {access('reports')}
+                </Col>
+              </Row>
+
+
+              <BlockTitle>{dict.discussions}</BlockTitle>
+
+              {access('comments')}
+              <CommentList
+                comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}
+                loadMore={props.loadMore} />
+            </React.Fragment>
 
           )
         }

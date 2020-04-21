@@ -2,15 +2,7 @@ import React, { Component } from 'react';
 import {
   Page,
   Navbar,
-  List,
-  ListItem,
-  ListInput,
-  Toggle,
-  BlockTitle,
-  Row,
-  Button,
-  Range,
-  Block,
+  Link,
   Icon, Fab
 } from 'framework7-react';
 import { dict } from '../../Dict';
@@ -33,11 +25,14 @@ export default class Layout extends Component {
     this.removeProfile = this.removeProfile.bind(this);
     this.searchStatus = this.searchStatus.bind(this);
     this.addStatus = this.addStatus.bind(this);
-    this.removeComment = this.removeComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+    this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.loadMore = this.loadMore.bind(this);
     this.changeRole = this.changeRole.bind(this);
     this.todoChecked = this.todoChecked.bind(this);
+    this.deleteTodoConfirm = this.deleteTodoConfirm.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
     
     
     
@@ -92,10 +87,9 @@ export default class Layout extends Component {
         comments: work.the_comments,
         access: work.user_access,
         todos: work.the_todos,
+        //participants: work.the_participants
       });
     }
-    console.log(work)
-    //this.$$('#cm-form').clear()
   }
 
   getList() {
@@ -175,7 +169,14 @@ export default class Layout extends Component {
     MyActions.setInstance('comments', data, this.state.token);
   }
 
-  removeComment(id) {
+
+  deleteCommentConfirm(id){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, () => self.deleteComment(id))
+  }
+
+  deleteComment(id) {
     var data = { id: id }
     MyActions.removeInstance('comments', data, this.state.token, this.state.page);
   }
@@ -200,6 +201,17 @@ export default class Layout extends Component {
     }
   }
 
+  deleteTodoConfirm(id){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, () => self.deleteTodo(id))
+  }
+
+  deleteTodo(id){
+    var data = {id: id}
+    MyActions.removeInstance('todos', data, this.state.token);
+  }
+
   removeWork(user_id) {
     MyActions.removeInstance('users/assignments', { user_id: user_id, work_id: this.state.id }, this.state.token);
   }
@@ -212,9 +224,11 @@ export default class Layout extends Component {
     const { work, users, assignedUsers, ability, profiles, statuses, comments, commentContent, access, todos } = this.state;
     return (
       <Page>
-        <Navbar title={dict.works} backLinkForce={true} backLink={dict.back} />
-        <BlockTitle></BlockTitle>
-        {this.fab()}
+        <Navbar title={dict.works} backLinkForce={true} backLink={dict.back} >
+        <Link panelOpen="right">
+          <Icon f7="bars"></Icon>
+        </Link>
+        </Navbar>
         <WorkShow 
           work={work} users={users} ability={ability} profiles={profiles} statuses={statuses}
           removeProfile={this.removeProfile} addProfile={this.addProfile}
@@ -222,9 +236,10 @@ export default class Layout extends Component {
           assignedUsers={assignedUsers} addAbility={this.addAbility} 
           removeWork={this.removeWork} submit={this.submit} handleChange={this.handleChangeValue}
           searchStatus={this.searchStatus} addStatus={this.addStatus}
-          submitComment={this.submitComment} removeComment={this.removeComment}
+          submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
-          changeRole={this.changeRole} access={access} todos={todos} todoChecked={this.todoChecked}
+          changeRole={this.changeRole} access={access} todos={todos} 
+          todoChecked={this.todoChecked} deleteTodoConfirm={this.deleteTodoConfirm}
           />
       </Page>
     );

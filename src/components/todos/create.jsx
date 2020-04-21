@@ -77,7 +77,7 @@ export default class TodoCreate extends Component {
     var klass = ModelStore.getKlass()
     if (work && klass === 'Work') {
       this.setState({
-        workParticipants: work.participants
+        workParticipants: work.the_participants
       });
     }
   }

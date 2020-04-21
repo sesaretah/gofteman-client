@@ -7,18 +7,33 @@ import 'moment/locale/fa';
 
 const CommentList = (props) => {
     var items = []
+    function editLink(comment) {
+        if (comment.editable) {
+            return (
+                <Link onClick={() => props.deleteCommentConfirm(comment.id)}>
+                    <i className="va ml-5 fa fa-trash"></i>
+                </Link>
+            )
+        }
+    }
     if (props.comments) {
 
         for (let i = 0; i < props.comments.length; i++) {
             var date = new Date(new window.ODate(props.comments[i].created_at))
-            var time = <React.Fragment><Link onClick={() => props.removeComment(props.comments[i].id)}><i className="va ml-5 fa fa-trash"></i></Link><Moment locale="fa" fromNow ago>{date}</Moment>{dict.ago}</React.Fragment>
+            var time =
+                <React.Fragment>
+                    { editLink(props.comments[i])}
+                    <Moment locale="fa" fromNow ago>{date}</Moment>
+                    {dict.ago}
+                </React.Fragment>
             items.push(
                 <ListItem
+                    key={'comment' + props.comments[i].id}
                     className='some-link'
                     text={time}
                     subtitle={props.comments[i].content}
                 >
-                    <img slot="media" src={props.comments[i].profile.avatar} width="44" height="44"/>
+                    <img slot="media" src={props.comments[i].profile.avatar} width="44" height="44" />
                 </ListItem>
 
             )
@@ -44,7 +59,7 @@ const CommentList = (props) => {
         )
     }
     else {
-        return ( <BlockTitle></BlockTitle>)
+        return (<BlockTitle></BlockTitle>)
     }
 }
 export default CommentList;

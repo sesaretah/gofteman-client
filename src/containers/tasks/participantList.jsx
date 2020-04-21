@@ -37,7 +37,7 @@ const ParticipantList = (props) => {
               <div className="item-content">
                 <div className="item-inner bg-w-after">
                   <div className="item-title">{dict.role}</div>
-                  <div class="item-after mt-2">{dict[participant.role]}</div>
+                  <div className="item-after mt-2">{dict[participant.role]}</div>
                 </div>
               </div>
             </a>
@@ -49,6 +49,7 @@ const ParticipantList = (props) => {
       <List className='fs-11'>
         {props.participants.map((participant) =>
           <ListItem
+            key={participant.profile.id}
             title={participant.profile.fullname}
             after={addLink(participant)}>
             <img slot="media" src={participant.profile.avatar} width="27" height="27" />

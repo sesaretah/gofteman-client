@@ -36,7 +36,7 @@ const Works = (props) => {
         if (work.status) {
             result.push(
 
-                <div className="chip" >
+                <div className="chip" key={'work-status-chip' + work.id }>
                     <div className="chip-media" style={{ backgroundColor: work.status.color }} >
                         <i className="icon f7-icons if-not-md">plus_circle</i>
                         <i className="icon material-icons md-only"></i>
@@ -68,7 +68,8 @@ const Works = (props) => {
                     <List mediaList >
                         {props.task.works.map((work) =>
                             <ListItem
-                                className='work-media'
+                                key={'work'+work.id}
+                                className='fs-11 work-media'
                                 link={"/works/" + work.id}
                                 title={work.title}
                                 after={chip(work)}

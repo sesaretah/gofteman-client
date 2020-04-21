@@ -47,7 +47,7 @@ const WorkList = (props) => {
         <CardContent>
           <List mediaList className='fs-11'>
             {props.works.map((work) =>
-              <ListItem title={work.title} text={dict.task + ':'+ work.task.title} after={alerts(work)} link={'/works/' + work.id}></ListItem>
+              <ListItem   key={'workList'+work.id} title={work.title} text={dict.task + ':'+ work.task.title} after={alerts(work)} link={'/works/' + work.id}></ListItem>
             )}
           </List>
         </CardContent>
