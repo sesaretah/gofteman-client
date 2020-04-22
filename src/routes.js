@@ -33,6 +33,11 @@ import WorkUpdate from './components/works/update';
 import TodoCreate from './components/todos/create';
 import TodoUpdate from './components/todos/update';
 
+import TimeSheetShow from './components/time_sheets/show';
+import TimeSheetIndex from './components/time_sheets/index';
+import TimeSheetCreate from './components/time_sheets/create';
+import TimeSheetUpdate from './components/time_sheets/update';
+
 
 import ProfileShow from './components/profiles/show';
 import ProfileIndex from './components/profiles/index';
@@ -143,6 +148,24 @@ export default [
     component: TagShow,
   },
 
+
+
+  {
+    path: '/time_sheets/',
+    component: TimeSheetIndex,
+  },
+  {
+    path: '/time_sheets/:timeSheetId/edit',
+    component: TimeSheetUpdate,
+  },
+  {
+    path: '/time_sheets/new',
+    component: TimeSheetCreate,
+  },
+  {
+    path: '/time_sheets/:timeSheetId',
+    component: TimeSheetShow,
+  },
 
 
   {

@@ -197,5 +197,11 @@ export const dict = {
   'todo_participants': 'افراد',
   'new_todo_participants': 'افراد جدید',
   'not_found': 'چیزی یافت نشد',
-  'are_you_sure': 'مطمئن هستید؟'
+  'are_you_sure': 'مطمئن هستید؟',
+  'Confirmer': 'تایید کننده',
+  'time_sheets': 'جداول زمان کار',
+  'morning_report':'گزارش پیش از ظهر',
+  'afternoon_report':'گزارش بعد از ظهر',
+  'extra_report':'گزارش اضافه کاری',
+  'write_appropriate_details':'شرحی کامل بنویسید'
 };

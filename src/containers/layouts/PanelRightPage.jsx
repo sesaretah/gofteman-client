@@ -38,6 +38,11 @@ export default class PanelRightPage extends Component {
               <i className="va ml-5 fa fa-user-circle-o"></i>
               <span>{dict.profiles}</span>
             </ListItem>
+
+            <ListItem link="/time_sheets/"  view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-hourglass-o"></i>
+              <span>{dict.time_sheets}</span>
+            </ListItem>
             
             </List>
             <BlockTitle> <i className="va ml-5 fa fa-cogs"></i>{dict.settings}</BlockTitle>

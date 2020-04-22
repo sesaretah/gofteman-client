@@ -553,4 +553,14 @@ color: var(--f7-navbar-bg-color)
   font-size: 10px;
 }
 
+.list textarea::placeholder {
+  padding-top: 2px;
+  font-size: 11px;
+}
+
+.date-input textarea::placeholder {
+  padding-top: 2px;
+  font-size: 11px;
+}
+
 

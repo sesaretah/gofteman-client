@@ -14,6 +14,7 @@ const ParticipantList = (props) => {
         return (
           <select name="role" onChange={(e) => { props.changeRole(participant.profile.id, e.target.value) }}>
             {option('Admin', participant)}
+            {option('Confirmer', participant)}
             {option('Colleague', participant)}
             {option('Observer', participant)}
           </select>
