@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
-import ParticipantList from "./participantList";
+import InvolvementList from "./involvementList";
 import SimpleList from "../profiles/simpleList";
 
 const Partcipants = (props) => {
@@ -44,8 +44,8 @@ const Partcipants = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List>
-                        <ParticipantList 
-                            participants={props.task.participants} removeProfile={props.removeProfile} 
+                        <InvolvementList 
+                            involvements={props.task.the_involvements} removeProfile={props.removeProfile} 
                             changeRole={props.changeRole} editable={props.editable}
                         />
                     </List>

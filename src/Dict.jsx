@@ -203,5 +203,7 @@ export const dict = {
   'morning_report':'گزارش پیش از ظهر',
   'afternoon_report':'گزارش بعد از ظهر',
   'extra_report':'گزارش اضافه کاری',
-  'write_appropriate_details':'شرحی کامل بنویسید'
+  'write_appropriate_details':'شرحی کامل بنویسید',
+  'associations':'مرتبط با',
+  'sheet_date':'تاریخ جدول'
 };

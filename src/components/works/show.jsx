@@ -72,7 +72,6 @@ export default class Layout extends Component {
 
   componentDidMount() {
     MyActions.getInstance('works', this.$f7route.params['workId'], this.state.token);
-    MyActions.getList('users', this.state.page, {}, this.state.token);
   }
 
   getInstance() {
@@ -87,7 +86,7 @@ export default class Layout extends Component {
         comments: work.the_comments,
         access: work.user_access,
         todos: work.the_todos,
-        //participants: work.the_participants
+        //involvementss: work.the_involvementss
       });
     }
   }
@@ -133,7 +132,7 @@ export default class Layout extends Component {
 
   addProfile(profileId){
     var data = { id: this.state.id, profile_id: profileId}
-    MyActions.setInstance('works/participants', data, this.state.token);
+    MyActions.setInstance('works/involvements', data, this.state.token);
   }
 
   addStatus(statusId){
@@ -143,7 +142,7 @@ export default class Layout extends Component {
 
   removeProfile(profileId) {
     var data = { id: this.state.id, profile_id: profileId}
-    MyActions.removeInstance('works/participants', data, this.state.token);
+    MyActions.removeInstance('works/involvements', data, this.state.token);
   }
 
   addAbility() {

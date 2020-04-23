@@ -59,8 +59,7 @@ export default class Layout extends Component {
   }
 
   componentDidMount() {
-    MyActions.getInstance('time_sheets', this.$f7route.params['time_sheetId'], this.state.token);
-    MyActions.getList('users', this.state.page, {}, this.state.token);
+    MyActions.getInstance('time_sheets', this.$f7route.params['timeSheetId'], this.state.token);
   }
 
   getInstance() {

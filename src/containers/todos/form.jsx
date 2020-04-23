@@ -6,10 +6,10 @@ import crypto from 'crypto-js';
 
 const TodoForm = (props) => {
   if (true) {
-    function participantChecked(workParticipant) {
+    function involvementChecked(workInvolvement) {
       var flag = false
-      props.participants.map((participant) => {
-        if (participant.id === workParticipant.profile.id) {
+      props.involvements.map((involvement) => {
+        if (involvement.id === workInvolvement.profile.id) {
           flag = true
         }
       }
@@ -31,13 +31,13 @@ const TodoForm = (props) => {
         />
 
         <List className='fs-11 ' >
-          {props.workParticipants.map((workParticipant) =>
+          {props.workInvolvements.map((workInvolvement) =>
             <ListItem
-              key={workParticipant.id}
+              key={workInvolvement.id}
               checkbox
-              checked={participantChecked(workParticipant)}
-              onChange={(e) => props.participantCheck(workParticipant.profile.id, e)}
-              title={workParticipant.profile.fullname}
+              checked={involvementChecked(workInvolvement)}
+              onChange={(e) => props.involvementCheck(workInvolvement.profile.id, e)}
+              title={workInvolvement.profile.fullname}
               after=''>
             </ListItem>
 

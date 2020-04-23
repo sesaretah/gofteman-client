@@ -67,7 +67,6 @@ export default class Layout extends Component {
 
   componentDidMount() {
     MyActions.getInstance('tasks', this.$f7route.params['taskId'], this.state.token);
-    MyActions.getList('users', this.state.page, {}, this.state.token);
   }
 
   getInstance() {
@@ -83,6 +82,7 @@ export default class Layout extends Component {
         access: task.user_access
       });
     }
+    console.log(task)
   }
 
 
@@ -133,7 +133,7 @@ export default class Layout extends Component {
 
   addProfile(profileId){
     var data = { id: this.state.id, profile_id: profileId}
-    MyActions.setInstance('tasks/participants', data, this.state.token);
+    MyActions.setInstance('tasks/involvements', data, this.state.token);
   }
 
   addStatus(statusId){
@@ -143,7 +143,7 @@ export default class Layout extends Component {
 
   removeProfile(profileId) {
     var data = { id: this.state.id, profile_id: profileId}
-    MyActions.removeInstance('tasks/participants', data, this.state.token);
+    MyActions.removeInstance('tasks/involvements', data, this.state.token);
   }
 
   changeRole(profile_id, role) {

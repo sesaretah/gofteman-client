@@ -1,7 +1,7 @@
 import React from "react";
 import { Block, AccordionContent, Card, Row, Col, CardHeader, CardContent, List, ListItem, Chip, Icon, CardFooter, BlockTitle, Link } from 'framework7-react';
 import { dict } from '../../Dict';
-import Participants from './participants';
+import Involvements from './involvements';
 import Statuses from "./status";
 import Works from "./works";
 import Reports from "./reports";
@@ -41,13 +41,13 @@ const TaskShow = (props) => {
           />)
       }
 
-      if (segment === 'participants') {
+      if (segment === 'involvements') {
         var editable = false
-        if (props.access.includes('participants')) {
+        if (props.access.includes('involvements')) {
           editable = true
         }
         return (
-          <Participants
+          <Involvements
             task={props.task} searchProfile={props.searchProfile}
             removeProfile={props.removeProfile} addProfile={props.addProfile}
             profiles={props.profiles} changeRole={props.changeRole}
@@ -115,7 +115,7 @@ const TaskShow = (props) => {
                 </Col>
 
                 <Col width='100' tabletWidth='50'>
-                  {access('participants')}
+                  {access('involvements')}
                 </Col>
               </Row>
 

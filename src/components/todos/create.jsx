@@ -16,15 +16,15 @@ export default class TodoCreate extends Component {
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.getInstance = this.getInstance.bind(this);
-    this.participantCheck = this.participantCheck.bind(this);
+    this.involvementCheck = this.involvementCheck.bind(this);
     
     
     this.state = {
       token: window.localStorage.getItem('token'),
       todo: {},
       title: null,
-      participants: [],
-      workParticipants: [],
+      involvements: [],
+      workInvolvements: [],
     }
   }
 
@@ -47,7 +47,7 @@ export default class TodoCreate extends Component {
   submit() {
     var data = { 
         title: this.state.title, work_id: this.$f7route.params['workId'],
-        participants: this.state.participants
+        involvements: this.state.involvements
     }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.setInstance('todos', data, this.state.token);
@@ -77,18 +77,18 @@ export default class TodoCreate extends Component {
     var klass = ModelStore.getKlass()
     if (work && klass === 'Work') {
       this.setState({
-        workParticipants: work.the_participants
+        workInvolvements: work.the_involvements
       });
     }
   }
 
-  participantCheck(id, e){
+  involvementCheck(id, e){
     if (e.target.checked) {
-      this.setState({ participants: this.state.participants.concat({ id: id })})
+      this.setState({ involvements: this.state.involvements.concat({ id: id })})
     } else {
       this.setState({
-        participants: this.state.participants.filter(function (participant) {
-          return participant.id !== id
+        involvements: this.state.involvements.filter(function (involvement) {
+          return involvement.id !== id
         })
       });
     }
@@ -97,15 +97,15 @@ export default class TodoCreate extends Component {
 
 
   render() {
-    const { todo, participants, workParticipants } = this.state;
+    const { todo, involvements, workInvolvements } = this.state;
     return (
       <Page  backLink={dict.back} backLinkForce={true}>
         <Navbar title={dict.work_form} backLink={dict.back} />
         <BlockTitle>{dict.work_form}</BlockTitle>
         <TodoForm 
-        todo={todo} workParticipants={workParticipants}
-         participants={participants} removeParticipant={this.removeParticipant}
-        submit={this.submit} editing={true} participantCheck={this.participantCheck}
+        todo={todo} workInvolvements={workInvolvements}
+         involvements={involvements} removeInvolvement={this.removeInvolvement}
+        submit={this.submit} editing={true} involvementCheck={this.involvementCheck}
         handleChange={this.handleChangeValue} />
       </Page>
     );

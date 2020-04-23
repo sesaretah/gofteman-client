@@ -7,12 +7,12 @@ import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
 
-const TodosParticipantsList = (props) => {
+const TodosInvolvementsList = (props) => {
 
-  function addParticipants(todo) {
+  function addInvolvements(todo) {
     var chips = []
-    todo.participants.map((participant) =>
-      chips.push(<Chip key={'chip' +'-'+todo.id +'-'+ participant.profile.id} className="ml-5" text={participant.profile.fullname} />)
+    todo.involvements.map((involvement) =>
+      chips.push(<Chip key={'chip' +'-'+todo.id +'-'+ involvement.profile.id} className="ml-5" text={involvement.profile.fullname} />)
     )
     chips.push(<Link key={'todoEdit'+ todo.id} href={'/todos/' + todo.id + '/edit'}><i className="ml-5 fa fa-edit"></i></Link>)
     chips.push(<Link key={'todoDelete'+ todo.id} onClick={() => props.deleteTodoConfirm(todo.id)}><i className="ml-5 fa fa-trash"></i></Link>)
@@ -39,7 +39,7 @@ const TodosParticipantsList = (props) => {
                 <div className="item-title of-visible mw-auto">{todo.title}</div>
                 <div className="item-after">
                   <span>
-                    {addParticipants(todo)}
+                    {addInvolvements(todo)}
                   </span>
                 </div>
               </div>
@@ -53,12 +53,12 @@ const TodosParticipantsList = (props) => {
     return (<ul></ul>)
   }
 }
-export default TodosParticipantsList;
+export default TodosInvolvementsList;
         /*<ListItem
 className={lt(todo)}
 checkbox
 checked={todo.check}
 onChange={(e) => props.todoChecked(todo.id,e)}
 title={todo.title}
-after={addParticipants(todo)}>
+after={addInvolvements(todo)}>
 </ListItem>*/

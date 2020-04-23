@@ -12,7 +12,7 @@ const TimeSheetList = (props) => {
             key={crypto.lib.WordArray.random(32)}
             link={"/time_sheets/" + time_sheet.id}
             ignoreCache={true}
-            title={time_sheet.title}
+            title={time_sheet.jdate}
             after=""
             subtitle=""
             text=""

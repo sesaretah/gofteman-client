@@ -60,7 +60,6 @@ export default class Layout extends Component {
 
   componentDidMount() {
     MyActions.getInstance('statuses', this.$f7route.params['statusId'], this.state.token);
-    MyActions.getList('users', this.state.page, {}, this.state.token);
   }
 
   getInstance() {

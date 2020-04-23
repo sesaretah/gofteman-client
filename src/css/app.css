@@ -351,7 +351,7 @@ li.media-item .item-media img {
 }
 
 .aurora .navbar .left {
-  margin-left: 100px;
+  margin-left: 146px;
 }
 
 .list .item-inner { 
@@ -373,6 +373,11 @@ li.media-item .item-media img {
 .mb-20 {
   margin-bottom: 20px;
 }
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
 
 .profile-card {
   position: absolute;
@@ -561,6 +566,14 @@ color: var(--f7-navbar-bg-color)
 .date-input textarea::placeholder {
   padding-top: 2px;
   font-size: 11px;
+}
+
+.va-minus-2 {
+  vertical-align: -2px;
+}
+
+.bg-gainsboro {
+ 
 }
 
 

@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
-import TodosParticipantsList from "./todosParticipantsList";
+import TodosInvolvementsList from "./todosInvolvementList";
 import  SimpleList from "../profiles/simpleList";
 import  TodoForm from "./form";
 
@@ -25,7 +25,7 @@ const TodoList = (props) => {
                 </CardHeader>
                 <CardContent>
                     <List>
-                        <TodosParticipantsList 
+                        <TodosInvolvementsList 
                         todos={props.todos} todoChecked={props.todoChecked} 
                         deleteTodoConfirm={props.deleteTodoConfirm}
                         />

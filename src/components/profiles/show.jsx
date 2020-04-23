@@ -22,7 +22,6 @@ export default class Layout extends Component {
   constructor() {
     super();
     this.getInstance = this.getInstance.bind(this);
-    this.addTag = this.addTag.bind(this);
     
     this.state = {
       profile: null,
@@ -70,9 +69,6 @@ export default class Layout extends Component {
     }
   }
 
-  addTag(){
-    console.log('hey');
-  }
 
   render() {
     const { profile, actuals, metas, channels } = this.state;

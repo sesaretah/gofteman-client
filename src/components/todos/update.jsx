@@ -16,10 +16,10 @@ export default class TodoCreate extends Component {
     this.submit = this.submit.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.removeParticipant = this.removeParticipant.bind(this);
+    this.removeInvolvement = this.removeInvolvement.bind(this);
     this.getInstance = this.getInstance.bind(this);
-    this.participantCheck = this.participantCheck.bind(this);
-    this.setParticipants = this.setParticipants.bind(this);
+    this.involvementCheck = this.involvementCheck.bind(this);
+    this.setInvolvements = this.setInvolvements.bind(this);
     
     
     this.state = {
@@ -27,8 +27,8 @@ export default class TodoCreate extends Component {
       todo: {},
       title: null,
       id: null, 
-      participants: [],
-      workParticipants: [],
+      involvements: [],
+      workInvolvements: [],
     }
   }
 
@@ -60,7 +60,7 @@ export default class TodoCreate extends Component {
     var data = { 
         id: this.state.id,
         title: this.state.title,
-        participants: this.state.participants
+        involvements: this.state.involvements
     }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.updateInstance('todos', data, this.state.token);
@@ -71,10 +71,10 @@ export default class TodoCreate extends Component {
 
   }
 
-  removeParticipant(id) {
+  removeInvolvement(id) {
     this.setState({
-      participants: this.state.participants.filter(function (participant) {
-        return participant.id !== id
+      involvements: this.state.involvements.filter(function (involvement) {
+        return involvement.id !== id
       })
     });
   }
@@ -86,31 +86,31 @@ export default class TodoCreate extends Component {
       this.setState({
         title: todo.title,
         id: todo.id,
-        //participants: todo.participant_tags,
-        workParticipants: todo.work_participants
-      }, () =>  this.setParticipants());
+        //involvements: todo.involvement_tags,
+        workInvolvements: todo.work_involvements
+      }, () =>  this.setInvolvements());
     }
   }
 
-  setParticipants(){
-    this.setState({ participants: [] });
+  setInvolvements(){
+    this.setState({ involvements: [] });
     var arr = []
-    this.state.workParticipants.map((workParticipant) => {
-      if(workParticipant.check){
-        arr.push({ id: workParticipant.profile.id })
+    this.state.workInvolvements.map((workInvolvement) => {
+      if(workInvolvement.check){
+        arr.push({ id: workInvolvement.profile.id })
       }
     })
-    this.setState({ participants: arr})
+    this.setState({ involvements: arr})
   }
 
 
-  participantCheck(id, e){
+  involvementCheck(id, e){
     if (e.target.checked) {
-      this.setState({ participants: this.state.participants.concat({ id: id })})
+      this.setState({ involvements: this.state.involvements.concat({ id: id })})
     } else {
       this.setState({
-        participants: this.state.participants.filter(function (participant) {
-          return participant.id !== id
+        involvements: this.state.involvements.filter(function (involvement) {
+          return involvement.id !== id
         })
       });
     }
@@ -133,15 +133,15 @@ export default class TodoCreate extends Component {
 
 
   render() {
-    const { todo, participants, title , workParticipants} = this.state;
+    const { todo, involvements, title , workInvolvements} = this.state;
     return (
       <Page  backLink={dict.back} backLinkForce={true}>
         <Navbar title={dict.work_form} backLink={dict.back} />
         <BlockTitle>{dict.work_form}</BlockTitle>
         <TodoForm 
-        todo={todo} workParticipants={workParticipants}
-         title={title} participants={participants} participantCheck={this.participantCheck}
-        removeParticipant={this.removeParticipant} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
+        todo={todo} workInvolvements={workInvolvements}
+         title={title} involvements={involvements} involvementCheck={this.involvementCheck}
+        removeInvolvement={this.removeInvolvement} submit={this.submit} editing={true} handleChange={this.handleChangeValue} />
       </Page>
     );
   }

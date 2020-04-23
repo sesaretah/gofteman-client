@@ -7,36 +7,36 @@ import JDate from 'jalali-date';
 import 'moment-timezone';
 import 'moment/locale/fa';
 
-const ParticipantList = (props) => {
-  if (props.participants) {
-    function select(participant) {
-      if (participant.role !== 'Creator' && props.editable) {
+const InvolvementList = (props) => {
+  if (props.involvements) {
+    function select(involvement) {
+      if (involvement.role !== 'Creator' && props.editable) {
         return (
-          <select name="role" onChange={(e) => { props.changeRole(participant.profile.id, e.target.value) }}>
-            {option('Admin', participant)}
-            {option('Colleague', participant)}
-            {option('Observer', participant)}
+          <select name="role" onChange={(e) => { props.changeRole(involvement.profile.id, e.target.value) }}>
+            {option('Admin', involvement)}
+            {option('Colleague', involvement)}
+            {option('Observer', involvement)}
           </select>
         )
       }
     }
-    function option(role, participant) {
+    function option(role, involvement) {
       var selected = false
-      if (participant.role == role) {
+      if (involvement.role == role) {
         selected = true
       }
       return (<option value={role} selected={selected}>{dict[role]}</option>)
     }
-    function addLink(participant) {
+    function addLink(involvement) {
       if (props.removeProfile) {
         return (
           <div className='inline'>
             <a className=" fs-10 smart-select smart-select-init" data-open-in="popover">
-              {select(participant)}
+              {select(involvement)}
               <div className="item-content">
                 <div className="item-inner bg-w-after">
                   <div className="item-title">{dict.role}</div>
-                  <div className="item-after mt-2">{dict[participant.role]}</div>
+                  <div className="item-after mt-2">{dict[involvement.role]}</div>
                 </div>
               </div>
             </a>
@@ -46,12 +46,12 @@ const ParticipantList = (props) => {
     }
     return (
       <List className='fs-11'>
-        {props.participants.map((participant) =>
+        {props.involvements.map((involvement) =>
           <ListItem
-            key={'participant' + participant.profile.id}
-            title={participant.profile.fullname}
-            after={addLink(participant)}>
-            <img slot="media" src={participant.profile.avatar} width="27" height="27" />
+            key={'involvement' + involvement.profile.id}
+            title={involvement.profile.fullname}
+            after={addLink(involvement)}>
+            <img slot="media" src={involvement.profile.avatar} width="27" height="27" />
           </ListItem>
         )}
       </List>
@@ -60,4 +60,4 @@ const ParticipantList = (props) => {
     return (<ul></ul>)
   }
 }
-export default ParticipantList;
+export default InvolvementList;
