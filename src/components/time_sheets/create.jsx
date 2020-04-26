@@ -28,6 +28,8 @@ export default class TimeSheetCreate extends Component {
     this.loadCalender = this.loadCalender.bind(this);
     this.loadAssociation = this.loadAssociation.bind(this);
     this.removeAssociation = this.removeAssociation.bind(this);
+    this.removeInvolvement = this.removeInvolvement.bind(this);
+    
     
     
     
@@ -37,6 +39,8 @@ export default class TimeSheetCreate extends Component {
       afternoonReport: null,
       extraReport: null,
       associations: [],
+      involvements: [],
+      time_sheet: {},
       timeSheetDate:  new Date(),
     }
   }
@@ -54,7 +58,8 @@ export default class TimeSheetCreate extends Component {
     var data = {
       associations: this.state.associations,
       morning_report: this.state.morningReport, afternoon_report: this.state.afternoonReport,
-      extra_report: this.state.extraReport, sheet_date: this.state.timeSheetDate
+      extra_report: this.state.extraReport, sheet_date: this.state.timeSheetDate,
+      involvements: this.state.involvements
     }
     MyActions.setInstance('time_sheets', data, this.state.token);
   }
@@ -65,7 +70,7 @@ export default class TimeSheetCreate extends Component {
 
     app.autocomplete.create({
       openIn: 'popup', //open in page
-      openerEl: '#morning-association', //link that opens autocomplete
+      openerEl: '#Morning-association', //link that opens autocomplete
       multiple: true, //allow multiple values
       valueProperty: 'id', //object's "value" property name
       textProperty: 'title', //object's "text" property name
@@ -96,7 +101,7 @@ export default class TimeSheetCreate extends Component {
           success: function (item) {
             // Find matched items
             for (var i = 0; i < item.data.length; i++) {
-              if (item.data[i].title.indexOf(query) >= 0) results.push(item.data[i]);
+              results.push(item.data[i]);
             }
             // Hide Preoloader
             autocomplete.preloaderHide();
@@ -108,7 +113,8 @@ export default class TimeSheetCreate extends Component {
       on: {
         change: function (value) {
           if (value && value[value.length - 1]) {
-            self.setState({ associations: self.state.associations.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id , type: 'Morning'}) })
+            console.log(value[value.length - 1])
+            self.setState({ associations: self.state.associations.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id , a_type:  value[value.length - 1].a_type, kind: 'Morning'}) })
           }
         },
       },
@@ -116,7 +122,7 @@ export default class TimeSheetCreate extends Component {
 
     app.autocomplete.create({
       openIn: 'popup', //open in page
-      openerEl: '#afternoon-association', //link that opens autocomplete
+      openerEl: '#Afternoon-association', //link that opens autocomplete
       multiple: true, //allow multiple values
       valueProperty: 'id', //object's "value" property name
       textProperty: 'title', //object's "text" property name
@@ -147,7 +153,7 @@ export default class TimeSheetCreate extends Component {
           success: function (item) {
             // Find matched items
             for (var i = 0; i < item.data.length; i++) {
-              if (item.data[i].title.indexOf(query) >= 0) results.push(item.data[i]);
+              results.push(item.data[i]);
             }
             // Hide Preoloader
             //autocomplete.preloaderHide();
@@ -159,7 +165,109 @@ export default class TimeSheetCreate extends Component {
       on: {
         change: function (value) {
           if (value && value[value.length - 1]) {
-            self.setState({ associations: self.state.associations.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id , type: 'Afternoon'}) })
+            self.setState({ associations: self.state.associations.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id ,  a_type:  value[value.length - 1].a_type, kind: 'Afternoon'}) })
+          }
+        },
+      },
+    });
+
+    app.autocomplete.create({
+      openIn: 'popup', //open in page
+      openerEl: '#Extra-association', //link that opens autocomplete
+      multiple: true, //allow multiple values
+      valueProperty: 'id', //object's "value" property name
+      textProperty: 'title', //object's "text" property name
+      searchbarDisableText: dict.cancel,
+      popupCloseLinkText: dict.close,
+      notFoundText: dict.not_found,
+      limit: 50,
+      searchbarPlaceholder: dict.search,
+      //preloader: true, //enable preloader
+      source: function (query, render) {
+        var autocomplete = this;
+        var results = [];
+        if (query.length === 0) {
+          render(results);
+          return;
+        }
+        // Show Preloader
+       // autocomplete.preloaderShow();
+        // Do Ajax request to Autocomplete data
+        app.request({
+          url: 'http://localhost:3001/v1/time_sheets/search_ass',
+          method: 'GET',
+          dataType: 'json',
+          //send "query" to server. Useful in case you generate response dynamically
+          data: {
+            q: query
+          },
+          success: function (item) {
+            // Find matched items
+            for (var i = 0; i < item.data.length; i++) {
+              results.push(item.data[i]);
+            }
+            // Hide Preoloader
+            //autocomplete.preloaderHide();
+            // Render items by passing array with result items
+            render(results);
+          }
+        });
+      },
+      on: {
+        change: function (value) {
+          if (value && value[value.length - 1]) {
+            self.setState({ associations: self.state.associations.concat({ title: value[value.length - 1].title, id: value[value.length - 1].id ,  a_type:  value[value.length - 1].a_type, kind: 'Extra'}) })
+          }
+        },
+      },
+    });
+
+    app.autocomplete.create({
+      openIn: 'popup', //open in page
+      openerEl: '#time-sheet-involvements', //link that opens autocomplete
+      multiple: true, //allow multiple values
+      valueProperty: 'id', //object's "value" property name
+      textProperty: 'fullname', //object's "text" property name
+      searchbarDisableText: dict.cancel,
+      popupCloseLinkText: dict.close,
+      notFoundText: dict.not_found,
+      limit: 50,
+      searchbarPlaceholder: dict.search,
+      //preloader: true, //enable preloader
+      source: function (query, render) {
+        var autocomplete = this;
+        var results = [];
+        if (query.length === 0) {
+          render(results);
+          return;
+        }
+        // Show Preloader
+       // autocomplete.preloaderShow();
+        // Do Ajax request to Autocomplete data
+        app.request({
+          url: 'http://localhost:3001/v1/profiles/search',
+          method: 'GET',
+          dataType: 'json',
+          //send "query" to server. Useful in case you generate response dynamically
+          data: {
+            q: query
+          },
+          success: function (item) {
+            // Find matched items
+            for (var i = 0; i < item.data.length; i++) {
+               results.push(item.data[i]);
+            }
+            // Hide Preoloader
+            //autocomplete.preloaderHide();
+            // Render items by passing array with result items
+            render(results);
+          }
+        });
+      },
+      on: {
+        change: function (value) {
+          if (value && value[value.length - 1]) {
+            self.setState({ involvements: self.state.involvements.concat({ fullname: value[value.length - 1].fullname, id: value[value.length - 1].id }) })
           }
         },
       },
@@ -203,10 +311,18 @@ export default class TimeSheetCreate extends Component {
     });
   }
 
-  removeAssociation(id, type){
+  removeAssociation(id, kind){
     this.setState({
       associations: this.state.associations.filter(function (association) {
-        return (association.id !== id || association.type !== type)
+        return (association.id !== id || association.kind !== kind)
+      })
+    });
+  }
+
+  removeInvolvement(id){
+    this.setState({
+      involvements: this.state.involvements.filter(function (involvement) {
+        return involvement.id !== id
       })
     });
   }
@@ -215,7 +331,7 @@ export default class TimeSheetCreate extends Component {
 
 
   render() {
-    const {time_sheet, associations} = this.state;
+    const {time_sheet, associations, involvements} = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.time_sheet_form} backLink={dict.back} />
@@ -224,6 +340,7 @@ export default class TimeSheetCreate extends Component {
           time_sheet={time_sheet} submit={this.submit}
            editing={true} handleChange={this.handleChangeValue}
            associations={associations} removeAssociation={this.removeAssociation}
+           involvements={involvements} removeInvolvement={this.removeInvolvement}
            />
       </Page>
     );

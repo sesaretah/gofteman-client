@@ -19,6 +19,20 @@ export function getList(model, page=1, params={}, token) {
   });
 }
 
+export function getMultipleList(model, page=1, params={}, token) {
+  var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+  axios.get(server + '/'+ model +'?page='+page+'&'+queryString, { headers: {'Content-Type': 'application/json', 'Authorization': "bearer " + token } })
+  .then(function (response) {
+    dispatcher.dispatch({
+      type: "MULTIPLE_LIST_MODEL_SUCCESS",
+      list: response.data,
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 export function fileUpload(model, id , file, token){
   const url = server + '/'+ model +'/'+id;
   const formData = new FormData();

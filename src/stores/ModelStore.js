@@ -6,6 +6,7 @@ class ModelStore extends EventEmitter {
   constructor() {
     super()
     this.list = [];
+    this.multipleList = [];
     this.instance = null;
     this.klass= null;
   }
@@ -23,6 +24,12 @@ class ModelStore extends EventEmitter {
       this.emit("got_list");
     }
 
+  }
+
+  listMultipleModel(list){
+    this.multipleList = list.data;
+    this.klass = list.klass
+    this.emit("got_multiple_list");
   }
 
   showIntance(instance){
@@ -59,6 +66,10 @@ class ModelStore extends EventEmitter {
     return this.list
   }
 
+  getMutipleList(){
+    return this.multipleList
+  }
+
   getListnKlass(){
     return [this.list, this.klass]
   }
@@ -71,6 +82,10 @@ class ModelStore extends EventEmitter {
     switch(action.type) {
       case "LIST_MODEL_SUCCESS": {
         this.listModel(action.list);
+        break;
+      }
+      case "MULTIPLE_LIST_MODEL_SUCCESS": {
+        this.listMultipleModel(action.list);
         break;
       }
       case "GET_INSTANCE_SUCCESS": {

@@ -25,22 +25,17 @@ export default class Layout extends Component {
     this.getList = this.getList.bind(this);
     this.submit = this.submit.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
-    this.removeTimeSheet = this.removeTimeSheet.bind(this);
-    this.addAbility = this.addAbility.bind(this);
-    this.removeAbility = this.removeAbility.bind(this);
-
+    this.deleteComment = this.deleteComment.bind(this);
+    this.submitComment = this.submitComment.bind(this);
+    this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
     
 
     this.state = {
       token: window.localStorage.getItem('token'),
       time_sheet: null,
       id: null,
-      users: null,
-      assignedUsers: null,
       user_id: null,
-      abilityTitle: '',
-      abilityValue: true,
-      ability: null,
+      comments: null,
     }
   }
 
@@ -69,8 +64,7 @@ export default class Layout extends Component {
       this.setState({
         time_sheet: time_sheet,
         id: time_sheet.id,
-        assignedUsers: time_sheet.users,
-        ability: time_sheet.ability
+        comments: time_sheet.the_comments,
       });
     }
   }
@@ -90,10 +84,24 @@ export default class Layout extends Component {
     MyActions.setInstance('users/assignments', data, this.state.token);
   }
 
-  addAbility() {
-    var data = { id: this.state.id, ability_title: this.state.abilityTitle, ability_value: this.state.abilityValue}
-    MyActions.setInstance('time_sheets/abilities', data, this.state.token);
+  submitComment() {
+    var data = { commentable_type: 'TimeSheet' ,commentable_id: this.state.id, content: this.state.commentContent }
+    MyActions.setInstance('comments', data, this.state.token);
   }
+
+
+  deleteCommentConfirm(id){
+    const self = this;
+    const app = self.$f7;
+    app.dialog.confirm(dict.are_you_sure, dict.alert, () => self.deleteComment(id))
+  }
+
+  deleteComment(id) {
+    var data = { id: id }
+    MyActions.removeInstance('comments', data, this.state.token, this.state.page);
+  }
+
+
 
   handleChangeValue(obj) {
     this.setState(obj);
@@ -110,22 +118,19 @@ export default class Layout extends Component {
     }
   }
 
-  removeTimeSheet(user_id) {
-    MyActions.removeInstance('users/assignments', { user_id: user_id, time_sheet_id: this.state.id }, this.state.token);
-  }
-
-  removeAbility(title){
-    MyActions.removeInstance('time_sheets/abilities', { id: this.state.id, title: title }, this.state.token);
-  }
-
   render() {
-    const { time_sheet, users, assignedUsers, ability } = this.state;
+    const { time_sheet, comments } = this.state;
     return (
       <Page>
         <Navbar title={dict.time_sheets} backLink={dict.back} />
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <TimeSheetShow time_sheet={time_sheet} users={users} ability={ability} removeAbility={this.removeAbility} assignedUsers={assignedUsers} addAbility={this.addAbility} removeTimeSheet={this.removeTimeSheet} submit={this.submit} handleChange={this.handleChangeValue} />
+        <TimeSheetShow 
+          time_sheet={time_sheet} 
+          submit={this.submit} handleChange={this.handleChangeValue} 
+          comments={comments}
+          submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
+          />
       </Page>
     );
   }

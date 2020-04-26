@@ -205,5 +205,8 @@ export const dict = {
   'extra_report':'گزارش اضافه کاری',
   'write_appropriate_details':'شرحی کامل بنویسید',
   'associations':'مرتبط با',
-  'sheet_date':'تاریخ جدول'
+  'sheet_date':'تاریخ جدول',
+  'recipients':'دریافت کنندگان',
+  'sent_by_me': 'ارسال شده ها',
+  'sent_to_me':'دریافت شده ها'
 };

@@ -1,14 +1,12 @@
 import React from "react";
 import { Page, Navbar, List, BlockTitle, ListItem, Chip, Icon, Preloader, Block } from 'framework7-react';
 import { dict } from '../../Dict';
-import AssignmentForm from "../assignments/form";
-import AssignmentList from "../assignments/list";
+import CommentForm from "../comments/form"
+import CommentList from "../comments/list"
 
-import AccessControlForm from "../access_controls/form";
-import AccessControlList from "../access_controls/list";
 
 const TimeSheetShow = (props) => {
-  function morningAssociation() {
+  function association(kind) {
     var chips = [
       <div>
         <div className="item-title fs-11">
@@ -18,8 +16,8 @@ const TimeSheetShow = (props) => {
     ]
     if (props.time_sheet.the_associations) {
       props.time_sheet.the_associations.map((association) => {
-        if (association.type == 'Morning') {
-          chips.push(<Chip text={association.title} />)
+        if (association.kind == kind) {
+          chips.push(<a href={'/' + association.a_type + '/' + association.id + '/'}><Chip text={association.title} /></a>)
         }
       }
       )
@@ -27,45 +25,7 @@ const TimeSheetShow = (props) => {
     return chips
   }
 
-  function afternoonAssociation() {
-    var chips = [
-      <div>
-        <div className="item-title fs-11">
-          {dict.associations}:
-        </div>
-      </div>
-    ]
-    if (props.time_sheet.the_associations) {
-      props.time_sheet.the_associations.map((association) => {
-        if (association.type == 'Afternoon') {
-          chips.push(<Chip text={association.title} />)
-        }
-      }
-      )
-    }
-    return chips
-  }
-
-  function extraAssociation() {
-    var chips = [
-      <div>
-        <div className="item-title fs-11">
-          {dict.associations}:
-        </div>
-      </div>
-    ]
-    if (props.time_sheet.the_associations) {
-      props.time_sheet.the_associations.map((association) => {
-        if (association.type == 'Extra') {
-          chips.push(<Chip text={association.title} />)
-        }
-      }
-      )
-    }
-    return chips
-  }
   if (props.time_sheet) {
-    console.log(props.time_sheet.the_associations)
     return (
       <React.Fragment>
         <BlockTitle>{dict.sheet_date}</BlockTitle>
@@ -73,25 +33,40 @@ const TimeSheetShow = (props) => {
           <ListItem>{props.time_sheet.jdate}</ListItem>
         </List>
 
+        <List className='fs-11'>
+        {props.time_sheet.the_involvements.map((involvement) =>
+          <ListItem
+            key={'involvement' + involvement.profile.id}
+            title={involvement.profile.fullname}
+            after=''>
+            <img slot="media" src={involvement.profile.avatar} width="27" height="27" />
+          </ListItem>
+        )}
+      </List>
+
         <BlockTitle>{dict.morning_report}</BlockTitle>
         <List simple-list>
           <ListItem>{props.time_sheet.morning_report}</ListItem>
-          <ListItem>{morningAssociation()}</ListItem>
+          <ListItem>{association('Morning')}</ListItem>
         </List>
 
         <BlockTitle>{dict.afternoon_report}</BlockTitle>
         <List simple-list>
           <ListItem>{props.time_sheet.afternoon_report}</ListItem>
-          <ListItem>{afternoonAssociation()}</ListItem>
+          <ListItem>{association('Afternoon')}</ListItem>
         </List>
 
         <BlockTitle>{dict.extra_report}</BlockTitle>
         <List simple-list>
           <ListItem>{props.time_sheet.extra_report}</ListItem>
-          <ListItem>{extraAssociation()}</ListItem>
+          <ListItem>{association('Extra')}</ListItem>
         </List>
 
+        <CommentForm model={props.time_sheet} submit={props.submitComment} handleChange={props.handleChange}/>
 
+        <CommentList
+                comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}
+                loadMore={props.loadMore} />
       </React.Fragment>
     )
   } else {
