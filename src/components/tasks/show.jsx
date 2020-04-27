@@ -29,7 +29,7 @@ export default class Layout extends Component {
     this.loadMore = this.loadMore.bind(this);
     this.changeRole = this.changeRole.bind(this);
     this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
-    
+    this.toggleSuggestor = this.toggleSuggestor.bind(this);
     
     this.state = {
       token: window.localStorage.getItem('token'),
@@ -48,6 +48,10 @@ export default class Layout extends Component {
       statuses: [],
       access: [],
       commentContent: '',
+      showSuggestor: false,
+      left: 0,
+      top: 0,
+
     }
   }
 
@@ -184,6 +188,27 @@ export default class Layout extends Component {
     }
   }
 
+  toggleSuggestor(metaInformation) {
+    const { hookType, cursor } = metaInformation;
+    console.log(metaInformation)
+    if (hookType === 'start') {
+      this.setState({
+        showSuggestor: true,
+        left: cursor.left,
+        top: cursor.top + cursor.height, // we need to add the cursor height so that the dropdown doesn't overlap with the `@`.
+      }, () => console.log(this));
+    }
+    if (hookType === 'cancel') {
+      // reset the state
+
+      this.setState({
+        showSuggestor: false,
+        left: null,
+        top: null
+      });
+    }
+  }
+
   removeTask(user_id) {
     MyActions.removeInstance('users/assignments', { user_id: user_id, task_id: this.state.id }, this.state.token);
   }
@@ -193,7 +218,10 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { task, users, assignedUsers, ability, profiles, statuses, works, commentContent, comments, access } = this.state;
+    const { 
+      task, users, assignedUsers, ability,
+      profiles, statuses, works, commentContent,
+      comments, access , showSuggestor, top, left} = this.state;
     return (
       <Page>
         <Navbar title={dict.tasks} backLink={dict.back} backLinkForce={true}>
@@ -210,7 +238,8 @@ export default class Layout extends Component {
           searchStatus={this.searchStatus} addStatus={this.addStatus} works={works}
           submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
-          changeRole={this.changeRole} access={access} 
+          changeRole={this.changeRole} access={access} toggleSuggestor={this.toggleSuggestor}
+          showSuggestor={showSuggestor} top={top} left={left}
           />
       </Page>
     );

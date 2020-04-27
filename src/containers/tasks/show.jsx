@@ -10,6 +10,7 @@ import CommentList from "../comments/list"
 import 'moment-timezone';
 import 'moment/locale/fa';
 
+
 const TaskShow = (props) => {
   if (props.task && props.access) {
     function tags() {
@@ -77,7 +78,8 @@ const TaskShow = (props) => {
           return (
             <CommentForm
               model={props.task} submit={props.submitComment}
-              handleChange={props.handleChange} 
+              handleChange={props.handleChange} toggleSuggestor={props.toggleSuggestor} 
+              showSuggestor={props.showSuggestor} top={props.top} left={props.left}
             />
           )
         }
@@ -132,13 +134,14 @@ const TaskShow = (props) => {
                 </Col>
               </Row>
 
-
               <BlockTitle>{dict.discussions}</BlockTitle>
 
               {access('comments')}
               <CommentList
                 comments={props.comments} deleteCommentConfirm={props.deleteCommentConfirm}
                 loadMore={props.loadMore} />
+
+
             </React.Fragment>
 
           )
