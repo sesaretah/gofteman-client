@@ -28,6 +28,7 @@ export default class WorkCreate extends Component {
       startTime:  '0:00',
       deadlineTime: '0:00',
       privateWork: true,
+      priority: 'normal',
     }
   }
 
@@ -137,7 +138,7 @@ export default class WorkCreate extends Component {
       title: this.state.title, details: this.state.details, 
       start: this.state.start, start_time: this.state.startTime, 
       deadline: this.state.deadline, deadline_time: this.state.deadlineTime,
-      task_id: this.$f7route.params['taskId']
+      task_id: this.$f7route.params['taskId'], priority: this.state.priority
     }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.setInstance('works', data, this.state.token);

@@ -46,6 +46,7 @@ export default class DocumentUpdate extends Component {
       startTime: '0 00',
       deadlineTime: '0 00',
       privateWork: true,
+      priority: 'normal',
     }
   }
 
@@ -152,7 +153,12 @@ export default class DocumentUpdate extends Component {
 
 
   submit() {
-    var data = { id: this.state.id, title: this.state.title, details: this.state.details, start: this.state.start, start_time: this.state.startTime, deadline: this.state.deadline, deadline_time: this.state.deadlineTime }// start: new Date(this.state.start.setHours(startTime[0], startTime[1], 0, 0)).toISOString(), deadline:  new Date(this.state.deadline.setHours(deadlineTime[0], deadlineTime[1], 0, 0)).toISOString() }
+    var data = { 
+      id: this.state.id, title: this.state.title, details: this.state.details,
+      start: this.state.start, start_time: this.state.startTime, 
+      deadline: this.state.deadline, deadline_time: this.state.deadlineTime,
+      priority: this.state.priority
+    }// start: new Date(this.state.start.setHours(startTime[0], startTime[1], 0, 0)).toISOString(), deadline:  new Date(this.state.deadline.setHours(deadlineTime[0], deadlineTime[1], 0, 0)).toISOString() }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.updateInstance('works', data, this.state.token);
     } else {
@@ -189,6 +195,7 @@ export default class DocumentUpdate extends Component {
         startTime: work.start_time,
         deadlineTime: work.deadline_time,
         defaultWork: work.default_work,
+        priority: work.priority
       }, () => this.loadCalender());
     }
   }
@@ -221,7 +228,7 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-    const { work, defaultWork, title, content, startTime, deadlineTime } = this.state;
+    const { work, defaultWork, title, content, startTime, deadlineTime, priority } = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.work_form} backLink={dict.back} />
@@ -232,6 +239,7 @@ export default class DocumentUpdate extends Component {
         defaultWork={defaultWork} submit={this.submit} 
         editing={true} handleChange={this.handleChangeValue} 
         deleteWorkConfirm={this.deleteWorkConfirm}
+        priority={priority}
         />
       </Page>
     );

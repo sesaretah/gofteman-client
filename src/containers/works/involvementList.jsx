@@ -8,7 +8,14 @@ import 'moment-timezone';
 import 'moment/locale/fa';
 
 const InvolvementList = (props) => {
+
   if (props.involvements) {
+    function removeLink(involvement){
+      if (involvement.role !== 'Creator' && props.editable){
+        return(<Link className="mt-4" onClick={() => props.removeProfile(involvement.profile.id)}>{dict.remove}</Link>)
+      }
+    }
+
     function select(involvement) {
       if (involvement.role !== 'Creator' && props.editable) {
         return (
@@ -31,6 +38,7 @@ const InvolvementList = (props) => {
       if (props.removeProfile) {
         return (
           <div className='inline'>
+             {removeLink(involvement)}
             <a className=" fs-10 smart-select smart-select-init" data-open-in="popover">
               {select(involvement)}
               <div className="item-content">

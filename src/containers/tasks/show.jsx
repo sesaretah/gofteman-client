@@ -21,6 +21,26 @@ const TaskShow = (props) => {
       return (arr)
     }
 
+    function archived(){
+      if(props.task.archived){
+        return(
+          <Row>
+          <Col width='100' tabletWidth='100'>
+          <Card className='fs-11 card-orange'>
+            <CardContent>
+            <i class="ml-2 fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {dict.archived} <br/>
+            {props.task.archive_note}
+            </CardContent>
+            
+          </Card>
+          </Col>
+        </Row>
+        )
+      }
+
+    }
+
     function isPublic() {
       if (props.task.is_public) {
         return (dict.public)
@@ -78,8 +98,11 @@ const TaskShow = (props) => {
           return (
             <CommentForm
               model={props.task} submit={props.submitComment}
-              handleChange={props.handleChange} toggleSuggestor={props.toggleSuggestor} 
+              handleChange={props.handleChange} toggleSuggestor={props.toggleSuggestor}
               showSuggestor={props.showSuggestor} top={props.top} left={props.left}
+              profiles={props.profiles} handleInput={props.handleInput} text={props.text}
+              handleKeyDown={props.handleKeyDown} currentSelection={props.currentSelection}
+              commentContent={props.commentContent} handleTextareaInput={props.handleTextareaInput}
             />
           )
         }
@@ -95,6 +118,7 @@ const TaskShow = (props) => {
         if (props.access.includes('view')) {
           return (
             <React.Fragment>
+              {archived()}
               <Row>
                 <Col width='100' tabletWidth='50'>
                   <Card>

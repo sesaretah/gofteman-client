@@ -9,14 +9,14 @@ import 'moment/locale/fa';
 
 const ParticipantList = (props) => {
   function removeLink(involvement){
-    if (props.editable){
+    if (involvement.role !== 'Creator' && props.editable){
       return(<Link className="mt-4" onClick={() => props.removeProfile(involvement.profile.id)}>{dict.remove}</Link>)
     }
   }
 
   if (props.involvements) {
     function select(involvement) {
-      if (involvement.role !== 'Creator' && props.editable) {
+      if ( props.editable) {
         return (
           <select name="role" onChange={(e) => { props.changeRole(involvement.profile.id, e.target.value) }}>
             {option('Admin', involvement)}

@@ -9,6 +9,7 @@ import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import TaskShow from "../../containers/tasks/show"
+import { messaging } from "../../init-fcm.js";
 
 export default class Layout extends Component {
   constructor() {
@@ -18,7 +19,6 @@ export default class Layout extends Component {
     this.submit = this.submit.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.removeTask = this.removeTask.bind(this);
-    this.removeAbility = this.removeAbility.bind(this);
     this.searchProfile = this.searchProfile.bind(this);
     this.addProfile = this.addProfile.bind(this);
     this.removeProfile = this.removeProfile.bind(this);
@@ -29,8 +29,10 @@ export default class Layout extends Component {
     this.loadMore = this.loadMore.bind(this);
     this.changeRole = this.changeRole.bind(this);
     this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
-    this.toggleSuggestor = this.toggleSuggestor.bind(this);
+
     
+
+
     this.state = {
       token: window.localStorage.getItem('token'),
       task: null,
@@ -48,9 +50,6 @@ export default class Layout extends Component {
       statuses: [],
       access: [],
       commentContent: '',
-      showSuggestor: false,
-      left: 0,
-      top: 0,
 
     }
   }
@@ -86,7 +85,6 @@ export default class Layout extends Component {
         access: task.user_access
       });
     }
-    console.log(task)
   }
 
 
@@ -121,47 +119,47 @@ export default class Layout extends Component {
     MyActions.setInstance('users/assignments', data, this.state.token);
   }
 
-  searchProfile(obj){
-    this.setState({ profiles: []});
+  searchProfile(obj) {
+    this.setState({ profiles: [] });
     this.setState(obj, () => {
-      MyActions.getList('profiles/search', this.state.page, {q: this.state.query});
-  });  
+      MyActions.getList('profiles/search', this.state.page, { q: this.state.query });
+    });
   }
 
-  searchStatus(obj){
-    this.setState({ statuses: []});
+  searchStatus(obj) {
+    this.setState({ statuses: [] });
     this.setState(obj, () => {
-      MyActions.getList('statuses/search', this.state.page, {q: this.state.query});
-  });  
+      MyActions.getList('statuses/search', this.state.page, { q: this.state.query });
+    });
   }
 
-  addProfile(profileId){
-    var data = { id: this.state.id, profile_id: profileId}
+  addProfile(profileId) {
+    var data = { id: this.state.id, profile_id: profileId }
     MyActions.setInstance('tasks/involvements', data, this.state.token);
   }
 
-  addStatus(statusId){
-    var data = { id: this.state.id, status_id: statusId}
+  addStatus(statusId) {
+    var data = { id: this.state.id, status_id: statusId }
     MyActions.setInstance('tasks/status', data, this.state.token);
   }
 
   removeProfile(profileId) {
-    var data = { id: this.state.id, profile_id: profileId}
+    var data = { id: this.state.id, profile_id: profileId }
     MyActions.removeInstance('tasks/involvements', data, this.state.token);
   }
 
   changeRole(profile_id, role) {
-    var data = { id: this.state.id, profile_id: profile_id, role: role}
+    var data = { id: this.state.id, profile_id: profile_id, role: role }
     MyActions.setInstance('tasks/change_role', data, this.state.token);
   }
 
   submitComment() {
-    var data = { commentable_type: 'Task' ,commentable_id: this.state.id, content: this.state.commentContent }
+    var data = { commentable_type: 'Task', commentable_id: this.state.id, content: this.state.commentContent }
     MyActions.setInstance('comments', data, this.state.token);
   }
 
 
-  deleteCommentConfirm(id){
+  deleteCommentConfirm(id) {
     const self = this;
     const app = self.$f7;
     app.dialog.confirm(dict.are_you_sure, dict.alert, () => self.deleteComment(id))
@@ -188,59 +186,37 @@ export default class Layout extends Component {
     }
   }
 
-  toggleSuggestor(metaInformation) {
-    const { hookType, cursor } = metaInformation;
-    console.log(metaInformation)
-    if (hookType === 'start') {
-      this.setState({
-        showSuggestor: true,
-        left: cursor.left,
-        top: cursor.top + cursor.height, // we need to add the cursor height so that the dropdown doesn't overlap with the `@`.
-      }, () => console.log(this));
-    }
-    if (hookType === 'cancel') {
-      // reset the state
 
-      this.setState({
-        showSuggestor: false,
-        left: null,
-        top: null
-      });
-    }
-  }
 
   removeTask(user_id) {
     MyActions.removeInstance('users/assignments', { user_id: user_id, task_id: this.state.id }, this.state.token);
   }
 
-  removeAbility(title){
-    MyActions.removeInstance('tasks/abilities', { id: this.state.id, title: title }, this.state.token);
-  }
+
 
   render() {
-    const { 
+    const {
       task, users, assignedUsers, ability,
       profiles, statuses, works, commentContent,
-      comments, access , showSuggestor, top, left} = this.state;
+      comments, access, } = this.state;
     return (
       <Page>
         <Navbar title={dict.tasks} backLink={dict.back} backLinkForce={true}>
-        <Link panelOpen="right">
-          <Icon f7="bars"></Icon>
-        </Link>
+          <Link panelOpen="right">
+            <Icon f7="bars"></Icon>
+          </Link>
         </Navbar>
-        <TaskShow 
+        <TaskShow
           task={task} users={users} ability={ability} profiles={profiles} statuses={statuses}
           removeProfile={this.removeProfile} addProfile={this.addProfile}
           searchProfile={this.searchProfile} removeAbility={this.removeAbility}
-          assignedUsers={assignedUsers} addAbility={this.addAbility} 
+          assignedUsers={assignedUsers} addAbility={this.addAbility}
           removeTask={this.removeTask} submit={this.submit} handleChange={this.handleChangeValue}
           searchStatus={this.searchStatus} addStatus={this.addStatus} works={works}
           submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
-          changeRole={this.changeRole} access={access} toggleSuggestor={this.toggleSuggestor}
-          showSuggestor={showSuggestor} top={top} left={left}
-          />
+          changeRole={this.changeRole} access={access}
+        />
       </Page>
     );
   }

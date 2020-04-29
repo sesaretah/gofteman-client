@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Col, ListInput, Block, Row, Button, BlockTitle, Card } from 'framework7-react';
+import { List, Col, ListInput, Block, Row, Button, BlockTitle, Card, Icon } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -12,8 +12,8 @@ const WorkForm = (props) => {
   }
 
   function deleteButton() {
-    if (props.editing){
-      return(
+    if (props.editing) {
+      return (
         <Col>
           <Button className="col ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteWorkConfirm()}>{dict.delete}</Button>
         </Col>
@@ -45,6 +45,19 @@ const WorkForm = (props) => {
           }}
         />
 
+        <ListInput
+          label={dict.priority}
+          type="select"
+          defaultValue={props.priority}
+          onChange={(e) => {
+            props.handleChange({ priority: e.target.value })
+          }}
+        >
+          <option value="normal">{dict.normal}</option>
+          <option value="high">{dict.high}</option>
+          <option value="urgent">{dict.urgent}</option>
+        </ListInput>
+
 
         <li>
           <div class="item-content item-input">
@@ -69,9 +82,9 @@ const WorkForm = (props) => {
         </li>
         <li>
           <div class="item-content item-input">
-            
+
           </div>
-          </li>
+        </li>
         <li>
           <div class="item-content item-input">
             <div class="item-inner">
@@ -97,8 +110,8 @@ const WorkForm = (props) => {
 
       <Block strong>
         <Row tag="p">
-        {deleteButton()}
-          <Button className="col" fill  onClick={props.submit}>{dict.submit}</Button>
+          {deleteButton()}
+          <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
         </Row>
       </Block>
     </Card >

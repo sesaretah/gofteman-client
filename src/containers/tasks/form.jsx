@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Chip, ListInput, Block, Row, Button, BlockTitle, Card, ListItem , Col} from 'framework7-react';
+import { List, Chip, ListInput, Block, Row, Button, BlockTitle, Card, ListItem, Col } from 'framework7-react';
 import { dict } from '../../Dict';
 import crypto from 'crypto-js';
 
@@ -12,7 +12,15 @@ const TaskForm = (props) => {
   }
   function tags() {
     if (props.tags) {
-      var chips = [<span className='fs-11'>{dict.tags}: </span>]
+      var chips = [
+        <div>
+          <a className='fs-11 ' href="#" id='autocomplete-standalone-ajax'>
+            <div className="item-title fs-11">
+              <i className="va-minus-2 ml-5 fa fa-plus"></i>
+              {dict.tags}:
+        </div>
+          </a>
+        </div>]
       props.tags.map((tag) =>
         chips.push(<Chip text={tag.title} deleteable onClick={() => props.removeTag(tag.id)} />)
       )
@@ -21,13 +29,37 @@ const TaskForm = (props) => {
   }
 
   function deleteButton() {
-    if (props.editing){
-      return(
+    if (props.editing) {
+      return (
         <Col>
           <Button className="col ml-5" outline color='red' disabled={!props.editing} onClick={() => props.deleteTaskConfirm()}>{dict.delete}</Button>
         </Col>
       )
     }
+  }
+
+  function archive() {
+    if (props.editing) {
+      return (
+        <List>
+          <ListItem checkbox value={props.archived} checked={props.archived} title={dict.archived}
+            onChange={(e) => {
+              props.handleChange({ archived: !JSON.parse(e.target.value) })
+            }}
+          ></ListItem>
+          <ListInput
+            label={dict.archive_note}
+            type="textarea"
+            placeholder={dict.write_archive_note}
+            value={props.archiveNote}
+            onInput={(e) => {
+              props.handleChange({ archiveNote: e.target.value })
+            }}
+          />
+
+        </List>)
+    }
+
   }
   return (
     <Card>
@@ -69,25 +101,16 @@ const TaskForm = (props) => {
 
 
         <ListItem title={tags()}></ListItem>
-        <li>
-          <a className="item-link item-content" href="#" id="autocomplete-standalone-ajax">
 
-            <div className="item-inner">
-              <div className="item-title fs-11">{dict.new_tag}</div>
-              <input className="hidden" />
-              <div className="item-after"></div>
-            </div>
-          </a>
-        </li>
       </List>
 
-
+      {archive()}
 
       <Block strong>
         <Row tag="p">
           {deleteButton()}
           <Col>
-          <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
+            <Button className="col" fill onClick={props.submit}>{dict.submit}</Button>
           </Col>
         </Row>
       </Block>

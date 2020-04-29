@@ -208,5 +208,11 @@ export const dict = {
   'sheet_date':'تاریخ جدول',
   'recipients':'دریافت کنندگان',
   'sent_by_me': 'ارسال شده ها',
-  'sent_to_me':'دریافت شده ها'
+  'sent_to_me':'دریافت شده ها',
+  'priority':'لولویت',
+  'normal':'عادی',
+  'high':'فوری',
+  'urgent':'بسیار فوری',
+  'archived': 'آرشیو شده',
+  'write_archive_note' : 'متن جمع بندی به منظور آرشیو سازی بنویسید'
 };

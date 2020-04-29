@@ -13,6 +13,27 @@ import CommentList from "../comments/list"
 import TodoList from "../todos/list"
 
 const WorkShow = (props) => {
+console.log(props.work)
+  function archived(){
+    if(props.work.archived){
+      return(
+        <Row>
+        <Col width='100' tabletWidth='100'>
+        <Card className='fs-11 card-orange'>
+          <CardContent>
+          <i class="ml-2 fa fa-exclamation-triangle" aria-hidden="true"></i>
+          {dict.archived} <br/>
+          {props.work.task.archive_note}
+          </CardContent>
+          
+        </Card>
+        </Col>
+      </Row>
+      )
+    }
+
+  }
+
   function access(segment) {
     if (segment === 'statuses') {
       var editable = false
@@ -81,6 +102,7 @@ const WorkShow = (props) => {
       if (props.access.includes('view')) {
         return (
           <React.Fragment>
+            {archived()}
             <Row>
               <Col width='100' tabletWidth='50'>
                 <Card>

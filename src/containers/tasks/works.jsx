@@ -57,6 +57,18 @@ const Works = (props) => {
         }
     }
 
+    function title(work){
+        var span = [<span></span>]
+        if (work.priority === 'high'){
+            span.push(<span className='fs-8 bg-yellow ml-2'>{dict[work.priority]}</span> )
+        }
+        if (work.priority === 'urgent'){
+            span.push(<span className='fs-8 bg-orange ml-2'>{dict[work.priority]}</span> )
+        }
+        
+        return(<span>{span}{work.title}</span>)
+    }
+
     if (props.task) {
         return (
             <Card>
@@ -71,7 +83,7 @@ const Works = (props) => {
                                 key={'work'+work.id}
                                 className='fs-11 work-media'
                                 link={"/works/" + work.id}
-                                title={work.title}
+                                title={title(work)}
                                 after={chip(work)}
                                 text={work.details}
                             >

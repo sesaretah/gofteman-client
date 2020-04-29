@@ -576,4 +576,32 @@ color: var(--f7-navbar-bg-color)
  
 }
 
+.bg-orange {
+  background-color: #fcca90 !important;
+}
+
+.bg-yellow {
+  background-color: #fdf9c1 !important;
+}
+
+.fs-8 {
+  font-size: 8px !important;
+  font-weight: normal;
+}
+
+.ml-2 {
+margin-left: 2px !important;
+}
+
+.card-orange {
+  background-color: #fcca90 !important;
+  border: 1px solid #bd6c02;
+}
+
+
+.notification {
+  direction: rtl;
+}
+
+
 

@@ -45,6 +45,8 @@ export default class DocumentUpdate extends Component {
       tags: [],
       isPublic: false,
       selectedMode: false,
+      archived: false,
+      archiveNote: null,
     }
   }
 
@@ -126,7 +128,8 @@ export default class DocumentUpdate extends Component {
   submit() {
     var data = {
       id: this.state.id, title: this.state.title, public: this.state.isPublic,
-      details: this.state.details, tags: this.state.tags
+      details: this.state.details, tags: this.state.tags, archive_note: this.state.archiveNote,
+      archived: this.state.archived
     }
     if (this.state.title && this.state.title.length > 0) {
       MyActions.updateInstance('tasks', data, this.state.token);
@@ -162,6 +165,8 @@ export default class DocumentUpdate extends Component {
         defaultTask: task.default_task,
         tags: task.the_tags,
         isPublic: task.is_public,
+        archived: task.archived, 
+        archiveNote: task.archive_note, 
       }, () => this.loadTags());
     }
 
@@ -176,6 +181,7 @@ export default class DocumentUpdate extends Component {
   }
 
   handleChangeValue(obj) {
+    console.log(obj)
     this.setState(obj);
   }
 
@@ -206,7 +212,7 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-    const { task, defaultTask, title, details, isPublic, tags, selectedMode } = this.state;
+    const { task, defaultTask, title, details, isPublic, tags, selectedMode, archived, archiveNote } = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)} backLink={dict.back} backLinkForce={true}>
         <Navbar title={dict.task_form} backLink={dict.back} />
@@ -217,6 +223,7 @@ export default class DocumentUpdate extends Component {
           details={details} defaultTask={defaultTask} submit={this.submit}
           editing={true} handleChange={this.handleChangeValue}
           deleteTaskConfirm={this.deleteTaskConfirm}
+          archived={archived} archiveNote={archiveNote}
           />
       </Page>
     );
