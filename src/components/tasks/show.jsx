@@ -29,7 +29,7 @@ export default class Layout extends Component {
     this.loadMore = this.loadMore.bind(this);
     this.changeRole = this.changeRole.bind(this);
     this.deleteCommentConfirm = this.deleteCommentConfirm.bind(this);
-
+    this.addGroup = this.addGroup.bind(this);
     
 
 
@@ -192,6 +192,15 @@ export default class Layout extends Component {
     MyActions.removeInstance('users/assignments', { user_id: user_id, task_id: this.state.id }, this.state.token);
   }
 
+  addGroup(e, id) {
+    var data = { id: this.state.id, group_id: id }
+    if (e.target.checked) {
+      MyActions.setInstance('tasks/group_involvements', data, this.state.token);
+    } else {
+      MyActions.removeInstance('tasks/group_involvements', data, this.state.token);
+    }
+  }
+
 
 
   render() {
@@ -215,7 +224,7 @@ export default class Layout extends Component {
           searchStatus={this.searchStatus} addStatus={this.addStatus} works={works}
           submitComment={this.submitComment} deleteCommentConfirm={this.deleteCommentConfirm}
           commentContent={commentContent} comments={comments} loadMore={this.loadMore}
-          changeRole={this.changeRole} access={access}
+          changeRole={this.changeRole} access={access} addGroup={this.addGroup}
         />
       </Page>
     );

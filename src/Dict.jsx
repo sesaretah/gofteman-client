@@ -214,5 +214,7 @@ export const dict = {
   'high':'فوری',
   'urgent':'بسیار فوری',
   'archived': 'آرشیو شده',
-  'write_archive_note' : 'متن جمع بندی به منظور آرشیو سازی بنویسید'
+  'write_archive_note' : 'متن جمع بندی به منظور آرشیو سازی بنویسید',
+  'user_groups': 'گروه بندی کاربران',
+  'user_settings': 'تنظیمات شخصی'
 };

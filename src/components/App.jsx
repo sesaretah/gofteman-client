@@ -45,7 +45,7 @@ export default class extends React.Component {
       titleRightText: '',
       cssClass: 'notification',
       subtitle: message.data['firebase-messaging-msg-data'].notification.body,
-      closeTimeout: 3000,
+      closeTimeout: 5000,
     }).open();
   }
     

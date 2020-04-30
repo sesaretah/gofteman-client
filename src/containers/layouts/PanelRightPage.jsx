@@ -28,7 +28,7 @@ export default class PanelRightPage extends Component {
             </ListItem>
           </List>
           <BlockTitle> <i className="va ml-5 fa fa-tachometer"></i>{dict.dashboard}</BlockTitle>
-          <List>
+          <List className='fs-13'>
             <ListItem link="/tasks/" view="#main-view" panelClose>
               <i className="va ml-5 fa fa-tasks"></i>
               <span>{dict.tasks}</span>
@@ -46,7 +46,7 @@ export default class PanelRightPage extends Component {
             
             </List>
             <BlockTitle> <i className="va ml-5 fa fa-cogs"></i>{dict.settings}</BlockTitle>
-            <List>
+            <List className='fs-13'>
             <ListItem link="/roles/" ignoreCache={true} view="#main-view" panelClose>
             <i className="va ml-5 fa fa-shield"></i>
               <span>{dict.roles}</span>
@@ -63,6 +63,17 @@ export default class PanelRightPage extends Component {
             <i className="va ml-5 fa fa-tags"></i>
               <span>{dict.tags}</span>
             </ListItem>
+
+            <ListItem link="/groups/" ignoreCache={true} view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-bullseye"></i>
+              <span>{dict.user_groups}</span>
+            </ListItem>
+
+            <ListItem link="/settings/" ignoreCache={true} view="#main-view" panelClose>
+            <i className="va ml-5 fa fa-cog"></i>
+              <span>{dict.user_settings}</span>
+            </ListItem>
+
           </List>
         </React.Fragment>
       )

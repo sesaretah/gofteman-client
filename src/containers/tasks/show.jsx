@@ -72,7 +72,7 @@ const TaskShow = (props) => {
             task={props.task} searchProfile={props.searchProfile}
             removeProfile={props.removeProfile} addProfile={props.addProfile}
             profiles={props.profiles} changeRole={props.changeRole}
-            editable={editable}
+            editable={editable} addGroup={props.addGroup}
           />)
       }
 

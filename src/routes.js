@@ -49,6 +49,12 @@ import ReportIndex from './components/reports/index';
 import ReportCreate from './components/reports/create';
 import ReportUpdate from './components/reports/update';
 
+import GroupShow from './components/groups/show';
+import GroupIndex from './components/groups/index';
+import GroupCreate from './components/groups/create';
+import GroupUpdate from './components/groups/update';
+
+import SettingUpdate from './components/settings/update';
 
 import Login from './components/users/Login';
 import SignUp from './components/users/SignUp';
@@ -94,6 +100,29 @@ export default [
     path: '/roles/:roleId',
     component: RoleShow,
   },
+
+  {
+    path: '/settings/',
+    component: SettingUpdate,
+  },
+
+  {
+    path: '/groups/',
+    component: GroupIndex,
+  },
+  {
+    path: '/groups/:groupId/edit',
+    component: GroupUpdate,
+  },
+  {
+    path: '/groups/new',
+    component: GroupCreate,
+  },
+  {
+    path: '/groups/:groupId',
+    component: GroupShow,
+  },
+
 
   {
     path: '/statuses/',
