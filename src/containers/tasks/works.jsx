@@ -11,6 +11,7 @@ const Works = (props) => {
 
     function chip(work) {
         var result = []
+
         if (work.deadline_alert) {
             result.push(
                 <span className='color-red ml-5'>
@@ -46,7 +47,7 @@ const Works = (props) => {
             )
 
         } else {
-            result.push(dict.add_stauts)
+            result.push(<span className='mr-5'>{dict.add_stauts}</span>)
         }
         return (result)
     }
@@ -57,16 +58,20 @@ const Works = (props) => {
         }
     }
 
-    function title(work){
-        var span = [<span></span>]
+    function title(work){        
+        return(<span>{work.title}</span>)
+    }
+
+    function text(work) {
+        var result = []
         if (work.priority === 'high'){
-            span.push(<span className='fs-8 bg-yellow ml-2'>{dict[work.priority]}</span> )
+            result.push(<span className='va-2 fs-8 bg-yellow ml-10'>{dict[work.priority]}</span> )
         }
         if (work.priority === 'urgent'){
-            span.push(<span className='fs-8 bg-orange ml-2'>{dict[work.priority]}</span> )
+            result.push(<span className='va-2 fs-8 bg-orange ml-10'>{dict[work.priority]}</span> )
         }
-        
-        return(<span>{span}{work.title}</span>)
+        result.push(<span  className='pd-5'>{work.details}</span>)
+        return(result)
     }
 
     if (props.task) {
@@ -85,7 +90,7 @@ const Works = (props) => {
                                 link={"/works/" + work.id}
                                 title={title(work)}
                                 after={chip(work)}
-                                text={work.details}
+                                text={text(work)}
                             >
                             </ListItem>
                         )}

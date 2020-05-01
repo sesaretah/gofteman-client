@@ -607,5 +607,19 @@ margin-left: 2px !important;
   font-size: 13px;
 }
 
+.ml-20 {
+  margin-left: 20px !important;
+}
 
+.float-left {
+  float: left;
+}
+
+.va-2 {
+  vertical-align: 2px;
+}
+
+.pd-5 {
+  padding-right: 5px;
+}
 
