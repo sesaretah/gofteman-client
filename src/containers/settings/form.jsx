@@ -5,17 +5,37 @@ import crypto from 'crypto-js';
 
 
 const SettingForm = (props) => {
-  if (props.notification_setting) {
+  if (true) {
     function setting(item) {
-      if (props.notification_setting && props.notification_setting[item]){
-        return(true)
+      if (props.notification_setting && props.notification_setting[item]) {
+        return (true)
       } else {
-        if(props.notification_setting && props.notification_setting[item] == false) {
-          return(false)
+        if (props.notification_setting && props.notification_setting[item] == false) {
+          return (false)
         } else {
-          return(true)
-        }     
+          return (true)
+        }
       }
+    }
+
+    function blockList() {
+      var chips = [
+        <div>
+          <a className='fs-11 ' href="#" id='user-blocklist'>
+            <div className="item-title fs-11">
+              <i className="va-minus-2 ml-5 fa fa-user-plus"></i>
+              {dict.profiles}:
+          </div>
+          </a>
+        </div>
+      ]
+      if (props.blockList) {
+        props.blockList.map((profile) => {
+          chips.push(<Chip text={profile.fullname} deleteable onClick={() => props.removeBlocked(profile.id)} />)
+        }
+        )
+      }
+      return chips
     }
 
     return (
@@ -24,7 +44,13 @@ const SettingForm = (props) => {
           <ListItem>
             <span >{dict.private}</span>
             <Toggle className='pd-5' onChange={(e) => props.changeSetting(e, '')} />
+            <span className='pd-10 fs-8'>{dict.if_someone_adds_you_youll_be_asked}</span>
           </ListItem>
+        </List>
+
+        <List>
+          <ListItem title='sss'></ListItem>
+          <ListItem title={blockList()}></ListItem>
         </List>
 
         <div className="data-table card">
@@ -38,6 +64,7 @@ const SettingForm = (props) => {
               </tr>
             </thead>
             <tbody>
+              {}
               <tr>
                 <td className='fs-11'>{dict.add_involvement_to_tasks}</td>
                 <td><Toggle className='pd-5' checked={setting('add_involvement_to_tasks_email')} onChange={(e) => props.changeSetting(e, 'add_involvement_to_tasks_email')} /></td>
@@ -156,6 +183,8 @@ const SettingForm = (props) => {
             </tbody>
           </table>
         </div>
+
+
 
       </React.Fragment>
     )

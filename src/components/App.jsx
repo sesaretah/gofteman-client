@@ -38,7 +38,7 @@ export default class extends React.Component {
     navigator.serviceWorker.addEventListener("message", (message) => {
     const self = this;
     const app = self.$f7;
-    console.log(message.data['firebase-messaging-msg-data'])
+   // console.log(message.data['firebase-messaging-msg-data'])
     app.notification.create({
       icon: '',
       title: message.data['firebase-messaging-msg-data'].notification.title,

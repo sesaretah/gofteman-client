@@ -232,9 +232,10 @@ export const dict = {
   'add_involvement_to_todos':'افزودن همکار به تقسیم کار',
   'remove_involvement_from_todos':'حذف همکار از تقسیم کار',
   'add_involvement_to_time_sheets':'افزودن گیرنده به جداول زمان کار',
-  'remove_involvement_from_timesheets':'جذف گیرنده از جداول زمان کار',
+  'remove_involvement_from_timesheets':'حذف گیرنده از جداول زمان کار',
   'notification_type':'شیوه اطلاع رسانی',
   'mail_notification':'ایمیل',
   'push_notification':'آگاهسازی وب',
   'sms':'پیامک',
+  'if_someone_adds_you_youll_be_asked': 'چنانچه کسی شما را به یک فعالیت بیافزاید شما باید تایید کنید.'
 };
