@@ -18,6 +18,7 @@ import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import GroupForm from "../../containers/groups/form"
 import Framework7 from 'framework7/framework7.esm.bundle';
+import { conf } from '../../conf';
 
 export default class GroupCreate extends Component {
   constructor() {
@@ -120,7 +121,7 @@ export default class GroupCreate extends Component {
        // autocomplete.preloaderShow();
         // Do Ajax request to Autocomplete data
         app.request({
-          url: 'http://localhost:3001/v1/profiles/search',
+          url: conf.server + '/profiles/search',
           method: 'GET',
           dataType: 'json',
           //send "query" to server. Useful in case you generate response dynamically

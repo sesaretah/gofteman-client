@@ -8,6 +8,7 @@ import { dict } from '../../Dict';
 import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import TaskForm from "../../containers/tasks/form"
+import { conf } from '../../conf';
 
 export default class TaskCreate extends Component {
   constructor() {
@@ -70,7 +71,7 @@ export default class TaskCreate extends Component {
         autocomplete.preloaderShow();
         // Do Ajax request to Autocomplete data
         app.request({
-          url: '/v1/tags/search',
+          url: conf.server + '/tags/search',
           method: 'GET',
           dataType: 'json',
           //send "query" to server. Useful in case you generate response dynamically

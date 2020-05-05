@@ -12,7 +12,7 @@ const ProfileForm = (props) => {
         <Card>
           <CardHeader>{dict.profile_info}</CardHeader>
           <CardContent>
-            <List form>
+            <List >
               <ListInput
                 label={dict.firstname}
                 type="text"
@@ -49,7 +49,7 @@ const ProfileForm = (props) => {
               </ListItem>
             </List>
 
-            <List form>
+            <List >
               <ListInput
                 label={dict.new_experties}
                 type="text"

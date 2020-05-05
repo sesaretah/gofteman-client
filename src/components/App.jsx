@@ -23,6 +23,7 @@ export default class extends React.Component {
   async componentDidMount() {
     const self = this;
     const app = self.$f7;
+    
     if(messaging){
     messaging.requestPermission()
       .then(async function () {
@@ -38,13 +39,14 @@ export default class extends React.Component {
     navigator.serviceWorker.addEventListener("message", (message) => {
     const self = this;
     const app = self.$f7;
-   // console.log(message.data['firebase-messaging-msg-data'])
+    console.log(message)
     app.notification.create({
       icon: '',
-      title: message.data['firebase-messaging-msg-data'].notification.title,
+      
+      title: message.data.firebaseMessaging.payload.notification.title,
       titleRightText: '',
       cssClass: 'notification',
-      subtitle: message.data['firebase-messaging-msg-data'].notification.body,
+      subtitle: message.data.firebaseMessaging.payload.notification.body,
       closeTimeout: 5000,
     }).open();
   }
@@ -68,11 +70,13 @@ export default class extends React.Component {
       // App routes
       routes,
     };
+
+    const server = React.createContext('http://localhost:3001/v1/');
     return (
       <App params={f7params}>
         {/* Statusbar */}
         <Statusbar />
-
+      
         {/* Left Panel */}
         <Panel left cover themeDark>
           <View url="/panel-left/" />

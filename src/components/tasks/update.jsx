@@ -18,6 +18,7 @@ import ModelStore from "../../stores/ModelStore";
 import * as MyActions from "../../actions/MyActions";
 import TaskForm from "../../containers/tasks/form"
 import Framework7 from 'framework7/framework7.esm.bundle';
+import { conf } from '../../conf';
 
 export default class DocumentUpdate extends Component {
   constructor() {
@@ -94,7 +95,7 @@ export default class DocumentUpdate extends Component {
         autocomplete.preloaderShow();
         // Do Ajax request to Autocomplete data
         app.request({
-          url: '/v1/tags/search',
+          url: conf.server + '/tags/search',
           method: 'GET',
           dataType: 'json',
           //send "query" to server. Useful in case you generate response dynamically

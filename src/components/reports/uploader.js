@@ -1,8 +1,9 @@
+import { conf } from '../../conf';
 export function uploadImageCallBack(file) {
   return new Promise(
     (resolve, reject) => {
       const xhr = new XMLHttpRequest(); // eslint-disable-line no-undef
-      xhr.open('POST', 'http://localhost:3001/v1/uploads');
+      xhr.open('POST', conf.server+'/uploads');
       xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca');
       const data = new FormData(); // eslint-disable-line no-undef
       data.append('upload[image]', file);

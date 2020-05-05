@@ -24,12 +24,10 @@ import Framework7 from 'framework7/framework7.esm.bundle';
 export default class extends React.Component {
   constructor() {
     super();
-    this.submit = this.submit.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.setInstance = this.setInstance.bind(this);
 
     this.state = {
-      token: window.localStorage.getItem('token'),
       email: '',
       password: '',
     };
@@ -43,26 +41,22 @@ export default class extends React.Component {
     ModelStore.removeListener("set_instance", this.setInstance);
   }
   componentDidMount(){
-    if(this.state.token && this.state.token.length > 10){
-      MyActions.setInstance('users/validate_token', {}, this.$f7route.params['token']);
-    }
+    MyActions.setInstance('users/validate_token', {}, this.$f7route.params['token']);
   }
 
-  submit(){
-    var data = {email: this.state.email, password: this.state.password}
-    MyActions.setInstance('users/login', data);
-  }
-
-  setInstance(){
+  setInstance() {
+    var user = ModelStore.getIntance()
     var klass = ModelStore.getKlass()
-    if (klass === 'Login') {
-      this.$f7router.navigate('/verification/'+this.state.email);
-    }
     if (klass === 'Validate') {
+      window.localStorage.setItem('token', user.token);
       this.$f7router.navigate('/tasks/');
+      window.location.reload()
+    } else {
+      this.$f7router.navigate('/login_error/');
       window.location.reload()
     }
   }
+
 
 
   handleChangeValue(obj) {

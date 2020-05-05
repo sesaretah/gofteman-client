@@ -123,7 +123,7 @@ export default class ReportCreate extends Component {
     const { report, editorState, uuid } = this.state;
     return (
       <Page>
-        <Navbar title={dict.report_form} />
+        <Navbar title={dict.report_form}  backLink={dict.back} />
         <ReportForm report={report} uuid={uuid} editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit} handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack} />
       </Page>
     );

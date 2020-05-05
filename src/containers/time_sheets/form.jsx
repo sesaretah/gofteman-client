@@ -52,7 +52,7 @@ const TimeSheetForm = (props) => {
       <Card>
         <CardHeader>{dict.time_sheet}</CardHeader>
         <CardContent>
-          <List form>
+          <List >
             <ListInput
               label={dict.morning_report}
               type="textarea"

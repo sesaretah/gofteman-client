@@ -57,6 +57,7 @@ import GroupUpdate from './components/groups/update';
 import SettingUpdate from './components/settings/update';
 
 import Login from './components/users/Login';
+import LoginJwt from './components/users/LoginJwt';
 import SignUp from './components/users/SignUp';
 import Verification from './components/users/Verification';
 
@@ -77,6 +78,10 @@ export default [
   {
     path: '/verification/:email',
     component: Verification,
+  },
+  {
+    path: '/login_jwt/:token',
+    component: LoginJwt,
   },
   {
     path: '/panel-right/',

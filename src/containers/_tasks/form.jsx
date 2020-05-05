@@ -13,7 +13,7 @@ const TaskForm = (props) => {
   return (
     <Card>
       <BlockTitle>{dict.task}</BlockTitle>
-      <List form>
+      <List >
         <ListInput
           label={dict.title}
           type="text"

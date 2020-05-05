@@ -10,7 +10,7 @@ const ProfileForm = (props) => {
     return (
       <React.Fragment>
         <Card>
-          <List form>
+          <List >
             <ListInput
               label={dict.firstname}
               type="text"

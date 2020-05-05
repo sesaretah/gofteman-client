@@ -27,30 +27,5 @@ export default () => (
         </Link>
       </NavLeft>
     </Navbar>
-    <Toolbar bottom>
-      <Link>Left Link</Link>
-      <Link>Right Link</Link>
-    </Toolbar>
-    <Block strong>
-      <p></p>
-    </Block>
-    <BlockTitle></BlockTitle>
-    <List>
-
-    </List>
-    <BlockTitle></BlockTitle>
-    <Block strong>
-
-    </Block>
-    <BlockTitle></BlockTitle>
-    <Block strong>
-
-    </Block>
-    <List>
-    </List>
-    <Fab href="/document_form/" target="#main-view" position="left-bottom" slot="fixed" color="orange">
-      <Icon ios="f7:add" aurora="f7:add" md="material:add"></Icon>
-      <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
-    </Fab>
   </Page>
 );

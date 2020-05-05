@@ -237,5 +237,7 @@ export const dict = {
   'mail_notification':'ایمیل',
   'push_notification':'آگاهسازی وب',
   'sms':'پیامک',
-  'if_someone_adds_you_youll_be_asked': 'چنانچه کسی شما را به یک فعالیت بیافزاید شما باید تایید کنید.'
+  'if_someone_adds_you_youll_be_asked': 'چنانچه کسی شما را به یک فعالیت بیافزاید شما باید تایید کنید.',
+  'previous_attachments':'پیوست های قبلا آپلود شده',
+  'cas': 'احراز هویت مرکزی'
 };

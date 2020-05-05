@@ -8,7 +8,7 @@ const CommentForm = (props) => {
   return (
     <Card>
       <CardHeader>{dict.comment_form}</CardHeader>
-     <List form>
+     <List >
         <ListInput
           label={dict.comment}
           id="cm-form"

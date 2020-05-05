@@ -40,6 +40,16 @@ const ReportShow = (props) => {
           {parent()}
         </List>
 
+        <List simple-list>
+        <ListItem
+            key={'profile' + props.report.profile.id}
+            title={props.report.profile.fullname}
+            after=''>
+            <img slot="media" src={props.report.profile.avatar} width="27" height="27" />
+          </ListItem>
+        </List>
+
+
 
 
         <BlockTitle>{dict.title}</BlockTitle>

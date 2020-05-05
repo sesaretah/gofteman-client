@@ -14,7 +14,7 @@ const LoginForm = (props) => {
       <Card>
         <CardHeader>{dict.login}</CardHeader>
         <CardContent >
-          <List form>
+          <List >
           <ListInput
               label={dict.email}
               type="text"

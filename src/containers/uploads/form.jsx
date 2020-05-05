@@ -4,7 +4,8 @@ import 'react-dropzone-uploader/dist/styles.css'
 import '../../css/upload.css'
 import Dropzone from 'react-dropzone-uploader'
 import { dict } from "../../Dict";
-const server='http://localhost:3001/v1'
+import { conf } from '../../conf';
+const server= conf.server
 
 const UploadForm = (props) => {
   // specify upload params and url for your files

@@ -13,7 +13,7 @@ const SettingForm = (props) => {
         if (props.notification_setting && props.notification_setting[item] == false) {
           return (false)
         } else {
-          return (true)
+          return (false)
         }
       }
     }

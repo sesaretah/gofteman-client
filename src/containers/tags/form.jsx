@@ -13,7 +13,7 @@ const TagForm = (props) => {
   return (
     <React.Fragment>
       <BlockTitle>{dict.tag}</BlockTitle>
-      <List form>
+      <List >
         <ListInput
           label={dict.title}
           type="text"

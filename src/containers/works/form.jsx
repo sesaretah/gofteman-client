@@ -23,7 +23,7 @@ const WorkForm = (props) => {
   return (
     <Card>
       <BlockTitle>{dict.work}</BlockTitle>
-      <List form>
+      <List >
         <ListInput
           label={dict.title}
           type="text"

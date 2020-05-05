@@ -17,7 +17,7 @@ const TodoForm = (props) => {
       return flag
     }
     return (
-      <List form>
+      <List>
         <ListInput
           key='todos-form-title'
           label={dict.title}

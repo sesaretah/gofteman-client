@@ -9,7 +9,7 @@ const StatusForm = (props) => {
     return (
       <React.Fragment>
         <BlockTitle>{dict.status}</BlockTitle>
-        <List form>
+        <List >
           <ListInput
             label={dict.title}
             type="text"

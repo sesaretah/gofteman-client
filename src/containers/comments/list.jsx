@@ -22,19 +22,22 @@ const CommentList = (props) => {
             var date = new Date(new window.ODate(props.comments[i].created_at))
             var time =
                 <React.Fragment>
-                    { editLink(props.comments[i])}
+                    {editLink(props.comments[i])}
                     <Moment locale="fa" fromNow ago>{date}</Moment>
                     {dict.ago}
                 </React.Fragment>
             items.push(
                 <ListItem
                     key={'comment' + props.comments[i].id}
-                    className='some-link'
+                    className='fs-10'
                     text={time}
+                    title={props.comments[i].profile.fullname + ':'}
                     subtitle={props.comments[i].content}
                 >
                     <img slot="media" src={props.comments[i].profile.avatar} width="44" height="44" />
                 </ListItem>
+
+
 
             )
         }

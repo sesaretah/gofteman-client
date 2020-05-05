@@ -21,6 +21,7 @@ import Framework7 from 'framework7/framework7.esm.bundle';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import {uploadImageCallBack} from "./uploader.js"
+import crypto from 'crypto-js';
 
 export default class ReportUpdate extends Component {
   constructor() {
@@ -31,16 +32,19 @@ export default class ReportUpdate extends Component {
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.onEditorStateChange = this.onEditorStateChange.bind(this)
     this.getList = this.getList.bind(this)
-    this.uploadImageCallBack = uploadImageCallBack.bind(this);
-
+    this.removeAttachment = this.removeAttachment.bind(this);
+    
 
     this.state = {
-      report: {title: '', draft: ''},
+      report: null,
       editorState: EditorState.createEmpty(),
       token: window.localStorage.getItem('token'),
+      uuid: crypto.enc.Base64.stringify(crypto.lib.WordArray.random(128/8)),
       id: null,
       title: null,
       draft: null,
+      taskId:  null,
+      workId: null,
       page: 0
     }
   }
@@ -58,7 +62,21 @@ export default class ReportUpdate extends Component {
   }
 
   submit(){
-    var data = {id: this.state.id, title: this.state.title, draft:convertToRaw(this.state.editorState.getCurrentContent())}
+    const blocks = convertToRaw(this.state.editorState.getCurrentContent()).blocks;
+    const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
+    var taskId = null
+    var workId = null
+    if (this.state.task){
+      taskId = this.state.task.id
+    }
+    if (this.state.work){
+      workId = this.state.work.id
+    }
+    var data = {
+      id: this.state.id, task_id: taskId, work_id: workId, 
+      uuid: this.state.uuid, title: this.state.title, content: value, 
+      draft: convertToRaw(this.state.editorState.getCurrentContent()) 
+    }
     MyActions.updateInstance('reports', data, this.state.token);
   }
 
@@ -80,14 +98,17 @@ export default class ReportUpdate extends Component {
 
   getInstance(){
     var report = ModelStore.getIntance()
-
-    if (report){
+    var klass = ModelStore.getKlass()
+    if (report && klass === 'Report') { 
       const contentState = convertFromRaw(report.draft);
       const editorState = EditorState.createWithContent(contentState);
       this.setState({
         report: report,
         title: report.title,
         id: report.id,
+        task: report.the_task,
+        work: report.the_work,
+        attachments: report.attachments,
         editorState: editorState
       });
     }
@@ -104,20 +125,38 @@ export default class ReportUpdate extends Component {
     });
   };
 
+  removeAttachment(id){
+    this.setState({
+      attachments: this.state.attachments.filter(function (attachment) {
+        return attachment.id !== id
+      })
+    });
+    var data = { id: id }
+    MyActions.removeInstance('uploads', data, this.state.token, this.state.page);
+  }
 
-  setInstance(){
-    const self = this;
-    this.$f7router.navigate('/reports/');
+
+  setInstance() {
+    var report = ModelStore.getIntance()
+    var klass = ModelStore.getKlass()
+    if (report && klass === 'Report') { 
+      this.$f7router.navigate('/reports/'+ report.id);
+    }
+    
   }
 
 
   render() {
-    const { report, editorState} = this.state;
+    const { report, editorState, uuid, title, attachments} = this.state;
     return (
       <Page>
-        <Navbar title="Form" backLink={dict.back} />
+        <Navbar title={dict.report} backLink={dict.back} />
         <BlockTitle>{dict.workflow_form}</BlockTitle>
-        <ReportForm report={report}  editorState={editorState} onEditorStateChange={this.onEditorStateChange} submit={this.submit}  handleChange={this.handleChangeValue} uploadImageCallBack={this.uploadImageCallBack}/>
+        <ReportForm 
+        report={report} attachments={attachments} title={title} 
+        uuid={uuid} editorState={editorState} 
+        onEditorStateChange={this.onEditorStateChange} submit={this.submit}  
+        handleChange={this.handleChangeValue} removeAttachment={this.removeAttachment}/>
       </Page>
     );
   }

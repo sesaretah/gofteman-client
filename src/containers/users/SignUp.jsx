@@ -14,7 +14,7 @@ const SignUpForm = (props) => {
       <Card>
         <CardHeader>{dict.sign_up}</CardHeader>
         <CardContent>
-          <List form>
+          <List >
             <ListInput
               label={dict.firstname + ' *'}
               placeholder={dict.enter_your_name}

@@ -626,3 +626,28 @@ margin-left: 2px !important;
 .pd-10 {
   padding-right: 10px;
 }
+
+:root {
+  --f7-tooltip-bg-color: rgba(0, 0, 0, 0.87);
+  --f7-tooltip-text-color: #fff;
+  --f7-tooltip-border-radius: 4px;
+  --f7-tooltip-padding: 8px 16px;
+  --f7-tooltip-font-size: 14px;
+  --f7-tooltip-font-weight: 500;
+  --f7-tooltip-desktop-padding: 6px 8px;
+  --f7-tooltip-desktop-font-size: 12px;
+}
+
+.link img {
+  border-radius: 50%;
+}
+.fl {
+  float: left;
+}
+.f-color-black {
+  color: black !important;
+}
+
+.bg-teal {
+  background-color: rgb(97, 177, 214) !important;
+}
