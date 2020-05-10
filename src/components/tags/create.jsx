@@ -29,7 +29,8 @@ export default class TagCreate extends Component {
     this.state = {
       token: window.localStorage.getItem('token'),
       tag: {},
-      default_tag: true,
+      isConfirmed: false,
+      confirmable: false,
     }
   }
 
@@ -43,7 +44,7 @@ export default class TagCreate extends Component {
   }
 
   submit(){
-    var data = {title: this.state.title, default_tag: this.state.defaultTag}
+    var data = {title: this.state.title, confirmed: this.state.isConfirmed}
     MyActions.setInstance('tags', data, this.state.token);
   }
 
@@ -60,12 +61,15 @@ export default class TagCreate extends Component {
 
 
   render() {
-    const {tag} = this.state;
+    const {tag, isConfirmed, confirmable} = this.state;
     return (
       <Page>
         <Navbar title={dict.tag_form} backLink={dict.back} />
         <BlockTitle>{dict.tag_form}</BlockTitle>
-        <TagForm tag={tag} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <TagForm 
+          tag={tag} submit={this.submit} editing={true} confirmable={confirmable}
+          handleChange={this.handleChangeValue} isConfirmed={isConfirmed}
+          />
       </Page>
     );
   }

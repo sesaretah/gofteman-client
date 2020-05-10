@@ -77,6 +77,7 @@ export default class Layout extends React.Component {
   getMutipleList() {
     var multiple = ModelStore.getMutipleList()
     var klass = ModelStore.getKlass()
+    console.log(multiple)
     if (multiple && klass === 'TimeSheet'){
       this.setState({
         mine_time_sheets: multiple.mine,

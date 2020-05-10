@@ -43,8 +43,11 @@ export default class extends React.Component {
     ModelStore.removeListener("set_instance", this.setInstance);
   }
   componentDidMount(){
-    if(this.state.token && this.state.token.length > 10){
+    if(this.$f7route.params['token']) {
       MyActions.setInstance('users/validate_token', {}, this.$f7route.params['token']);
+    }
+    if(this.state.token && this.state.token.length > 10){
+      MyActions.setInstance('users/validate_token', {}, this.state.token);
     }
   }
 
@@ -62,6 +65,7 @@ export default class extends React.Component {
       this.$f7router.navigate('/tasks/');
       window.location.reload()
     }
+    console.log(klass)
   }
 
 

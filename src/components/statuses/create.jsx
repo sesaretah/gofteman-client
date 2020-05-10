@@ -31,6 +31,7 @@ export default class StatusCreate extends Component {
       status: {},
       title: '',
       color: '',
+      isConfirmed: false,
     }
   }
 
@@ -69,7 +70,7 @@ export default class StatusCreate extends Component {
   }
 
   submit(){
-    var data = {title: this.state.title, color: this.state.color}
+    var data = {title: this.state.title, color: this.state.color, confirmed: this.state.isConfirmed}
     MyActions.setInstance('statuses', data, this.state.token);
   }
 
@@ -86,12 +87,15 @@ export default class StatusCreate extends Component {
 
 
   render() {
-    const {status} = this.state;
+    const {status, isConfirmed} = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.status_form} backLink={dict.back} />
         <BlockTitle>{dict.status_form}</BlockTitle>
-        <StatusForm status={status} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <StatusForm 
+        status={status} submit={this.submit} isConfirmed={isConfirmed}
+        editing={true} handleChange={this.handleChangeValue}
+        />
       </Page>
     );
   }

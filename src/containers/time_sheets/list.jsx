@@ -15,6 +15,7 @@ const TimeSheetList = (props) => {
           <List mediaList className='fs-11'>
             {props.time_sheets.map((time_sheet) =>
               <ListItem
+              className='fs-11'
                 key={crypto.lib.WordArray.random(32)}
                 link={"/time_sheets/" + time_sheet.id}
                 ignoreCache={true}

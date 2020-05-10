@@ -10,12 +10,14 @@ const RoleForm = (props) => {
   } else {
     var isDefaultRole = false
   }
+  
   return (
     <React.Fragment>
       <BlockTitle>{dict.role}</BlockTitle>
       <List >
         <ListInput
           label={dict.title}
+          key='role-title'
           type="text"
           placeholder='...'
           defaultValue={props.role.title}

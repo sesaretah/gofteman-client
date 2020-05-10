@@ -32,7 +32,8 @@ export default class DocumentUpdate extends Component {
     this.state = {
       token: window.localStorage.getItem('token'),
       tag : {},
-      defaultTag: null,
+      isConfirmed: false,
+      confirmable: false,
     }
   }
 
@@ -49,7 +50,9 @@ export default class DocumentUpdate extends Component {
 
 
   submit(){
-    var data = {id:this.state.id, title: this.state.title, default_tag: this.state.defaultTag}
+    var data = {
+      id:this.state.id, title: this.state.title, 
+      confirmed: this.state.isConfirmed}
     MyActions.updateInstance('tags', data,  this.state.token);
   }
   componentDidMount(){
@@ -73,7 +76,8 @@ export default class DocumentUpdate extends Component {
         title: tag.title,
         id: tag.id,
         tag: tag,
-        defaultTag: tag.default_tag
+        isConfirmed: tag.confirmed,
+        confirmable: tag.confirmable
       });
     }
   }
@@ -90,12 +94,14 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-        const {tag, defaultTag} = this.state;
+        const {tag, isConfirmed, confirmable} = this.state;
     return (
       <Page>
         <Navbar title={dict.tag_form} backLink={dict.back} />
         <BlockTitle>{dict.tag_form}</BlockTitle>
-        <TagForm tag={tag} defaultTag={defaultTag} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <TagForm 
+          tag={tag} isConfirmed={isConfirmed} submit={this.submit} confirmable={confirmable}
+          editing={true} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

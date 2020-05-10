@@ -15,6 +15,10 @@ const StatusShow = (props) => {
         <List simple-list>
           <ListItem>{props.status.title}</ListItem>
         </List>
+        <BlockTitle>{dict.confirmed}</BlockTitle>
+        <List simple-list>
+          <ListItem>{dict[props.status.confirmed]}</ListItem>
+        </List>
 
         <List simple-list>
           <ListItem style={{backgroundColor: props.status.the_color}}>{props.status.the_color}</ListItem>

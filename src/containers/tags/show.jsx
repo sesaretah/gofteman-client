@@ -16,6 +16,11 @@ const TagShow = (props) => {
           <ListItem>{props.tag.title}</ListItem>
         </List>
 
+        <BlockTitle>{dict.confirmed}</BlockTitle>
+        <List simple-list>
+          <ListItem>{dict[props.tag.confirmed]}</ListItem>
+        </List>
+
         
       </React.Fragment>
     )

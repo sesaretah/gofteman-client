@@ -6,6 +6,30 @@ import crypto from 'crypto-js';
 
 const StatusForm = (props) => {
   if (props.status) {
+    if (props.isConfirmed) {
+      var isConfirmedTag = true;
+    } else {
+      var isConfirmedTag = false
+    }
+    function confirm() {
+      if (props.confirmable) {
+        return (
+          <List>
+            <ListItem radio value={false} checked={!isConfirmedTag} name="selectedMode" title={dict.not_confirmed}
+              onChange={(e) => {
+                props.handleChange({ isConfirmed: JSON.parse(e.target.value) });
+              }}>
+            </ListItem>
+            <ListItem radio value={true} checked={isConfirmedTag} name="selectedMode" title={dict.confirmed}
+              onChange={(e) => {
+                props.handleChange({ isConfirmed: JSON.parse(e.target.value) })
+              }}>
+            </ListItem>
+          </List>
+        )
+      }
+
+    }
     return (
       <React.Fragment>
         <BlockTitle>{dict.status}</BlockTitle>
@@ -19,15 +43,16 @@ const StatusForm = (props) => {
               props.handleChange({ title: e.target.value })
             }}
           />
-  
         </List>
-  
+
+        {confirm()}
+
         <div className="list ">
           <ul>
             <li>
               <div className="item-content item-input">
                 <div className="item-media">
-                <i class="fa fa-2x fa-circle-o demo-list-icon" aria-hidden="true" id="demo-color-picker-spectrum-value"></i>
+                  <i class="fa fa-2x fa-circle-o demo-list-icon" aria-hidden="true" id="demo-color-picker-spectrum-value"></i>
                 </div>
                 <div className="item-inner">
                   <div className="item-input-wrap">
@@ -38,7 +63,7 @@ const StatusForm = (props) => {
             </li>
           </ul>
         </div>
-  
+
         <Block strong>
           <Row tag="p">
             <Button className="col" fill disabled={!props.editing} onClick={props.submit}>{dict.submit}</Button>
@@ -47,7 +72,7 @@ const StatusForm = (props) => {
       </React.Fragment>
     )
   } else {
-    return(null)
+    return (null)
   }
 
 }

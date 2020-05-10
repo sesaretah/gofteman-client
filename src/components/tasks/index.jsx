@@ -17,6 +17,7 @@ export default class Layout extends React.Component {
       token: window.localStorage.getItem('token'),
       tasks: null,
       works: null,
+      ability: null,
     }
   }
   componentWillMount() {
@@ -48,6 +49,7 @@ export default class Layout extends React.Component {
     if (list && klass === 'Task'){
       this.setState({
         tasks: list,
+        ability: list[0].ability
       });
     }
     if (list && klass === 'Work'){
@@ -58,7 +60,7 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    const {tasks, works} = this.state;
-    return(<TaskIndex tasks={tasks} works={works} sortChange={this.sortChange}/>)
+    const {tasks, works, ability} = this.state;
+    return(<TaskIndex tasks={tasks} ability={ability} works={works} sortChange={this.sortChange}/>)
   }
 }

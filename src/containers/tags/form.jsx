@@ -5,10 +5,31 @@ import crypto from 'crypto-js';
 
 
 const TagForm = (props) => {
-  if (props.defaultTag) {
-    var isDefaultTag = true;
+
+  if (props.isConfirmed) {
+    var isConfirmedTag = true;
   } else {
-    var isDefaultTag = false
+    var isConfirmedTag = false
+  }
+
+  function confirm() {
+    if (props.confirmable) {
+      return (
+        <List>
+          <ListItem radio value={false} checked={!isConfirmedTag} name="selectedMode" title={dict.not_confirmed}
+            onChange={(e) => {
+              props.handleChange({ isConfirmed: JSON.parse(e.target.value) });
+            }}>
+          </ListItem>
+          <ListItem radio value={true} checked={isConfirmedTag} name="selectedMode" title={dict.confirmed}
+            onChange={(e) => {
+              props.handleChange({ isConfirmed: JSON.parse(e.target.value) })
+            }}>
+          </ListItem>
+        </List>
+      )
+    }
+
   }
   return (
     <React.Fragment>
@@ -24,6 +45,7 @@ const TagForm = (props) => {
           }}
         />
       </List>
+      {confirm()}
 
       <Block strong>
         <Row tag="p">

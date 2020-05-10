@@ -5,8 +5,7 @@ import crypto from 'crypto-js';
 import ExpertiesList from "./experties";
 import ImageUploader from 'react-images-upload';
 const ProfileForm = (props) => {
-  console.log(props)
-  if (props.name && props.metas) {
+  if (props.profile) {
     return (
       <React.Fragment>
         <Card>
@@ -40,38 +39,11 @@ const ProfileForm = (props) => {
           </CardFooter>
         </Card>
 
-        <Card>
-          <CardHeader>{dict.experties}</CardHeader>
-          <CardContent>
-            <List>
-              <ListItem>
-                <ExpertiesList experties={props.experties} editable={true} removeExperties={props.removeExperties}/>
-              </ListItem>
-            </List>
-
-            <List >
-              <ListInput
-                label={dict.new_experties}
-                type="text"
-                placeholder='...'
-                defaultValue={props.expert}
-                onInput={(e) => {
-                  props.handleChange({ expert: e.target.value })
-                }}
-              />
-
-            </List>
-          </CardContent>
-          <CardFooter>
-            <Link></Link>
-            <Button className="col" fill onClick={props.submitExperties}>{dict.submit}</Button>
-          </CardFooter>
-        </Card>
 
 
         <Card>
           <CardHeader>
-            <img src={props.avatar} width="80"></img>
+            <img src={props.avatar} width="40" height="40"></img>
           </CardHeader>
           <ImageUploader
             withIcon={true}

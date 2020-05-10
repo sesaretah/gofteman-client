@@ -37,6 +37,8 @@ export default class DocumentUpdate extends Component {
       title: null,
       id: '',
       color: '#fff',
+      isConfirmed: false,
+      confirmable: false,
     }
   }
 
@@ -83,7 +85,7 @@ export default class DocumentUpdate extends Component {
 
 
   submit(){
-    var data = {id:this.state.id, title: this.state.title, color: this.state.color}
+    var data = {id:this.state.id, title: this.state.title, color: this.state.color, confirmed: this.state.isConfirmed}
     MyActions.updateInstance('statuses', data,  this.state.token);
   }
 
@@ -105,6 +107,8 @@ export default class DocumentUpdate extends Component {
         id: status.id,
         color: status.the_color,
         status: status,
+        isConfirmed: status.confiremd,
+        confirmable: status.confirmable,
       }, () => this.loadPalette());
     } 
     console.log(status)
@@ -122,12 +126,16 @@ export default class DocumentUpdate extends Component {
 
 
   render() {
-        const {status, title, color} = this.state;
+        const {status, title, color, isConfirmed, confirmable} = this.state;
     return (
       <Page onPageAfterIn={this.pageAfterIn.bind(this)}>
         <Navbar title={dict.status_form} backLink={dict.back} />
         <BlockTitle>{dict.status_form}</BlockTitle>
-        <StatusForm status={status} title={title} color={color} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <StatusForm 
+        status={status} title={title} color={color} isConfirmed={isConfirmed}
+        submit={this.submit} editing={true} handleChange={this.handleChangeValue}
+        confirmable={confirmable}
+        />
       </Page>
     );
   }

@@ -29,7 +29,7 @@ export default class RoleCreate extends Component {
     this.state = {
       token: window.localStorage.getItem('token'),
       role: {},
-      default_role: true,
+      defaultRole: true,
     }
   }
 
@@ -60,12 +60,12 @@ export default class RoleCreate extends Component {
 
 
   render() {
-    const {role} = this.state;
+    const {role, defaultRole} = this.state;
     return (
       <Page>
         <Navbar title={dict.role_form} backLink={dict.back} />
         <BlockTitle>{dict.role_form}</BlockTitle>
-        <RoleForm role={role} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
+        <RoleForm role={role} defaultRole={defaultRole} submit={this.submit} editing={true} handleChange={this.handleChangeValue}/>
       </Page>
     );
   }

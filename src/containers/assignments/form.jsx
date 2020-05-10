@@ -7,7 +7,7 @@ const AssignmentForm = (props) => {
     return (
       <React.Fragment>
         <BlockTitle>{dict.assignment_form}</BlockTitle>
-        <List form inset>
+        <List  inset>
           <ListItem
             title={dict.email}
             smartSelect

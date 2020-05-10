@@ -35,7 +35,25 @@ const TaskList = (props) => {
         </span>
       )
     }
-    return(result)
+    return (result)
+  }
+
+  function sort() {
+    if (props.sortChange) {
+      return (
+        <a className=" fs-10 smart-select smart-select-init" data-open-in="popover">
+          <select name="superhero" onChange={(e) => { props.sortChange({ title: e.target.value }) }}>
+            <option value="title" key='option-title' >{dict.by_title}</option>
+            <option value="events" key='option-events' selected>{dict.by_events}</option>
+          </select>
+          <div className="item-content">
+            <div className="item-inner">
+              <div className="item-title">{dict.sort_by}</div>
+            </div>
+          </div>
+        </a>
+      )
+    }
   }
 
   if (props.tasks) {
@@ -43,28 +61,18 @@ const TaskList = (props) => {
       <React.Fragment>
         <CardHeader>
           {props.header}
-          <a className=" fs-10 smart-select smart-select-init" data-open-in="popover">
-            <select name="superhero" onChange={(e) => { props.sortChange({ title: e.target.value }) }}>
-              <option value="title" >{dict.by_title}</option>
-              <option value="events" selected>{dict.by_events}</option>
-            </select>
-            <div className="item-content">
-              <div className="item-inner">
-                <div className="item-title">{dict.sort_by}</div>
-              </div>
-            </div>
-          </a>
 
+          {sort()}
         </CardHeader>
         <CardContent>
           <List mediaList className='fs-11'>
             {props.tasks.map((task) =>
-              <ListItem key={'task'+task.id} title={task.title} text={task.details} after={alerts(task)} link={'/tasks/' + task.id}></ListItem>
+              <ListItem key={'task' + task.id} title={task.title} text={task.details} after={alerts(task)} link={'/tasks/' + task.id}></ListItem>
             )}
           </List>
         </CardContent>
         <CardFooter>
-         {/* <span className='fs-10'>
+          {/* <span className='fs-10'>
             <span className='color-red ml-5'>
               <i class="fa fa-bell-o ml-5" aria-hidden="true"></i>
               {dict.deadline_near}

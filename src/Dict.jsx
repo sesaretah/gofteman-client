@@ -199,7 +199,7 @@ export const dict = {
   'not_found': 'چیزی یافت نشد',
   'are_you_sure': 'مطمئن هستید؟',
   'Confirmer': 'تایید کننده',
-  'time_sheets': 'جداول زمان کار',
+  'time_sheets': 'کارنما',
   'morning_report':'گزارش پیش از ظهر',
   'afternoon_report':'گزارش بعد از ظهر',
   'extra_report':'گزارش اضافه کاری',
@@ -231,13 +231,18 @@ export const dict = {
   'add_comments_to_works':'افزودن نظر به کارها',
   'add_involvement_to_todos':'افزودن همکار به تقسیم کار',
   'remove_involvement_from_todos':'حذف همکار از تقسیم کار',
-  'add_involvement_to_time_sheets':'افزودن گیرنده به جداول زمان کار',
-  'remove_involvement_from_timesheets':'حذف گیرنده از جداول زمان کار',
+  'add_involvement_to_time_sheets':'افزودن گیرنده به کارنما',
+  'remove_involvement_from_timesheets':'حذف گیرنده از کارنما',
   'notification_type':'شیوه اطلاع رسانی',
   'mail_notification':'ایمیل',
   'push_notification':'آگاهسازی وب',
   'sms':'پیامک',
   'if_someone_adds_you_youll_be_asked': 'چنانچه کسی شما را به یک فعالیت بیافزاید شما باید تایید کنید.',
   'previous_attachments':'پیوست های قبلا آپلود شده',
-  'cas': 'احراز هویت مرکزی'
-};
+  'cas': 'احراز هویت مرکزی' ,
+  'profile': 'پروفایل',
+  'groups' : 'گروهبندی همکاران',
+  'confirmed':'تایید شده',
+  'not_confirmed': 'تایید نشده'
+
+}

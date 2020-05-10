@@ -651,3 +651,32 @@ margin-left: 2px !important;
 .bg-teal {
   background-color: rgb(97, 177, 214) !important;
 }
+
+.fs-11 .item-inner  .item-subtitle {
+  font-size: 11px !important;
+}
+
+.fs-11 .item-inner  .item-text {
+  font-size: 11px !important;
+}
+
+.fs-11 .item-inner  .item-title-row {
+  font-size: .95em !important;
+}
+
+.fs-10 .item-inner  .item-subtitle {
+  font-size: 1.2em !important;
+}
+
+.fs-10 .item-inner  .item-title-row {
+  font-size: 1.1em !important;
+}
+
+.fs-10 .item-inner  .item-text {
+  font-size: 0.9em !important;
+}
+
+.fs-10 .item-inner  .item-text .link{
+  font-size: 1.2em !important;
+  vertical-align: -2px;
+}

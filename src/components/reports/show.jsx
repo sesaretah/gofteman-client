@@ -16,11 +16,9 @@ export default class Layout extends Component {
   constructor() {
     super();
     this.getInstance = this.getInstance.bind(this);
-    this.interaction = this.interaction.bind(this);
     this.setInstance = this.setInstance.bind(this);
     this.handleChangeValue = this.handleChangeValue.bind(this);
     this.getList = this.getList.bind(this);
-    this.submit = this.submit.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.removeComment = this.removeComment.bind(this);
     this.loadMore = this.loadMore.bind(this);
@@ -111,17 +109,6 @@ export default class Layout extends Component {
   }
 
 
-  interaction(interaction_type, interactionable_id, interactionable_type, source_type = null, source_id = null) {
-    var data = { interaction_type: interaction_type, interactionable_id: interactionable_id, interactionable_type: interactionable_type, source_type: source_type, source_id: source_id }
-    MyActions.setInstance('interactions', data, this.state.token);
-  }
-
-  submit() {
-    var data = { report_id: this.state.id, channel_id: this.state.selectedChannel }
-    MyActions.setInstance('shares', data, this.state.token);
-    const self = this;
-    self.$f7.sheet.close('.demo-sheet')
-  }
 
   submitComment() {
     var data = { report_id: this.state.id, content: this.state.commentContent }
@@ -134,7 +121,7 @@ export default class Layout extends Component {
   }
 
   render() {
-    const { report, sheetOpened, channels, comments } = this.state;
+    const { report, comments } = this.state;
     return (
       <Page>
         <Navbar title={dict.reports} >
@@ -144,7 +131,7 @@ export default class Layout extends Component {
       </Navbar>
         <BlockTitle></BlockTitle>
         {this.fab()}
-        <ReportShow report={report} comments={comments} channels={channels} submitComment={this.submitComment} removeComment={this.removeComment} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue} loadMore={this.loadMore} />
+        <ReportShow report={report} comments={comments} submitComment={this.submitComment} removeComment={this.removeComment} submit={this.submit} interaction={this.interaction} handleChange={this.handleChangeValue} loadMore={this.loadMore} />
       </Page>
     );
   }

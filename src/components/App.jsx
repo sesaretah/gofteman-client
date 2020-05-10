@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   App,
   Panel,
@@ -21,37 +21,36 @@ export default class extends React.Component {
     }
   }
   async componentDidMount() {
-    const self = this;
+    const self = this;      
     const app = self.$f7;
-    
-    if(messaging){
-    messaging.requestPermission()
-      .then(async function () {
-        const token = await messaging.getToken();
-        console.log(token)
-        var data = {token: token}
-        MyActions.setInstance('devices', data, self.state.token);
-      })
-      .catch(function (err) {
-        console.log("Unable to get permission to notify.", err);
-      });
+
+    if (messaging) {
+      messaging.requestPermission()
+        .then(async function () {
+          const token = await messaging.getToken();
+          var data = { token: token }
+          if (self.state.token && self.state.token.length > 10) {
+            MyActions.setInstance('devices', data, self.state.token);
+          }
+        })
+        .catch(function (err) {
+          console.log("Unable to get permission to notify.", err);
+        });
     }
     navigator.serviceWorker.addEventListener("message", (message) => {
-    const self = this;
-    const app = self.$f7;
-    console.log(message)
-    app.notification.create({
-      icon: '',
-      
-      title: message.data.firebaseMessaging.payload.notification.title,
-      titleRightText: '',
-      cssClass: 'notification',
-      subtitle: message.data.firebaseMessaging.payload.notification.body,
-      closeTimeout: 5000,
-    }).open();
-  }
-    
-    );
+
+      app.notification.create({
+        icon: '',
+
+        title: message.data.firebaseMessaging.payload.notification.title,
+        titleRightText: '',
+        cssClass: 'notification',
+        subtitle: message.data.firebaseMessaging.payload.notification.body,
+        closeTimeout: 5000,
+      }).open();
+    });
+
+
   }
   // Framework7 parameters here
 
@@ -76,7 +75,7 @@ export default class extends React.Component {
       <App params={f7params}>
         {/* Statusbar */}
         <Statusbar />
-      
+
         {/* Left Panel */}
         <Panel left cover themeDark>
           <View url="/panel-left/" />

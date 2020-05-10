@@ -5,6 +5,22 @@ import WorkList from "./workList"
 import { dict } from '../../Dict';
 
 const TaskIndex = (props) => {
+  function fab(a) {
+    if (props.ability) {
+      var result = []
+      props.ability.map((ab) => {
+        if (ab.title === a && ab.value) {
+          result.push(
+            <Fab href="/tasks/new" target="#main-view" position="left-bottom" slot="fixed" color="deeporange">
+              <Icon ios="f7:add" aurora="f7:add" md="material:add"></Icon>
+              <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
+            </Fab>
+          )
+        }
+      })
+    }
+    return result
+  }
   return (
     <Page>
       <Navbar title={dict.tasks} >
@@ -13,10 +29,7 @@ const TaskIndex = (props) => {
         </Link>
       </Navbar>
       <BlockTitle>{dict.list}</BlockTitle>
-      <Fab href="/tasks/new" target="#main-view" position="left-bottom" slot="fixed" color="deeporange">
-        <Icon ios="f7:add" aurora="f7:add" md="material:add"></Icon>
-        <Icon ios="f7:close" aurora="f7:close" md="material:close"></Icon>
-      </Fab>
+    {fab('create_task')}
       <Row>
         <Col width='100' tabletWidth='50'>
           <Card>

@@ -14,6 +14,7 @@ export default class Layout extends React.Component {
     this.search = this.search.bind(this);
     
     this.state = {
+      token: window.localStorage.getItem('token'),
       profiles: null,
       query: null,
     }
@@ -31,12 +32,12 @@ export default class Layout extends React.Component {
   }
 
   loadData(){
-    MyActions.getList('profiles', this.state.page);
+    MyActions.getList('profiles', this.state.page, {}, this.state.token);
   }
 
   search(obj){
     this.setState(obj, () => {
-      MyActions.getList('profiles/search', this.state.page, {q: this.state.query});
+      MyActions.getList('profiles/search', this.state.page, {q: this.state.query}, this.state.token);
   });    
   }
 

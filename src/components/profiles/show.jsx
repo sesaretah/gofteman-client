@@ -24,6 +24,7 @@ export default class Layout extends Component {
     this.getInstance = this.getInstance.bind(this);
     
     this.state = {
+      token: window.localStorage.getItem('token'),
       profile: null,
       id: null,
       actuals: null,
@@ -41,7 +42,7 @@ export default class Layout extends Component {
   }
 
   componentDidMount() {
-    MyActions.getInstance('profiles', this.$f7route.params['profileId']);
+    MyActions.getInstance('profiles', this.$f7route.params['profileId'], this.state.token);
   }
 
   getInstance() {
@@ -51,9 +52,6 @@ export default class Layout extends Component {
       this.setState({
         profile: profile,
         id: profile.id,
-        actuals: profile.actuals,
-        metas: profile.metas,
-        channels: profile.channels,
       });
     }
   }
@@ -71,18 +69,12 @@ export default class Layout extends Component {
 
 
   render() {
-    const { profile, actuals, metas, channels } = this.state;
+    const { profile } = this.state;
     return (
       <Page>
         <Navbar title={dict.profiles} backLink={dict.back} />
-        <Toolbar tabbar bottom>
-          <Link tabLink="#tab-1" tabLinkActive><i className="va ml-5 fa fa-user-circle"></i></Link>
-          <Link tabLink="#tab-2"><i className="va ml-5 fa fa-bar-chart"></i></Link>
-          <Link tabLink="#tab-3"><i className="va ml-5 fa fa-list"></i></Link>
-        </Toolbar>
         {this.fab()}
-        <ProfileShow profile={profile} actuals={actuals} channels={channels} metas={metas} addTag={this.addTag}/>
-
+        <ProfileShow profile={profile} />
       </Page>
     );
   }

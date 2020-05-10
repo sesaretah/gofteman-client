@@ -43,6 +43,7 @@ export default class TimeSheetCreate extends Component {
       involvements: [],
       time_sheet: {},
       timeSheetDate:  new Date(),
+      isPublic: false,
     }
   }
 
@@ -294,7 +295,8 @@ export default class TimeSheetCreate extends Component {
   loadCalender() {
     const self = this;
     const app = self.$f7;
-
+    var today = new window.ODate();
+    var weekAgo = new window.ODate().setDate(today.getDate() - 7);  
     app.calendar.create({
       inputEl: '#sheet-date-calendar',
       value: [new Date()],
@@ -304,6 +306,14 @@ export default class TimeSheetCreate extends Component {
       monthNames: ['فروردين', 'ارديبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
       dayNames: ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'],
       dayNamesShort: ['یک', 'دو', 'سه ', 'چهار', 'پنج‌', 'جمعه', 'شنبه'],
+      disabled: function (date) {
+        if (date > weekAgo && date < today) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    },
       on: {
         closed: function (c) {
           self.setState({ timeSheetDate: c.value[0].a });

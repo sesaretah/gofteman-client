@@ -8,7 +8,7 @@ const AccessControlForm = (props) => {
     return (
         <React.Fragment>
             <BlockTitle>{dict.access_control_form}</BlockTitle>
-            <List form inset>
+            <List  inset>
                 <ListInput
                     label={dict.item}
                     type="text"
