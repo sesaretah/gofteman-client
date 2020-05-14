@@ -243,6 +243,7 @@ export const dict = {
   'profile': 'پروفایل',
   'groups' : 'گروهبندی همکاران',
   'confirmed':'تایید شده',
-  'not_confirmed': 'تایید نشده'
-
+  'not_confirmed': 'تایید نشده',
+  'blocked_list': 'کاربران مسدود شده',
+  'notifications': 'اطلاع رسانی'
 }

@@ -82,6 +82,12 @@ export default class PanelRightPage extends Component {
               <i className="va ml-5 fa fa-file-excel-o"></i>
               <span>{dict.time_sheets}</span>
             </ListItem>
+
+
+            <ListItem link="/notifications/" ignoreCache={false} reloadCurrent={false} view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-circle-o-notch"></i>
+              <span>{dict.notifications}</span>
+            </ListItem>
           </List>
 
           <BlockTitle>{dict.user_settings}</BlockTitle>

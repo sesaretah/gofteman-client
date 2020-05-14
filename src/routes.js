@@ -60,6 +60,7 @@ import Login from './components/users/Login';
 import LoginJwt from './components/users/LoginJwt';
 import SignUp from './components/users/SignUp';
 import Verification from './components/users/Verification';
+import NotificationIndex from './components/notifications/index';
 
 
 export default [
@@ -86,6 +87,11 @@ export default [
   {
     path: '/panel-right/',
     component: PanelRightPage,
+  },
+
+  {
+    path: '/notifications/',
+    component: NotificationIndex,
   },
 
 

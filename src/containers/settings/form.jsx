@@ -49,7 +49,7 @@ const SettingForm = (props) => {
         </List>
 
         <List>
-          <ListItem title='sss'></ListItem>
+          <ListItem title={dict.blocked_list}></ListItem>
           <ListItem title={blockList()}></ListItem>
         </List>
 
