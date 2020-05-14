@@ -92,7 +92,6 @@ export default class PanelRightPage extends Component {
             </ListItem>
           </List>
 
-
           <BlockTitle> <i className="va ml-5 fa fa-cog"></i>{dict.settings}</BlockTitle>
           <List className='fs-13'>
           </List>
