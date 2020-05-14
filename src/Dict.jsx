@@ -245,5 +245,6 @@ export const dict = {
   'confirmed':'تایید شده',
   'not_confirmed': 'تایید نشده',
   'blocked_list': 'کاربران مسدود شده',
-  'notifications': 'اطلاع رسانی'
+  'notifications': 'اطلاع رسانی',
+  'privacy':'حریم خصوصی'
 }

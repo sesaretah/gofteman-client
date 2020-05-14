@@ -29,10 +29,10 @@
 /* Custom color theme properties */
 :root {
 
-  --f7-theme-color: #4f2d65;
+  --f7-theme-color: #53402e;
   --f7-theme-color-rgb: 90, 200, 250;
-  --f7-theme-color-shade: #211429;
-  --f7-theme-color-tint: #211429;
+  --f7-theme-color-shade: #2c1e1e;
+  --f7-theme-color-tint: #2c1e1e;
   --f7-card-header-font-size: 12px;
 
   --f7-navbar-height: 40px;
@@ -101,9 +101,9 @@
 }
 
 .theme-dark {
-  --f7-page-bg-color: #211429;
-  --f7-navbar-bg-color: #211429;
-  --f7-navbar-border-color: #635a64;
+  --f7-page-bg-color: #2c1e1e;
+  --f7-navbar-bg-color: #2c1e1e;
+  --f7-navbar-border-color: #645a5a;
   --f7-navbar-text-color: #e9cfec;
 
 
@@ -119,16 +119,16 @@
 }
 
 .theme-dark .list ul {
-  --f7-list-bg-color: #443852;
-  --f7-list-border-color: #635a64;
-  --f7-list-item-border-color: #635a64;
+  --f7-list-bg-color: #4e3b3b;
+  --f7-list-border-color: #645a5a;
+  --f7-list-item-border-color: #645a5a;
   color: #f1f1f1;
 }
 
 .theme-dark .block-strong {
   --f7-block-strong-text-color: #e9cfec;
-  --f7-block-strong-bg-color: #211429;
-  --f7-block-strong-border-color: #5d5c5d;
+  --f7-block-strong-bg-color: #2c1e1e;
+  --f7-block-strong-border-color: #745050;
 }
 
 .theme-dark .block-title {
