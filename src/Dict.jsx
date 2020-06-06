@@ -246,5 +246,10 @@ export const dict = {
   'not_confirmed': 'تایید نشده',
   'blocked_list': 'کاربران مسدود شده',
   'notifications': 'اطلاع رسانی',
-  'privacy':'حریم خصوصی'
+  'privacy':'حریم خصوصی',
+  'shortners' : 'نشانک ها',
+  'url': 'آدرس',
+  'new_address': 'آدرس جدید',
+  'href': 'آدرس',
+  'behran': 'بهران'
 }

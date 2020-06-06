@@ -62,7 +62,7 @@ export default class extends React.Component {
       this.$f7router.navigate('/verification/'+this.state.email);
     }
     if (klass === 'Validate') {
-      this.$f7router.navigate('/tasks/');
+      this.$f7router.navigate('/shortners/');
       window.location.reload()
     }
     console.log(klass)

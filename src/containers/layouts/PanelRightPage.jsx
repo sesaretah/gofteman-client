@@ -74,26 +74,20 @@ export default class PanelRightPage extends Component {
           <BlockTitle> <i className="va ml-5 fa fa-tachometer"></i>{dict.dashboard}</BlockTitle>
           <List className='fs-13'>
 
-            <ListItem link="/notifications/" ignoreCache={false} reloadCurrent={false} view="#main-view" panelClose>
-              <i className="va ml-5 fa fa-circle-o-notch"></i>
-              <span>{dict.notifications}</span>
+            <ListItem link="/shortners/" ignoreCache={false} reloadCurrent={false} view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-address-card-o"></i>
+              <span>{dict.shortners}</span>
             </ListItem>
-          </List>
 
-          <BlockTitle><i className="va ml-5 fa fa-cogs"></i>{dict.user_settings}</BlockTitle>
-          <List>
-            <ListItem link="/profiles/" view="#main-view" panelClose>
-              <i className="va ml-5 fa fa-user-circle-o"></i>
-              <span>{dict.profile}</span>
+            <ListItem link="/rooms/" ignoreCache={false} reloadCurrent={false} view="#main-view" panelClose>
+              <i className="va ml-5 fa fa-address-card-o"></i>
+              <span>{dict.rooms}</span>
             </ListItem>
+
             <ListItem view="#main-view" panelClose onClick={this.logout}>
               <i className="va ml-5 fa fa-power-off"></i>
               <span>{dict.logout}</span>
             </ListItem>
-          </List>
-
-          <BlockTitle> <i className="va ml-5 fa fa-cog"></i>{dict.settings}</BlockTitle>
-          <List className='fs-13'>
           </List>
         </React.Fragment>
       )
@@ -113,7 +107,7 @@ export default class PanelRightPage extends Component {
     const { token } = this.state;
     return (
       <Page >
-        <Navbar title={dict.tavan} />
+        <Navbar title={dict.behran} />
         {this.logged_in(token)}
       </Page>
     );

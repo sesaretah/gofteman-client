@@ -56,7 +56,7 @@ export default class extends React.Component {
     var klass = ModelStore.getKlass()
     if (user && klass == 'Verify'){
       window.localStorage.setItem('token', user.token);
-      this.$f7router.navigate('/tasks/');
+      this.$f7router.navigate('/shortners/');
       window.location.reload()
     }
   }

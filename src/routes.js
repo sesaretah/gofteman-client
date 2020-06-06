@@ -12,8 +12,13 @@ import TagIndex from './components/tags/index';
 import TagCreate from './components/tags/create';
 import TagUpdate from './components/tags/update';
 
+import ShortnerShow from './components/shortners/show';
+import ShortnerIndex from './components/shortners/index';
+import ShortnerCreate from './components/shortners/create';
+import ShortnerUpdate from './components/shortners/update';
 
-
+import RoomShow from './components/rooms/show';
+import RoomIndex from './components/rooms/index';
 
 
 
@@ -81,6 +86,28 @@ export default [
   {
     path: '/tags/:tagId',
     component: TagShow,
+  },
+
+  {
+    path: '/shortners/',
+    component: ShortnerIndex,
+  },
+  {
+    path: '/shortners/:shortnerId/edit',
+    component: ShortnerUpdate,
+  },
+  {
+    path: '/shortners/new',
+    component: ShortnerCreate,
+  },
+  {
+    path: '/shortners/:shortnerId',
+    component: ShortnerShow,
+  },
+
+  {
+    path: '/rooms/',
+    component: RoomIndex,
   },
 
 

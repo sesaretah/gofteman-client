@@ -29,7 +29,10 @@
 /* Custom color theme properties */
 :root {
 
-  --f7-theme-color: #53402e;
+  --f7-page-bg-color: #505050;
+  --f7-theme-color: #345e3d;
+  --f7-bars-bg-color: #424141;
+
   --f7-theme-color-rgb: 90, 200, 250;
   --f7-theme-color-shade: #2c1e1e;
   --f7-theme-color-tint: #2c1e1e;
@@ -101,11 +104,10 @@
 }
 
 .theme-dark {
-  --f7-page-bg-color: #2c1e1e;
-  --f7-navbar-bg-color: #2c1e1e;
-  --f7-navbar-border-color: #645a5a;
-  --f7-navbar-text-color: #e9cfec;
-
+  --f7-page-bg-color: #345e3d;
+  --f7-navbar-bg-color: #2b4d32;
+  --f7-navbar-border-color: #5a645c;
+  --f7-navbar-text-color: #0c0a0c;
 
 }
 
@@ -119,9 +121,9 @@
 }
 
 .theme-dark .list ul {
-  --f7-list-bg-color: #4e3b3b;
-  --f7-list-border-color: #645a5a;
-  --f7-list-item-border-color: #645a5a;
+  --f7-list-bg-color: #2b4d32;
+  --f7-list-border-color: #5a645c;
+  --f7-list-item-border-color: #5a645c;
   color: #f1f1f1;
 }
 
@@ -313,7 +315,7 @@ Extra borders for main view and left panel for iOS theme when it behaves as pane
 
 .media-list .item-media img,
 li.media-item .item-media img {
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 .profile-footer {
@@ -679,4 +681,24 @@ margin-left: 2px !important;
 .fs-10 .item-inner  .item-text .link{
   font-size: 1.2em !important;
   vertical-align: -2px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+
+
+.video-btn {
+  background-color: #666;
+  border: medium none;
+  color: #fff;
+  display: block;
+  font-size: 18px;
+  left: 0;
+  margin: 0 auto;
+  padding: 8px 16px;
+  position: absolute;
+  right: 0;
+  top: 50%;
 }
