@@ -21,6 +21,7 @@ export default class extends React.Component {
     }
   }
   async componentDidMount() {
+    /*
     const self = this;      
     const app = self.$f7;
 
@@ -49,7 +50,7 @@ export default class extends React.Component {
         closeTimeout: 5000,
       }).open();
     });
-
+*/
 
   }
   // Framework7 parameters here
