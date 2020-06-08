@@ -12,43 +12,42 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  FabButtons,
+  FabButton,
 } from "framework7-react";
 
 import { dict } from "../../Dict";
 import ReactPlayer from "react-player";
 
-const ShortnerIndex = (props) => {
+const RoomIndex = (props) => {
   function videos() {
     var result = [];
-    if (props.urls) {
+
+    if (props.feeds) {
       {
-        props.urls.map((url) =>
+        props.feeds.map((feed) =>{
           result.push(
+            <React.Fragment  key={feed.id}>
             <Col width="100" tabletWidth="33">
-              <Card>
-                <CardHeader>hhh</CardHeader>
-                <CardContent>
-                  <video src={url} width="320" height="240" autoPlay />
-                </CardContent>
-                <CardFooter></CardFooter>
-              </Card>
+                <video controls={true} key={feed.id} id={"video-"+feed.id} src="" width="320" height="240" autoPlay playsInline muted={true}/>
             </Col>
-          )
+            </React.Fragment>
+          )}
         );
       }
     }
     return result;
   }
   return (
-    <Page>
+    <Page onPageAfterIn={props.pageAfterIn.bind(this)}>
       <Navbar title={dict.profiles} backLink={dict.back}>
         <Link panelOpen="right">
           <Icon f7="bars"></Icon>
         </Link>
       </Navbar>
-      <Row className="center">
+      <Row className="center" id='hosts'>
         <Col width="50" tabletWidth="33">
-          <video id="video1" src="" width="320" height="240" autoPlay />
+          <video id="video0" src="" width="320" height="240" autoPlay playsInline />
           <Row>
             <Button fill onClick={() => props.off()}>
               off
@@ -58,14 +57,33 @@ const ShortnerIndex = (props) => {
             </Button>
           </Row>
         </Col>
-        <Col width="50" tabletWidth="33">
-          <video id="video2" src="" width="320" height="240" autoPlay />
-        </Col>
-        <Col width="50" tabletWidth="33">
-          <video id="video3" src="" width="320" height="240" autoPlay />
-        </Col>
+      {videos()}
       </Row>
+      <Button fill onClick={() => props.publishOwnFeed()}>
+        publishOwnFeed
+      </Button>
+      <Fab
+        position="center-bottom"
+        slot="fixed"
+        color="orange"
+        className="f-color-black"
+      >
+        <i class="fa fa-cogs" aria-hidden="true"></i>
+        <i class="fa fa-cog" aria-hidden="true"></i>
+        <FabButtons position="center">
+          <FabButton className="f-color-black" outline  active  onClick={() => props.publishMicrophone()}>
+              <i class="fa fa-microphone" aria-hidden="true"></i>
+          </FabButton>
+          <FabButton className="f-color-black" onClick={() => props.publishCamera()}>
+              <i class="fa fa-video-camera" aria-hidden="true"></i>
+          </FabButton>
+          <FabButton></FabButton>
+          <FabButton className="f-color-black">
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+          </FabButton>
+        </FabButtons>
+      </Fab>
     </Page>
   );
 };
-export default ShortnerIndex;
+export default RoomIndex;

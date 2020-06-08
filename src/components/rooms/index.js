@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Fab, Icon } from "framework7-react";
+import { Page, Col, Icon } from "framework7-react";
 import ModelStore from "../../stores/ModelStore";
 import RoomIndex from "../../containers/rooms/index";
 import * as MyActions from "../../actions/MyActions";
@@ -16,9 +16,11 @@ export default class Layout extends React.Component {
     this.sessionCreate = this.sessionCreate.bind(this);
     this.registerUsername = this.registerUsername.bind(this);
     this.newRemoteFeed = this.newRemoteFeed.bind(this);
-    this.publishOwnFeed = this.publishOwnFeed.bind(this);
+    this.publishCamera = this.publishCamera.bind(this);
+    this.publishMicrophone = this.publishMicrophone.bind(this);
     this.off = this.off.bind(this);
     this.on = this.on.bind(this);
+    this.pageAfterIn = this.pageAfterIn.bind(this);
 
     this.state = {
       token: window.localStorage.getItem("token"),
@@ -35,6 +37,8 @@ export default class Layout extends React.Component {
       feeds: [],
       bitrateTimer: [],
       urls: [],
+      publisedCamera: false,
+      publishedMicrophone: false,
     };
   }
   componentWillMount() {
@@ -98,7 +102,7 @@ export default class Layout extends React.Component {
               },
               onmessage: function (msg, jsep) {
                 console.log(msg);
-                Janus.debug(" ::: Got a message (publisher) :::", msg);
+                Janus.log(" ::: Got a message (publisher) :::", msg);
                 var event = msg["videoroom"];
                 Janus.debug("Event: " + event);
                 if (event) {
@@ -107,11 +111,11 @@ export default class Layout extends React.Component {
                     self.setState({
                       myid: msg["id"],
                       mypvtid: msg["private_id"],
-                    }, () =>  self.publishOwnFeed());
-                  
+                    });
+
                     if (msg["publishers"]) {
                       var list = msg["publishers"];
-                      Janus.debug(
+                      Janus.log(
                         "Got a list of available publishers/feeds:",
                         list
                       );
@@ -165,16 +169,30 @@ export default class Layout extends React.Component {
                       }
                     } else if (msg["leaving"]) {
                     } else if (msg["unpublished"]) {
+                      var unpublished = msg["unpublished"];
+												Janus.log("Publisher left: " + unpublished);
+												if(unpublished === 'ok') {
+													// That's us
+													self.state.sfutest.hangup();
+													return;
+												}
                     } else if (msg["error"]) {
                     }
                   }
                 }
+                if (jsep) {
+                  Janus.log("Handling SDP as well...", jsep);
+                  self.state.sfutest.handleRemoteJsep({ jsep: jsep });
+                }
               },
               onlocalstream: function (stream) {
-                Janus.debug(" ::: Got a local stream :::", stream);
+                Janus.log(" ::: Got a local stream :::", stream);
+                self
+                  .$$("#video0")
+                  .prop("src", window.URL.createObjectURL(stream));
               },
               onremotestream: function (stream) {
-                Janus.debug(" ::: Got a remote stream :::", stream);
+                Janus.log(" ::: Got a remote stream :::", stream);
                 // The publisher stream is sendonly, we don't expect anything here
               },
               oncleanup: function () {
@@ -203,7 +221,7 @@ export default class Layout extends React.Component {
       request: "join",
       room: self.state.myroom,
       ptype: "publisher",
-      display: "test",
+      display: "test1",
     };
     self.state.sfutest.send({ message: register });
   }
@@ -268,15 +286,16 @@ export default class Layout extends React.Component {
           window.alert(msg["error"]);
         } else if (event) {
           if (event === "attached") {
-            for (var i = 1; i < 6; i++) {
-              if (!self.state.feeds[i]) {
-                let newState = Object.assign({}, self.state);
-                newState.feeds[i] = remoteFeed;
-                self.setState(newState);
-                remoteFeed.rfindex = i;
-                break;
-              }
-            }
+            //for (var i = 1; i < 6; i++) {
+              //if (!self.state.feeds[i]) {
+                //let newState = Object.assign({}, self.state);
+                //newState.feeds[i] = remoteFeed;
+                //self.setState(newState);
+                //remoteFeed.rfindex = i;
+               // break;
+              //}
+            //}
+            self.setState({feeds: self.state.feeds.concat(remoteFeed)})
             remoteFeed.rfid = msg["id"];
             remoteFeed.rfdisplay = msg["display"];
             console.log(remoteFeed);
@@ -336,19 +355,14 @@ export default class Layout extends React.Component {
         // The subscriber stream is recvonly, we don't expect anything here
       },
       onremotestream: function (stream) {
-        // console.log('stream',stream);
-        //Janus.log("Remote feed #" + remoteFeed.rfindex + ", stream:", stream);
-        //console.log(self.$$('#vv').first)
-        //self.$$('#details').append('<video class="rounded centered" id="vv' + remoteFeed.rfindex + '" width=320 height=240 />');
-        //Janus.attachMediaStream(self.$$('#videox'), stream);
-        self
-          .$$("#video" + remoteFeed.rfindex)
-          .prop("src", window.URL.createObjectURL(stream));
-
-        //self.setState({urls: self.state.urls.concat(window.URL.createObjectURL(stream))})
-
-        self.$$("#metax").html(stream);
-        //console.log(window.URL.createObjectURL(stream))
+        console.log('stream>>>>>>>>>>>>', stream)
+        // self
+        //  .$$('#hosts').append("<video id='video-"+remoteFeed.rfid+"' src='' width='320' height='240' autoPlay playsInline />")
+          Janus.attachMediaStream(document.getElementById('video-'+remoteFeed.id), stream)
+          //.$$("#video" + remoteFeed.rfindex)
+        // .prop("src", window.URL.createObjectURL(stream));
+         // console.log('>>>>>')
+          //console.log(remoteFeed)
       },
       oncleanup: function () {
         Janus.log(
@@ -358,38 +372,50 @@ export default class Layout extends React.Component {
     });
   }
 
-  publishOwnFeed() {
-    // Publish our stream
-
+  publishCamera() {
     var self = this;
-    console.log(self.state.sfutest)
+    console.log('camera', !self.state.publisedCamera);
     self.state.sfutest.createOffer({
-      // Add data:true here if you want to publish datachannels as well
       media: {
         audioRecv: false,
         videoRecv: false,
-        audioSend: true,
-        videoSend: true,
-      }, // Publishers are sendonly
-      // If you want to test simulcasting (Chrome and Firefox only), then
-      // pass a ?simulcast=true when opening this demo page: it will turn
-      // the following 'simulcast' property to pass to janus.js to true
+        videoSend: !self.state.publisedCamera,
+        removeVideo: self.state.publisedCamera,
+        audioSend: self.state.publishedMicrophone,
+      },
 
       success: function (jsep) {
         Janus.debug("********* Got publisher SDP!", jsep);
         if (jsep) {
-        var publish = { request: "configure", audio: true, video: true };
-        // You can force a specific codec to use when publishing by using the
-        // audiocodec and videocodec properties, for instance:
-        // 		publish["audiocodec"] = "opus"
-        // to force Opus as the audio codec to use, or:
-        // 		publish["videocodec"] = "vp9"
-        // to force VP9 as the videocodec to use. In both case, though, forcing
-        // a codec will only work if: (1) the codec is actually in the SDP (and
-        // so the browser supports it), and (2) the codec is in the list of
-        // allowed codecs in a room. With respect to the point (2) above,
-        // refer to the text in janus.plugin.videoroom.jcfg for more details
-        self.state.sfutest.send({ message: publish, jsep: jsep });
+          var publish = { request: "configure", audio: true, video: true };
+          self.state.sfutest.send({ message: publish, jsep: jsep });
+        }
+        self.setState({publisedCamera: !self.state.publisedCamera})
+      },
+      error: function (error) {
+        Janus.error("***** WebRTC error:", error);
+      },
+    });
+  }
+
+  publishMicrophone() {
+    var self = this;
+    console.log('Microphone', !self.state.publishedMicrophone);
+    self.state.sfutest.createOffer({
+      media: {
+        audioRecv: false,
+        videoRecv: false,
+        audioSend: !self.state.publishedMicrophone,
+        removeAudio: self.state.publishedMicrophone,
+        videoSend: self.state.publisedCamera,
+      },
+
+      success: function (jsep) {
+        Janus.debug("********* Got publisher SDP!", jsep);
+        if (jsep) {
+          var publish = { request: "configure", audio: true, video: true };
+          self.state.sfutest.send({ message: publish, jsep: jsep });
+          self.setState({publishedMicrophone: !self.state.publishedMicrophone})
         }
       },
       error: function (error) {
@@ -419,6 +445,10 @@ export default class Layout extends React.Component {
   }
 
   componentDidMount() {
+    
+  }
+
+  pageAfterIn(){
     this.sessionCreate();
   }
 
@@ -443,13 +473,19 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    const { shortners, urls } = this.state;
+    const { shortners, urls, publishedMicrophone, publisedCamera, feeds} = this.state;
     return (
       <RoomIndex
+        pageAfterIn={this.pageAfterIn}
         shortners={shortners}
         urls={urls}
         off={this.off}
         on={this.on}
+        feeds={feeds}
+        publisedCamera={publisedCamera}
+        publishedMicrophone={publishedMicrophone}
+        publishCamera={this.publishCamera}
+        publishMicrophone={this.publishMicrophone}
       />
     );
   }

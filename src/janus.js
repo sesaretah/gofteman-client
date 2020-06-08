@@ -307,6 +307,7 @@ Janus.init = function(options) {
 					element.src = URL.createObjectURL(stream);
 				} catch (e) {
 					Janus.error("Error attaching stream to element");
+					console.log("Error attaching stream to element");
 				}
 			}
 		};
