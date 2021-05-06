@@ -26,7 +26,7 @@
     "react": "^16.9.0",
     "react-charts": "^2.0.0-beta.6",
     "react-dom": "^16.9.0",
-    "react-draft-wysiwyg": "^1.13.2",
+    "react-draft-wysiwyg": "^1.14.6",
     "react-dropzone": "^10.2.2",
     "react-dropzone-uploader": "^2.11.0",
     "react-images-upload": "^1.2.7",
